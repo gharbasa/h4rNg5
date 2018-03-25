@@ -1,9 +1,10 @@
-<div class="card">
-  <form novalidate #form="ngForm">
-      <input name="username" placeholder="LoginId" class="form-control" [(ngModel)]="usersession.login"/> 
-                
-      <input type="password" name="password" placeholder="Password" class="form-control" [(ngModel)]="usersession.password"/>
-        <br/>
-      <input type="button" value="Login" class="form-control"/>
-    </form>
+<!--<div class="row justify-content-center" *ngIf="isUserlogin == false"> -->
+ <div class="row justify-content-center">
+      <form novalidate #form="ngForm">
+          <input name="username" placeholder="LoginId" class="form-control" [(ngModel)]="usersession.login"/> 
+                    
+          <input type="password" name="password" placeholder="Password" class="form-control" [(ngModel)]="usersession.password"/>
+            <br/>
+          <input type="button" value="Login" class="form-control"/>
+        </form>
 </div>

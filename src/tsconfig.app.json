@@ -8,6 +8,7 @@
   },
   "include": [
     "./app/models/**/*.ts",
+    "./app/views/**/*.ts",
     "./**/*.ts",
   ],
   "exclude": [

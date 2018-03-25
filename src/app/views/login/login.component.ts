@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild, HostListener} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild, HostListener,Input} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
 import { Usersession } from '../../models/usersession';
@@ -10,15 +10,10 @@ import { Usersession } from '../../models/usersession';
   host: {'class': 'col-4'}
 })
 
-
 export class LoginComponent implements OnInit {
-
     constructor() { }
-    //(new Usersession(eventData.login, eventData.password))
-    public usersession: Usersession = new Usersession("a", "a");
-    
-    //public loginId: any = {text: 'l'};
-    //public password: any = {text: 'p'};
+    @Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
+    public usersession: Usersession = new Usersession("", "");
     
     ngOnInit() {
     }
@@ -38,8 +33,6 @@ export class LoginComponent implements OnInit {
         this.onLoginClick.emit(usersession);
         usersession.login = '';
         usersession.password = '';
-        //this.loginId.text = '';
-        //this.password.text = '';
     }
 }
 

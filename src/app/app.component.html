@@ -8,10 +8,8 @@
       Welcome to {{title}}!
     </h1>
   </div>
-   <div class="row justify-content-center" *ngIf="isUserlogin == false">
-    <h4r-login (onLoginClick)="validateLogin($event)"></h4r-login>
-   </div>
-   <div class="row justify-content-center" *ngIf="isUserlogin == true">
-    <h4r-notifications></h4r-notifications>
-   </div>
+    <!--<h4r-login (onLoginClick)="validateLogin($event)" [isUserlogin] = "userLoggedin"></h4r-login> -->
+    <h4r-login (onLoginClick)="validateLogin($event)"  *ngIf="userLoggedin == false"></h4r-login>
+    <h4r-notifications *ngIf="userLoggedin == true"></h4r-notifications>
+
 </div>

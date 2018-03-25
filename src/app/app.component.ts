@@ -13,24 +13,25 @@ import { Usersession } from './models/Usersession';
 
 export class AppComponent {
   title = 'Gharbasa-o';
-  isUserlogin = false;
+  userLoggedin:boolean = false;
   //public usersession: Observable<Usersession>;
-  public usersession: Usersession;
+  //public usersession: Usersession = new Usersession("","");
   
   constructor(private loginService: LoginService, protected localStorage: AsyncLocalStorage) {
     console.log("AppComponent C'tor");
+    let that = this;
     loginService.get().subscribe(res => {
-        console.log("Looks like usersession is still alive, userid=" + res.fname);
-        this.localStorage.setItem('user', res).subscribe(() => {
+        //console.log("Looks like usersession is still alive, userid=" + res.fname);
+        that.localStorage.setItem('user', res).subscribe(() => {
             console.log("Stored user session in localStorage");
-            this.isUserlogin = true;
+            that.userLoggedin = true;
         });
         //Do not show login dialog
     },
     err => {
             console.log('Error occurred while retrieving user session', err);
-            localStorage.setItem('user', null).subscribe(() => {
-                
+            that.localStorage.removeItem('user').subscribe(() => {
+                that.userLoggedin = false;
             });
     });
   }
@@ -41,11 +42,20 @@ export class AppComponent {
   */
   validateLogin(usersession: Usersession) {
     console.log("Login with userid " + usersession.login);
+    let that = this;
     this.loginService.login(usersession).subscribe(res => {
         console.log("Login successful");
+        that.localStorage.setItem('user', res).subscribe(() => {
+            console.log("Stored user session in localStorage");
+            that.userLoggedin = true;
+        });
     }
     ,err => {
-        console.log("Login failed.");  
-    });//(new Usersession(eventData.login, eventData.password));
+        console.log("Login failed.");
+        that.userLoggedin = false;  
+        that.localStorage.removeItem('user').subscribe(() => {
+                that.userLoggedin = false;
+            });
+    });
   }
 }
