@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild, HostListener} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
-import { Usersession } from '../models/usersession';
+import { Usersession } from '../../models/usersession';
 
 @Component({
   selector: 'h4r-login',
