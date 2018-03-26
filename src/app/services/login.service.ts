@@ -16,8 +16,8 @@ export class LoginService {
 		return this.http.post(this.basePath, payload);
 	}
 
-	remove(payload) {
-		return this.http.delete(this.basePath + '/${payload.id}.json');
+	remove(userId) {
+		return this.http.delete(this.basePath + "/" + userId);
 	}
 
 	update(payload) {

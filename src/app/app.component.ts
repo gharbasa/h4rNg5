@@ -58,4 +58,23 @@ export class AppComponent {
             });
     });
   }
+  
+  logout(eventPayload:any) {
+    let that = this;
+    let userId = "";
+    this.localStorage.getItem('user').subscribe((user) => {
+        userId = user.id;
+        console.log("1.Logout user session -" + userId);    
+        that.loginService.remove(userId).subscribe(res => {
+            console.log("Logout successful");    
+        }
+        ,err => {
+            console.log("Somehow Logout failed.");
+        });
+        that.localStorage.removeItem('user').subscribe(() => {
+            console.log("Removed user from the session");
+            that.userLoggedin = false;
+        });
+    });
+  }
 }

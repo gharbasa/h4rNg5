@@ -12,7 +12,7 @@ import { Usersession } from '../../models/usersession';
 
 export class LoginComponent implements OnInit {
     constructor() { }
-    @Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
+    //@Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
     public usersession: Usersession = new Usersession("", "");
     
     ngOnInit() {
