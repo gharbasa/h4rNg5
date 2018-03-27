@@ -1,28 +1,68 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';  // replaces previous Http service
-import { AsyncLocalStorageModule } from 'angular-async-local-storage';
 
 import {FormsModule} from "@angular/forms";
-
+import { ImportComponent } from './import/import.component';
+import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { LoginService } from './services/login.service';
+import { AppSettingsService } from './services/AppSettingsService';
+import { LocalStorageService } from './services/LocalStorageService';
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
+
+import { AboutComponent } from './views/about/about.component';
+import { HomeComponent } from './views/home/home.component';
+import { NewuserComponent } from './views/newuser/newuser.component';
+
+const routes: Routes = [
+    {
+        path: 'about/:id',
+        component: AboutComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: '',
+        component: HomeComponent
+    }
+    ,
+    {
+        path: 'postlogin',
+        component: HomeComponent
+    }
+    ,
+    {
+        path: 'postlogout',
+        component: HomeComponent
+    }
+    ,
+    {
+        path: 'newuser',
+        component: NewuserComponent
+    }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavBarComponent
+    NavBarComponent,
+    ImportComponent,
+    AboutComponent,
+    HomeComponent,
+    NewuserComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AsyncLocalStorageModule
+    RouterModule.forRoot(routes)
   ],
-  providers: [LoginService],
+  providers: [LoginService, AppSettingsService, LocalStorageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

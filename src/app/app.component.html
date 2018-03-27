@@ -6,7 +6,10 @@
     <h4>
       Welcome to {{title}}!
     </h4>    
-  </div>
-    <h4r-login (onLoginClick)="validateLogin($event)" *ngIf="userLoggedin == false"></h4r-login>
+    </div>
+    <!--<h4r-login (onLoginClick)="validateLogin($event)" *ngIf="userLoggedin == false"></h4r-login> -->
     <h4r-notifications *ngIf="userLoggedin == true"></h4r-notifications>
+    
+    <router-outlet></router-outlet>
 </div>
+    
