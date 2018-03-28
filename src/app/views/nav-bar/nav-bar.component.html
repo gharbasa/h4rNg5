@@ -1,9 +1,11 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" routerLink="newuser">::Create profile</a>
-  <a class="navbar-brand" routerLink="login" *ngIf="!isUserLogin()">::Login</a>
   <a class="navbar-brand" routerLink="" href="#">::Home</a>
+  <a class="navbar-brand" routerLink="newUser">::Create profile</a>
+  <a class="navbar-brand" routerLink="login" *ngIf="!isUserLogin()">::Login</a>
   <a class="navbar-brand" >::Houses</a>
   <a class="navbar-brand" >::Notifications</a>
   <a class="navbar-brand" routerLink="about/48">::About</a>
+  <a class="navbar-brand" routerLink="editUser/-1" *ngIf="isUserLogin()">::Edit profile</a>
+  <a class="navbar-brand" routerLink="admin" *ngIf="isUserLogin()">::Admin</a>
   <a class="navbar-brand" href="#" (click)="logoutClicked()" *ngIf="isUserLogin()">::Logout</a>
 </nav>
