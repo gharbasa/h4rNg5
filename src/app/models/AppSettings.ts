@@ -1,3 +1,5 @@
 export class AppSettings {
-  isUserLogin:boolean = false;
+	SELF_EDIT_USER_PROFILE:number = -1;
 }
+
+

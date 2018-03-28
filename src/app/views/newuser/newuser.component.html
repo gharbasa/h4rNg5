@@ -1,3 +1,68 @@
-<p>
-  newuser works!
-</p>
+<h6>New User registration</h6>
+<br/>
+<div class="row justify-content-center">
+      <form novalidate #form="ngForm" style="width:30%">
+          <div class="field" *ngIf='user.message != ""' style="color:green">
+            <label>Message:</label>
+            <label>{{user.message}}</label>
+          </div>
+          <div class="field" *ngIf='user.errorMessage != ""' style="color:red">
+            <label>Error Message:</label>
+            <label>{{user.errorMessage}}</label>
+          </div>
+          <div class="field">
+            <label>First name:</label>
+            <input name="fname" placeholder="First name" class="form-control" [(ngModel)]="user.fname" />
+          </div>
+          <div class="field">
+            <label>Middle name:</label>
+            <input name="mname" placeholder="Middle name" class="form-control" [(ngModel)]="user.mname"/>
+          </div>
+          <div class="field">
+            <label>Last name:</label>
+            <input name="mname" placeholder="Last name" class="form-control" [(ngModel)]="user.lname"/>
+          </div>
+          <div class="field">
+            <label>Login Id:</label>
+            <input name="login" placeholder="Login Id" class="form-control" [(ngModel)]="user.login"/>
+          </div>
+          <div class="field">
+            <label>Email:</label>
+            <input name="email" placeholder="Login Id" class="form-control" [(ngModel)]="user.email"/>
+          </div>
+          <div class="field">
+            <label>Identification: </label>
+            <input name="adhaar_no" placeholder="Aadhar or Driving license No" class="form-control" [(ngModel)]="user.adhaar_no"/>
+          </div>
+          <div class="field">
+            <label>Password: </label>
+            <input name="password" placeholder="Password" class="form-control" [(ngModel)]="user.password"/>
+          </div>
+          <div class="field">
+            <label>Confirm password: </label>
+            <input name="password_confirmation" placeholder="Confirm password" class="form-control" [(ngModel)]="user.password_confirmation"/>
+          </div>
+          <div class="field">
+            <label>Phone: </label>
+            <input name="phone1" placeholder="Quick contact" class="form-control" [(ngModel)]="user.phone1"/>
+          </div>
+          <div class="field">
+            <label>Address 1: </label>
+            <input name="addr1" placeholder="Address 1" class="form-control" [(ngModel)]="user.addr1"/>
+          </div>
+          <div class="field">
+            <label>Address 2: </label>
+            <input name="addr2" placeholder="Address 2" class="form-control" [(ngModel)]="user.addr2"/>
+          </div>
+          <div class="field">
+            <label>Address 3: </label>
+            <input name="addr3" placeholder="Address 3" class="form-control" [(ngModel)]="user.addr3"/>
+          </div>
+          <div class="field">
+            <label>Address 4: </label>
+            <input name="addr4" placeholder="Address 4" class="form-control" [(ngModel)]="user.addr4"/>
+          </div>
+          <br/>
+          <input type="button" value="Save" class="form-control" (click)="saveUserRecord()"/>
+      </form>
+</div>

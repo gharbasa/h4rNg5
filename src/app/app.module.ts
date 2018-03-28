@@ -10,6 +10,7 @@ import { LoginComponent } from './views/login/login.component';
 import { LoginService } from './services/login.service';
 import { AppSettingsService } from './services/AppSettingsService';
 import { LocalStorageService } from './services/LocalStorageService';
+import { UserService } from './services/UserService';
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 
 import { AboutComponent } from './views/about/about.component';
@@ -41,8 +42,18 @@ const routes: Routes = [
     }
     ,
     {
-        path: 'newuser',
+        path: 'newUser',
         component: NewuserComponent
+    }
+    ,
+    {
+        path: 'editUser/:feature',
+        component: NewuserComponent
+    }
+    ,
+    {
+        path: 'postupdate',
+        component: HomeComponent
     }
 ];
 
@@ -62,7 +73,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [LoginService, AppSettingsService, LocalStorageService],
+  providers: [LoginService, AppSettingsService, LocalStorageService, UserService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
