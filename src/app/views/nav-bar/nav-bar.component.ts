@@ -30,11 +30,14 @@ export class NavBarComponent implements OnInit {
 	  that.loginService.remove(userId).subscribe(res => {
 		  console.log("Logout successful");
 		  that.localStorageService.removeItem('user');
+		  this.router.navigate(['']);
 	  }
 	  ,err => {
 		  console.log("Somehow Logout failed.");
 		  that.localStorageService.removeItem('user');
+		  this.router.navigate(['']);
 	  });
+	  
 	  return false;
   }
   

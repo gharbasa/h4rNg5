@@ -1,7 +1,8 @@
-<h6>New User registration</h6>
-<br/>
-<div class="row justify-content-center">
-      <form novalidate #form="ngForm" style="width:30%">
+<h4>New User registration</h4>
+
+<div id='formDiv' class="row justify-content-center">
+      <form novalidate #form="ngForm">
+
           <div class="field" *ngIf='user.message != ""' style="color:green">
             <label>Message:</label>
             <label>{{user.message}}</label>
@@ -10,59 +11,83 @@
             <label>Error Message:</label>
             <label>{{user.errorMessage}}</label>
           </div>
+          
           <div class="field">
-            <label>First name:</label>
-            <input name="fname" placeholder="First name" class="form-control" [(ngModel)]="user.fname" />
+          
+            <p>First Name: <input name="fname" type="text" size="25" [(ngModel)]="user.fname" placeholder="First name"/></p>
+          
           </div>
+          
           <div class="field">
-            <label>Middle name:</label>
-            <input name="mname" placeholder="Middle name" class="form-control" [(ngModel)]="user.mname"/>
+              <p>Middle Name: <input name="mname" type="text" size="25" [(ngModel)]="user.mname" placeholder="Middle name"/></p>
           </div>
+          
           <div class="field">
-            <label>Last name:</label>
-            <input name="mname" placeholder="Last name" class="form-control" [(ngModel)]="user.lname"/>
+         
+            <p>Last Name: <input name="lname" type="text" size="25" [(ngModel)]="user.lname" placeholder="Last name"></p>
+          
           </div>
+          
           <div class="field">
-            <label>Login Id:</label>
-            <input name="login" placeholder="Login Id" class="form-control" [(ngModel)]="user.login"/>
+          
+            <p>Login ID: <input name="login" [(ngModel)]="user.login" type="text" size="25" placeholder="Login ID"></p>
+         
           </div>
+          
           <div class="field">
-            <label>Email:</label>
-            <input name="email" placeholder="Login Id" class="form-control" [(ngModel)]="user.email"/>
+          
+            <p>Email: <input name="email" type="text" [(ngModel)]="user.email" size="25" placeholder="Email"></p>
+         
           </div>
+          
           <div class="field">
-            <label>Identification: </label>
-            <input name="adhaar_no" placeholder="Aadhar or Driving license No" class="form-control" [(ngModel)]="user.adhaar_no"/>
+          
+            <p>Identification: <input name="adhaar_no" [(ngModel)]="user.adhaar_no" type="text" size="25" placeholder="Aadhar or Driving license No"></p>
+         
           </div>
+          
+           <div class="field">
+          
+            <p>Password: <input name="password" [(ngModel)]="user.password" type="password" size="25" placeholder="Password"></p>
+         
+          </div>
+        
+           <div class="field">
+          
+            <p>Confirm Password: <input name="password_confirmation" [(ngModel)]="user.password_confirmation" type="password" size="25" placeholder="Confirm Password"></p>
+         
+          </div>
+          
           <div class="field">
-            <label>Password: </label>
-            <input name="password" placeholder="Password" class="form-control" [(ngModel)]="user.password"/>
+              
+          <p>Phone Number:<input name="phone1" type="text" size="25"  [(ngModel)]="user.phone1" placeholder="Quick Contact"></p>
+          
           </div>
+        
           <div class="field">
-            <label>Confirm password: </label>
-            <input name="password_confirmation" placeholder="Confirm password" class="form-control" [(ngModel)]="user.password_confirmation"/>
+          
+            <p>Address 1: <input name="addr1" [(ngModel)]="user.addr1" type="text" size="25" placeholder="Address 1"></p>
+         
           </div>
+          
+           <div class="field">
+          
+            <p>Address 2: <input name="addr2" [(ngModel)]="user.addr2" type="text" size="25" placeholder="Address 2"></p>
+         
+          </div>
+          
           <div class="field">
-            <label>Phone: </label>
-            <input name="phone1" placeholder="Quick contact" class="form-control" [(ngModel)]="user.phone1"/>
+          
+            <p>Address 3: <input name="addr3" [(ngModel)]="user.addr3" type="text" size="25" placeholder="Address 3"></p>
+         
           </div>
-          <div class="field">
-            <label>Address 1: </label>
-            <input name="addr1" placeholder="Address 1" class="form-control" [(ngModel)]="user.addr1"/>
+          
+           <div class="field">
+          
+            <p>Address 4: <input name="addr4" type="text" size="25" [(ngModel)]="user.addr4" placeholder="Address 4"></p>
+         
           </div>
-          <div class="field">
-            <label>Address 2: </label>
-            <input name="addr2" placeholder="Address 2" class="form-control" [(ngModel)]="user.addr2"/>
-          </div>
-          <div class="field">
-            <label>Address 3: </label>
-            <input name="addr3" placeholder="Address 3" class="form-control" [(ngModel)]="user.addr3"/>
-          </div>
-          <div class="field">
-            <label>Address 4: </label>
-            <input name="addr4" placeholder="Address 4" class="form-control" [(ngModel)]="user.addr4"/>
-          </div>
-          <br/>
-          <input type="button" value="Save" class="form-control" (click)="saveUserRecord()"/>
+          <br />
+        <button type="button" class="btn btn-success"  (click)="saveUserRecord()">Save</button>
       </form>
 </div>
