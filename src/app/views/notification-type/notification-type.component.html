@@ -1,0 +1,61 @@
+<h4>Notification Type</h4>
+
+<div id='formDiv' class="row justify-content-center">
+      <form novalidate #form="ngForm">
+
+          <div class="field" *ngIf='notificationType.message != ""' style="color:green">
+            <label>Message:</label>
+            <label>{{notificationType.message}}</label>
+          </div>
+          <div class="field" *ngIf='notificationType.errorMessage != ""' style="color:red">
+            <label>Error Message:</label>
+            <label>{{notificationType.errorMessage}}</label>
+          </div>
+       
+         <table colspan="2">
+          <tr>
+              <td><div class="field">
+          
+            <p>Subject: 
+                <input [autofocus]="true" name="subject" type="text" size="25" [(ngModel)]="notificationType.subject" placeholder="Subject"/>
+             </p>
+          
+          </div></td>
+          
+          </tr>
+          
+          <tr><td><div class="field">
+              
+              <p>Content: 
+                  <textarea name="content" [(ngModel)]='notificationType.content' rows="3" cols="50" placeholder="Content">                             
+                    </textarea>
+                    </p>          
+          </div></td></tr>
+          <tr><td>
+            <div class="field">
+            <p>
+                <ng-select name="ntype" [items]="noticeTypeOptions"
+                   bindLabel="description"
+                   bindValue="id"
+                   placeholder="Select Type"
+                   [(ngModel)]="notificationType.ntype">
+                </ng-select>
+            </p>
+          </div>
+          </td></tr>
+          <tr><td>
+          <div class="field">
+          
+            <p>Active? :
+                <input name="active" [(ngModel)]="notificationType.active" type="checkbox">
+            </p>
+         
+          </div>
+          </td></tr>
+        </table>
+          <br />
+          
+        <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
+        
+      </form>
+</div>

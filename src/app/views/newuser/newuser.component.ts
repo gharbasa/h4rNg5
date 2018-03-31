@@ -11,7 +11,7 @@ import { LocalStorageService } from '../../services/LocalStorageService';
 })
 export class NewuserComponent implements OnInit {
 	
-	public user: User = new User();
+	public user: any = new User();
 	public selfEditUserProfile:boolean = false;
   	constructor(private userService: UserService
   			, private router: Router
@@ -27,7 +27,7 @@ export class NewuserComponent implements OnInit {
   				console.log("User wants to edit his/her profile " + that.user.id);
   			} else if(res.feature > 0) {
   				//if not -1, then it is a userId
-  				that.user = userService.get(res.feature).subscribe(res => {
+  				this.userService.get(res.feature).subscribe(res => {
 	  				that.user = res;
   					that.user.message = "";
 	  				that.user.errorMessage = "";
@@ -44,15 +44,15 @@ export class NewuserComponent implements OnInit {
   		
   	}
   	
-  	saveUserRecord() {
+  	saveRecord() {
   		if(this.user.id !== 0) {
-  			this.updateUser();
+  			this.update();
   		} else {
-  			this.createUser();
+  			this.create();
   		}
   	}
   	
-  	createUser() {
+  	create() {
   		console.log("Creating a new user with fname=" + this.user.fname);
   		this.userService.create(this.user).subscribe(res => {
   			console.log("User is successfully created");
@@ -65,7 +65,7 @@ export class NewuserComponent implements OnInit {
   		});
   	}
   	
-  	updateUser() {
+  	update() {
   		console.log("Udpating the user id=" + this.user.id);
   		this.userService.update(this.user).subscribe(res => {
   			console.log("Successfully updated");
