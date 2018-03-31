@@ -8,6 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { LoginService } from './services/login.service';
+import { NotificationTypeService } from './services/NotificationTypeService';
 import { AppSettingsService } from './services/AppSettingsService';
 import { LocalStorageService } from './services/LocalStorageService';
 import { UserService } from './services/UserService';
@@ -19,7 +20,10 @@ import { NewuserComponent } from './views/newuser/newuser.component';
 import { AdminComponent } from './views/admin/admin.component';
 import { UsersComponent } from './views/users/users.component';
 import { UserRowComponent } from './views/user-row/user-row.component';
-
+import { NotificationTypeComponent } from './views/notification-type/notification-type.component';
+import { NotificationTypeListComponent } from './views/notification-type-list/notification-type-list.component';
+import { NotificationTypeRowComponent } from './views/notification-type-row/notification-type-row.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const routes: Routes = [
     {
@@ -68,6 +72,16 @@ const routes: Routes = [
         path: 'users',
         component: UsersComponent
     }
+    ,
+    {
+        path: 'notificationTypes',
+        component: NotificationTypeListComponent
+    }
+    ,
+    {
+        path: 'notificationType/:id',
+        component: NotificationTypeComponent
+    }
 ];
 
 @NgModule({
@@ -81,15 +95,21 @@ const routes: Routes = [
     NewuserComponent,
     AdminComponent,
     UsersComponent,
-    UserRowComponent
+    UserRowComponent,
+    NotificationTypeComponent,
+    NotificationTypeListComponent,
+    NotificationTypeRowComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    NgSelectModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [LoginService, AppSettingsService, LocalStorageService, UserService],
+  providers: [LoginService, AppSettingsService
+                , LocalStorageService, UserService
+                , NotificationTypeService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
