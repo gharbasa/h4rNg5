@@ -11,16 +11,22 @@
             <label>Error Message:</label>
             <label>{{user.errorMessage}}</label>
           </div>
+       
+         <table colspan="2">
+          <tr>
+              <td><div class="field">
           
-          <div class="field">
+            <p>First Name: <input [autofocus]="true" name="fname" type="text" size="25" [(ngModel)]="user.fname" placeholder="First name"/></p>
           
-            <p>First Name: <input name="fname" type="text" size="25" [(ngModel)]="user.fname" placeholder="First name"/></p>
+          </div></td>
           
-          </div>
+          </tr>
           
-          <div class="field">
+          <tr><div class="field">
+              
               <p>Middle Name: <input name="mname" type="text" size="25" [(ngModel)]="user.mname" placeholder="Middle name"/></p>
-          </div>
+          
+          </div></tr>
           
           <div class="field">
          
@@ -40,12 +46,12 @@
          
           </div>
           
-          <div class="field">
+          <div class="field left-form">
           
             <p>Identification: <input name="adhaar_no" [(ngModel)]="user.adhaar_no" type="text" size="25" placeholder="Aadhar or Driving license No"></p>
          
           </div>
-          
+         
            <div class="field">
           
             <p>Password: <input name="password" [(ngModel)]="user.password" type="password" size="25" placeholder="Password"></p>
@@ -87,7 +93,11 @@
             <p>Address 4: <input name="addr4" type="text" size="25" [(ngModel)]="user.addr4" placeholder="Address 4"></p>
          
           </div>
+        
+        </table>
           <br />
+          
         <button type="button" class="btn btn-success"  (click)="saveUserRecord()">Save</button>
+        
       </form>
 </div>

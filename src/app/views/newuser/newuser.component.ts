@@ -15,7 +15,7 @@ export class NewuserComponent implements OnInit {
 	public selfEditUserProfile:boolean = false;
   	constructor(private userService: UserService
   			, private router: Router
-  			, private route: ActivatedRoute, 
+  			, private route: ActivatedRoute 
   			,private localStorageService: LocalStorageService) {
   		let that = this;
   		this.route.params.subscribe(res => {
@@ -25,6 +25,17 @@ export class NewuserComponent implements OnInit {
   				that.user.message = "";
   				that.user.errorMessage = "";
   				console.log("User wants to edit his/her profile " + that.user.id);
+  			} else if(res.feature > 0) {
+  				//if not -1, then it is a userId
+  				that.user = userService.get(res.feature).subscribe(res => {
+	  				that.user = res;
+  					that.user.message = "";
+	  				that.user.errorMessage = "";
+	  				console.log("User wants to edit someother user profile, userID=" + that.user.id);
+  				},
+  				err => {
+  					
+  				});
   			}
   		});
   	}
