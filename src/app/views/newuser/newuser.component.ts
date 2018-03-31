@@ -25,7 +25,7 @@ export class NewuserComponent implements OnInit {
   				that.user.message = "";
   				that.user.errorMessage = "";
   				console.log("User wants to edit his/her profile " + that.user.id);
-  			} else {
+  			} else if(res.feature > 0) {
   				//if not -1, then it is a userId
   				that.user = userService.get(res.feature).subscribe(res => {
 	  				that.user = res;
