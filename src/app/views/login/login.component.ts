@@ -62,5 +62,10 @@ export class LoginComponent implements OnInit {
         console.log("Removing user from localStorage");
         this.localStorageService.removeItem('user');
     }
+    
+    newUserClicked() {
+    	this.router.navigate(['newUser']);
+    	return false;
+    }
 }
 

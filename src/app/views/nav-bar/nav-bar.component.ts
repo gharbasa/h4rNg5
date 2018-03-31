@@ -14,8 +14,8 @@ export class NavBarComponent implements OnInit {
   constructor(protected localStorageService: LocalStorageService
 		  ,private router: Router
 		  ,private loginService: LoginService) { }
-  @Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
-  @Output() onLogoutClick = new EventEmitter<string>();
+  //@Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
+  //@Output() onLogoutClick = new EventEmitter<string>();
   
   ngOnInit() {
   }

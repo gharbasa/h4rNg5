@@ -25,4 +25,8 @@ export class UserService {
 	remove(userId:number) {
 		return this.http.delete(this.basePath + "/" + userId);
 	}
+	
+	list() {
+		return this.http.get(this.basePath);
+	}
 }

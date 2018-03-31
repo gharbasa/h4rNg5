@@ -16,10 +16,14 @@ import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 import { AboutComponent } from './views/about/about.component';
 import { HomeComponent } from './views/home/home.component';
 import { NewuserComponent } from './views/newuser/newuser.component';
+import { AdminComponent } from './views/admin/admin.component';
+import { UsersComponent } from './views/users/users.component';
+import { UserRowComponent } from './views/user-row/user-row.component';
+
 
 const routes: Routes = [
     {
-        path: 'about/:id',
+        path: 'about',
         component: AboutComponent
     },
     {
@@ -55,6 +59,15 @@ const routes: Routes = [
         path: 'postupdate',
         component: HomeComponent
     }
+    ,
+    {
+        path: 'admin',
+        component: AdminComponent
+    },
+    {
+        path: 'users',
+        component: UsersComponent
+    }
 ];
 
 @NgModule({
@@ -65,7 +78,10 @@ const routes: Routes = [
     ImportComponent,
     AboutComponent,
     HomeComponent,
-    NewuserComponent
+    NewuserComponent,
+    AdminComponent,
+    UsersComponent,
+    UserRowComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 <!-- Fixed navbar -->
-<h4r-nav-bar [isUserlogin] = "userLoggedin" (onLogoutClick)="logout($event)"></h4r-nav-bar>
+<!--<h4r-nav-bar [isUserlogin] = "userLoggedin" (onLogoutClick)="logout($event)"></h4r-nav-bar> -->
+<h4r-nav-bar></h4r-nav-bar>
 
 <div class="container-fluid text-center pb-5">
     <div style="text-align:center">
@@ -8,7 +9,7 @@
     </h4>    
     </div>
     <!--<h4r-login (onLoginClick)="validateLogin($event)" *ngIf="userLoggedin == false"></h4r-login> -->
-    <h4r-notifications *ngIf="userLoggedin == true"></h4r-notifications>
+    
     
     <router-outlet></router-outlet>
 </div>

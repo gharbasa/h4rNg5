@@ -1,11 +1,13 @@
 <!--<div class="row justify-content-center" *ngIf="isUserlogin == false"> -->
+
  <div class="row justify-content-center">
       <form novalidate #form="ngForm">
-          <input name="username" placeholder="Login Id" class="form-control" [(ngModel)]="usersession.login"/> 
+          <input name="username" placeholder="Login Id" class="form-control" [(ngModel)]="usersession.login" [autofocus]="true"/> 
                     
           <input type="password" name="password" placeholder="Password" class="form-control" [(ngModel)]="usersession.password"/>
             <br/>
           <input type="button" value="Login" class="form-control"/>
+          <br/>
+          <a href="#" (click)= "newUserClicked()">New user?</a>
         </form>
-        <input type="button" value="New User?" class="form-control"/>
 </div>
