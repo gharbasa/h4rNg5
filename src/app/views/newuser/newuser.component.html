@@ -96,7 +96,8 @@
         
         </table>
           <br />
-          
+            Picture <img [src]="avatar"  height="50" width="50">&nbsp;&nbsp;&nbsp;<input name="avatar" type="file" (change)="handleFileInput($event)">
+            <br/> 
         <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
         
       </form>

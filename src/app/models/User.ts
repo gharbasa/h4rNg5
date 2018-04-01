@@ -29,6 +29,7 @@ export class User {
     otherRole?: boolean = false;
     errorMessage:string = "";
     message:string = "";
+    image:any=null;
 
 /*
     constructor(fname: string, email: string) {
