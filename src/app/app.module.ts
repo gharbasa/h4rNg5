@@ -24,6 +24,9 @@ import { NotificationTypeComponent } from './views/notification-type/notificatio
 import { NotificationTypeListComponent } from './views/notification-type-list/notification-type-list.component';
 import { NotificationTypeRowComponent } from './views/notification-type-row/notification-type-row.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { HouseComponent } from './views/house/house.component';
+import { HouseRowComponent } from './views/house-row/house-row.component';
+import { HouseListComponent } from './views/house-list/house-list.component';
 
 const routes: Routes = [
     {
@@ -79,6 +82,12 @@ const routes: Routes = [
     }
     ,
     {
+        path: 'houses',
+        component: HouseListComponent
+    }
+    
+    ,
+    {
         path: 'notificationType/:id',
         component: NotificationTypeComponent
     }
@@ -98,7 +107,10 @@ const routes: Routes = [
     UserRowComponent,
     NotificationTypeComponent,
     NotificationTypeListComponent,
-    NotificationTypeRowComponent
+    NotificationTypeRowComponent,
+    HouseComponent,
+    HouseRowComponent,
+    HouseListComponent
   ],
   imports: [
     BrowserModule,

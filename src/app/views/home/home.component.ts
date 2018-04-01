@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 	
-	private logo:any = require("../../assets/img/logo.png");
+	private logo:any = require("assets/img/logo.png");
 
 	constructor() { }
 

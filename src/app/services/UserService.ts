@@ -15,10 +15,12 @@ export class UserService {
 	}
 
 	create(user:User) {
+		this.nullifyNonServerAttrs(user);
 		return this.http.post(this.basePath, user);
 	}
 
 	update(user:User) {
+		this.nullifyNonServerAttrs(user);
 		return this.http.put(this.basePath + "/" + user.id, user);
 	}
 	
@@ -28,5 +30,14 @@ export class UserService {
 	
 	list() {
 		return this.http.get(this.basePath);
+	}
+	
+	/**
+	 * Following attributes are not needed to the backend server.
+	 */
+	nullifyNonServerAttrs(user:User) {
+		user.image = null;
+		user.errorMessage = "";
+		user.message = "";
 	}
 }

@@ -1,5 +1,3 @@
 export class AppSettings {
-	SELF_EDIT_USER_PROFILE:number = -1;
+	static H4R_BACKEND_URL:string = "http://localhost:3000/";
 }
-
-

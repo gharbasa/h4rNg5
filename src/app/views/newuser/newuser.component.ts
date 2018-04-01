@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../models/User';
 import { UserService } from '../../services/UserService';
 import { LocalStorageService } from '../../services/LocalStorageService';
+import { AppSettings } from '../../models/AppSettings';
 
 @Component({
   selector: 'h4r-newuser',
@@ -13,6 +14,8 @@ export class NewuserComponent implements OnInit {
 	
 	public user: any = new User();
 	public selfEditUserProfile:boolean = false;
+	public fileToUpload: File = null;
+	private avatar:any = null;//require("../../assets/img/logo.png");
   	constructor(private userService: UserService
   			, private router: Router
   			, private route: ActivatedRoute 
@@ -24,14 +27,16 @@ export class NewuserComponent implements OnInit {
   				that.user = JSON.parse(localStorageService.getItem('user'));
   				that.user.message = "";
   				that.user.errorMessage = "";
-  				console.log("User wants to edit his/her profile " + that.user.id);
+  				that.avatar = AppSettings.H4R_BACKEND_URL + that.user.avatar;
+  				console.log("User wants to edit his/her profile " +  that.user.id); 
   			} else if(res.feature > 0) {
-  				//if not -1, then it is a userId
-  				this.userService.get(res.feature).subscribe(res => {
-	  				that.user = res;
+  				//if not -1, then it is a userId 
+  				this.userService.get(res.feature).subscribe(resp => {
+	  				that.user = resp;
   					that.user.message = "";
 	  				that.user.errorMessage = "";
-	  				console.log("User wants to edit someother user profile, userID=" + that.user.id);
+	  				that.avatar = AppSettings.H4R_BACKEND_URL + that.user.avatar;
+	  				console.log("User wants to edit someother user profile, userID=" + "assets/" + that.user.id);
   				},
   				err => {
   					
@@ -78,6 +83,31 @@ export class NewuserComponent implements OnInit {
   			console.log("Problem updating the user: " + JSON.stringify(err));
   			this.user.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage[0]:"Problem updating the user";
   		});
+  	}
+  	
+  	handleFileInput($event) {
+  		var files:FileList = $event.target.files;
+  		var file = files.item(0);
+  		var content = null;
+  		
+  		if(file == undefined)
+  	    	return; //do nothing, no file attached. 
+  		var name = file.name;
+  	    var size = file.size;
+  	    var type = file.type;
+  	    var reader = new FileReader();
+  	    let that = this;
+  	    reader.onload = function(readerEvt) {
+  	    	content = btoa(readerEvt.target.result);
+  	    	console.log(name +":"+size+":"+type);
+  	    	var avatar = {data:null,filename:null,content_type:null};
+  	    	avatar.data = content;
+  	    	avatar.filename = name;
+  	    	avatar.content_type = type;
+  	    	that.user.avatar = avatar;
+  	    	console.log("avatar::", that.user.avatar);
+  	    };
+  	    reader.readAsBinaryString(file);
   	}
 
 }
