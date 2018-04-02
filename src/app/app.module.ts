@@ -9,9 +9,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { LoginService } from './services/login.service';
 import { NotificationTypeService } from './services/NotificationTypeService';
+import { HouseService } from './services/HouseService';
 import { AppSettingsService } from './services/AppSettingsService';
 import { LocalStorageService } from './services/LocalStorageService';
 import { UserService } from './services/UserService';
+import { CommunityService } from './services/CommunityService';
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 
 import { AboutComponent } from './views/about/about.component';
@@ -85,7 +87,11 @@ const routes: Routes = [
         path: 'houses',
         component: HouseListComponent
     }
-    
+    ,
+    {
+        path: 'house/:id',
+        component: HouseComponent
+    }
     ,
     {
         path: 'notificationType/:id',
@@ -121,7 +127,8 @@ const routes: Routes = [
   ],
   providers: [LoginService, AppSettingsService
                 , LocalStorageService, UserService
-                , NotificationTypeService],
+                , NotificationTypeService, HouseService
+                , CommunityService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

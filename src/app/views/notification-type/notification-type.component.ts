@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationType } from '../../models/NotificationType';
 import { NotificationTypeService } from '../../services/NotificationTypeService';
-import { LocalStorageService } from '../../services/LocalStorageService';
 
 @Component({
   selector: 'h4r-notification-type',
@@ -14,12 +13,6 @@ export class NotificationTypeComponent implements OnInit {
 	private notificationType: any = new NotificationType();
 	private editNotificationType:boolean = false;
 
-	private config = {
-        displayKey:"description", //if objects array passed which key to be displayed defaults to description,
-        search:true //enables the search plugin to search in the list
-    };
-	
-	//dropdown reference: https://github.com/manishjanky/ngx-select-dropdown/blob/master/demo/src/app/app.component.ts
 	private noticeTypeOptions = [
 	                         {id:1, description:"New user"},
 	                         {id:2, description: "House Verified"},
@@ -32,8 +25,7 @@ export class NotificationTypeComponent implements OnInit {
 	
 	constructor(private notificationTypeService: NotificationTypeService
 			, private router: Router
-			, private route: ActivatedRoute 
-			,private localStorageService: LocalStorageService) {
+			, private route: ActivatedRoute) {
 		
 		let that = this;
   		this.route.params.subscribe(res => {

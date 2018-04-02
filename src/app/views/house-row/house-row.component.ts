@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'h4r-house-row',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HouseRowComponent implements OnInit {
 
-  constructor() { }
+	@Input() house:any;
+	constructor() { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
 }
