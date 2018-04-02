@@ -1,3 +1,8 @@
-<p>
-  house-row works!
+<p style="background:#d7dde5" [ngStyle]="{'color':house.active? '#000000' : '#959ba5' }">
+  <a routerLink="../house/{{house.id}}">{{house.name}}</a>
+  <span>
+      {{house.addr1}}, {{house.addr2}}
+      {{house.addr3}}, {{house.addr4}}
+  </span>
+  <span>{{house.no_of_floors}}</span>
 </p>

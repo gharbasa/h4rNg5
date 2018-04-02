@@ -1,3 +1,14 @@
-<p>
-  house-list works!
-</p>
+  Houses <a routerLink="../house/-1">(+)</a>
+  <table>
+      <tbody>
+    <tr>
+        <th>House</th>
+        <th>Address</th>
+        <th>No. of floors</th>
+    </tr>
+    </tbody>
+    <tbody>
+        <h4r-house-row *ngFor="let house of houses" [house]="house"></h4r-house-row>
+    </tbody>
+  </table>
+

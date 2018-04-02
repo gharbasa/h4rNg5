@@ -28,7 +28,7 @@ export class NewuserComponent implements OnInit {
   				that.user.message = "";
   				that.user.errorMessage = "";
   				that.avatar = AppSettings.H4R_BACKEND_URL + that.user.avatar;
-  				console.log("User wants to edit his/her profile " +  that.user.id); 
+  				console.log("User wants to edit his/her own profile " +  that.user.id); 
   			} else if(res.feature > 0) {
   				//if not -1, then it is a userId 
   				this.userService.get(res.feature).subscribe(resp => {

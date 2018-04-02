@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { CommunityService } from './CommunityService';
+import { LocalStorageService } from './LocalStorageService';
 
 @Injectable()
 export class LoginService {
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient, 
+				private communityService:CommunityService,
+				private localStorageService: LocalStorageService) { 
+		
+	}
 	
 	private basePath = '/api/1/usersession';
 	
@@ -22,6 +28,16 @@ export class LoginService {
 
 	update(payload) {
 		return this.http.patch(this.basePath + '/${payload.id}.json', payload);
+	}
+	
+	postLoginActivity() {
+		this.communityService.list().subscribe(res => {
+			console.log("Fetched communities");
+			this.localStorageService.setItem('communities', JSON.stringify(res));
+		},
+		err =>{
+			console.log("error in fetching communities");
+		});
 	}
 	
 }

@@ -17,12 +17,23 @@ p input {
   float:right;
   border-radius:4px;
   border: 1px solid #ccc;
+  position:relative;
  
 }
 
 div {
-  
   margin-top:12px;
+}
+
+ ul{
+      float:left;
+      list-style: none;
+      margin-top: 10px;
+    }
+
+li{
+
+  width: 340px;
 }
 
 

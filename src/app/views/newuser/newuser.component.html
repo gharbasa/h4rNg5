@@ -12,52 +12,60 @@
             <label>{{user.errorMessage}}</label>
           </div>
        
-         <table colspan="2">
-          <tr>
-              <td><div class="field">
+         <ul class="form">
+             
+                      
+                   
+         <li><div class="field">
           
             <p>First Name: <input [autofocus]="true" name="fname" type="text" size="25" [(ngModel)]="user.fname" placeholder="First name"/></p>
           
-          </div></td>
+          </div></li>
           
-          </tr>
-          
-          <tr><div class="field">
+         <li><div class="field">
               
-              <p>Middle Name: <input name="mname" type="text" size="25" [(ngModel)]="user.mname" placeholder="Middle name"/></p>
+            <p>Middle Name: <input name="mname" type="text" size="25" [(ngModel)]="user.mname" placeholder="Middle name"/></p>
           
-          </div></tr>
+          </div></li>
           
-          <div class="field">
+         <li><div class="field">
          
             <p>Last Name: <input name="lname" type="text" size="25" [(ngModel)]="user.lname" placeholder="Last name"></p>
           
-          </div>
+          </div></li>
           
-          <div class="field">
+          <li><div class="field">
           
             <p>Login ID: <input name="login" [(ngModel)]="user.login" type="text" size="25" placeholder="Login ID"></p>
          
-          </div>
+          </div></li>
           
-          <div class="field">
+          <li><div class="field">
           
             <p>Email: <input name="email" type="text" [(ngModel)]="user.email" size="25" placeholder="Email"></p>
          
-          </div>
-          
-          <div class="field left-form">
+          </div></li>
+    
+              
+          <li><div class="field left-form">
           
             <p>Identification: <input name="adhaar_no" [(ngModel)]="user.adhaar_no" type="text" size="25" placeholder="Aadhar or Driving license No"></p>
          
-          </div>
+          </div></li>
+          
+          
+       </ul>  
+       
+       <ul class="form">
+                   
+                
          
-           <div class="field">
+          <div class="field">
           
             <p>Password: <input name="password" [(ngModel)]="user.password" type="password" size="25" placeholder="Password"></p>
          
           </div>
-        
+          
            <div class="field">
           
             <p>Confirm Password: <input name="password_confirmation" [(ngModel)]="user.password_confirmation" type="password" size="25" placeholder="Confirm Password"></p>
@@ -72,31 +80,32 @@
         
           <div class="field">
           
-            <p>Address 1: <input name="addr1" [(ngModel)]="user.addr1" type="text" size="25" placeholder="Address 1"></p>
+            <p>Address: <input name="addr1" [(ngModel)]="user.addr1" type="text" size="25" placeholder="House No."></p>
          
           </div>
           
            <div class="field">
           
-            <p>Address 2: <input name="addr2" [(ngModel)]="user.addr2" type="text" size="25" placeholder="Address 2"></p>
+            <p>: <input name="addr2" [(ngModel)]="user.addr2" type="text" size="25" placeholder="Street name"></p>
          
           </div>
           
           <div class="field">
           
-            <p>Address 3: <input name="addr3" [(ngModel)]="user.addr3" type="text" size="25" placeholder="Address 3"></p>
+            <p>: <input name="addr3" [(ngModel)]="user.addr3" type="text" size="25" placeholder="City, Zip code"></p>
          
           </div>
           
            <div class="field">
           
-            <p>Address 4: <input name="addr4" type="text" size="25" [(ngModel)]="user.addr4" placeholder="Address 4"></p>
+            <p>: <input name="addr4" type="text" size="25" [(ngModel)]="user.addr4" placeholder="State, Country"></p>
          
           </div>
-        
-        </table>
+          
+          </ul>
+          
           <br />
-            Picture <img [src]="avatar"  height="50" width="50">&nbsp;&nbsp;&nbsp;<input name="avatar" type="file" (change)="handleFileInput($event)">
+            Picture <img [src]="avatar" alt="Avatar" *ngIf='avatar != null && avatar != ""'  height="50" width="50">&nbsp;&nbsp;&nbsp;<input name="avatar" type="file" (change)="handleFileInput($event)">
             <br/> 
         <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
         
