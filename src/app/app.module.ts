@@ -32,6 +32,7 @@ import { HouseComponent } from './views/house/house.component';
 import { HouseRowComponent } from './views/house-row/house-row.component';
 import { HouseListComponent } from './views/house-list/house-list.component';
 import { HousePicsComponent } from './views/house-pics/house-pics.component';
+import { LoggingService, Config } from 'loggerservice';
 
 const routes: Routes = [
     {

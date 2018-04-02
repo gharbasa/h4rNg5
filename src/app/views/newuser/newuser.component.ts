@@ -4,6 +4,8 @@ import { User } from '../../models/User';
 import { UserService } from '../../services/UserService';
 import { LocalStorageService } from '../../services/LocalStorageService';
 import { AppSettings } from '../../models/AppSettings';
+import { LoggingService, Config } from 'loggerservice';
+
 
 @Component({
   selector: 'h4r-newuser',
@@ -19,7 +21,8 @@ export class NewuserComponent implements OnInit {
   	constructor(private userService: UserService
   			, private router: Router
   			, private route: ActivatedRoute 
-  			,private localStorageService: LocalStorageService) {
+  			,private localStorageService: LocalStorageService
+  			, private logger: LoggingService) {
   		let that = this;
   		this.route.params.subscribe(res => {
   			if(res.feature == -1) {
@@ -28,7 +31,7 @@ export class NewuserComponent implements OnInit {
   				that.user.message = "";
   				that.user.errorMessage = "";
   				that.avatar = AppSettings.H4R_BACKEND_URL + that.user.avatar;
-  				console.log("User wants to edit his/her own profile " +  that.user.id); 
+  				this.logger.log(this,"User wants to edit his/her own profile " +  that.user.id); 
   			} else if(res.feature > 0) {
   				//if not -1, then it is a userId 
   				this.userService.get(res.feature).subscribe(resp => {
@@ -36,7 +39,7 @@ export class NewuserComponent implements OnInit {
   					that.user.message = "";
 	  				that.user.errorMessage = "";
 	  				that.avatar = AppSettings.H4R_BACKEND_URL + that.user.avatar;
-	  				console.log("User wants to edit someother user profile, userID=" + "assets/" + that.user.id);
+	  				this.logger.log(this,"User wants to edit someother user profile, userID=" + "assets/" + that.user.id);
   				},
   				err => {
   					
@@ -58,29 +61,29 @@ export class NewuserComponent implements OnInit {
   	}
   	
   	create() {
-  		console.log("Creating a new user with fname=" + this.user.fname);
+  		this.logger.log(this,"Creating a new user with fname=" + this.user.fname);
   		this.userService.create(this.user).subscribe(res => {
-  			console.log("User is successfully created");
+  			this.logger.log(this,"User is successfully created");
   			this.user.message = "Successfully created user.";
   			this.router.navigate(['postupdate']);
   		},
   		err => {
-  			console.log("problem creating the user: " + JSON.stringify(err));
+  			this.logger.log(this,"problem creating the user: " + JSON.stringify(err));
   			this.user.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage[0]:"Problem creating the user";
   		});
   	}
   	
   	update() {
-  		console.log("Udpating the user id=" + this.user.id);
+  		this.logger.log(this,"Udpating the user id=" + this.user.id);
   		this.userService.update(this.user).subscribe(res => {
-  			console.log("Successfully updated");
+  			this.logger.log(this,"Successfully updated");
   			this.user.message = "Successfully updated the user.";
   			if(this.selfEditUserProfile === true)
   				this.localStorageService.setItem('user', JSON.stringify(res));
   			this.router.navigate(['postupdate']);
   		},
   		err => {
-  			console.log("Problem updating the user: " + JSON.stringify(err));
+  			this.logger.log(this,"Problem updating the user: " + JSON.stringify(err));
   			this.user.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage[0]:"Problem updating the user";
   		});
   	}
@@ -99,13 +102,13 @@ export class NewuserComponent implements OnInit {
   	    let that = this;
   	    reader.onload = function(readerEvt) {
   	    	content = btoa(readerEvt.target.result);
-  	    	console.log(name +":"+size+":"+type);
+  	    	this.logger.log(this,name +":"+size+":"+type);
   	    	var avatar = {data:null,filename:null,content_type:null};
   	    	avatar.data = content;
   	    	avatar.filename = name;
   	    	avatar.content_type = type;
   	    	that.user.avatar = avatar;
-  	    	console.log("avatar::", that.user.avatar);
+  	    	this.logger.log(this,"avatar::", that.user.avatar);
   	    };
   	    reader.readAsBinaryString(file);
   	}

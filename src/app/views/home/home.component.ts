@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoggingService, Config } from 'loggerservice';
 
 
 @Component({
@@ -10,7 +11,7 @@ export class HomeComponent implements OnInit {
 	
 	private logo:any = require("assets/img/logo.png");
 
-	constructor() { }
+	constructor(private logger: LoggingService) { }
 
 	ngOnInit() {
 	}

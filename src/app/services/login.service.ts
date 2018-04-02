@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { CommunityService } from './CommunityService';
 import { LocalStorageService } from './LocalStorageService';
+import { LoggingService, Config } from 'loggerservice';
 
 @Injectable()
 export class LoginService {
 
 	constructor(private http: HttpClient, 
 				private communityService:CommunityService,
-				private localStorageService: LocalStorageService) { 
+				private localStorageService: LocalStorageService,
+				private logger: LoggingService) { 
 		
 	}
 	
@@ -32,11 +34,11 @@ export class LoginService {
 	
 	postLoginActivity() {
 		this.communityService.list().subscribe(res => {
-			console.log("Fetched communities");
+			this.logger.log(this,"Fetched communities");
 			this.localStorageService.setItem('communities', JSON.stringify(res));
 		},
 		err =>{
-			console.log("error in fetching communities");
+			this.logger.error(this,"error in fetching communities");
 		});
 	}
 	

@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Usersession } from '../../models/usersession';
 import { LoginService } from '../../services/login.service';
 import { LocalStorageService } from '../../services/LocalStorageService';
+import { LoggingService, Config } from 'loggerservice';
+
 
 @Component({
   selector: 'h4r-login',
@@ -16,7 +18,8 @@ import { LocalStorageService } from '../../services/LocalStorageService';
 export class LoginComponent implements OnInit {
     constructor(private loginService: LoginService 
     		,private localStorageService: LocalStorageService
-    		,private router: Router) { 
+    		,private router: Router
+    		,private logger: LoggingService) { 
         
     }
     //@Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
@@ -36,18 +39,18 @@ export class LoginComponent implements OnInit {
     }
 
     login(usersession: Usersession) {
-        //this.onLoginClick.emit(usersession);
-        console.log("Login with userid " + usersession.login);
+        //this.onLoginClick.emit(user session);
+    	this.logger.log(this,"Login with userid " + usersession.login);
         let that = this;
         this.loginService.login(usersession).subscribe(res => {
-            //console.log("Login successful " + res.fname);
+            //this.logger.log(this,"Login successful " + res.fname);
             that.updateUserInLocalStorage(res);
             this.loginService.postLoginActivity();
-            //navigate user to the postlogin 
+            //navigate user to the post login 
             this.router.navigate(['postlogin']);
         }
         ,err => {
-            console.log("Login failed.");
+        	this.logger.error(this,"Login failed.");
             that.removeUserFromLocalStorage();
         });
         usersession.login = '';
@@ -55,12 +58,12 @@ export class LoginComponent implements OnInit {
     }
     
     updateUserInLocalStorage(res) {
-        console.log("Updating user in localStorage ");
+    	this.logger.log(this,"Updating user in localStorage ");
         this.localStorageService.setItem('user', JSON.stringify(res));
     }
     
     removeUserFromLocalStorage() {
-        console.log("Removing user from localStorage");
+    	this.logger.log(this,"Removing user from localStorage");
         this.localStorageService.removeItem('user');
     }
     

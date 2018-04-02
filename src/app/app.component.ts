@@ -8,6 +8,7 @@ import { AppSettings } from './models/AppSettings';
 import { AppSettingsService } from './services/AppSettingsService';
 import { LocalStorageService } from './services/LocalStorageService';
 import { Router } from '@angular/router';
+import { LoggingService, Config } from 'loggerservice';
 
 @Component({
   selector: 'h4r-root',
@@ -23,17 +24,18 @@ export class AppComponent {
   
   constructor(private loginService: LoginService
 		  		, private localStorageService: LocalStorageService
-		  		, private router: Router) {
-    console.log("AppComponent C'tor");
+		  		, private router: Router
+		  		, private logger: LoggingService) {
+	  this.logger.log(this,"AppComponent C'tor");
     let that = this;
     loginService.get().subscribe(res => {
-        console.log("Looks like usersession is still alive");
+    	this.logger.log(this,"Looks like usersession is still alive");
         that.localStorageService.setItem('user', JSON.stringify(res));
         this.router.navigate(['postlogin']);
         //Do not show login dialog
     },
     err => {
-            console.log('Error occurred while retrieving user session, taking user to the login screen', err);
+    	this.logger.error(this,'Error occurred while retrieving user session, taking user to the login screen', err);
             that.localStorageService.removeItem('user');
             this.router.navigate(['login']);
     });
