@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { LoggingService, Config } from 'loggerservice';
 
 @Component({
   selector: 'h4r-notification-type-row',
@@ -8,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NotificationTypeRowComponent implements OnInit {
 
 	@Input() notificationType:any;
-	constructor() { }
+	constructor(private logger: LoggingService) { }
 
 	ngOnInit() {
 	}

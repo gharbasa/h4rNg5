@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { LoggingService, Config } from 'loggerservice';
 
 @Component({
   selector: 'h4r-user-row',
@@ -8,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class UserRowComponent implements OnInit {
 
 	@Input() user:any;
-  	constructor() { 
+  	constructor(private logger: LoggingService) { 
   		
   	}
 

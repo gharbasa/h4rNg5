@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationTypeService } from '../../services/NotificationTypeService';
+import { LoggingService, Config } from 'loggerservice';
 
 @Component({
   selector: 'h4r-notification-type-list',
@@ -11,14 +12,15 @@ export class NotificationTypeListComponent implements OnInit {
 
 	private notificationTypes: any;
 
-	constructor(private notificationTypeService: NotificationTypeService) {
+	constructor(private notificationTypeService: NotificationTypeService
+			, private logger: LoggingService) {
 		let that = this;
 		
 		this.notificationTypeService.list().subscribe(res => {
 			that.notificationTypes = res;
-			//console.log("notificationTypes =" + JSON.stringify(res));
+			//this.logger.log(this,"notificationTypes =" + JSON.stringify(res));
 		}, err=> {
-			console.log("notificationTypes err=" + JSON.stringify(err));
+			this.logger.error(this,"notificationTypes err=" + JSON.stringify(err));
 		});
 	}
 	

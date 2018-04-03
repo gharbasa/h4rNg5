@@ -1,4 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { LoggingService, Config } from 'loggerservice';
 
 @Component({
   selector: 'h4r-house-row',

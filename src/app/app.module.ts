@@ -32,6 +32,8 @@ import { HouseComponent } from './views/house/house.component';
 import { HouseRowComponent } from './views/house-row/house-row.component';
 import { HouseListComponent } from './views/house-list/house-list.component';
 import { HousePicsComponent } from './views/house-pics/house-pics.component';
+import { LoggingService, Config } from 'loggerservice';
+import { PicAlbumComponent } from './views/pic-album/pic-album.component';
 
 const routes: Routes = [
     {
@@ -120,7 +122,8 @@ const routes: Routes = [
     HouseComponent,
     HouseRowComponent,
     HouseListComponent,
-    HousePicsComponent
+    HousePicsComponent,
+    PicAlbumComponent
   ],
   imports: [
     BrowserModule,

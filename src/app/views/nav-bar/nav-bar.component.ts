@@ -3,6 +3,7 @@ import { Component, OnInit, Input, Output,EventEmitter, HostListener } from '@an
 import { LocalStorageService } from '../../services/LocalStorageService';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
+import { LoggingService, Config } from 'loggerservice';
 
 @Component({
   selector: 'h4r-nav-bar',
@@ -13,7 +14,8 @@ export class NavBarComponent implements OnInit {
 
   constructor(protected localStorageService: LocalStorageService
 		  ,private router: Router
-		  ,private loginService: LoginService) { }
+		  ,private loginService: LoginService
+		  ,private logger: LoggingService){ }
   //@Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
   //@Output() onLogoutClick = new EventEmitter<string>();
   
@@ -26,14 +28,14 @@ export class NavBarComponent implements OnInit {
 	  let userJSON = this.localStorageService.getItem('user');
 	  let user = JSON.parse(userJSON);
 	  let userId = user.id;
-	  console.log("User wants to logout userId=" + userId);    
+	  this.logger.log(this,"User wants to logout userId=" + userId);    
 	  that.loginService.remove(userId).subscribe(res => {
-		  console.log("Logout successful");
+		  this.logger.log(this,"Logout successful");
 		  that.localStorageService.removeItem('user');
 		  this.router.navigate(['']);
 	  }
 	  ,err => {
-		  console.log("Somehow Logout failed.");
+		  this.logger.error(this,"Somehow Logout failed.");
 		  that.localStorageService.removeItem('user');
 		  this.router.navigate(['']);
 	  });
