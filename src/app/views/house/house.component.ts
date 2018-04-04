@@ -4,6 +4,7 @@ import { House } from '../../models/House';
 import { HouseService } from '../../services/HouseService';
 import { LocalStorageService } from '../../services/LocalStorageService';
 import { LoggingService, Config } from 'loggerservice';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'h4r-house',
@@ -20,9 +21,10 @@ export class HouseComponent implements OnInit {
 			, private router: Router
 			, private route: ActivatedRoute
 			, private localStorageService: LocalStorageService
-			, private logger: LoggingService) { 
+			, private logger: LoggingService
+			, private loginService:LoginService) { 
   		let that = this;
-  		this.communities = JSON.parse(this.localStorageService.getItem('communities'));
+  		this.communities = loginService.getCommunities();//JSON.parse(this.localStorageService.getItem('communities'));
   		this.route.params.subscribe(res => {
   			if(res.id == -1) {
   				this.logger.log(this,"User wants to create a new house");

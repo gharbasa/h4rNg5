@@ -1,0 +1,5 @@
+<p>
+  <span *ngFor="let notification of notifications; let i = index">
+            <h4r-notification [notification]="notification" (onDeleteNotificationClick)="deleteNotification($event)"></h4r-notification>
+    </span>
+</p>

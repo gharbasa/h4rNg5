@@ -17,8 +17,9 @@ import { UserService } from './services/UserService';
 import { CommunityService } from './services/CommunityService';
 import { HousePicsService } from './services/HousePicsService';
 import { HouseNoteService } from './services/HouseNoteService';
-import { NavBarComponent } from './views/nav-bar/nav-bar.component';
+import { NotificationService } from './services/NotificationService';
 
+import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 import { AboutComponent } from './views/about/about.component';
 import { HomeComponent } from './views/home/home.component';
 import { NewuserComponent } from './views/newuser/newuser.component';
@@ -36,6 +37,8 @@ import { HousePicsComponent } from './views/house-pics/house-pics.component';
 import { PicAlbumComponent } from './views/pic-album/pic-album.component';
 import { HouseNotesComponent } from './views/house-notes/house-notes.component';
 import { HouseNoteComponent } from './views/house-note/house-note.component';
+import { NotificationsComponent } from './views/notifications/notifications.component';
+import { NotificationComponent } from './views/notification/notification.component';
 
 
 const routes: Routes = [
@@ -105,6 +108,12 @@ const routes: Routes = [
         path: 'notificationType/:id',
         component: NotificationTypeComponent
     }
+    ,
+    {
+        path: 'notifications',
+        component: NotificationsComponent
+    }
+    
 ];
 
 @NgModule({
@@ -128,7 +137,9 @@ const routes: Routes = [
     HousePicsComponent,
     PicAlbumComponent,
     HouseNotesComponent,
-    HouseNoteComponent
+    HouseNoteComponent,
+    NotificationsComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -140,7 +151,7 @@ const routes: Routes = [
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService
                 , NotificationTypeService, HouseService
-                , CommunityService, HousePicsService, HouseNoteService],
+                , CommunityService, HousePicsService, HouseNoteService, NotificationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
