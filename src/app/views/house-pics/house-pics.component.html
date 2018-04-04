@@ -1,20 +1,23 @@
 <h4>House pictures</h4>
 <p> 
     <br/>
-  <span *ngIf="housePics.length > 0">
-    <a (click)="prevImage()" href="#">Previous ({{viewIndex+1}}/{{housePics.length}})</a>
-    &nbsp;<a (click)="deleteImage()" href="#">(X)</a>
-    <!--<img *ngFor="let housePic of housePics" [src]="housePic.image" alt="{{housePic.about_pic}}"> -->
-    <span *ngFor="let housePic of housePics; let i = index">
-        <h4r-pic-album [housePic]="housePic" *ngIf="(i===viewIndex)"></h4r-pic-album>
-    </span>
-    <a (click)="nextImage()" href="#" tooltip="Delete the picture">Next ({{viewIndex+1}}/{{housePics.length}})</a>
-    &nbsp;<a (click)="deleteImage()" href="#">(X)</a>
+    <span *ngIf="housePics.length > 0">
+        <a (click)="prevImage()" href="#" title="Previous picture">&lt;&lt;&lt;</a>
+        ({{viewIndex+1}}/{{housePics.length}})
+        <a (click)="nextImage()" href="#" title="Next picture">&gt;&gt;&gt;</a>
+        
+        &nbsp;<a (click)="deleteImage()" href="#" title="Delete the picture">(X)</a>
+        
+        <span *ngFor="let housePic of housePics; let i = index">
+            <h4r-pic-album [housePic]="housePic" *ngIf="(i===viewIndex)"></h4r-pic-album>
+        </span>
+    
     </span>
     <br/>
-    <input name="avatar" type="file" (change)="handleFileInput($event)">
-            <br/>
-     <input name="about_pic" type="text"  [(ngModel)]="newHousePic.about_pic" placeholder="Describe">
-        <button type="button" class="btn btn-success"  (click)="attachHousePic()">Attach</button>
-          
+    <span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="avatar" type="file" (change)="handleFileInput($event)">
+        <br/>
+         <input name="about_pic" type="text"  [(ngModel)]="newHousePic.about_pic" placeholder="Describe">
+            <button type="button" class="btn btn-success"  (click)="attachHousePic()">Attach</button>
+    </span>      
 </p>
