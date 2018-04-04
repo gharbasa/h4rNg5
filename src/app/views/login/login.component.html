@@ -2,12 +2,19 @@
 
  <div class="row justify-content-center">
       <form novalidate #form="ngForm">
-          <input name="username" placeholder="Login Id" class="form-control" [(ngModel)]="usersession.login" [autofocus]="true"/> 
-                    
-          <input type="password" name="password" placeholder="Password" class="form-control" [(ngModel)]="usersession.password"/>
-            <br/>
-          <input type="button" value="Login" class="form-control"/>
-          <br/>
-          <a href="#" (click)= "newUserClicked()">New user?</a>
+          <div class="field">
+          <p><input name="username" placeholder="Login Id" class="form-control" [(ngModel)]="usersession.login" [autofocus]="true"/></p> 
+           </div>
+           
+           <div class="field">         
+          <p><input type="password" name="password" placeholder="Password" class="form-control" [(ngModel)]="usersession.password"/></p>
+           </div>
+           
+         <p><button type="submit" class="btn btn-primary my-1">Login</button></p>
+         
+         <br/>
+         
+         <a href="#" (click)= "newUserClicked()">New user?</a>
+         
         </form>
 </div>

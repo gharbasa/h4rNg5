@@ -1,4 +1,4 @@
-<h4>House notes({{houseNotes.length}})</h4>
+<h4>Notes({{houseNotes.length}})</h4>
 <p> 
     <br/>
     <span *ngIf="houseNotes.length > 0">
@@ -8,9 +8,11 @@
     </span>
     <br/>
     <span>
+        <input type="checkbox" name="private_note" [(ngModel)]='newHouseNote.private_note' />Private note?
         <br/>
          <textarea name="content" [(ngModel)]='newHouseNote.note' rows="3" cols="50" placeholder="Note">                             
         </textarea>
-         <button type="button" class="btn btn-success"  (click)="attachHouseNote()">Attach</button>
+        <br/>
+         <button type="button" class="btn btn-success"  (click)="attachHouseNote()">Save Note</button>
     </span>      
 </p>
