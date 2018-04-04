@@ -4,6 +4,7 @@ import { LocalStorageService } from '../../services/LocalStorageService';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 import { LoggingService, Config } from 'loggerservice';
+import { AppSettings } from '../../models/AppSettings';
 
 @Component({
   selector: 'h4r-nav-bar',
@@ -12,7 +13,9 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(protected localStorageService: LocalStorageService
+	private userPic:string = "";
+	private userName:string = "";
+	constructor(protected localStorageService: LocalStorageService
 		  ,private router: Router
 		  ,private loginService: LoginService
 		  ,private logger: LoggingService){ }
@@ -46,7 +49,10 @@ export class NavBarComponent implements OnInit {
   isUserLogin() {
 	    let user = this.localStorageService.getItem('user');
 	    let result = ((user != undefined) && (user != null));
+	    if(result == true) {
+	    	this.userPic = AppSettings.H4R_BACKEND_URL + JSON.parse(user).avatar;
+	    	this.userName = JSON.parse(user).lname + ", " + JSON.parse(user).fname;
+	    }
 	    return result;
   }
-  
 }

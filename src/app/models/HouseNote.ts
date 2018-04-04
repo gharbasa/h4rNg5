@@ -3,7 +3,7 @@ export class HouseNote {
     note:string = "";
     active:boolean = false;
     house_id: number = 0;
-    private: boolean = false;
+	private_note:boolean = false;
     created_by:number = 0;
     updated_by: number = 0;
     created_at:string = "";
