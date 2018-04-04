@@ -1,0 +1,7 @@
+<p *ngIf="notification != null">
+    
+    <span>{{notification.subject}}</span>
+    <br/>
+    <span>{{notification.content}}</span>
+    <a href="#" (click)="deleteNotification()">(X)</a>
+</p>

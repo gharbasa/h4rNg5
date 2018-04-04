@@ -15,6 +15,7 @@ export class NavBarComponent implements OnInit {
 
 	private userPic:string = "";
 	private userName:string = "";
+	private notifications:any = [];
 	constructor(protected localStorageService: LocalStorageService
 		  ,private router: Router
 		  ,private loginService: LoginService
@@ -47,12 +48,14 @@ export class NavBarComponent implements OnInit {
   }
   
   isUserLogin() {
-	    let user = this.localStorageService.getItem('user');
-	    let result = ((user != undefined) && (user != null));
-	    if(result == true) {
-	    	this.userPic = AppSettings.H4R_BACKEND_URL + JSON.parse(user).avatar;
-	    	this.userName = JSON.parse(user).lname + ", " + JSON.parse(user).fname;
+	  	let user = this.loginService.getCurrentUser();
+	    if(user != null) {
+	    	this.userPic = AppSettings.H4R_BACKEND_URL + user.avatar;
+	    	this.userName = user.lname + ", " + user.fname;
+	    	this.notifications = this.loginService.getNotifications();
+	    } else {
+	    	return false;
 	    }
-	    return result;
+	    return true;
   }
 }

@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
         this.loginService.login(usersession).subscribe(res => {
             //this.logger.log(this,"Login successful " + res.fname);
             that.updateUserInLocalStorage(res);
-            this.loginService.postLoginActivity();
             //navigate user to the post login 
             this.router.navigate(['postlogin']);
         }

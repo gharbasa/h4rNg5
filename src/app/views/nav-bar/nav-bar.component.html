@@ -2,10 +2,10 @@
   <a class="navbar-brand" routerLink="" href="#">
       <img *ngIf="isUserLogin()" width="30" height="30" [src]="userPic" alt="{{userName}}"  title="{{userName}}">
   </a>
+  <a class="navbar-brand" routerLink="notifications" *ngIf="isUserLogin()">::Notifications({{notifications.length}})</a>
   <a class="navbar-brand" routerLink="newUser">::Create profile</a>
   <a class="navbar-brand" routerLink="login" *ngIf="!isUserLogin()">::Login</a>
   <a class="navbar-brand" >::Houses</a>
-  <a class="navbar-brand" >::Notifications</a>
   <a class="navbar-brand" routerLink="about">::About</a>
   <a class="navbar-brand" routerLink="editUser/-1" *ngIf="isUserLogin()">::Edit profile</a>
   <a class="navbar-brand" routerLink="admin" *ngIf="isUserLogin()">::Admin</a>
