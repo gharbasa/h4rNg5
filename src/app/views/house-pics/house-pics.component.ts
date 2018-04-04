@@ -81,7 +81,7 @@ export class HousePicsComponent implements OnInit {
   	    reader.onload = function(readerEvt) {
   	    	content = btoa(readerEvt.target.result);
   	    	that.logger.log(this, name +":"+size+":"+type);
-  	    	var picturePayload = {data:null,filename:null,content_type:null};
+  	    	var picturePayload = {data:"",filename:"",content_type:""};
   	    	picturePayload.data = content;
   	    	picturePayload.filename = name;
   	    	picturePayload.content_type = type;
@@ -99,7 +99,7 @@ export class HousePicsComponent implements OnInit {
 			that.fetchHousePics();
 		}, err => {
 			that.logger.error(this,"Error in saving the new pic to the house " + this.newHousePic.house_id);
-		}
+		});
 	}
 	
 	deleteImage() {
@@ -111,7 +111,7 @@ export class HousePicsComponent implements OnInit {
 			that.fetchHousePics();
 		}, err => {
 			that.logger.error(this,"Error deleting the pic");
-		}
+		});
 		return false;
 	}
 }

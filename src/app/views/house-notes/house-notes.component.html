@@ -1,0 +1,16 @@
+<h4>House notes({{houseNotes.length}})</h4>
+<p> 
+    <br/>
+    <span *ngIf="houseNotes.length > 0">
+        <span *ngFor="let houseNote of houseNotes; let i = index">
+            <h4r-house-note [houseNote] = "houseNote" (onDeleteNoteClick)="deleteNote($event)"></h4r-house-note>
+        </span>
+    </span>
+    <br/>
+    <span>
+        <br/>
+         <textarea name="content" [(ngModel)]='newHouseNote.note' rows="3" cols="50" placeholder="Note">                             
+        </textarea>
+         <button type="button" class="btn btn-success"  (click)="attachHouseNote()">Attach</button>
+    </span>      
+</p>

@@ -16,6 +16,7 @@ import { LocalStorageService } from './services/LocalStorageService';
 import { UserService } from './services/UserService';
 import { CommunityService } from './services/CommunityService';
 import { HousePicsService } from './services/HousePicsService';
+import { HouseNoteService } from './services/HouseNoteService';
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 
 import { AboutComponent } from './views/about/about.component';
@@ -32,8 +33,10 @@ import { HouseComponent } from './views/house/house.component';
 import { HouseRowComponent } from './views/house-row/house-row.component';
 import { HouseListComponent } from './views/house-list/house-list.component';
 import { HousePicsComponent } from './views/house-pics/house-pics.component';
-import { LoggingService, Config } from 'loggerservice';
 import { PicAlbumComponent } from './views/pic-album/pic-album.component';
+import { HouseNotesComponent } from './views/house-notes/house-notes.component';
+import { HouseNoteComponent } from './views/house-note/house-note.component';
+
 
 const routes: Routes = [
     {
@@ -123,19 +126,21 @@ const routes: Routes = [
     HouseRowComponent,
     HouseListComponent,
     HousePicsComponent,
-    PicAlbumComponent
+    PicAlbumComponent,
+    HouseNotesComponent,
+    HouseNoteComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     NgSelectModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {useHash: true})
   ],
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService
                 , NotificationTypeService, HouseService
-                , CommunityService, HousePicsService],
+                , CommunityService, HousePicsService, HouseNoteService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
