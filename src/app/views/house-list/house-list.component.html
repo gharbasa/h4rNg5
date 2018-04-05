@@ -4,11 +4,17 @@
     <tr>
         <th>House</th>
         <th>Address</th>
+        <th>Description</th>
         <th>No. of floors</th>
     </tr>
     </tbody>
     <tbody>
-        <h4r-house-row *ngFor="let house of houses" [house]="house"></h4r-house-row>
+        <tr *ngFor="let house of houses"  [ngStyle]="{'color':house.active? '' : '#959ba5' }">
+            <td><a routerLink="../house/{{house.id}}">{{house.name}}</a></td>
+            <td>{{house.addr1}}, {{house.addr2}}<br/>{{house.addr3}}, {{house.addr4}}</td>
+            <td>{{house.description}}</td>
+            <td>{{house.no_of_floors}}</td>
+        </tr>
     </tbody>
   </table>
 

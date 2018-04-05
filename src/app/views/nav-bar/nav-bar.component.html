@@ -8,6 +8,6 @@
   <a class="navbar-brand" >::Houses</a>
   <a class="navbar-brand" routerLink="about">::About</a>
   <a class="navbar-brand" routerLink="editUser/-1" *ngIf="isUserLogin()">::Edit profile</a>
-  <a class="navbar-brand" routerLink="admin" *ngIf="isUserLogin()">::Admin</a>
+  <a class="navbar-brand" routerLink="admin" *ngIf="isAdminUser()">::Admin</a>
   <a class="navbar-brand" href="#" (click)="logoutClicked()" *ngIf="isUserLogin()">::Logout</a>
 </nav>

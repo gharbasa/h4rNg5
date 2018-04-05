@@ -1,13 +1,14 @@
 export class Notification {
 	id: number = 0;
-    note:string = "";
-    active:boolean = false;
-    house_id: number = 0;
-	private_note:boolean = false;
-    created_by:number = 0;
-    updated_by: number = 0;
-    created_at:string = "";
-    updated_at:string = "";
+	user_id: number = 0;
+	notification_type_id: number;
+	retries_count:number = 0;
+	active: boolean = true;
+	created_by: number = 0;
+	updated_by: number = 0;
+	priority: number = 0;
+	updated_at:string = "";
+	created_at: string = "";
 	
 	subject:string = "";
 	content:string = "";

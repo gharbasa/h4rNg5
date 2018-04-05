@@ -20,7 +20,7 @@ export class NotificationService {
 	}
 	
 	list(userId:number) {
-		let url = this.userNotifications.replace("{user.id}", userId);
+		let url = this.userNotifications.replace("{user.id}", userId+"");
 		return this.http.get(url);
 	}
 }

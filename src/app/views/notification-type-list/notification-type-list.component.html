@@ -6,10 +6,11 @@
         <th>Content</th>
         <th>Type</th>
     </tr>
-    
-    
-        <h4r-notification-type-row *ngFor="let notificationType of notificationTypes" [notificationType]="notificationType">
-        </h4r-notification-type-row>
-    
+        <tr *ngFor="let notificationType of notificationTypes" 
+            [ngStyle]="{'color':notificationType.active? '' : '#959ba5'}">
+            <td><a routerLink="../notificationType/{{notificationType.id}}">{{notificationType.subject}}</a></td>
+            <td>{{notificationType.content}}</td>
+            <td>{{notificationType.ntype}}</td>
+        </tr>
   </table>
 

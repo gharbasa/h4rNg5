@@ -58,4 +58,9 @@ export class NavBarComponent implements OnInit {
 	    }
 	    return true;
   }
+  
+  isAdminUser() {
+	  let user = this.loginService.getCurrentUser();
+	  return (user != null && user.admin===true);
+  }
 }
