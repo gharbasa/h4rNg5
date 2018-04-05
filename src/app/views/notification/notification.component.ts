@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LocalStorageService } from '../../services/LocalStorageService';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
+import { UtilityService } from '../../services/UtilityService';
 import { Notification } from '../../models/Notification';
 
 @Component({
@@ -16,7 +17,8 @@ export class NotificationComponent implements OnInit {
 	
 	constructor(private localStorageService:LocalStorageService
 			, private logger: LoggingService
-			, private loginService: LoginService) { 
+			, private loginService: LoginService
+			, private utilityService: UtilityService) { 
 		this.logger.info(this, "notification.subject");
 	}
 
@@ -33,6 +35,7 @@ export class NotificationComponent implements OnInit {
 			let noticeType = this.findNoticeType(this.notification.notification_type_id);
 			this.notification.content = noticeType.content;
 			this.notification.subject = noticeType.subject;
+			this.notification.created_at = this.utilityService.convertDateUTC2Local(this.notification.created_at); 
 		} else {
 			this.logger.info(this, "notification is null");
 		}

@@ -1,14 +1,15 @@
   Users List <a routerLink="../newUser">(+)</a>
-  <table>
-      <tbody>
-    <tr>
-        <th>user</th>
-        <th>login</th>
-        <th>email</th>
-    </tr>
-    </tbody>
-    <tbody>
-        <h4r-user-row *ngFor="let user of users" [user]="user"></h4r-user-row>
-    </tbody>
-  </table>
-
+ <table>
+  <tr>
+    <th>User</th>
+    <th>LoginID</th> 
+    <th>Email</th>
+    <th>Avatar</th>
+  </tr>
+  <tr *ngFor="let user of users">
+    <td><a routerLink="../editUser/{{user.id}}">{{user.lname}}, {{user.fname}}</a></td>
+    <td>{{user.login}}</td>
+    <td>{{user.email}}</td>
+    <td><img [src]="user.avatar" height="30" width="30"></td>
+  </tr>
+</table>

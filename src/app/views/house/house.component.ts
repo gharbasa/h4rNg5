@@ -41,7 +41,7 @@ export class HouseComponent implements OnInit {
   				},
   				err => {
   					that.house.message = "";
-	  				that.house.errorMessage = "Problem retrieving notification type.";
+	  				that.house.errorMessage = "Problem retrieving house.";
   				});
   			}
   		});

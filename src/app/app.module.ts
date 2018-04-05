@@ -18,6 +18,7 @@ import { CommunityService } from './services/CommunityService';
 import { HousePicsService } from './services/HousePicsService';
 import { HouseNoteService } from './services/HouseNoteService';
 import { NotificationService } from './services/NotificationService';
+import { UtilityService } from './services/UtilityService';
 
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 import { AboutComponent } from './views/about/about.component';
@@ -151,7 +152,8 @@ const routes: Routes = [
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService
                 , NotificationTypeService, HouseService
-                , CommunityService, HousePicsService, HouseNoteService, NotificationService],
+                , CommunityService, HousePicsService, HouseNoteService
+                , NotificationService, UtilityService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
