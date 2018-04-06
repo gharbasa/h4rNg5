@@ -1,7 +1,10 @@
+<table width="100%"  style="float:center">
+    <tr><td>
 <h4>Pictures</h4>
-<p> 
-    <br/>
-    <span *ngIf="housePics.length > 0">
+</td>
+</tr>
+<tr *ngIf="housePics.length > 0"><td>
+    <span>
         <a (click)="prevImage()" href="#" title="Previous picture">&lt;&lt;&lt;</a>
         ({{viewIndex+1}}/{{housePics.length}})
         <a (click)="nextImage()" href="#" title="Next picture">&gt;&gt;&gt;</a>
@@ -11,13 +14,16 @@
         <span *ngFor="let housePic of housePics; let i = index">
             <h4r-pic-album [housePic]="housePic" *ngIf="(i===viewIndex)"></h4r-pic-album>
         </span>
-    
     </span>
-    <br/>
-    <span>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="avatar" type="file" (change)="handleFileInput($event)">
+    </td>
+    </tr>
+    <tr>
+    <td>
+    
+        <input name="avatar" type="file" (change)="handleFileInput($event)">
         <br/>
-         <input name="about_pic" type="text"  [(ngModel)]="newHousePic.about_pic" placeholder="Describe">
+         <input name="about_pic" type="text" size="25" [(ngModel)]="newHousePic.about_pic" placeholder="Describe">
             <button type="button" class="btn btn-success"  (click)="attachHousePic()">Attach</button>
-    </span>      
-</p>
+    
+    </td></tr>
+</table>

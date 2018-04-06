@@ -23,8 +23,12 @@ export class HouseComponent implements OnInit {
 			, private localStorageService: LocalStorageService
 			, private logger: LoggingService
 			, private loginService:LoginService) { 
+  		
+  	}
+
+  	ngOnInit() {
   		let that = this;
-  		this.communities = loginService.getCommunities();//JSON.parse(this.localStorageService.getItem('communities'));
+  		this.communities = this.loginService.getCommunities();//JSON.parse(this.localStorageService.getItem('communities'));
   		this.route.params.subscribe(res => {
   			if(res.id == -1) {
   				this.logger.log(this,"User wants to create a new house");
@@ -46,9 +50,6 @@ export class HouseComponent implements OnInit {
   			}
   		});
   	}
-
-  	ngOnInit() {
-  	}
   	
   	saveRecord() {
 		if(this.house.id !== 0) {
@@ -67,7 +68,7 @@ export class HouseComponent implements OnInit {
 		},
 		err => {
 			this.logger.log(this,"problem creating the house: " + JSON.stringify(err));
-			this.house.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage[0]:"Problem creating the house";
+			this.house.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage:"Problem creating the house";
 		});
 	}
 	

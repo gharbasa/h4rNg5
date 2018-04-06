@@ -13,18 +13,17 @@ export class HouseListComponent implements OnInit {
 
 	constructor(private houseService: HouseService,
 			private logger: LoggingService) {
+
+	}
+
+	ngOnInit() {
 		let that = this;
-		
 		this.houseService.list().subscribe(res => {
 			that.houses = res;
 			//this.logger.log(this,"notificationTypes =" + JSON.stringify(res));
 		}, err=> {
 			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
 		});
-	}
-
-	ngOnInit() {
-		
 	}
 
 }

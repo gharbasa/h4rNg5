@@ -87,6 +87,11 @@ export class LoginService {
 		});
 	}
 	
+	isAdminUser() {
+		  let user = this.getCurrentUser();
+		  return (user != null && user.admin===true);
+	 }
+	
 	getNotifications() {
 		return this.notifications;
 	}

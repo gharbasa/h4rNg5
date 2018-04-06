@@ -1,8 +1,10 @@
 <h4>House</h4>
 
-<div id='formDiv' class="row justify-content-center">
-      <form novalidate #form="ngForm">
-    
+<div id='grad1' class="row justify-content-center">
+      
+    <table>
+        <tr align="left"><td width="50%">
+            <form novalidate #form="ngForm">
           <div class="field" *ngIf='house.message != ""' style="color:green">
             <label>Message:</label>
             <label>{{house.message}}</label>
@@ -12,124 +14,97 @@
             <label>{{house.errorMessage}}</label>
           </div>
        
-         <table colspan="2">
-          <tr>
-              <td><div class="field">
-          
-            <p>Name: 
-                <input [autofocus]="true" name="name" type="text" size="25" [(ngModel)]="house.name" placeholder="House name"/>
-             </p>
-          
-          </div></td>
-          
-          </tr>
-          
-          <tr>
-              <td><div class="field">
-          
-            <p>Description: 
-                <textarea name="description" [(ngModel)]='house.description' rows="3" cols="50" placeholder="Description">                             
-                    </textarea>
-             </p>
-          
-          </div></td>
-          
-          </tr>
-          
-          <tr>
-              <td><div class="field">
-          
-            <p>Address: 
-                <input name="addr1" type="text" size="25" [(ngModel)]="house.addr1" placeholder="House no."/>
-             </p>
-          
-          </div></td>
-          
-          </tr>
-          
-          <tr>
-              <td><div class="field">
-          
-            <p>: 
-                <input name="addr2" type="text" size="25" [(ngModel)]="house.addr2" placeholder="Street"/>
-             </p>
-          
-          </div></td>
-          
-          </tr>
-          
-          <tr>
-              <td><div class="field">
-          
-            <p>: 
-                <input name="addr3" type="text" size="25" [(ngModel)]="house.addr3" placeholder="City, Zip code"/>
-             </p>
-          
-          </div></td>
-          
-          </tr>
-          
-          <tr>
-              <td><div class="field">
-          
-            <p>: 
-                <input name="addr4" type="text" size="25" [(ngModel)]="house.addr4" placeholder="State,Country"/>
-             </p>
-          
-          </div></td>
-          
-          </tr>
-          
-          <tr>
-              <td><div class="field">
-          
-            <p>Processing fee: 
-                <input name="processing_fee" type="text" size="25" [(ngModel)]="house.processing_fee" placeholder="Processing fee"/>
-             </p>
-          
-          </div></td>
-          
-          </tr>
-          
-          <tr>
-              <td><div class="field">
-          
-            <p>Manager: 
-                <input name="manager_id" type="text" size="25" [(ngModel)]="house.manager_id" placeholder="Manager"/>
-             </p>
-          
-          </div></td>
-          
-          </tr>
+         <table><tr>
+             <td width="20%">
+            Name: </td>
+            <td><input [autofocus]="true" name="name" type="text" size="25" [(ngModel)]="house.name" placeholder="House name"/>
+                </td>
+               </tr>
+         <tr>
 
+         <td>
+            Description:
+            </td>
+            <td> 
+            <textarea name="description" [(ngModel)]='house.description' rows="3" cols="30" placeholder="Description"> </textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            House No.:</td>
+            <td><input name="addr1" type="text" size="25" [(ngModel)]="house.addr1" placeholder="House no."/>
+          </td>
+         </tr>
+         <tr>
+          <td>
+            Street:</td><td> <input name="addr2" type="text" size="25" [(ngModel)]="house.addr2" placeholder="Street"/>
+          </td>
+          </tr>
+          <tr>
+         <td>
+            City, Zipcode:</td>
+            <td><input name="addr3" type="text" size="25" [(ngModel)]="house.addr3" placeholder="City, Zip code"/>
+            </td>
+         
+          </tr>
+         <tr>
+             <td>
+            State, Country:</td><td>
+                 <input name="addr4" type="text" size="25" [(ngModel)]="house.addr4" placeholder="State,Country"/>
+                 </td>
+         </tr>
+          
+        <tr>
+            <td>Processing fee:</td><td> <input name="processing_fee" type="text" size="25" [(ngModel)]="house.processing_fee" placeholder="Processing fee"/>
+                </td>
+        </tr>
+          
+         <tr>
+             <td>
+            Manager:</td><td> <input name="manager_id" type="text" size="25" [(ngModel)]="house.manager_id" placeholder="Manager"/>
+                </td>
+         </tr>
+          
+         
+        <tr>
 
-          <tr><td>
-            <div class="field">
-            <p> Community:
+          <td>
+             Community:</td>
+             <td width="40%">
                 <ng-select name="community_id" [items]="communities"
                    bindLabel="name"
                    bindValue="id"
                    placeholder="Community"
                    [(ngModel)]="house.community_id">
                 </ng-select>
-            </p>
-          </div>
-          </td></tr>
-          <tr><td>
-          <div class="field">
+            </td>
           
-            <p>Active? :
-                <input name="active" [(ngModel)]="house.active" type="checkbox">
-            </p>
+          </tr>
+          <tr>
          
-          </div>
-          </td></tr>
-        </table>
-          <br />
           
-        <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
-        
+          <td>
+            Active? :</td><td>
+                <input name="active" [(ngModel)]="house.active" type="checkbox">
+            </td>
+         
+          
+          </tr>
+          <tr align='center'>
+              <td colspan="2">
+                  <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
+              </td>
+          </tr>
+        </table>
+
       </form>
-      <h4r-house-pics [house]="house"></h4r-house-pics>
-      <h4r-house-notes [house]="house"></h4r-house-notes>
+      </td>
+      <td>
+        <h4r-house-pics [house]="house"></h4r-house-pics>    
+      </td>
+      <tr><td colspan="2">
+        <h4r-house-notes [house]="house"></h4r-house-notes>
+      </td></tr>
+      </table>
+      
 </div>
