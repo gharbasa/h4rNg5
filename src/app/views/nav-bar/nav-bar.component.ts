@@ -36,12 +36,12 @@ export class NavBarComponent implements OnInit {
 	  that.loginService.remove(userId).subscribe(res => {
 		  this.logger.log(this,"Logout successful");
 		  that.localStorageService.removeItem('user');
-		  this.router.navigate(['']);
+		  this.router.navigate(['login']);
 	  }
 	  ,err => {
 		  this.logger.error(this,"Somehow Logout failed.");
 		  that.localStorageService.removeItem('user');
-		  this.router.navigate(['']);
+		  this.router.navigate(['login']);
 	  });
 	  
 	  return false;
@@ -60,7 +60,6 @@ export class NavBarComponent implements OnInit {
   }
   
   isAdminUser() {
-	  let user = this.loginService.getCurrentUser();
-	  return (user != null && user.admin===true);
+	  return this.loginService.isAdminUser();
   }
 }

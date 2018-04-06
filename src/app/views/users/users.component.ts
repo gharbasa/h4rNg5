@@ -14,23 +14,21 @@ export class UsersComponent implements OnInit {
 
 	constructor(private userService: UserService,
 			private logger: LoggingService) {
-  		let that = this;
-  		
-  		this.userService.list().subscribe(res => {
-  			that.users = res;
-  			for(var i in that.users) {
-  				let user:any = that.users[i];
-  				user.avatar = AppSettings.H4R_BACKEND_URL + user.avatar;
-  			}
-  			//this.logger.log(this,"users =" + JSON.stringify(res));
-  		}, err=> {
-  			this.logger.error(this,"users err=" + JSON.stringify(err));
-  		});
   		
   	}
 	
-  ngOnInit() {
-	  
-  }
+	ngOnInit() {
+		let that = this;
+		this.userService.list().subscribe(res => {
+			that.users = res;
+			for(var i in that.users) {
+				let user:any = that.users[i];
+				user.avatar = AppSettings.H4R_BACKEND_URL + user.avatar;
+			}
+			//this.logger.log(this,"users =" + JSON.stringify(res));
+		}, err=> {
+			this.logger.error(this,"users err=" + JSON.stringify(err));
+		});
+	}
 
 }

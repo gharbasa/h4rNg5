@@ -19,7 +19,7 @@ export class NotificationComponent implements OnInit {
 			, private logger: LoggingService
 			, private loginService: LoginService
 			, private utilityService: UtilityService) { 
-		this.logger.info(this, "notification.subject");
+		
 	}
 
 	ngOnInit() {
@@ -27,7 +27,7 @@ export class NotificationComponent implements OnInit {
 	}
 	
 	ngOnChanges() {
-		this.massageNotification();
+		//this.massageNotification();
 	}
 	
 	massageNotification() {

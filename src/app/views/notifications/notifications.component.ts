@@ -23,7 +23,7 @@ export class NotificationsComponent implements OnInit {
   	}
   	
   	ngOnChanges() {
-  		this.notifications = this.loginService.getNotifications();
+  		//this.notifications = this.loginService.getNotifications();
   	}
   	
   	refreshNotifications() {
