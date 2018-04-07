@@ -32,6 +32,17 @@ export class UserService {
 		return this.http.get(this.basePath);
 	}
 	
+	promote2Admin(user:any) {
+		let url = this.basePath + "/" + user.id + "/" + "promote2Admin"
+		return this.http.put(url);
+	}
+	
+	demoteFromAdmin(user:any) {
+		let url = this.basePath + "/" + user.id + "/" + "demoteFromAdmin"
+		return this.http.put(url);
+	}
+
+	
 	/**
 	 * Following attributes are not needed to the backend server.
 	 */

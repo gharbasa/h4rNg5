@@ -58,10 +58,34 @@
             <td>Processing fee:</td><td> <input name="processing_fee" type="text" size="25" [(ngModel)]="house.processing_fee" placeholder="Processing fee"/>
                 </td>
         </tr>
-          
+         
          <tr>
              <td>
-            Manager:</td><td> <input name="manager_id" type="text" size="25" [(ngModel)]="house.manager_id" placeholder="Manager"/>
+            Land Lord:</td><td> 
+                <!--<input name="manager_id" type="text" size="25" [(ngModel)]="house.manager_id" placeholder="Manager"/>-->
+                <ng-select name="landlord_id" [items]="users"
+                   bindLabel="fullName"
+                   bindValue="id"
+                   placeholder="Land Lord"
+                   [(ngModel)]="house.landlord_id"
+                   >
+                </ng-select>
+                
+                </td>
+         </tr>
+
+ 
+         <tr>
+             <td>
+            Manager:</td><td> 
+                <!--<input name="manager_id" type="text" size="25" [(ngModel)]="house.manager_id" placeholder="Manager"/>-->
+                <ng-select name="manager_id" [items]="users"
+                   bindLabel="fullName"
+                   bindValue="id"
+                   placeholder="Manager"
+                   [(ngModel)]="house.manager_id">
+                </ng-select>
+                
                 </td>
          </tr>
           

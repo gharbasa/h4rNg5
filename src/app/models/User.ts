@@ -27,7 +27,11 @@ export class User {
     agency_collection_emp: boolean = false;
     agency_collection_mgr: boolean = false;
     otherRole: boolean = false;
-    errorMessage:string = "";
+    
+	promote2Admin:boolean = false;
+	roleStr: string = "";
+	sexStr:string = "";
+	errorMessage:string = "";
     message:string = "";
     image:any=null;
 

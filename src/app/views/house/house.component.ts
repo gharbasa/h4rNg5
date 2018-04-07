@@ -17,6 +17,8 @@ export class HouseComponent implements OnInit {
 	private house: any = new House();
 	private editHouse:boolean = false;
 	private communities:any = null;
+	private users: any = [];
+	
   	constructor(private houseService: HouseService
 			, private router: Router
 			, private route: ActivatedRoute
@@ -29,6 +31,7 @@ export class HouseComponent implements OnInit {
   	ngOnInit() {
   		let that = this;
   		this.communities = this.loginService.getCommunities();//JSON.parse(this.localStorageService.getItem('communities'));
+  		this.users = this.loginService.getUsers();
   		this.route.params.subscribe(res => {
   			if(res.id == -1) {
   				this.logger.log(this,"User wants to create a new house");

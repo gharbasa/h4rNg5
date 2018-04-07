@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/UserService';
+import { LoginService } from '../../services/login.service';
 import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
 
@@ -11,24 +12,36 @@ import { AppSettings } from '../../models/AppSettings';
 export class UsersComponent implements OnInit {
 
 	private users: any;
-
+	private currentUser:any = null;
 	constructor(private userService: UserService,
-			private logger: LoggingService) {
-  		
+			private logger: LoggingService,
+			private loginService: LoginService) {
   	}
 	
 	ngOnInit() {
 		let that = this;
-		this.userService.list().subscribe(res => {
-			that.users = res;
-			for(var i in that.users) {
-				let user:any = that.users[i];
-				user.avatar = AppSettings.H4R_BACKEND_URL + user.avatar;
-			}
-			//this.logger.log(this,"users =" + JSON.stringify(res));
-		}, err=> {
-			this.logger.error(this,"users err=" + JSON.stringify(err));
-		});
+		this.currentUser = this.loginService.getCurrentUser();
+		this.users = this.loginService.getUsers();
+	}
+	
+	promoteUser(user:any) {
+		this.logger.error(this,"User going to be promoted/demoted to/from admin is " + user.fullName);
+		let that = this;
+		if(user.promote2Admin === true) {
+			this.userService.promote2Admin(user).subscribe(res => {
+				this.logger.info(this, "Successfully promoted.");
+			},
+			err => {
+				this.logger.error(this, "Error in promoting the user.");
+			});
+		}else {
+			this.userService.demoteFromAdmin(user).subscribe(res => {
+				this.logger.info(this, "Successfully demoted.");
+			},
+			err => {
+				this.logger.error(this, "Error in demoting the user.");
+			});
+		}
 	}
 
 }
