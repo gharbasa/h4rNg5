@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggingService, Config } from 'loggerservice';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'h4r-admin',
@@ -8,9 +9,12 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private logger: LoggingService) { }
+	private isAdmin:boolean = false;
+  constructor(private logger: LoggingService
+		  ,private loginService: LoginService) { }
 
   ngOnInit() {
+	  this.isAdmin = this.loginService.isAdminUser();
   }
 
 }

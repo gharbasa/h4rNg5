@@ -1,10 +1,10 @@
 <p>
-  <a routerLink="../users"><strong>Users</strong></a>
+  <a routerLink="../users" *ngIf="isAdmin"><strong>Users</strong></a>
   <br/>
   <a routerLink="../houses"><strong>Houses</strong></a>
   <br/>
   <a routerLink="../communities"><strong>Co-Op/Condos</strong></a>
   <br/>
-  <a routerLink="../notificationTypes"><strong>Notification Types</strong></a>
+  <a routerLink="../notificationTypes" *ngIf="isAdmin"><strong>Notification Types</strong></a>
 </p>
 

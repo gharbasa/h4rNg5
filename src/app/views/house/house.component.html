@@ -53,7 +53,17 @@
                  <input name="addr4" type="text" size="25" [(ngModel)]="house.addr4" placeholder="State,Country"/>
                  </td>
          </tr>
-          
+
+        <tr>
+            <td>No. of floors:</td><td> <input name="no_of_floors" type="text" size="25" [(ngModel)]="house.no_of_floors" placeholder="No. of Floors"/>
+                </td>
+        </tr>
+
+        <tr>
+            <td>No. of Portions:</td><td> <input name="no_of_portions" type="text" size="25" [(ngModel)]="house.no_of_portions" placeholder="No. of Portions"/>
+                </td>
+        </tr>
+  
         <tr>
             <td>Processing fee:</td><td> <input name="processing_fee" type="text" size="25" [(ngModel)]="house.processing_fee" placeholder="Processing fee"/>
                 </td>
@@ -67,14 +77,13 @@
                    bindLabel="fullName"
                    bindValue="id"
                    placeholder="Land Lord"
-                   [(ngModel)]="house.landlord_id"
+                   [(ngModel)]="house.land_lord.id"
                    >
                 </ng-select>
                 
                 </td>
          </tr>
-
- 
+        
          <tr>
              <td>
             Manager:</td><td> 
@@ -83,7 +92,7 @@
                    bindLabel="fullName"
                    bindValue="id"
                    placeholder="Manager"
-                   [(ngModel)]="house.manager_id">
+                   [(ngModel)]="house.property_mgmt_mgr.id">
                 </ng-select>
                 
                 </td>
@@ -106,9 +115,9 @@
           </tr>
           <tr>
          
-          
           <td>
-            Active? :</td><td>
+            Active? :</td>
+            <td>
                 <input name="active" [(ngModel)]="house.active" type="checkbox">
             </td>
          
@@ -120,13 +129,12 @@
               </td>
           </tr>
         </table>
-
       </form>
       </td>
-      <td>
+      <td *ngIf="!createNewHouse" valign="top">
         <h4r-house-pics [house]="house"></h4r-house-pics>    
       </td>
-      <tr><td colspan="2">
+      <tr *ngIf="!createNewHouse"><td colspan="2">
         <h4r-house-notes [house]="house"></h4r-house-notes>
       </td></tr>
       </table>

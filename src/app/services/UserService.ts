@@ -34,12 +34,12 @@ export class UserService {
 	
 	promote2Admin(user:any) {
 		let url = this.basePath + "/" + user.id + "/" + "promote2Admin"
-		return this.http.put(url);
+		return this.http.put(url,"");
 	}
 	
 	demoteFromAdmin(user:any) {
 		let url = this.basePath + "/" + user.id + "/" + "demoteFromAdmin"
-		return this.http.put(url);
+		return this.http.put(url,"");
 	}
 
 	

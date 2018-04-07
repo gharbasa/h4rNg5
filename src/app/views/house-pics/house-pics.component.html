@@ -1,10 +1,8 @@
-<table width="100%"  style="float:center">
-    <tr><td>
-<h4>Pictures</h4>
-</td>
-</tr>
-<tr *ngIf="housePics.length > 0"><td>
-    <span>
+<table width="100%">
+    
+<tr *ngIf="housePics.length > 0">
+    <td>
+        Pictures::
         <a (click)="prevImage()" href="#" title="Previous picture">&lt;&lt;&lt;</a>
         ({{viewIndex+1}}/{{housePics.length}})
         <a (click)="nextImage()" href="#" title="Next picture">&gt;&gt;&gt;</a>
@@ -14,7 +12,6 @@
         <span *ngFor="let housePic of housePics; let i = index">
             <h4r-pic-album [housePic]="housePic" *ngIf="(i===viewIndex)"></h4r-pic-album>
         </span>
-    </span>
     </td>
     </tr>
     <tr>
@@ -25,5 +22,6 @@
          <input name="about_pic" type="text" size="25" [(ngModel)]="newHousePic.about_pic" placeholder="Describe">
             <button type="button" class="btn btn-success"  (click)="attachHousePic()">Attach</button>
     
-    </td></tr>
+    </td>
+    </tr>
 </table>

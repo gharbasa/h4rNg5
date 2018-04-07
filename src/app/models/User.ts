@@ -19,14 +19,6 @@ export class User {
     role: number = 0;
     admin: boolean = false;
     guest: boolean = false;
-    tenant: boolean = false;
-    land_lord: boolean = false;
-    accountant: boolean = false;
-    property_mgmt_mgr: boolean = false;
-    property_mgmt_emp: boolean = false;
-    agency_collection_emp: boolean = false;
-    agency_collection_mgr: boolean = false;
-    otherRole: boolean = false;
     
 	promote2Admin:boolean = false;
 	roleStr: string = "";
