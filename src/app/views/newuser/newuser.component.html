@@ -77,6 +77,12 @@
           </div>
         
           <div class="field">
+                <input name="sex" [value]=1 type="radio" [(ngModel)]="user.sex"> Male
+                &nbsp;&nbsp;&nbsp;<input name="sex" [value]=2 type="radio" [(ngModel)]="user.sex"> Female
+                &nbsp;&nbsp;&nbsp;<input name="sex" [value]=0 type="radio" [(ngModel)]="user.sex"> Other
+          </div>
+          
+          <div class="field">
           
             <p>Address: <input name="addr1" [(ngModel)]="user.addr1" type="text" size="25" placeholder="House No."></p>
          

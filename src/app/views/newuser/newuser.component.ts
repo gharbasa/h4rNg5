@@ -91,7 +91,7 @@ export class NewuserComponent implements OnInit {
   	handleFileInput($event) {
   		var files:FileList = $event.target.files;
   		var file = files.item(0);
-  		var content = null;
+  		var content:any = null;
   		
   		if(file == undefined)
   	    	return; //do nothing, no file attached. 
@@ -102,8 +102,8 @@ export class NewuserComponent implements OnInit {
   	    let that = this;
   	    reader.onload = function(readerEvt) {
   	    	content = btoa(readerEvt.target.result);
-  	    	this.logger.log(this,name +":"+size+":"+type);
-  	    	var avatar = {data:null,filename:null,content_type:null};
+  	    	//this.logger.log(this,name +":"+size+":"+type);
+  	    	var avatar:any = {data:null,filename:null,content_type:null};
   	    	avatar.data = content;
   	    	avatar.filename = name;
   	    	avatar.content_type = type;

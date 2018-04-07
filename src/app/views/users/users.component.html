@@ -4,12 +4,18 @@
     <th>User</th>
     <th>LoginID</th> 
     <th>Email</th>
+    <th>Sex</th>
+    <th>Role</th>
     <th>Avatar</th>
+    <th>Make Admin</th>
   </tr>
   <tr *ngFor="let user of users">
     <td><a routerLink="../editUser/{{user.id}}">{{user.lname}}, {{user.fname}}</a></td>
     <td>{{user.login}}</td>
     <td>{{user.email}}</td>
+    <td>{{user.sexStr}}</td>
+    <td>{{user.roleStr}}</td>
     <td><img [src]="user.avatar" height="30" width="30"></td>
+    <td><input *ngIf="((currentUser.id !=user.id) || (currentUser.admin != true))" type="checkbox" [(ngModel)]="user.promote2Admin" (change)="promoteUser(user)"></td>
   </tr>
 </table>
