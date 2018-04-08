@@ -20,7 +20,7 @@
                    bindValue="id"
                    placeholder="Tenant"
                    [(ngModel)]="userHouseLink.tenant_id"
-                   (change)="tenantChanged(userHouseLink)">
+                   (change)="houseUserLinkChanged(userHouseLink, 'tenant')">
                 </ng-select>
         </td>
         <td>
@@ -28,8 +28,8 @@
                    bindLabel="fullName"
                    bindValue="id"
                    placeholder="Landlord"
-                   [(ngModel)]="userHouseLink.landLord_id"
-                   (change)="landLordChanged(userHouseLink)">
+                   [(ngModel)]="userHouseLink.land_lord_id"
+                   (change)="houseUserLinkChanged(userHouseLink, 'land_lord')">
              </ng-select>
         </td>
         <td>

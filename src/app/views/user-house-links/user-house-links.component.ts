@@ -37,7 +37,7 @@ export class UserHouseLinksComponent implements OnInit {
 			  	let link:any = resp[i];
 		  		if(link.house != null && link.role > 0) {
 		  			if(link.land_lord == true) {
-		  				link.landLord_id = link.user_id 
+		  				link.land_lord_id = link.user_id 
 		  			}
 		  			if(link.tenant == true) {
 		  				link.tenant_id = link.user_id 
@@ -93,24 +93,17 @@ export class UserHouseLinksComponent implements OnInit {
 	  that.logger.log(this,"accountantChanged changed for the house=" + userHouseLink.house.name);
   }
   
-  landLordChanged(userHouseLink:any) {
+  houseUserLinkChanged(userHouseLink:any, changeType) {
 	  let that = this;
-	  that.logger.log(this,"landLordChanged changed for the house=" + userHouseLink.house.name);
+	  that.logger.log(this,changeType + " changed for the house=" + userHouseLink.house.name);
+	  userHouseLink.updateType=changeType;
 	  that.logger.log(this,"New Payload=" + JSON.stringify(userHouseLink));
-	  userHouseLink.updateType="landLord";
 	  this.userHouseLinkService.update(userHouseLink).subscribe(resp => {
-		  that.logger.log(this,"Landlord of this house '" + userHouseLink.house.name + "' is successfully changed");
-		  //refresh the list model?
+		  that.logger.log(this,changeType + " of this house '" + userHouseLink.house.name + "' is successfully changed");
 		  that.refreshHouseUserLinks();
 	  }
 	  ,err => {
-		  that.logger.error(this,"Error in changing Landlord of this house '" + userHouseLink.house.name);
+		  that.logger.error(this,"Error in changing " + changeType+ " of this house '" + userHouseLink.house.name);
 	  });
-	  
-  }
-  
-  tenantChanged(userHouseLink:any) {
-	  let that = this;
-	  that.logger.log(this,"tenantChanged changed for the house=" + userHouseLink.house.name);
   }
 }
