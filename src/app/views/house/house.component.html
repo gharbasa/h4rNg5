@@ -71,33 +71,24 @@
          
          <tr>
              <td>
-            Land Lord:</td><td> 
-                <!--<input name="manager_id" type="text" size="25" [(ngModel)]="house.manager_id" placeholder="Manager"/>-->
-                <ng-select name="landlord_id" [items]="users"
-                   bindLabel="fullName"
-                   bindValue="id"
-                   placeholder="Land Lord"
-                   [(ngModel)]="house.land_lord.id"
-                   >
-                </ng-select>
-                
+            Land lord:</td><td> 
+                {{house.land_lord.lname}}, {{house.land_lord.fname}}
                 </td>
          </tr>
         
          <tr>
              <td>
-            Manager:</td><td> 
-                <!--<input name="manager_id" type="text" size="25" [(ngModel)]="house.manager_id" placeholder="Manager"/>-->
-                <ng-select name="manager_id" [items]="users"
-                   bindLabel="fullName"
-                   bindValue="id"
-                   placeholder="Manager"
-                   [(ngModel)]="house.property_mgmt_mgr.id">
-                </ng-select>
-                
+            Manager:</td><td>
+                {{house.property_mgmt_mgr.lname}}, {{house.property_mgmt_mgr.fname}} 
                 </td>
          </tr>
-          
+         
+          <tr>
+             <td>
+            Tenant:</td><td>
+                {{house.tenant.lname}}, {{house.tenant.fname}} 
+                </td>
+         </tr>
          
         <tr>
 

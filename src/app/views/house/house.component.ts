@@ -45,9 +45,14 @@ export class HouseComponent implements OnInit {
   				this.houseService.get(res.id).subscribe(res => {
   					that.house = res;
   					if(!that.house.property_mgmt_mgr) {
-  						this.logger.log(this,"Looks like there is no manager");
-  						that.house.property_mgmt_mgr = {id:0};
+  						this.logger.log(this,"No Manager to this house");
+  						that.house.property_mgmt_mgr = {id:0,fname:"",lname:""};
   					}
+  					if(!that.house.tenant) {
+  						this.logger.log(this,"No tenant to this house");
+  						that.house.tenant = {id:0,fname:"",lname:""};
+  					}
+  					
   					that.house.message = "";
 	  				that.house.errorMessage = "";
   				},

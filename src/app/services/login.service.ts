@@ -144,33 +144,13 @@ export class LoginService {
 	
 	populateUserRoleString(user:any) {
 		let rolesArray:any = [];
-		if(user.admin)
-			rolesArray.push(AppSettings.ADMIN_ROLE_STR);
-		
+		if(user.admin) {
+			rolesArray.push(JSON.stringify(AppSettings.ROLES["ADMIN"].label));
+		}
+		/**
 		if(user.guest)
-			rolesArray.push(AppSettings.GUEST_ROLE_STR);
-		
-		if(user.tenant)
-			rolesArray.push(AppSettings.TENANT_ROLE_STR);
-
-		if(user.land_lord)
-			rolesArray.push(AppSettings.LANDLORD_ROLE_STR);
-		
-		if(user.accountant)
-			rolesArray.push(AppSettings.ACC_ROLE_STR);
-		
-		if(user.property_mgmt_mgr)
-			rolesArray.push(AppSettings.PROP_MGR_ROLE_STR);
-		
-		if(user.property_mgmt_emp)
-			rolesArray.push(AppSettings.PROP_EMP_ROLE_STR);
-		
-		if(user.agency_collection_emp)
-			rolesArray.push(AppSettings.PROP_AGC_COLL_EMP_STR);
-		
-		if(user.agency_collection_mgr)
-			rolesArray.push(AppSettings.PROP_AGC_COLL_MGR_STR);
-		
+			rolesArray.push(AppSettings.ROLES["GUEST"].label));
+		*/
 		let str:string = "";
 		if(rolesArray.length > 0) {
 			str = rolesArray[0];

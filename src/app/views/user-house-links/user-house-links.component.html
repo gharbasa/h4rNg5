@@ -1,0 +1,82 @@
+<table>
+    <tr>
+        
+        <th>House</th>
+        <th>{{staticRoles["TENANT"].label}}</th>
+        <th>{{staticRoles["LAND_LORD"].label}}</th>
+        <th>{{staticRoles["ACCOUNTANT"].label}}</th>
+        <th>{{staticRoles["PROPERTY_MGMT_MGR"].label}}</th>
+        <th>{{staticRoles["PROPERTY_MGMT_EMP"].label}}</th>
+        <th>{{staticRoles["AGENCY_COLLECTION_MGR"].label}}</th>
+        <th>{{staticRoles["AGENCY_COLLECTION_EMP"].label}}</th>
+    </tr>
+    <tr *ngFor="let userHouseLink of userHouseLinks">
+        <td>
+           {{userHouseLink.house.name}} 
+        </td>
+        <td>
+            <ng-select name="tenant" [items]="users"
+                   bindLabel="fullName"
+                   bindValue="id"
+                   placeholder="Tenant"
+                   [(ngModel)]="userHouseLink.tenant_id"
+                   (change)="tenantChanged(userHouseLink)">
+                </ng-select>
+        </td>
+        <td>
+            <ng-select name="landLord" [items]="users"
+                   bindLabel="fullName"
+                   bindValue="id"
+                   placeholder="Landlord"
+                   [(ngModel)]="userHouseLink.landLord_id"
+                   (change)="landLordChanged(userHouseLink)">
+             </ng-select>
+        </td>
+        <td>
+            <ng-select name="accountant" [items]="users"
+                   bindLabel="fullName"
+                   bindValue="id"
+                   placeholder="Accountant"
+                   [(ngModel)]="userHouseLink.accountant_id"
+                   (change)="accountantChanged(userHouseLink)">
+                </ng-select>
+        </td>
+        <td>
+            <ng-select name="property_mgmt_mgr" [items]="users"
+                   bindLabel="fullName"
+                   bindValue="id"
+                   placeholder="Property Mgr"
+                   [(ngModel)]="userHouseLink.property_mgmt_mgr_id"
+                   (change)="propertyMgrChanged(userHouseLink)">
+                </ng-select>
+        </td>
+        <td>
+            <ng-select name="property_mgmt_emp" [items]="users"
+                   bindLabel="fullName"
+                   bindValue="id"
+                   placeholder="Property Mgr Emp"
+                   [(ngModel)]="userHouseLink.property_mgmt_emp_id"
+                   (change)="propertyEmpChanged(userHouseLink)">
+                </ng-select>
+        </td>
+        <td>
+            <ng-select name="agency_coll_mgr" [items]="users"
+                   bindLabel="fullName"
+                   bindValue="id"
+                   placeholder="Coll Agency Mgr"
+                   [(ngModel)]="userHouseLink.agency_coll_mgr_id"
+                   (change)="agencyMgrChanged(userHouseLink)">
+                </ng-select>
+        </td>
+        <td>
+            <ng-select name="agency_coll_emp" [items]="users"
+                   bindLabel="fullName"
+                   bindValue="id"
+                   placeholder="Coll Agency Emp"
+                   [(ngModel)]="userHouseLink.agency_coll_emp_id"
+                   (change)="agencyEmpChanged(userHouseLink)">
+                </ng-select>
+        </td>
+    </tr>
+   
+</table>

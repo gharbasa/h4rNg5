@@ -26,7 +26,7 @@ export class User {
 	errorMessage:string = "";
     message:string = "";
     image:any=null;
-
+	
 /*
     constructor(fname: string, email: string) {
         this.fname = fname;

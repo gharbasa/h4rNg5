@@ -19,6 +19,7 @@ import { HousePicsService } from './services/HousePicsService';
 import { HouseNoteService } from './services/HouseNoteService';
 import { NotificationService } from './services/NotificationService';
 import { UtilityService } from './services/UtilityService';
+import { UserHouseLinkService } from './services/UserHouseLinkService';
 
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 import { AboutComponent } from './views/about/about.component';
@@ -40,6 +41,7 @@ import { HouseNotesComponent } from './views/house-notes/house-notes.component';
 import { HouseNoteComponent } from './views/house-note/house-note.component';
 import { NotificationsComponent } from './views/notifications/notifications.component';
 import { NotificationComponent } from './views/notification/notification.component';
+import { UserHouseLinksComponent } from './views/user-house-links/user-house-links.component';
 
 
 const routes: Routes = [
@@ -114,6 +116,11 @@ const routes: Routes = [
         path: 'notifications',
         component: NotificationsComponent
     }
+    ,
+    {
+        path: 'houses_users',
+        component: UserHouseLinksComponent
+    }
     
 ];
 
@@ -140,7 +147,8 @@ const routes: Routes = [
     HouseNotesComponent,
     HouseNoteComponent,
     NotificationsComponent,
-    NotificationComponent
+    NotificationComponent,
+    UserHouseLinksComponent
   ],
   imports: [
     BrowserModule,
@@ -153,7 +161,7 @@ const routes: Routes = [
                 , LocalStorageService, UserService
                 , NotificationTypeService, HouseService
                 , CommunityService, HousePicsService, HouseNoteService
-                , NotificationService, UtilityService],
+                , NotificationService, UtilityService, UserHouseLinkService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
