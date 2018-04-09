@@ -38,7 +38,7 @@
                    bindValue="id"
                    placeholder="Accountant"
                    [(ngModel)]="userHouseLink.accountant_id"
-                   (change)="accountantChanged(userHouseLink)">
+                   (change)="houseUserLinkChanged(userHouseLink, 'accountant')">
                 </ng-select>
         </td>
         <td>
@@ -47,7 +47,7 @@
                    bindValue="id"
                    placeholder="Property Mgr"
                    [(ngModel)]="userHouseLink.property_mgmt_mgr_id"
-                   (change)="propertyMgrChanged(userHouseLink)">
+                   (change)="houseUserLinkChanged(userHouseLink, 'property_mgmt_mgr')">
                 </ng-select>
         </td>
         <td>
@@ -56,7 +56,7 @@
                    bindValue="id"
                    placeholder="Property Mgr Emp"
                    [(ngModel)]="userHouseLink.property_mgmt_emp_id"
-                   (change)="propertyEmpChanged(userHouseLink)">
+                   (change)="houseUserLinkChanged(userHouseLink, 'property_mgmt_emp')">
                 </ng-select>
         </td>
         <td>
@@ -65,7 +65,7 @@
                    bindValue="id"
                    placeholder="Coll Agency Mgr"
                    [(ngModel)]="userHouseLink.agency_coll_mgr_id"
-                   (change)="agencyMgrChanged(userHouseLink)">
+                   (change)="houseUserLinkChanged(userHouseLink, 'agency_coll_mgr')">
                 </ng-select>
         </td>
         <td>
@@ -74,7 +74,7 @@
                    bindValue="id"
                    placeholder="Coll Agency Emp"
                    [(ngModel)]="userHouseLink.agency_coll_emp_id"
-                   (change)="agencyEmpChanged(userHouseLink)">
+                   (change)="houseUserLinkChanged(userHouseLink, 'agency_coll_emp')">
                 </ng-select>
         </td>
     </tr>
