@@ -59,7 +59,7 @@
           	<td>
             	<div class="field">
           
-	            <p>Contract Start Date: <input type="text" name="contract_start_date" [(ngModel)]="houseContract.contract_start_date" />
+	            <p>Contract Start Date(mm/dd/yyy): <input type="text" name="contract_start_date" [(ngModel)]="houseContract.contract_start_date" />
 
 	             </p>
           
@@ -71,7 +71,7 @@
           	<td>
             	<div class="field">
           
-	            <p>Contract End Date: <input type="text" name="contract_end_date" [(ngModel)]="houseContract.contract_end_date" />
+	            <p>Contract End Date(mm/dd/yyy): <input type="text" name="contract_end_date" [(ngModel)]="houseContract.contract_end_date" />
 
 	             </p>
           
@@ -110,6 +110,15 @@
                     </textarea>
                     </p>          
           </div></td></tr>
+
+          <tr><td><div class="field">
+              
+              <p>Active?: 
+                  <td><input type="checkbox" name="active" [(ngModel)]="houseContract.active"></td>
+                    </p>          
+          </div></td></tr>
+
+          
           
         </table>
           <br />

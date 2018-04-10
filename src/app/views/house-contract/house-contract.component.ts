@@ -83,4 +83,16 @@ export class HouseContractComponent implements OnInit {
 	  		that.houseContract.errorMessage = "Problem retrieving house.";
   		});
   	}
+
+  	saveRecord() {
+  		let that = this;
+  		this.logger.log(this,"User wants to edit a house contract, id=" + that.houseContract.id);
+  		this.houseContractsService.update(that.houseContract).subscribe(res => {
+  			this.logger.log(this,"Sucessfully updated house contract, id=" + that.houseContract.id);
+  			this.router.navigate(['postupdate']);
+  		},
+  		err => {
+  			this.logger.err(this,"Error in updating house contract, id=" + that.houseContract.id);
+  		}
+  	}
 }

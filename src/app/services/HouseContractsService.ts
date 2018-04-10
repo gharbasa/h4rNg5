@@ -23,6 +23,11 @@ export class HouseContractsService {
 		return this.http.post(this.basePath_admin, houseContract);
 	}
 	
+	update(houseContract:HouseContract) {
+		this.nullifyNonServerAttrs(houseContract);
+		return this.http.put(this.basePath_admin + "/" + houseContract.id, houseContract);
+	}
+
 	activate(houseContract:HouseContract) {
 		this.nullifyNonServerAttrs(houseContract);
 		return this.http.put(this.basePath_admin + "/" + houseContract.id + "/activate", "");
