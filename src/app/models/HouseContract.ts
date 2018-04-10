@@ -6,6 +6,7 @@ export class HouseContract {
     contract_end_date:string = "";
     annual_rent_amount:number = 0;
 	monthly_rent_amount:number = 0;
+	user_house_link_id:number = 0;
 	active:boolean = false
 	created_by:number = 0;
     updated_by:number = 0;
@@ -13,6 +14,7 @@ export class HouseContract {
     updated_at:string = "";
     note:string = "";
     roles:string = "";
+    role:number = 0;
     
 	/*
 	constructor(fname: string, email: string) {

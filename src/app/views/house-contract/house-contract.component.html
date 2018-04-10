@@ -13,25 +13,8 @@
           </div>
        
          <table colspan="2">
-          <tr *ngIf="newContract">
-            <td>
-            	<div class="field">
-          <!-- Display (House-User-Role) in the option-->
-	            <p>House &lt;-&gt;User:  
-	                <ng-select name="ntype" [items]="noticeTypeOptions"
-	                   bindLabel="description"
-	                   bindValue="id"
-	                   placeholder="Select Type"
-	                   [(ngModel)]="houseContract.ntype">
-	                </ng-select>
-	             </p>
-          
-          		</div>
-          	</td>
-          	          
-          </tr>
           <tr>
-          	<td *ngIf="newContract == false">
+          	<td>
             	<div class="field">
           
 	            <p>House: {{houseContract.house.name}}
@@ -44,7 +27,7 @@
           </tr>	
 
           <tr>
-          	<td *ngIf="newContract == false">
+          	<td>
             	<div class="field">
           
 	            <p>User: {{houseContract.user.fullName}} ({{houseContract.roles}})
@@ -126,6 +109,5 @@
         <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
         
       </form>
-
-      <h4r-house-contract-notes [houseContract]="houseContract"></h4r-house-contract-notes>
+      <h4r-house-contract-notes *ngIf="newContract == false" [houseContract]="houseContract"></h4r-house-contract-notes>
 </div>

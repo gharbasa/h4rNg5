@@ -8,6 +8,7 @@ import { LoginService } from '../services/login.service';
 @Injectable()
 export class HouseContractsService {
 	
+	private sharedKey:any = null;
 	constructor(private http: HttpClient, private loginService: LoginService,
 					private logger: LoggingService) { }
 	
@@ -50,6 +51,14 @@ export class HouseContractsService {
 		}
 	}
 	
+	setSharedKey(sharedKey:any) {
+		this.sharedKey = sharedKey;
+	}
+
+	getSharedKey() {
+		return this.sharedKey;
+	}
+
 	/**
 	 * Following attributes are not needed to the backend server.
 	 */

@@ -39,6 +39,9 @@ export class UserHouseLinkService {
 		}
 	}
 	
+	contracts(key:string) {
+		return this.http.get(this.basePath_admin + "/" + key + "/contracts");
+	}
 	/**
 	 * Following attributes are not needed to the backend server.
 	 */
