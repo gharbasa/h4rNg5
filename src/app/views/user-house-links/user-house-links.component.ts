@@ -34,7 +34,8 @@ export class UserHouseLinksComponent implements OnInit {
 	  this.userHouseLinkService.list().subscribe(resp => {
 		  for(var i in resp) {
 			  	let link:any = resp[i];
-		  		if(link.house != null && link.role > 0) {
+		  		//if(link.house != null && link.role > 0) {
+		  		if(link.house != null) {
 		  			that.pushUserHouseLink(link);
 		  		}
 		  }

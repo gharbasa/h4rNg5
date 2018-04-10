@@ -14,7 +14,7 @@ import { LoginService } from '../../services/login.service';
 })
 export class HouseComponent implements OnInit {
 	
-	private house:House = new House();
+	private house:any = new House();
 	private editHouse:boolean = false;
 	private communities:any = null;
 	private users: any = [];
@@ -73,7 +73,7 @@ export class HouseComponent implements OnInit {
 	}
 	
 	create() {
-		this.logger.log(this,"Creating a new house with subject=" + this.house.subject);
+		this.logger.log(this,"Creating a new house");
 		this.houseService.create(this.house).subscribe(res => {
 			this.logger.log(this,"house is successfully created");
 			this.house.message = "Successfully created house.";

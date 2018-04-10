@@ -30,7 +30,7 @@ export class NewuserComponent implements OnInit {
   		this.route.params.subscribe(res => {
   			if(res.feature == -1) {
   				that.selfEditUserProfile = true;
-  				that.user = JSON.parse(localStorageService.getItem('user'));
+  				that.user = JSON.parse(this.localStorageService.getItem('user'));
   				that.user.message = "";
   				that.user.errorMessage = "";
   				that.avatar = AppSettings.H4R_BACKEND_URL + that.user.avatar;
