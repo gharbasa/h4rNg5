@@ -105,8 +105,8 @@
 
           <tr><td><div class="field">
               
-              <p>Note: 
-                  <textarea name="content" [(ngModel)]='houseContract.note' rows="3" cols="50" placeholder="Content">                             
+              <p>Contract Details: 
+                  <textarea name="content" [(ngModel)]='houseContract.note' rows="3" cols="50" placeholder="Contract Details">                             
                     </textarea>
                     </p>          
           </div></td></tr>
@@ -126,4 +126,6 @@
         <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
         
       </form>
+
+      <h4r-house-contract-notes [houseContract]="houseContract"></h4r-house-contract-notes>
 </div>

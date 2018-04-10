@@ -92,7 +92,7 @@ export class HouseContractComponent implements OnInit {
   			this.router.navigate(['postupdate']);
   		},
   		err => {
-  			this.logger.err(this,"Error in updating house contract, id=" + that.houseContract.id);
-  		}
+  			this.logger.error(this,"Error in updating house contract, id=" + that.houseContract.id);
+  		});
   	}
 }

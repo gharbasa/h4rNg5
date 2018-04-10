@@ -1,0 +1,17 @@
+<h4>Notes({{houseContractNotes.length}})</h4>
+<p> 
+    <br/>
+    <span *ngIf="houseContractNotes.length > 0">
+        <span *ngFor="let houseContractNote of houseContractNotes; let i = index">
+            <h4r-house-contract-note [houseContractNote] = "houseContractNote" (onDeleteNoteClick)="deleteNote($event)"></h4r-house-contract-note>
+        </span>
+    </span>
+    <br/>
+    <span>
+        <input type="checkbox" name="private_note" [(ngModel)]='newHouseContractNote.private_note' /> Private note?
+        <br/>
+         <textarea name="content" [(ngModel)]='newHouseContractNote.note' rows="3" cols="50" placeholder="Note"></textarea>
+        <br/>
+         <button type="button" class="btn btn-success"  (click)="attachHouseContractNote()">Save Note</button>
+    </span>      
+</p>
