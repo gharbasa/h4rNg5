@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild, HostListener,Input} from '@angular/core';
+ import {Component, EventEmitter, OnInit, Output, ViewChild, HostListener,Input} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -31,18 +31,19 @@ export class LoginComponent implements OnInit {
     @Output() onLoginClick = new EventEmitter<Usersession>();  
     @ViewChild('form') public form: NgForm;
     
+    /*
     @HostListener('document:keypress', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent) {
         if (event.code === "Enter" && this.usersession.login.length > 0) {
-            this.login(this.usersession);
+            this.login();
         }
-    }
+    }*/
 
-    login(usersession: Usersession) {
+    login() {
         //this.onLoginClick.emit(user session);
-    	this.logger.log(this,"Login with userid " + usersession.login);
+    	this.logger.log(this,"Login with userid " + this.usersession.login);
         let that = this;
-        this.loginService.login(usersession).subscribe(res => {
+        this.loginService.login(this.usersession).subscribe(res => {
             //this.logger.log(this,"Login successful " + res.fname);
             that.updateUserInLocalStorage(res);
             //navigate user to the post login 
@@ -52,8 +53,8 @@ export class LoginComponent implements OnInit {
         	this.logger.error(this,"Login failed.");
             that.removeUserFromLocalStorage();
         });
-        usersession.login = '';
-        usersession.password = '';
+        this.usersession.login = '';
+        this.usersession.password = '';
     }
     
     updateUserInLocalStorage(res) {

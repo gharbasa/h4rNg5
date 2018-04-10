@@ -17,6 +17,15 @@ export class House {
     updated_at:string = "";
 	description:string = "";
 
+	land_lord:any = {};
+	guest:any = {};
+	tenant:any =  {};
+	accountant:any =  {};
+	property_mgmt_mgr:any = {};
+	property_mgmt_emp:any = {};
+	agency_collection_emp:any = {};
+	agency_collection_mgr:any = {};
+
 	errorMessage:string = "";
 	message:string  = "";
 	images:any = [];

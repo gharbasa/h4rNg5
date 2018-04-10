@@ -17,7 +17,7 @@ import { LoggingService, Config } from 'loggerservice';
 })
 
 export class AppComponent {
-  title = 'Gharbasa-o';
+  title = 'Gharbasa-O';
   userLoggedin:boolean = false;
   //public usersession: Observable<Usersession>;
   //public usersession: Usersession = new Usersession("","");

@@ -1,0 +1,28 @@
+  House Contracts <a routerLink="../house_contract/-1">(+)</a>
+  <table>
+      <tbody>
+    <tr>
+        <th>House &lt;-&gt; User</th>
+        <th>Role</th>
+        <th>Start Date(m/d/y)</th>
+        <th>End Date(m/d/y)</th>
+        <th>Annual Fee</th>
+        <th>Monthly Fee</th>
+        <th>Details</th>
+        <th>Active</th>
+    </tr>
+    </tbody>
+    <tbody>
+    	<tr *ngIf="errorMessage != ''"><td colspan="9">{{errorMessage}}</td><tr>
+        <tr *ngFor="let houseContract of houseContracts"  [ngStyle]="{'color':houseContract.active? '' : '#959ba5' }">
+            <td><a routerLink="../house_contract/{{houseContract.id}}">{{houseContract.house.name}} &lt;-&gt; {{houseContract.user.fullName}}</a></td>
+            <td>{{houseContract.roles}}</td>
+            <td>{{houseContract.contract_start_date}}</td>
+            <td>{{houseContract.contract_end_date}}</td>
+            <td>{{houseContract.annual_rent_amount}}</td>
+            <td>{{houseContract.monthly_rent_amount}}</td>
+            <td>{{houseContract.note}}</td>
+            <td><input type="checkbox" [(ngModel)]="houseContract.active" (change)="activeFlagChanged(houseContract)"></td>
+        </tr>
+    </tbody>
+  </table>

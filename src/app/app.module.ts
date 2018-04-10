@@ -19,6 +19,9 @@ import { HousePicsService } from './services/HousePicsService';
 import { HouseNoteService } from './services/HouseNoteService';
 import { NotificationService } from './services/NotificationService';
 import { UtilityService } from './services/UtilityService';
+import { UserHouseLinkService } from './services/UserHouseLinkService';
+import { HouseContractsService } from './services/HouseContractsService';
+import { HouseContractNoteService } from './services/HouseContractNoteService';
 
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 import { AboutComponent } from './views/about/about.component';
@@ -40,6 +43,11 @@ import { HouseNotesComponent } from './views/house-notes/house-notes.component';
 import { HouseNoteComponent } from './views/house-note/house-note.component';
 import { NotificationsComponent } from './views/notifications/notifications.component';
 import { NotificationComponent } from './views/notification/notification.component';
+import { UserHouseLinksComponent } from './views/user-house-links/user-house-links.component';
+import { HouseContractsComponent } from './views/house-contracts/house-contracts.component';
+import { HouseContractComponent } from './views/house-contract/house-contract.component';
+import { HouseContractNotesComponent } from './views/house-contract-notes/house-contract-notes.component';
+import { HouseContractNoteComponent } from './views/house-contract-note/house-contract-note.component';
 
 
 const routes: Routes = [
@@ -114,7 +122,21 @@ const routes: Routes = [
         path: 'notifications',
         component: NotificationsComponent
     }
-    
+    ,
+    {
+        path: 'houses_users',
+        component: UserHouseLinksComponent
+    }
+    ,
+    {
+        path: 'house_contracts',
+        component: HouseContractsComponent
+    }
+    ,
+    {
+        path: 'house_contract/:id',
+        component: HouseContractComponent
+    }
 ];
 
 @NgModule({
@@ -140,7 +162,12 @@ const routes: Routes = [
     HouseNotesComponent,
     HouseNoteComponent,
     NotificationsComponent,
-    NotificationComponent
+    NotificationComponent,
+    UserHouseLinksComponent,
+    HouseContractsComponent,
+    HouseContractComponent,
+    HouseContractNotesComponent,
+    HouseContractNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -153,7 +180,8 @@ const routes: Routes = [
                 , LocalStorageService, UserService
                 , NotificationTypeService, HouseService
                 , CommunityService, HousePicsService, HouseNoteService
-                , NotificationService, UtilityService],
+                , NotificationService, UtilityService, UserHouseLinkService, HouseContractsService
+                , HouseContractNoteService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

@@ -23,11 +23,14 @@ export class NewuserComponent implements OnInit {
   			, private route: ActivatedRoute 
   			,private localStorageService: LocalStorageService
   			, private logger: LoggingService) {
+  	}
+  	
+  	ngOnInit() {
   		let that = this;
   		this.route.params.subscribe(res => {
   			if(res.feature == -1) {
   				that.selfEditUserProfile = true;
-  				that.user = JSON.parse(localStorageService.getItem('user'));
+  				that.user = JSON.parse(this.localStorageService.getItem('user'));
   				that.user.message = "";
   				that.user.errorMessage = "";
   				that.avatar = AppSettings.H4R_BACKEND_URL + that.user.avatar;
@@ -39,17 +42,19 @@ export class NewuserComponent implements OnInit {
   					that.user.message = "";
 	  				that.user.errorMessage = "";
 	  				that.avatar = AppSettings.H4R_BACKEND_URL + that.user.avatar;
-	  				this.logger.log(this,"User wants to edit someother user profile, userID=" + "assets/" + that.user.id);
+	  				this.logger.log(this,"User wants to edit someother user profile, userID=" + that.user.id);
   				},
   				err => {
   					
   				});
   			}
+  			/**
+  			let role:number = AppSettings.TENANT + AppSettings.LAND_LORD;
+  			this.logger.log(this, "isTenant=" + ((role &  AppSettings.TENANT) ==  AppSettings.TENANT));
+  			this.logger.log(this, "isLandLord=" + ((role &  AppSettings.LAND_LORD) ==  AppSettings.LAND_LORD));
+  			this.logger.log(this, "isAccountant=" + ((role &  AppSettings.ACCOUNTANT) ==  AppSettings.ACCOUNTANT));
+  			*/
   		});
-  	}
-  	
-  	ngOnInit() {
-  		
   	}
   	
   	saveRecord() {

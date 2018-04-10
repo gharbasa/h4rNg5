@@ -10,4 +10,5 @@ export class AppSettingsService {
     return Observable.of<AppSettings>(settings);
   }
 
+  
 }

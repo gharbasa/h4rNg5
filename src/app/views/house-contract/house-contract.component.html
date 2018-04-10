@@ -1,0 +1,113 @@
+<h4>House Contract</h4>
+
+<div id='formDiv' class="row justify-content-center">
+      <form novalidate #form="ngForm">
+
+          <div class="field" *ngIf='houseContract.message != ""' style="color:green">
+            <label>Message:</label>
+            <label>{{houseContract.message}}</label>
+          </div>
+          <div class="field" *ngIf='houseContract.errorMessage != ""' style="color:red">
+            <label>Error Message:</label>
+            <label>{{houseContract.errorMessage}}</label>
+          </div>
+       
+         <table colspan="2">
+          <tr>
+          	<td>
+            	<div class="field">
+          
+	            <p>House: {{houseContract.house.name}}
+	                
+
+	             </p>
+          
+          		</div>
+          	</td>
+          </tr>	
+
+          <tr>
+          	<td>
+            	<div class="field">
+          
+	            <p>User: {{houseContract.user.fullName}} ({{houseContract.roles}})
+
+	             </p>
+          
+          		</div>
+          	</td>
+          </tr>
+
+          <tr>
+          	<td>
+            	<div class="field">
+          
+	            <p>Contract Start Date(mm/dd/yyyy): <input type="text" name="contract_start_date" [(ngModel)]="houseContract.contract_start_date" />
+
+	             </p>
+          
+          		</div>
+          	</td>
+          </tr>
+
+			<tr>
+          	<td>
+            	<div class="field">
+          
+	            <p>Contract End Date(mm/dd/yyyy): <input type="text" name="contract_end_date" [(ngModel)]="houseContract.contract_end_date" />
+
+	             </p>
+          
+          		</div>
+          	</td>
+          </tr>
+
+          <tr>
+          	<td>
+            	<div class="field">
+          
+	            <p>Annual Contract Amount: <input type="text" name="annual_rent_amount" [(ngModel)]="houseContract.annual_rent_amount" />
+
+	             </p>
+          
+          		</div>
+          	</td>
+          </tr>
+
+          <tr>
+          	<td>
+            	<div class="field">
+          
+	            <p>Monthly Contract Amount: <input type="text" name="monthly_rent_amount" [(ngModel)]="houseContract.monthly_rent_amount" />
+
+	             </p>
+          
+          		</div>
+          	</td>
+          </tr>
+
+          <tr><td><div class="field">
+              
+              <p>Contract Details: 
+                  <textarea name="content" [(ngModel)]='houseContract.note' rows="3" cols="50" placeholder="Contract Details">                             
+                    </textarea>
+                    </p>          
+          </div></td></tr>
+
+          <tr><td><div class="field">
+              
+              <p>Active?: 
+                  <td><input type="checkbox" name="active" [(ngModel)]="houseContract.active"></td>
+                    </p>          
+          </div></td></tr>
+
+          
+          
+        </table>
+          <br />
+          
+        <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
+        
+      </form>
+      <h4r-house-contract-notes *ngIf="newContract == false" [houseContract]="houseContract"></h4r-house-contract-notes>
+</div>

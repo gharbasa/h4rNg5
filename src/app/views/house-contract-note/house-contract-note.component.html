@@ -1,0 +1,3 @@
+<p [ngStyle]="{'font-style':houseContractNote.private_note? 'oblique' : 'normal' }">
+  {{houseContractNote.note}} <a href="#" (click)="deleteNote()" title="Delete note">(X)</a>
+</p>

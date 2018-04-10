@@ -9,7 +9,7 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class HouseListComponent implements OnInit {
 
-	private houses: any;
+	private houses: any = [];
 
 	constructor(private houseService: HouseService,
 			private logger: LoggingService) {

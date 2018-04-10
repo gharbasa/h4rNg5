@@ -6,6 +6,8 @@
         <th>Address</th>
         <th>Description</th>
         <th>No. of floors</th>
+        <th>Land lord</th>
+        <th>Manager</th>
     </tr>
     </tbody>
     <tbody>
@@ -14,6 +16,8 @@
             <td>{{house.addr1}}, {{house.addr2}}<br/>{{house.addr3}}, {{house.addr4}}</td>
             <td>{{house.description}}</td>
             <td>{{house.no_of_floors}}</td>
+            <td>{{house.land_lord.lname}}, {{house.land_lord.fname}}</td>
+            <td>{{house.property_mgmt_mgr && house.property_mgmt_mgr.lname}}, {{house.property_mgmt_mgr && house.property_mgmt_mgr.fname}}</td>
         </tr>
     </tbody>
   </table>

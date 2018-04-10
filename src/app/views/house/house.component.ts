@@ -14,11 +14,11 @@ import { LoginService } from '../../services/login.service';
 })
 export class HouseComponent implements OnInit {
 	
-	private house: any = new House();
+	private house:any = new House();
 	private editHouse:boolean = false;
 	private communities:any = null;
 	private users: any = [];
-	
+	private createNewHouse:boolean = false;
   	constructor(private houseService: HouseService
 			, private router: Router
 			, private route: ActivatedRoute
@@ -38,11 +38,21 @@ export class HouseComponent implements OnInit {
   				that.editHouse = false;
   				that.house.message = "";
   				that.house.errorMessage = "";
+  				that.createNewHouse = true;
   			} else if(res.id > 0) {
   				//if not -1, then it is a id
   				this.logger.log(this,"User wants to edit house, id=" + res.id);
   				this.houseService.get(res.id).subscribe(res => {
   					that.house = res;
+  					if(!that.house.property_mgmt_mgr) {
+  						this.logger.log(this,"No Manager to this house");
+  						that.house.property_mgmt_mgr = {id:0,fname:"",lname:""};
+  					}
+  					if(!that.house.tenant) {
+  						this.logger.log(this,"No tenant to this house");
+  						that.house.tenant = {id:0,fname:"",lname:""};
+  					}
+  					
   					that.house.message = "";
 	  				that.house.errorMessage = "";
   				},
@@ -63,7 +73,7 @@ export class HouseComponent implements OnInit {
 	}
 	
 	create() {
-		this.logger.log(this,"Creating a new house with subject=" + this.house.subject);
+		this.logger.log(this,"Creating a new house");
 		this.houseService.create(this.house).subscribe(res => {
 			this.logger.log(this,"house is successfully created");
 			this.house.message = "Successfully created house.";

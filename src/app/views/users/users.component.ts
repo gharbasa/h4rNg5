@@ -25,11 +25,13 @@ export class UsersComponent implements OnInit {
 	}
 	
 	promoteUser(user:any) {
-		this.logger.error(this,"User going to be promoted/demoted to/from admin is " + user.fullName);
+		this.logger.info(this,"User going to be promoted/demoted to/from admin is " + user.fullName);
 		let that = this;
 		if(user.promote2Admin === true) {
 			this.userService.promote2Admin(user).subscribe(res => {
 				this.logger.info(this, "Successfully promoted.");
+				that.loginService.refreshUsersList();
+				//do not update users list here
 			},
 			err => {
 				this.logger.error(this, "Error in promoting the user.");
@@ -37,6 +39,8 @@ export class UsersComponent implements OnInit {
 		}else {
 			this.userService.demoteFromAdmin(user).subscribe(res => {
 				this.logger.info(this, "Successfully demoted.");
+				that.loginService.refreshUsersList();
+				//do not update users list here
 			},
 			err => {
 				this.logger.error(this, "Error in demoting the user.");
