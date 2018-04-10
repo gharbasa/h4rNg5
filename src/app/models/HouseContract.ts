@@ -20,7 +20,7 @@ export class HouseContract {
 		this.email = email;
 	}*/
 	user:any =  {"fullName": ""};
-    house:user = {"name": ""};
+    house:any = {"name": ""};
 
     errorMessage:string = "";
 	message:string  = "";

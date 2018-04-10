@@ -17,8 +17,8 @@
         <tr *ngFor="let houseContract of houseContracts"  [ngStyle]="{'color':houseContract.active? '' : '#959ba5' }">
             <td><a routerLink="../house_contract/{{houseContract.id}}">{{houseContract.house.name}} &lt;-&gt; {{houseContract.user.fullName}}</a></td>
             <td>{{houseContract.roles}}</td>
-            <td>{{houseContract.contract_start_date | date: 'dd/MM/yyyy'}}</td>
-            <td>{{houseContract.contract_end_date | date: 'dd/MM/yyyy'}}</td>
+            <td>{{houseContract.contract_start_date}}</td>
+            <td>{{houseContract.contract_end_date}}</td>
             <td>{{houseContract.annual_rent_amount}}</td>
             <td>{{houseContract.monthly_rent_amount}}</td>
             <td>{{houseContract.note}}</td>

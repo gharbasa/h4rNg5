@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild, HostListener,Input} from '@angular/core';
+ import {Component, EventEmitter, OnInit, Output, ViewChild, HostListener,Input} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -31,12 +31,13 @@ export class LoginComponent implements OnInit {
     @Output() onLoginClick = new EventEmitter<Usersession>();  
     @ViewChild('form') public form: NgForm;
     
+    /*
     @HostListener('document:keypress', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent) {
         if (event.code === "Enter" && this.usersession.login.length > 0) {
             this.login();
         }
-    }
+    }*/
 
     login() {
         //this.onLoginClick.emit(user session);
