@@ -295,7 +295,7 @@ export class UserHouseLinksComponent implements OnInit {
   		return false;
   	}
   	var userName = this.loginService.getUserName(userId);
-  	let key:string = {
+  	let key:any = {
   		user: {
   			id: userId
   			,fullName: userName

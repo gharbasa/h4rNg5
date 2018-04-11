@@ -94,7 +94,7 @@ export class HouseContractComponent implements OnInit {
   		},
   		err => {
   			that.houseContract.message = "";
-	  		that.houseContract.errorMessage = "Problem retrieving house.";
+	  		that.houseContract.errorMessage = "Problem retrieving house contract.";
   		});
   	}
 

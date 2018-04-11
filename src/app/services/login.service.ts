@@ -146,7 +146,7 @@ export class LoginService {
 		var name = "";
 		this.users.forEach(function (user) {
 			if(user.id == userId) name = user.fullName;
-		}
+		});
 		return name;
 	}
 	
