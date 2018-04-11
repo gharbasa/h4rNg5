@@ -18,7 +18,9 @@
             	<div class="field">
           
 	            <p>House: <b>{{houseContract.house.name}}</b>
-	                
+	                       <b title="Contract is about to expire" class="orange" *ngIf="(houseContract.isRenewable == true)">(Renew Contract)</b>
+                         <a href="#" *ngIf="houseContract.next_contract_id != null && houseContract.next_contract_id != 0" 
+                                routerLink="../../house_contract/{{houseContract.next_contract_id}}">Next Contract</a>
 
 	             </p>
           

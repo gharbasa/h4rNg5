@@ -284,16 +284,24 @@ export class UserHouseLinksComponent implements OnInit {
 	  });
   }
 
-  createContract(userHouseLink:any, hasRole:boolean, userId, role:string) {
-  	this.logger.log(this, "User wants to create contract " + JSON.stringify(userHouseLink));
-	
+  /**
+  	contract_id is valid when renew:true
+  */
+  createContract(userHouseLink:any, hasRole:boolean, userId, role:string, renew:boolean, contract_id) {
+  	
+	if(renew == true) 
+		this.logger.log(this, "User wants to renew contract " + JSON.stringify(userHouseLink));
+	else 
+		this.logger.log(this, "User wants to create contract " + JSON.stringify(userHouseLink));
+
   	if(hasRole) {
-  		this.logger.log(this, "Ok, data values are correct, lets create contract between them");	
+  		this.logger.log(this, "Ok, data values are correct");
   	} else {
   		this.logger.log(this, "Not a valid user.");	
   		this.errorMessage = "Warning:Choose a user.";
   		return false;
   	}
+
   	var userName = this.loginService.getUserName(userId);
   	let key:any = {
   		user: {
@@ -306,7 +314,9 @@ export class UserHouseLinksComponent implements OnInit {
   			,name: userHouseLink.house.name
   		}
   		,role: role
-  		,id: userHouseLink.id
+  		,id: contract_id
+  		,renew: renew
+  		,user_house_link_id: userHouseLink.id
   	}
   	this.logger.log(this, "User wants to create contract " + JSON.stringify(key));
   	this.houseContractsService.setSharedKey(key);

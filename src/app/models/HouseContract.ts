@@ -7,7 +7,11 @@ export class HouseContract {
     annual_rent_amount:number = 0;
 	monthly_rent_amount:number = 0;
 	user_house_link_id:number = 0;
-	active:boolean = false
+	active:boolean = false;
+	isRenewable:boolean = false; //If (now - contract_end_date) < 3
+	next_contract_id:number = 0;
+	from_contract_id:number = 0;// This atribute is used by the backend controller only, not mapped to the schema/model in the backend,
+	renew:boolean; //This flag is sent by the view to the server. To renew this contract.
 	created_by:number = 0;
     updated_by:number = 0;
     created_at:string = "";

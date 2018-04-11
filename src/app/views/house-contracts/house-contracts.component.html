@@ -6,6 +6,7 @@
         <th>Role</th>
         <th>Start Date(m/d/y)</th>
         <th>End Date(m/d/y)</th>
+        <th>Renewable?</th>
         <th>Annual Fee</th>
         <th>Monthly Fee</th>
         <th>Details</th>
@@ -19,6 +20,7 @@
             <td>{{houseContract.roles}}</td>
             <td>{{houseContract.contract_start_date}}</td>
             <td>{{houseContract.contract_end_date}}</td>
+            <td class="orange">{{houseContract.isRenewable}}</td>
             <td>{{houseContract.annual_rent_amount}}</td>
             <td>{{houseContract.monthly_rent_amount}}</td>
             <td>{{houseContract.note}}</td>
