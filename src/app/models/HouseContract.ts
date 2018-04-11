@@ -15,7 +15,6 @@ export class HouseContract {
     note:string = "";
     roles:string = "";
     role:number = 0;
-    
 	/*
 	constructor(fname: string, email: string) {
 		this.fname = fname;

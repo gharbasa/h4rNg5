@@ -142,6 +142,14 @@ export class LoginService {
 		return this.users;
 	}
 	
+	getUserName(userId:number) {
+		var name = "";
+		this.users.forEach(function (user) {
+			if(user.id == userId) name = user.fullName;
+		}
+		return name;
+	}
+	
 	populateUserRoleString(user:any) {
 		let rolesArray:any = [];
 		if(user.admin) {

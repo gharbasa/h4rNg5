@@ -12,93 +12,199 @@
     <tr *ngIf="errorMessage != ''">
         <td colspan="8">{{errorMessage}}</td>
     </tr>
-    <tr *ngFor="let userHouseLink of userHouseLinks">
+    <tr *ngFor="let user_house_link of userHouseLinks">
         <td>
-           {{userHouseLink.house.name}} 
+           {{user_house_link.house.name}} 
         </td>
         <td>
             <ng-select name="tenant" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
                    placeholder="Tenant"
-                   [(ngModel)]="userHouseLink.tenant_id"
-                   (change)="houseUserLinkChanged(userHouseLink, 'tenant')">
+                   [(ngModel)]="user_house_link.tenant_id"
+                   (change)="houseUserLinkChanged(user_house_link, 'tenant')">
                 </ng-select>
-                <span *ngIf="userHouseLink.tenant_contract && (userHouseLink.tenant_contract.active == true)"><a class='ActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.tenant_contract.id}}">Active Contract</a></span>
-                <span *ngIf="userHouseLink.tenant_contract && (userHouseLink.tenant_contract.active == false)"><a class='InActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.tenant_contract.id}}">Inactive Contract</a></span>
-                <span *ngIf="!userHouseLink.tenant_contract && (userHouseLink.tenant == true)"><a href="#" class='NewContract' (click)="createContract(userHouseLink, userHouseLink.tenant, 'TENANT')">Create Contract</a></span>
+                <span *ngIf="user_house_link.tenant_active_contract">
+                    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.tenant_active_contract.id}}">
+                        <!--<img [src]="activePng" height="15" width="30"/> -->
+                        Active
+                    </a>
+                </span>
+                <span *ngIf="user_house_link.tenant_inactive_contracts">
+                    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.tenant_inactive_contracts[0].id}}">
+                        <!--<img [src]="inactivePng" height="15" width="30"/>-->
+                        Inactive({{user_house_link.tenant_inactive_contracts.length}})
+                    </a>
+                </span>
+                <span *ngIf="!user_house_link.tenant_active_contract &&  (user_house_link.tenant == true)">
+                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.tenant,user_house_link.tenant_id , 'TENANT')">
+                        <!--<img [src]="newcontractPng" height="15" width="30"/> -->
+                        Create(+)
+                    </a>
+                </span>
         </td>
         <td>
             <ng-select name="landLord" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
                    placeholder="Landlord"
-                   [(ngModel)]="userHouseLink.land_lord_id"
-                   (change)="houseUserLinkChanged(userHouseLink, 'land_lord')">
+                   [(ngModel)]="user_house_link.land_lord_id"
+                   (change)="houseUserLinkChanged(user_house_link, 'land_lord')">
              </ng-select>
-             <span *ngIf="userHouseLink.land_lord_contract && (userHouseLink.land_lord_contract.active == true)"><a class='ActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.land_lord_contract.id}}">Active Contract</a></span>
-             <span *ngIf="userHouseLink.land_lord_contract && (userHouseLink.land_lord_contract.active == false)"><a class='InActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.land_lord_contract.id}}">Inactive Contract</a></span>
-             <span *ngIf="!userHouseLink.land_lord_contract && (userHouseLink.land_lord == true)"><a href="#" class='NewContract' (click)="createContract(userHouseLink, userHouseLink.land_lord, 'LAND_LORD')">Create Contract</a></span>
+             <span *ngIf="user_house_link.land_lord_active_contract">
+                    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.land_lord_active_contract.id}}">
+                        <!--<img [src]="activePng" height="15" width="30"/> -->
+                        Active
+                    </a>
+             </span>
+             <span *ngIf="user_house_link.land_lord_inactive_contracts">
+                    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.land_lord_inactive_contracts[0].id}}">
+                        <!--<img [src]="inactivePng" height="15" width="30"/>-->
+                        Inactive({{user_house_link.land_lord_inactive_contracts.length}})
+                    </a>
+             </span>
+             <span *ngIf="!user_house_link.land_lord_active_contract &&  (user_house_link.land_lord == true)">
+                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.land_lord,user_house_link.land_lord_id, 'LAND_LORD')">
+                        <!--<img [src]="newcontractPng" height="15" width="30"/> -->
+                        Create(+)
+                    </a>
+             </span>
+                
         </td>
         <td>
             <ng-select name="accountant" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
                    placeholder="Accountant"
-                   [(ngModel)]="userHouseLink.accountant_id"
-                   (change)="houseUserLinkChanged(userHouseLink, 'accountant')">
+                   [(ngModel)]="user_house_link.accountant_id"
+                   (change)="houseUserLinkChanged(user_house_link, 'accountant')">
             </ng-select>
-            <span *ngIf="userHouseLink.accountant_contract && (userHouseLink.accountant_contract.active == true)"><a class='ActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.accountant_contract.id}}">Active Contract</a></span>
-             <span *ngIf="userHouseLink.accountant_contract && (userHouseLink.accountant_contract.active == false)"><a  class='InActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.accountant_contract.id}}">Inactive Contract</a></span>
-             <span *ngIf="!userHouseLink.accountant_contract && (userHouseLink.accountant == true)"><a class='NewContract' href="#" (click)="createContract(userHouseLink, userHouseLink.accountant, 'ACCOUNTANT')">Create Contract</a></span>
+            <span *ngIf="user_house_link.accountant_active_contract">
+                    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.accountant_active_contract.id}}">
+                        <!--<img [src]="activePng" height="15" width="30"/> -->
+                        Active
+                    </a>
+                </span>
+                <span *ngIf="user_house_link.accountant_inactive_contracts">
+                    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.accountant_inactive_contracts[0].id}}">
+                        <!--<img [src]="inactivePng" height="15" width="30"/>-->
+                        Inactive({{user_house_link.accountant_inactive_contracts.length}})
+                    </a>
+                </span>
+                <span *ngIf="!user_house_link.accountant_active_contract &&  (user_house_link.accountant == true)">
+                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.accountant,user_house_link.accountant_id, 'ACCOUNTANT')">
+                        <!--<img [src]="newcontractPng" height="15" width="30"/> -->
+                        Create(+)
+                    </a>
+            </span>
         </td>
         <td>
             <ng-select name="property_mgmt_mgr" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
-                   placeholder="Property Mgr"
-                   [(ngModel)]="userHouseLink.property_mgmt_mgr_id"
-                   (change)="houseUserLinkChanged(userHouseLink, 'property_mgmt_mgr')">
+                   placeholder="Prop Mgr"
+                   [(ngModel)]="user_house_link.property_mgmt_mgr_id"
+                   (change)="houseUserLinkChanged(user_house_link, 'property_mgmt_mgr')">
             </ng-select>
-              <span *ngIf="userHouseLink.property_mgmt_mgr_contract && (userHouseLink.property_mgmt_mgr_contract.active == true)"><a class='ActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.property_mgmt_mgr_contract.id}}">Active Contract</a></span>
-             <span *ngIf="userHouseLink.property_mgmt_mgr_contract && (userHouseLink.property_mgmt_mgr_contract.active == false)"><a class='InActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.property_mgmt_mgr_contract.id}}">Inactive Contract</a></span>
-             <span *ngIf="!userHouseLink.property_mgmt_mgr_contract && (userHouseLink.property_mgmt_mgr == true)"><a class='NewContract' href="#" (click)="createContract(userHouseLink, userHouseLink.property_mgmt_mgr, 'PROPERTY_MGMT_MGR')">Create Contract</a></span>
+            <span *ngIf="user_house_link.property_mgmt_mgr_active_contract">
+                <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.property_mgmt_mgr_active_contract.id}}">
+                    <!--<img [src]="activePng" height="15" width="30"/> -->
+                        Active
+                </a>
+            </span>
+            <span *ngIf="user_house_link.property_mgmt_mgr_inactive_contracts">
+                <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.property_mgmt_mgr_inactive_contracts[0].id}}">
+                    <!--<img [src]="inactivePng" height="15" width="30"/>-->
+                        Inactive({{user_house_link.property_mgmt_mgr_inactive_contracts.length}})
+                </a>
+            </span>
+            <span *ngIf="!user_house_link.property_mgmt_mgr_active_contract &&  (user_house_link.property_mgmt_mgr == true)">
+                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.property_mgmt_mgr,user_house_link.property_mgmt_mgr_id, 'PROPERTY_MGMT_MGR')">
+                    <!--<img [src]="newcontractPng" height="15" width="30"/> -->
+                        Create(+)
+                </a>
+            </span>
         </td>
         <td>
             <ng-select name="property_mgmt_emp" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
-                   placeholder="Property Mgr Emp"
-                   [(ngModel)]="userHouseLink.property_mgmt_emp_id"
-                   (change)="houseUserLinkChanged(userHouseLink, 'property_mgmt_emp')">
+                   placeholder="Prop Mgr Emp"
+                   [(ngModel)]="user_house_link.property_mgmt_emp_id"
+                   (change)="houseUserLinkChanged(user_house_link, 'property_mgmt_emp')">
             </ng-select>
-            <span *ngIf="userHouseLink.property_mgmt_emp_contract && (userHouseLink.property_mgmt_emp_contract.active == true)"><a class='ActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.property_mgmt_emp_contract.id}}">Active Contract</a></span>
-             <span *ngIf="userHouseLink.property_mgmt_emp_contract && (userHouseLink.property_mgmt_emp_contract.active == false)"><a class='InActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.property_mgmt_emp_contract.id}}">Inactive Contract</a></span>
-             <span *ngIf="!userHouseLink.property_mgmt_emp_contract && (userHouseLink.property_mgmt_emp == true)"><a class='NewContract' href="#" (click)="createContract(userHouseLink, userHouseLink.property_mgmt_emp, 'PROPERTY_MGMT_EMP')">Create Contract</a></span>
+            <span *ngIf="user_house_link.property_mgmt_emp_active_contract">
+                <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.property_mgmt_emp_active_contract.id}}">
+                    <!--<img [src]="activePng" height="15" width="30"/> -->
+                        Active
+                </a>
+            </span>
+            <span *ngIf="user_house_link.property_mgmt_emp_inactive_contracts">
+                <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.property_mgmt_emp_inactive_contracts[0].id}}">
+                    <!--<img [src]="inactivePng" height="15" width="30"/>-->
+                        Inactive({{user_house_link.property_mgmt_emp_inactive_contracts.length}})
+                </a>
+            </span>
+            <span *ngIf="!user_house_link.property_mgmt_emp_active_contract &&  (user_house_link.property_mgmt_emp == true)">
+                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.property_mgmt_emp,user_house_link.property_mgmt_emp_id, 'PROPERTY_MGMT_EMP')">
+                    <!--<img [src]="newcontractPng" height="15" width="30"/> -->
+                        Create(+)
+                </a>
+            </span>
         </td>
         <td>
             <ng-select name="agency_coll_mgr" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
-                   placeholder="Coll Agency Mgr"
-                   [(ngModel)]="userHouseLink.agency_collection_mgr_id"
-                   (change)="houseUserLinkChanged(userHouseLink, 'agency_collection_mgr')">
+                   placeholder="Agency Mgr"
+                   [(ngModel)]="user_house_link.agency_collection_mgr_id"
+                   (change)="houseUserLinkChanged(user_house_link, 'agency_collection_mgr')">
                 </ng-select>
-                <span *ngIf="userHouseLink.agency_collection_mgr_contract && (userHouseLink.agency_collection_mgr_contract.active == true)"><a class='ActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.agency_collection_mgr_contract.id}}">Active Contract</a></span>
-             <span *ngIf="userHouseLink.agency_collection_mgr_contract && (userHouseLink.agency_collection_mgr_contract.active == false)"><a  class='InActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.agency_collection_mgr_contract.id}}">Inactive Contract</a></span>
-             <span *ngIf="!userHouseLink.agency_collection_mgr_contract && (userHouseLink.agency_collection_mgr == true)"><a class='NewContract' href="#" (click)="createContract(userHouseLink, userHouseLink.agency_collection_mgr, 'PROPERTY_MGMT_EMP')">Create Contract</a></span>
+             <span *ngIf="user_house_link.agency_collection_mgr_active_contract">
+                <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.agency_collection_mgr_active_contract.id}}">
+                    <!--<img [src]="activePng" height="15" width="30"/> -->
+                        Active
+                </a>
+            </span>
+            <span *ngIf="user_house_link.agency_collection_mgr_inactive_contracts">
+                <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.agency_collection_mgr_inactive_contracts[0].id}}">
+                    <!--<img [src]="inactivePng" height="15" width="30"/>-->
+                        Inactive({{user_house_link.agency_collection_mgr_inactive_contracts.length}})
+                </a>
+            </span>
+            <span *ngIf="!user_house_link.agency_collection_mgr_active_contract &&  (user_house_link.agency_collection_mgr == true)">
+                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.agency_collection_mgr, user_house_link.agency_collection_mgr_id, 'AGENCY_COLLECTION_MGR')">
+                    <!--<img [src]="newcontractPng" height="15" width="30"/> -->
+                        Create(+)
+                </a>
+            </span>
         </td>
         <td>
             <ng-select name="agency_coll_emp" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
-                   placeholder="Coll Agency Emp"
-                   [(ngModel)]="userHouseLink.agency_collection_emp_id"
-                   (change)="houseUserLinkChanged(userHouseLink, 'agency_collection_emp')">
+                   placeholder="Agency Emp"
+                   [(ngModel)]="user_house_link.agency_collection_emp_id"
+                   (change)="houseUserLinkChanged(user_house_link, 'agency_collection_emp')">
             </ng-select>
-            <span *ngIf="userHouseLink.agency_collection_emp_contract && (userHouseLink.agency_collection_emp_contract.active == true)"><a class='ActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.agency_collection_emp_contract.id}}">Active Contract</a></span>
-             <span *ngIf="userHouseLink.agency_collection_emp_contract && (userHouseLink.agency_collection_emp_contract.active == false)"><a class='InActiveContract' href="#" routerLink="../house_contract/{{userHouseLink.agency_collection_emp_contract.id}}">Inactive Contract</a></span>
-             <span *ngIf="!userHouseLink.agency_collection_emp_contract && (userHouseLink.agency_collection_emp == true)"><a class='NewContract' href="#" (click)="createContract(userHouseLink, userHouseLink.agency_collection_emp, 'PROPERTY_MGMT_EMP')">Create Contract</a></span>
+            <span *ngIf="user_house_link.agency_collection_emp_active_contract">
+                <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.agency_collection_emp_active_contract.id}}">
+                    <!--<img [src]="activePng" height="15" width="30"/> -->
+                        Active
+                </a>
+            </span>
+            <span *ngIf="user_house_link.agency_collection_emp_inactive_contracts">
+                <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.agency_collection_emp_inactive_contracts[0].id}}">
+                    <!--<img [src]="inactivePng" height="15" width="30"/>-->
+                        Inactive({{user_house_link.agency_collection_emp_inactive_contracts.length}})
+                </a>
+            </span>
+            <span *ngIf="!user_house_link.agency_collection_emp_active_contract &&  (user_house_link.agency_collection_emp == true)">
+                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.agency_collection_emp,user_house_link.agency_collection_emp_id, 'AGENCY_COLLECTION_EMP')">
+                    <!--<img [src]="newcontractPng" height="15" width="30"/> -->
+                        Create(+)
+                </a>
+            </span>
         </td>
     </tr>
    

@@ -37,7 +37,7 @@ export class HouseContractComponent implements OnInit {
   				that.newContract = false;
   				that.fetchExistingContract(res.id);
   			} else if(res.id == 0) {
-          let key:string = that.houseContractsService.getSharedKey(); //house_user_role
+          let key:any = that.houseContractsService.getSharedKey(); //house_user_role
           that.logger.log(that,"User is launched from House User Links, lets get the key=" + key);
           that.houseContractsService.setSharedKey(null);
           that.houseContract.user = key.user;
@@ -100,25 +100,26 @@ export class HouseContractComponent implements OnInit {
 
   	saveRecord() {
   		let that = this;
-      if(this.newContract == false) {
-        this.logger.log(this,"User wants to edit/save a house contract, id=" + that.houseContract.id);
+  		if(this.newContract == false) {
+  			this.logger.log(this,"User wants to edit/save a house contract, id=" + that.houseContract.id);
     		this.houseContractsService.update(that.houseContract).subscribe(res => {
     			this.logger.log(this,"Sucessfully updated house contract, id=" + that.houseContract.id);
     			this.router.navigate(['postupdate']);
     		},
     		err => {
     			this.logger.error(this,"Error in updating house contract, id=" + that.houseContract.id);
-          that.houseContract.errorMessage = "Problem saving the contract.";
+    			that.houseContract.errorMessage = "Problem saving the contract.";
     		});
-  	 } else {
-        this.logger.log(this,"User wants to create/save a house contract");
-        this.houseContractsService.create(that.houseContract).subscribe(res => {
-          this.logger.log(this,"Sucessfully created house contract");
-          this.router.navigate(['postupdate']);
-        },
-        err => {
-          this.logger.error(this,"Error in updating house contract, id=" + that.houseContract.id);
-          that.houseContract.errorMessage = "Problem saving the contract.";
-        });
-     }
+  		} else {
+  			this.logger.log(this,"User wants to create/save a house contract");
+  			this.houseContractsService.create(that.houseContract).subscribe(res => {
+  				this.logger.log(this,"Sucessfully created house contract");
+  				this.router.navigate(['postupdate']);
+  			},
+  			err => {
+  				this.logger.error(this,"Error in updating house contract, id=" + that.houseContract.id);
+  				that.houseContract.errorMessage = "Problem saving the contract.";
+  			});
+  		}
+  	}
 }
