@@ -280,7 +280,8 @@ export class UserHouseLinksComponent implements OnInit {
 		  that.refreshHouseUserLinks();
 	  }
 	  ,err => {
-		  that.logger.error(this,"Error in changing " + changeType+ " of this house '" + userHouseLink.house.name);
+		  that.logger.error(this,"Error in changing " + changeType+ " of this house " + userHouseLink.house.name);
+		  that.errorMessage = err.error.errorMessage;
 	  });
   }
 
