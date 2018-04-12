@@ -17,8 +17,12 @@
           	<td>
             	<div class="field">
           
-	            <p>House: {{houseContract.house.name}}
-	                
+	            <p>House: <b>{{houseContract.house.name}}</b>
+	                       <b title="Contract is about to expire" class="orange" *ngIf="(houseContract.isRenewable == true)">(Renew Contract)</b>
+                         <a href="#" *ngIf="houseContract.next_contract_id != null && houseContract.next_contract_id != 0" 
+                                routerLink="../../house_contract/{{houseContract.next_contract_id}}" title="Next contract">
+                                <fa-icon [icon]="['fas', 'forward']"></fa-icon>
+                                </a>
 
 	             </p>
           
@@ -30,7 +34,7 @@
           	<td>
             	<div class="field">
           
-	            <p>User: {{houseContract.user.fullName}} ({{houseContract.roles}})
+	            <p>User: <b>{{houseContract.user.fullName}} ({{houseContract.roles}})</b>
 
 	             </p>
           
@@ -42,7 +46,7 @@
           	<td>
             	<div class="field">
           
-	            <p>Contract Start Date(mm/dd/yyyy): <input type="text" name="contract_start_date" [(ngModel)]="houseContract.contract_start_date" />
+	            <p>Contract Start Date(dd-mm-yyyy): <input type="text" name="contract_start_date" [(ngModel)]="houseContract.contract_start_date" />
 
 	             </p>
           
@@ -54,7 +58,7 @@
           	<td>
             	<div class="field">
           
-	            <p>Contract End Date(mm/dd/yyyy): <input type="text" name="contract_end_date" [(ngModel)]="houseContract.contract_end_date" />
+	            <p>Contract End Date(dd-mm-yyyy): <input type="text" name="contract_end_date" [(ngModel)]="houseContract.contract_end_date" />
 
 	             </p>
           

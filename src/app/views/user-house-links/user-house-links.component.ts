@@ -14,6 +14,9 @@ import { UserHouseLink } from '../../models/UserHouseLink';
   styleUrls: ['./user-house-links.component.scss']
 })
 export class UserHouseLinksComponent implements OnInit {
+	private activePng:any = require("assets/img/active.png");
+	private inactivePng:any = require("assets/img/inactive.png");
+	private newcontractPng:any = require("assets/img/new_contract.png");
 	private userHouseLinks: any = [];
 	private staticRoles:any = [];
 	private users:any = [];
@@ -146,16 +149,16 @@ export class UserHouseLinksComponent implements OnInit {
 
   fetchContracts(userHouseLink:any) {
   	let that = this;
-
   	if(userHouseLink.tenant === true) {
-  		let key:string = userHouseLink.house_id + "_" + userHouseLink.user_id + "_" + AppSettings.ROLES["TENANT"].value;
+  		let key:string = userHouseLink.house_id + "_" + userHouseLink.tenant_id + "_" + AppSettings.ROLES["TENANT"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_TENANTRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
 			if(resp && resp.length > 0) {
 				that.logger.info(that, "There is a contract for tenant key=" + key);
-				var id = resp[0].id;
-				var active = resp[0].active;
-				userHouseLink.tenant_contract = {id: id, active: active};
+				var active_contracts = resp.filter(contract => (contract.active == true));
+				var inactive_contracts = resp.filter(contract => (contract.active == false));
+				userHouseLink.tenant_active_contract = active_contracts.length > 0?active_contracts[0]:null;
+				userHouseLink.tenant_inactive_contracts = inactive_contracts.length > 0?inactive_contracts:null;
 			}
 		},
 		err => {
@@ -164,12 +167,15 @@ export class UserHouseLinksComponent implements OnInit {
 	}
 
 	if(userHouseLink.accountant === true) {
-  		let key:string = userHouseLink.house_id + "_" + userHouseLink.user_id + "_" + AppSettings.ROLES["ACCOUNTANT"].value;
+  		let key:string = userHouseLink.house_id + "_" + userHouseLink.accountant_id + "_" + AppSettings.ROLES["ACCOUNTANT"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_ACCOUNTANTRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
 			if(resp && resp.length > 0) {
 				that.logger.info(that, "There is a contract for accountant key=" + key);
-				userHouseLink.accountant_contract = key;
+				var active_contracts = resp.filter(contract => (contract.active == true));
+				var inactive_contracts = resp.filter(contract => (contract.active == false));
+				userHouseLink.accountant_active_contract = active_contracts.length > 0?active_contracts[0]:null;
+				userHouseLink.accountant_inactive_contracts = inactive_contracts.length > 0?inactive_contracts:null;
 			}
 		},
 		err => {
@@ -178,12 +184,15 @@ export class UserHouseLinksComponent implements OnInit {
 	}
 
 	if(userHouseLink.land_lord === true) {
-  		let key:string = userHouseLink.house_id + "_" + userHouseLink.user_id + "_" + AppSettings.ROLES["LAND_LORD"].value;
+  		let key:string = userHouseLink.house_id + "_" + userHouseLink.land_lord_id + "_" + AppSettings.ROLES["LAND_LORD"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_LAND_LORDRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
 			if(resp && resp.length > 0) {
 				that.logger.info(that, "There is a contract for land_lord key=" + key);
-				userHouseLink.land_lord_contract = key;
+				var active_contracts = resp.filter(contract => (contract.active == true));
+				var inactive_contracts = resp.filter(contract => (contract.active == false));
+				userHouseLink.land_lord_active_contract = active_contracts.length > 0?active_contracts[0]:null;
+				userHouseLink.land_lord_inactive_contracts = inactive_contracts.length > 0?inactive_contracts:null;
 			}
 		},
 		err => {
@@ -192,12 +201,15 @@ export class UserHouseLinksComponent implements OnInit {
 	}
 
 	if(userHouseLink.property_mgmt_mgr === true) {
-  		let key:string = userHouseLink.house_id + "_" + userHouseLink.user_id + "_" + AppSettings.ROLES["PROPERTY_MGMT_MGR"].value;
+  		let key:string = userHouseLink.house_id + "_" + userHouseLink.property_mgmt_mgr_id + "_" + AppSettings.ROLES["PROPERTY_MGMT_MGR"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_PROPERTY_MGMT_MGRRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
 			if(resp && resp.length > 0) {
 				that.logger.info(that, "There is a contract for property_mgmt_mgr key=" + key);
-				userHouseLink.property_mgmt_mgr_contract = key;
+				var active_contracts = resp.filter(contract => (contract.active == true));
+				var inactive_contracts = resp.filter(contract => (contract.active == false));
+				userHouseLink.property_mgmt_mgr_active_contract = active_contracts.length > 0?active_contracts[0]:null;
+				userHouseLink.property_mgmt_mgr_inactive_contracts = inactive_contracts.length > 0?inactive_contracts:null;
 			}
 		},
 		err => {
@@ -206,12 +218,15 @@ export class UserHouseLinksComponent implements OnInit {
 	}
 
 	if(userHouseLink.property_mgmt_emp === true) {
-  		let key:string = userHouseLink.house_id + "_" + userHouseLink.user_id + "_" + AppSettings.ROLES["PROPERTY_MGMT_EMP"].value;
+  		let key:string = userHouseLink.house_id + "_" + userHouseLink.property_mgmt_emp_id + "_" + AppSettings.ROLES["PROPERTY_MGMT_EMP"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_PROPERTY_MGMT_EMPRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
 			if(resp && resp.length > 0) {
 				that.logger.info(that, "There is a contract for property_mgmt_emp key=" + key);
-				userHouseLink.property_mgmt_emp_contract = key;
+				var active_contracts = resp.filter(contract => (contract.active == true));
+				var inactive_contracts = resp.filter(contract => (contract.active == false));
+				userHouseLink.property_mgmt_emp_active_contract = active_contracts.length > 0?active_contracts[0]:null;
+				userHouseLink.property_mgmt_emp_inactive_contracts = inactive_contracts.length > 0?inactive_contracts:null;
 			}
 		},
 		err => {
@@ -220,12 +235,15 @@ export class UserHouseLinksComponent implements OnInit {
 	}
 
 	if(userHouseLink.agency_collection_mgr === true) {
-  		let key:string = userHouseLink.house_id + "_" + userHouseLink.user_id + "_" + AppSettings.ROLES["AGENCY_COLLECTION_MGR"].value;
+  		let key:string = userHouseLink.house_id + "_" + userHouseLink.agency_collection_mgr_id + "_" + AppSettings.ROLES["AGENCY_COLLECTION_MGR"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_AGENCY_COLLECTION_MGRRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
 			if(resp && resp.length > 0) {
 				that.logger.info(that, "There is a contract for agency_collection_mgr key=" + key);
-				userHouseLink.agency_collection_mgr_contract = key;
+				var active_contracts = resp.filter(contract => (contract.active == true));
+				var inactive_contracts = resp.filter(contract => (contract.active == false));
+				userHouseLink.agency_collection_mgr_active_contract = active_contracts.length > 0?active_contracts[0]:null;
+				userHouseLink.agency_collection_mgr_inactive_contracts = inactive_contracts.length > 0?inactive_contracts:null;
 			}
 		},
 		err => {
@@ -234,12 +252,15 @@ export class UserHouseLinksComponent implements OnInit {
 	}
 
 	if(userHouseLink.agency_collection_emp === true) {
-  		let key:string = userHouseLink.house_id + "_" + userHouseLink.user_id + "_" + AppSettings.ROLES["AGENCY_COLLECTION_EMP"].value;
+  		let key:string = userHouseLink.house_id + "_" + userHouseLink.agency_collection_emp_id + "_" + AppSettings.ROLES["AGENCY_COLLECTION_EMP"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_AGENCY_COLLECTION_EMPRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
 			if(resp && resp.length > 0) {
 				that.logger.info(that, "There is a contract for agency_collection_emp key=" + key);
-				userHouseLink.agency_collection_emp_contract = key;
+				var active_contracts = resp.filter(contract => (contract.active == true));
+				var inactive_contracts = resp.filter(contract => (contract.active == false));
+				userHouseLink.agency_collection_emp_active_contract = active_contracts.length > 0?active_contracts[0]:null;
+				userHouseLink.agency_collection_emp_inactive_contracts = inactive_contracts.length > 0?inactive_contracts:null;
 			}
 		},
 		err => {
@@ -259,25 +280,34 @@ export class UserHouseLinksComponent implements OnInit {
 		  that.refreshHouseUserLinks();
 	  }
 	  ,err => {
-		  that.logger.error(this,"Error in changing " + changeType+ " of this house '" + userHouseLink.house.name);
+		  that.logger.error(this,"Error in changing " + changeType+ " of this house " + userHouseLink.house.name);
+		  that.errorMessage = err.error.errorMessage;
 	  });
   }
 
-  createContract(userHouseLink:any, hasRole:boolean, role:string) {
-  	this.logger.log(this, "User wants to create contract " + JSON.stringify(userHouseLink));
-	
+  /**
+  	contract_id is valid when renew:true
+  */
+  createContract(userHouseLink:any, hasRole:boolean, userId, role:string, renew:boolean, contract_id) {
+  	
+	if(renew == true) 
+		this.logger.log(this, "User wants to renew contract " + JSON.stringify(userHouseLink));
+	else 
+		this.logger.log(this, "User wants to create contract " + JSON.stringify(userHouseLink));
+
   	if(hasRole) {
-  		this.logger.log(this, "Ok, data values are correct, lets create contract between them");	
+  		this.logger.log(this, "Ok, data values are correct");
   	} else {
   		this.logger.log(this, "Not a valid user.");	
   		this.errorMessage = "Warning:Choose a user.";
   		return false;
   	}
-  	
-  	let key:string = {
+
+  	var userName = this.loginService.getUserName(userId);
+  	let key:any = {
   		user: {
-  			id: userHouseLink.user.id
-  			,fullName: userHouseLink.user.fullName
+  			id: userId
+  			,fullName: userName
   		}
   		,
   		house: {
@@ -285,7 +315,9 @@ export class UserHouseLinksComponent implements OnInit {
   			,name: userHouseLink.house.name
   		}
   		,role: role
-  		,id: userHouseLink.id
+  		,id: contract_id
+  		,renew: renew
+  		,user_house_link_id: userHouseLink.id
   	}
   	this.logger.log(this, "User wants to create contract " + JSON.stringify(key));
   	this.houseContractsService.setSharedKey(key);

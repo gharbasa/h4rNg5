@@ -14,14 +14,18 @@ export class UsersComponent implements OnInit {
 	private users: any;
 	private currentUser:any = null;
 	constructor(private userService: UserService,
-			private logger: LoggingService,
+			private logger: LoggingService, 	
 			private loginService: LoginService) {
   	}
 	
 	ngOnInit() {
+		this.refreshUsersList();
+	}
+
+	refreshUsersList() {
 		let that = this;
 		this.currentUser = this.loginService.getCurrentUser();
-		this.users = this.loginService.getUsers();
+		this.users = this.loginService.getUsers();	
 	}
 	
 	promoteUser(user:any) {
@@ -46,6 +50,18 @@ export class UsersComponent implements OnInit {
 				this.logger.error(this, "Error in demoting the user.");
 			});
 		}
+	}
+
+	resetPassword(user:any) {
+		this.userService.resetPassword(user.id).subscribe(resp => {
+			this.logger.info(this, "Successfully reset the password.");
+			this.refreshUsersList();
+		},
+		err => {
+			this.logger.error(this, "Problem in resetting the password.");
+		});	
+		return false;
+
 	}
 
 }

@@ -27,7 +27,7 @@ export class UserHouseLinkService {
 		return this.http.delete(this.basePath_admin + "/" + UserHouseLinkId);
 	}
 	
-	list() {
+	list() { 
 		if(this.loginService.isAdminUser()) {
 			this.logger.log(this, "Hey Admin, fetching all user house links")
 			return this.http.get(this.basePath_admin);

@@ -1,3 +1,6 @@
 <p [ngStyle]="{'font-style':houseNote.private_note? 'oblique' : 'normal' }">
-  {{houseNote.note}} <a href="#" (click)="deleteNote()" title="Delete note">(X)</a>
+  <fa-icon [icon]="['fas', 'comment']"></fa-icon>
+  {{houseNote.createdAt}} :: 
+  {{houseNote.note}} <a href="#" (click)="deleteNote()" title="Delete note">
+            (<fa-icon [icon]="['fas', 'cut']"></fa-icon>)</a>
 </p>

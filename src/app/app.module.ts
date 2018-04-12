@@ -49,6 +49,18 @@ import { HouseContractComponent } from './views/house-contract/house-contract.co
 import { HouseContractNotesComponent } from './views/house-contract-notes/house-contract-notes.component';
 import { HouseContractNoteComponent } from './views/house-contract-note/house-contract-note.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+//import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+library.add(fas, far);
+//library.add(faCoffee);
+library.add(faCalendar);
+
+import {MatMenuModule} from '@angular/material/menu';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const routes: Routes = [
     {
@@ -168,13 +180,14 @@ const routes: Routes = [
     HouseContractComponent,
     HouseContractNotesComponent,
     HouseContractNoteComponent
-  ],
+  ], 
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     NgSelectModule,
-    RouterModule.forRoot(routes, {useHash: true})
+    RouterModule.forRoot(routes, {useHash: true}),
+    FontAwesomeModule, MatMenuModule,BrowserAnimationsModule
   ],
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService

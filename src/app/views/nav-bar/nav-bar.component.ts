@@ -13,7 +13,7 @@ import { AppSettings } from '../../models/AppSettings';
 })
 export class NavBarComponent implements OnInit {
 
-	private userPic:string = "";
+	private userPic:string = ""; 
 	private userName:string = "";
 	private notifications:any = [];
 	constructor(protected localStorageService: LocalStorageService
@@ -24,8 +24,12 @@ export class NavBarComponent implements OnInit {
   //@Output() onLogoutClick = new EventEmitter<string>();
   
   ngOnInit() {
+	  
   }
   
+  isAdmin() {
+	  return this.loginService.isAdminUser();
+  }
   logoutClicked() {
 	  let that = this;
 	  

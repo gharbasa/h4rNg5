@@ -42,7 +42,7 @@ export class LoginService {
 	update(payload) {
 		return this.http.patch(this.basePath + '/${payload.id}.json', payload);
 	}
-	
+
 	postLoginActivity() {
 		let that = this;
 		this.communityService.list().subscribe(res => {
@@ -140,6 +140,14 @@ export class LoginService {
 		});
 		
 		return this.users;
+	}
+	
+	getUserName(userId:number) {
+		var name = "";
+		this.users.forEach(function (user) {
+			if(user.id == userId) name = user.fullName;
+		});
+		return name;
 	}
 	
 	populateUserRoleString(user:any) {
