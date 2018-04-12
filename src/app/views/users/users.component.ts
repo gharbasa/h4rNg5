@@ -14,7 +14,7 @@ export class UsersComponent implements OnInit {
 	private users: any;
 	private currentUser:any = null;
 	constructor(private userService: UserService,
-			private logger: LoggingService,
+			private logger: LoggingService, 
 			private loginService: LoginService) {
   	}
 	
@@ -46,6 +46,11 @@ export class UsersComponent implements OnInit {
 				this.logger.error(this, "Error in demoting the user.");
 			});
 		}
+	}
+
+	resetPassword(user:any) {
+		return false;
+
 	}
 
 }

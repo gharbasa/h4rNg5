@@ -14,7 +14,7 @@
     </tr>
     <tr *ngFor="let user_house_link of userHouseLinks">
         <td>
-           {{user_house_link.house.name}} 
+           {{user_house_link.house.name}}
         </td>
         <td>
             <ng-select name="tenant" [items]="users"
@@ -42,7 +42,7 @@
                     </a>
                 </span>
                 <span *ngIf="!user_house_link.tenant_active_contract &&  (user_house_link.tenant == true)">
-                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.tenant,user_house_link.tenant_id , 'TENANT', false)">
+                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.tenant,user_house_link.tenant_id , 'TENANT', false, null)">
                         <!--<img [src]="newcontractPng" height="15" width="30"/> -->
                         Create(+)
                     </a>
@@ -61,6 +61,11 @@
                         <!--<img [src]="activePng" height="15" width="30"/> -->
                         Active
                     </a>
+                    <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
+                                            *ngIf="(user_house_link.land_lord_active_contract.isRenewable == true)"
+                                             (click)="createContract(user_house_link, user_house_link.land_lord,user_house_link.land_lord_id , 'LAND_LORD', true, user_house_link.land_lord_active_contract.id)">
+                            (Renew)
+                    </a>
              </span>
              <span *ngIf="user_house_link.land_lord_inactive_contracts">
                     <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.land_lord_inactive_contracts[0].id}}">
@@ -69,7 +74,7 @@
                     </a>
              </span>
              <span *ngIf="!user_house_link.land_lord_active_contract &&  (user_house_link.land_lord == true)">
-                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.land_lord,user_house_link.land_lord_id, 'LAND_LORD')">
+                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.land_lord,user_house_link.land_lord_id, 'LAND_LORD', false, null)">
                         <!--<img [src]="newcontractPng" height="15" width="30"/> -->
                         Create(+)
                     </a>
@@ -89,6 +94,11 @@
                         <!--<img [src]="activePng" height="15" width="30"/> -->
                         Active
                     </a>
+                    <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
+                                            *ngIf="(user_house_link.accountant_active_contract.isRenewable == true)"
+                                             (click)="createContract(user_house_link, user_house_link.accountant,user_house_link.accountant_id , 'ACCOUNTANT', true, user_house_link.accountant_active_contract.id)">
+                            (Renew)
+                    </a>
                 </span>
                 <span *ngIf="user_house_link.accountant_inactive_contracts">
                     <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.accountant_inactive_contracts[0].id}}">
@@ -97,7 +107,7 @@
                     </a>
                 </span>
                 <span *ngIf="!user_house_link.accountant_active_contract &&  (user_house_link.accountant == true)">
-                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.accountant,user_house_link.accountant_id, 'ACCOUNTANT')">
+                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.accountant,user_house_link.accountant_id, 'ACCOUNTANT', false, null)">
                         <!--<img [src]="newcontractPng" height="15" width="30"/> -->
                         Create(+)
                     </a>
@@ -116,6 +126,11 @@
                     <!--<img [src]="activePng" height="15" width="30"/> -->
                         Active
                 </a>
+                <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
+                                    *ngIf="(user_house_link.property_mgmt_mgr_active_contract.isRenewable == true)"
+                                    (click)="createContract(user_house_link, user_house_link.property_mgmt_mgr,user_house_link.property_mgmt_mgr_id , 'PROPERTY_MGMT_MGR', true, user_house_link.property_mgmt_mgr_active_contract.id)">
+                            (Renew)
+                </a>
             </span>
             <span *ngIf="user_house_link.property_mgmt_mgr_inactive_contracts">
                 <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.property_mgmt_mgr_inactive_contracts[0].id}}">
@@ -124,7 +139,7 @@
                 </a>
             </span>
             <span *ngIf="!user_house_link.property_mgmt_mgr_active_contract &&  (user_house_link.property_mgmt_mgr == true)">
-                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.property_mgmt_mgr,user_house_link.property_mgmt_mgr_id, 'PROPERTY_MGMT_MGR')">
+                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.property_mgmt_mgr,user_house_link.property_mgmt_mgr_id, 'PROPERTY_MGMT_MGR', false, null)">
                     <!--<img [src]="newcontractPng" height="15" width="30"/> -->
                         Create(+)
                 </a>
@@ -143,6 +158,11 @@
                     <!--<img [src]="activePng" height="15" width="30"/> -->
                         Active
                 </a>
+                <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
+                                    *ngIf="(user_house_link.property_mgmt_emp_active_contract.isRenewable == true)"
+                                    (click)="createContract(user_house_link, user_house_link.property_mgmt_emp,user_house_link.property_mgmt_emp_id , 'PROPERTY_MGMT_EMP', true, user_house_link.property_mgmt_emp_active_contract.id)">
+                            (Renew)
+                </a>
             </span>
             <span *ngIf="user_house_link.property_mgmt_emp_inactive_contracts">
                 <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.property_mgmt_emp_inactive_contracts[0].id}}">
@@ -151,7 +171,7 @@
                 </a>
             </span>
             <span *ngIf="!user_house_link.property_mgmt_emp_active_contract &&  (user_house_link.property_mgmt_emp == true)">
-                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.property_mgmt_emp,user_house_link.property_mgmt_emp_id, 'PROPERTY_MGMT_EMP')">
+                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.property_mgmt_emp,user_house_link.property_mgmt_emp_id, 'PROPERTY_MGMT_EMP', false, null)">
                     <!--<img [src]="newcontractPng" height="15" width="30"/> -->
                         Create(+)
                 </a>
@@ -170,6 +190,11 @@
                     <!--<img [src]="activePng" height="15" width="30"/> -->
                         Active
                 </a>
+                <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
+                                    *ngIf="(user_house_link.agency_collection_mgr_active_contract.isRenewable == true)"
+                                    (click)="createContract(user_house_link, user_house_link.agency_collection_mgr,user_house_link.agency_collection_mgr_id , 'AGENCY_COLLECTION_MGR', true, user_house_link.agency_collection_mgr_active_contract.id)">
+                            (Renew)
+                </a>
             </span>
             <span *ngIf="user_house_link.agency_collection_mgr_inactive_contracts">
                 <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.agency_collection_mgr_inactive_contracts[0].id}}">
@@ -178,7 +203,7 @@
                 </a>
             </span>
             <span *ngIf="!user_house_link.agency_collection_mgr_active_contract &&  (user_house_link.agency_collection_mgr == true)">
-                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.agency_collection_mgr, user_house_link.agency_collection_mgr_id, 'AGENCY_COLLECTION_MGR')">
+                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.agency_collection_mgr, user_house_link.agency_collection_mgr_id, 'AGENCY_COLLECTION_MGR', false, null)">
                     <!--<img [src]="newcontractPng" height="15" width="30"/> -->
                         Create(+)
                 </a>
@@ -197,6 +222,11 @@
                     <!--<img [src]="activePng" height="15" width="30"/> -->
                         Active
                 </a>
+                <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
+                                    *ngIf="(user_house_link.agency_collection_emp_active_contract.isRenewable == true)"
+                                    (click)="createContract(user_house_link, user_house_link.agency_collection_emp,user_house_link.agency_collection_emp_id , 'AGENCY_COLLECTION_EMP', true, user_house_link.agency_collection_emp_active_contract.id)">
+                            (Renew)
+                </a>
             </span>
             <span *ngIf="user_house_link.agency_collection_emp_inactive_contracts">
                 <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.agency_collection_emp_inactive_contracts[0].id}}">
@@ -205,7 +235,7 @@
                 </a>
             </span>
             <span *ngIf="!user_house_link.agency_collection_emp_active_contract &&  (user_house_link.agency_collection_emp == true)">
-                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.agency_collection_emp,user_house_link.agency_collection_emp_id, 'AGENCY_COLLECTION_EMP')">
+                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.agency_collection_emp,user_house_link.agency_collection_emp_id, 'AGENCY_COLLECTION_EMP', false, null)">
                     <!--<img [src]="newcontractPng" height="15" width="30"/> -->
                         Create(+)
                 </a>
