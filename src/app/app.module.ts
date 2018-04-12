@@ -57,7 +57,6 @@ import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 //import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 library.add(fas, far);
 //library.add(faCoffee);
-library.add(faCalendar);
 
 import {MatMenuModule} from '@angular/material/menu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
