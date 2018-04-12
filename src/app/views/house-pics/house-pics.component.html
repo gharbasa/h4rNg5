@@ -1,5 +1,8 @@
 <table width="100%">
+<tr *ngIf="errorMessage != ''">
     
+    <td>{{errorMessage}}</td>
+</tr>
 <tr *ngIf="housePics.length > 0">
     <td>
         Pictures::

@@ -17,6 +17,7 @@ export class HousePicsComponent implements OnInit {
 	private housePics:any = [];
 	private viewIndex:number = 0;
 	private newHousePic:HousePic = new HousePic();
+	private errorMessage:string = "";
 	constructor(private housePicsService: HousePicsService, private logger: LoggingService) { 
 		
 	}
@@ -99,6 +100,7 @@ export class HousePicsComponent implements OnInit {
 			that.fetchHousePics();
 		}, err => {
 			that.logger.error(this,"Error in saving the new pic to the house " + this.newHousePic.house_id);
+			that.errorMessage = err.error.errorMessage;
 		});
 	}
 	

@@ -14,7 +14,7 @@
     </tr>
     <tr *ngFor="let user_house_link of userHouseLinks">
         <td>
-           {{user_house_link.house.name}}
+           <a routerLink="../house/{{user_house_link.house.id}}">{{user_house_link.house.name}}</a>
         </td>
         <td>
             <ng-select name="tenant" [items]="users"
