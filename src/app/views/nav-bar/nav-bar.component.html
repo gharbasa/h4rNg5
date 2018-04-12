@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" routerLink="" href="#" title="Home">
-      <img *ngIf="isUserLogin()" width="30" height="30" [src]="userPic" alt="{{userName}}"  title="{{userName}}">
+      <img *ngIf="isUserLogin()" width="25" height="25" [src]="userPic" alt="{{userName}}"  title="{{userName}}">
       {{userName}}
   </a>
   
@@ -20,16 +20,51 @@
   </a>
   
   <a class="navbar-brand" routerLink="about" title='About us'> <!---->
-        <fa-icon [icon]="['fas', 'sitemap']"></fa-icon>About
+        About
   </a>
   <a class="navbar-brand" routerLink="editUser/-1" *ngIf="isUserLogin()" title="Edit my profile">
       <fa-icon [icon]="['fas', 'edit']"></fa-icon>profile</a>
-  <a class="navbar-brand" routerLink="admin" *ngIf="isUserLogin()" title="Authenticated services">
-      <fa-icon [icon]="['fas', 'barcode']"></fa-icon>
-  </a>
-  <a class="navbar-brand" href="#" (click)="logoutClicked()" *ngIf="isUserLogin()" title="Logout">
+  
+<a class="navbar-brand" style="color:white" *ngIf="isUserLogin()" title="Authenticated services" [matMenuTriggerFor]="menu">  
+    <fa-icon [icon]="['fas', 'barcode']"></fa-icon>
+</a>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+        </button>
+        <button mat-menu-item routerLink="../users" *ngIf="isAdmin()" title="Users">
+            <span><fa-icon [icon]="['fas', 'users']"></fa-icon> Users</span>
+        </button>
+        <button mat-menu-item routerLink="../houses" title="Houses">
+            <fa-icon [icon]="['fas', 'home']"></fa-icon> Houses
+        </button>
+        <button mat-menu-item routerLink="../houses_users" title="User and house associations">
+            <fa-icon [icon]="['fas', 'users']"></fa-icon><fa-icon [icon]="['fas', 'arrows-alt-h']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon> Associations
+        </button>
+        <button mat-menu-item routerLink="../house_contracts" title="House contracts">
+            House contracts
+        </button>
+        <button mat-menu-item routerLink="../communities" title="Co-op/Condos/Town houses">
+            <fa-icon [icon]="['fas', 'building']"></fa-icon> Co-Op/Condos
+        </button>
+        <button mat-menu-item routerLink="../notificationTypes" title="Notification types" *ngIf="isAdmin()">
+            <fa-icon [icon]="['fas', 'bell']"></fa-icon> Notification types 
+        </button>
+        <button mat-menu-item routerLink="../notificationTypes" *ngIf="isAdmin()" title="Notification types">
+            <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon> Accounts receivable
+        </button>
+        
+        <button mat-menu-item routerLink="../notificationTypes" *ngIf="isAdmin()" title="Notification types">
+            <fa-icon [icon]="['fas', 'chart-pie']"></fa-icon> Performance
+        </button>      
+    </mat-menu>
+
+    <a class="navbar-brand" href="#" (click)="logoutClicked()" *ngIf="isUserLogin()" title="Logout">
       <fa-icon [icon]="['fas', 'power-off']"></fa-icon>
-  </a>
-  <span style="color:#c67878;padding-left:50px">Welcome to Gharbasa-O</span>
+    </a>
+  
+    <span style="color:#c67878;padding-left:50px">Welcome to Gharbasa-O</span>
+  
 </nav>
 

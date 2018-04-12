@@ -7,8 +7,8 @@ Users List <a routerLink="../newUser">(+)</a>
     <th>Sex</th>
     <th>Role</th>
     <th>Avatar</th>
-    <th>Make Admin</th>
-    <th>Reset Password</th>
+    <th *ngIf="isAdmin">Make Admin</th>
+    <th *ngIf="isAdmin">Reset Password</th>
   </tr>
   <tr *ngFor="let user of users">
     <td><a routerLink="../editUser/{{user.id}}">{{user.lname}}, {{user.fname}}</a></td>

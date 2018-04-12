@@ -24,8 +24,12 @@ export class NavBarComponent implements OnInit {
   //@Output() onLogoutClick = new EventEmitter<string>();
   
   ngOnInit() {
+	  
   }
   
+  isAdmin() {
+	  return this.loginService.isAdminUser();
+  }
   logoutClicked() {
 	  let that = this;
 	  

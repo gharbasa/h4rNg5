@@ -59,6 +59,9 @@ library.add(fas, far);
 //library.add(faCoffee);
 library.add(faCalendar);
 
+import {MatMenuModule} from '@angular/material/menu';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 const routes: Routes = [
     {
         path: 'about',
@@ -184,7 +187,7 @@ const routes: Routes = [
     HttpClientModule,
     NgSelectModule,
     RouterModule.forRoot(routes, {useHash: true}),
-    FontAwesomeModule
+    FontAwesomeModule, MatMenuModule,BrowserAnimationsModule
   ],
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService

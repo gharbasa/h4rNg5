@@ -2,6 +2,7 @@
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"; /* This is for angular material components */
 
 body {
   padding-top: 5rem;
