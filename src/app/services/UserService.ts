@@ -24,6 +24,10 @@ export class UserService {
 		return this.http.put(this.basePath + "/" + user.id, user);
 	}
 	
+	resetPassword(userId:number) {
+		return this.http.put(this.basePath + "/" + userId + "/resetPassword", "");
+	}
+
 	remove(userId:number) {
 		return this.http.delete(this.basePath + "/" + userId);
 	}

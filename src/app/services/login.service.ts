@@ -42,7 +42,7 @@ export class LoginService {
 	update(payload) {
 		return this.http.patch(this.basePath + '/${payload.id}.json', payload);
 	}
-	
+
 	postLoginActivity() {
 		let that = this;
 		this.communityService.list().subscribe(res => {
