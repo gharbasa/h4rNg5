@@ -3,5 +3,7 @@
     <span>{{notification.subject}}&nbsp;&nbsp;({{notification.created_at}})</span>
     <br/>
     <span>{{notification.content}}</span>
-    <a href="#" (click)="deleteNotification()" title="Delete notification">(X)</a>
+    <a href="#" (click)="deleteNotification()" title="Delete notification">
+        (<fa-icon [icon]="['fas', 'cut']"></fa-icon>)
+    </a>
 </p>

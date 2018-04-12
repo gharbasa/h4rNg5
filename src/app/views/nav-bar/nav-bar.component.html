@@ -1,13 +1,35 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" routerLink="" href="#">
+  <a class="navbar-brand" routerLink="" href="#" title="Home">
       <img *ngIf="isUserLogin()" width="30" height="30" [src]="userPic" alt="{{userName}}"  title="{{userName}}">
+      {{userName}}
   </a>
-  <a class="navbar-brand" routerLink="notifications" *ngIf="isUserLogin()">::Notifications({{notifications.length}})</a>
-  <a class="navbar-brand" routerLink="newUser">::Create profile</a>
-    <a class="navbar-brand" routerLink="login" *ngIf="!isUserLogin()">::Login</a>
-  <a class="navbar-brand" >::Houses</a>
-  <a class="navbar-brand" routerLink="about">::About</a>
-  <a class="navbar-brand" routerLink="editUser/-1" *ngIf="isUserLogin()">::Edit profile</a>
-  <a class="navbar-brand" routerLink="admin" *ngIf="isUserLogin()">::Admin</a>
-  <a class="navbar-brand" href="#" (click)="logoutClicked()" *ngIf="isUserLogin()">::Logout</a>
+  
+  <a class="navbar-brand" routerLink="notifications" *ngIf="isUserLogin()" title="Notifications">
+    <fa-icon [icon]="['fas', 'envelope']"></fa-icon>({{notifications.length}})
+    <!--<fa-icon [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>-->
+  </a>
+  
+  <a class="navbar-brand" routerLink="newUser" title='Create new user profile'>
+      <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
+  </a>
+  
+  <a class="navbar-brand" routerLink="login" *ngIf="!isUserLogin()">::Login</a>
+  
+  <a class="navbar-brand" title="search houses">
+        <fa-icon [icon]="['fas', 'search']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon>
+  </a>
+  
+  <a class="navbar-brand" routerLink="about" title='About us'> <!---->
+        <fa-icon [icon]="['fas', 'sitemap']"></fa-icon>About
+  </a>
+  <a class="navbar-brand" routerLink="editUser/-1" *ngIf="isUserLogin()" title="Edit my profile">
+      <fa-icon [icon]="['fas', 'edit']"></fa-icon>profile</a>
+  <a class="navbar-brand" routerLink="admin" *ngIf="isUserLogin()" title="Authenticated services">
+      <fa-icon [icon]="['fas', 'barcode']"></fa-icon>
+  </a>
+  <a class="navbar-brand" href="#" (click)="logoutClicked()" *ngIf="isUserLogin()" title="Logout">
+      <fa-icon [icon]="['fas', 'power-off']"></fa-icon>
+  </a>
+  <span style="color:#c67878;padding-left:50px">Welcome to Gharbasa-O</span>
 </nav>
+

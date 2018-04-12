@@ -1,15 +1,32 @@
 <p>
-  <a routerLink="../users" *ngIf="isAdmin"><strong>Users</strong></a>
+  <a routerLink="../users" *ngIf="isAdmin" title="Users">
+        Users (<fa-icon [icon]="['fas', 'users']"></fa-icon>)
+  </a>
   <br/>
-  <a routerLink="../houses"><strong>Houses</strong></a>
+  <a routerLink="../houses">
+      Houses (<fa-icon [icon]="['fas', 'home']"></fa-icon>)
+  </a>
   <br/>
-  <a routerLink="../houses_users"><strong>House&lt;-&gt;User Role</strong></a>
+  <a routerLink="../houses_users">
+      House<fa-icon [icon]="['fas', 'arrows-alt-h']"></fa-icon>Users
+      (<fa-icon [icon]="['fas', 'users']"></fa-icon><fa-icon [icon]="['fas', 'arrows-alt-h']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon>)
+      
+  </a>
   <br/>
-  <a routerLink="../house_contracts"><strong>House Contracts</strong></a>
+  <a routerLink="../house_contracts">House contracts</a>
   <br/>
-  <a routerLink="../communities"><strong>Co-Op/Condos</strong></a>
+  <a routerLink="../communities">Co-Op/Condos (<fa-icon [icon]="['fas', 'building']"></fa-icon>)</a>
   <br/>
-  <a routerLink="../notificationTypes" *ngIf="isAdmin"><strong>Notification Types</strong></a>
-  
+  <a routerLink="../notificationTypes" *ngIf="isAdmin" title="Notification types">
+      Notification types (<fa-icon [icon]="['fas', 'bell']"></fa-icon>)
+  </a>
+  <br/>
+  <a routerLink="../notificationTypes" *ngIf="isAdmin" title="Notification types">
+      Accounts receivable (<fa-icon [icon]="['fas', 'bell']"></fa-icon>)
+  </a>
+  <br/>
+  <a routerLink="../notificationTypes" *ngIf="isAdmin" title="Notification types">
+      Charts (<fa-icon [icon]="['fas', 'chart-bar']"></fa-icon>)
+  </a>
 </p>
 
