@@ -22,6 +22,7 @@ import { UtilityService } from './services/UtilityService';
 import { UserHouseLinkService } from './services/UserHouseLinkService';
 import { HouseContractsService } from './services/HouseContractsService';
 import { HouseContractNoteService } from './services/HouseContractNoteService';
+import { UserHouseContractPicService } from './services/UserHouseContractPicService';
 
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 import { AboutComponent } from './views/about/about.component';
@@ -48,6 +49,7 @@ import { HouseContractsComponent } from './views/house-contracts/house-contracts
 import { HouseContractComponent } from './views/house-contract/house-contract.component';
 import { HouseContractNotesComponent } from './views/house-contract-notes/house-contract-notes.component';
 import { HouseContractNoteComponent } from './views/house-contract-note/house-contract-note.component';
+import { HouseContractPicsComponent } from './views/house-contract-pics/house-contract-pics.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -60,6 +62,7 @@ library.add(fas, far);
 
 import {MatMenuModule} from '@angular/material/menu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 const routes: Routes = [
     {
@@ -178,7 +181,8 @@ const routes: Routes = [
     HouseContractsComponent,
     HouseContractComponent,
     HouseContractNotesComponent,
-    HouseContractNoteComponent
+    HouseContractNoteComponent,
+    HouseContractPicsComponent
   ], 
   imports: [
     BrowserModule,
@@ -193,7 +197,7 @@ const routes: Routes = [
                 , NotificationTypeService, HouseService
                 , CommunityService, HousePicsService, HouseNoteService
                 , NotificationService, UtilityService, UserHouseLinkService, HouseContractsService
-                , HouseContractNoteService],
+                , HouseContractNoteService, UserHouseContractPicService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

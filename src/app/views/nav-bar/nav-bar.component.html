@@ -25,7 +25,7 @@
   <a class="navbar-brand" routerLink="editUser/-1" *ngIf="isUserLogin()" title="Edit my profile">
       <fa-icon [icon]="['fas', 'edit']"></fa-icon>profile</a>
   
-<a class="navbar-brand" style="color:white" *ngIf="isUserLogin()" title="Authenticated services" [matMenuTriggerFor]="menu">  
+<a class="navbar-brand" style="color:white;cursor:pointer" *ngIf="isUserLogin()" title="Authenticated services" [matMenuTriggerFor]="menu">  
     <fa-icon [icon]="['fas', 'barcode']"></fa-icon>
 </a>
     <mat-menu #menu="matMenu">

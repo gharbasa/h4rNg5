@@ -1,7 +1,7 @@
 <h4 title="Notes"><fa-icon [icon]="['fas', 'comments']"></fa-icon>({{houseContractNotes.length}})</h4>
-<p> 
+<div> 
     <br/>
-    <span *ngIf="houseContractNotes.length > 0">
+    <span *ngIf="houseContractNotes.length > 0"  style="text-align:left">
         <span *ngFor="let houseContractNote of houseContractNotes; let i = index">
             <h4r-house-contract-note [houseContractNote] = "houseContractNote" (onDeleteNoteClick)="deleteNote($event)"></h4r-house-contract-note>
         </span>
@@ -14,4 +14,4 @@
         <br/>
          <button type="button" class="btn btn-success"  (click)="attachHouseContractNote()">Save Note</button>
     </span>      
-</p>
+</div>

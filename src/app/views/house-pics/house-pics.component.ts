@@ -69,7 +69,8 @@ export class HousePicsComponent implements OnInit {
 	}
 	
 	handleFileInput($event) {
-  		var files:FileList = $event.target.files;
+  		this.errorMessage = "";
+		var files:FileList = $event.target.files;
   		var file = files.item(0);
   		var content = null;
   		if(file == undefined)
