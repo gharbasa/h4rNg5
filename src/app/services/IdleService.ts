@@ -82,8 +82,7 @@ export class IdleService {
 
   logout() {
   	let that = this;
-    let userJSON = this.localStorageService.getItem('user');
-    let user = JSON.parse(userJSON);
+    let user = this.loginService.getCurrentUser();
     let userId = user.id;
     this.logger.log(this,"User will be logged out");    
     that.loginService.remove(userId).subscribe(res => {
@@ -98,6 +97,12 @@ export class IdleService {
       this.router.navigate(['login']);
       
     });
+  }
+
+  //Stop the idle service, this is called from the login component
+  stop() {
+  	this.logger.info("ok IdleService is stopped.");
+  	this.idle.stop();
   }
 
   openDialog(): void {
@@ -129,7 +134,7 @@ export class IdleService {
   closeDialog():void {
   	this.logger.info("Request to close dialog on-demand.");
   	if(this.dialogRef != null) {
-  		this.logger.info("Ok, dialogRef is not null.");
+  		this.logger.info("Ok, dialogRef is not null closing.");
       	this.dialogRef.close();
     }
     this.dialogRef = null;

@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     public usersession: Usersession = new Usersession("", "");
     
     ngOnInit() {
+        this.idleService.stop();
     }
     
     @Output() onLoginClick = new EventEmitter<Usersession>();  
