@@ -39,6 +39,8 @@
     "@fortawesome/free-regular-svg-icons":"",
     "@angular/material":"",
     "@angular/cdk":"",
+    "@ng-idle/core":"",
+    "@ng-idle/keepalive":"",
     "@angular/animations":"",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",

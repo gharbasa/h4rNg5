@@ -23,6 +23,8 @@ import { UserHouseLinkService } from './services/UserHouseLinkService';
 import { HouseContractsService } from './services/HouseContractsService';
 import { HouseContractNoteService } from './services/HouseContractNoteService';
 import { UserHouseContractPicService } from './services/UserHouseContractPicService';
+import { IdleService } from './services/IdleService';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 import { AboutComponent } from './views/about/about.component';
@@ -190,14 +192,16 @@ const routes: Routes = [
     HttpClientModule,
     NgSelectModule,
     RouterModule.forRoot(routes, {useHash: true}),
-    FontAwesomeModule, MatMenuModule,BrowserAnimationsModule
+    FontAwesomeModule, MatMenuModule,BrowserAnimationsModule,
+    NgIdleKeepaliveModule.forRoot()
   ],
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService
                 , NotificationTypeService, HouseService
                 , CommunityService, HousePicsService, HouseNoteService
                 , NotificationService, UtilityService, UserHouseLinkService, HouseContractsService
-                , HouseContractNoteService, UserHouseContractPicService],
+                , HouseContractNoteService, UserHouseContractPicService
+                , IdleService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

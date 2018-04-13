@@ -6,7 +6,7 @@ import { Usersession } from '../../models/usersession';
 import { LoginService } from '../../services/login.service';
 import { LocalStorageService } from '../../services/LocalStorageService';
 import { LoggingService, Config } from 'loggerservice';
-
+import { IdleService } from '../../services/IdleService';
 
 @Component({
   selector: 'h4r-login',
@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
     constructor(private loginService: LoginService 
     		,private localStorageService: LocalStorageService
     		,private router: Router
-    		,private logger: LoggingService) { 
+    		,private logger: LoggingService
+            ,private idleService: IdleService) { 
         
     }
     //@Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
             that.updateUserInLocalStorage(res);
             //navigate user to the post login 
             this.router.navigate(['postlogin']);
+            this.idleService.startIdleService();
         }
         ,err => {
         	this.logger.error(this,"Login failed.");
