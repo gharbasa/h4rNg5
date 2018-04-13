@@ -55,7 +55,7 @@ export class NavBarComponent implements OnInit {
 	  	let user = this.loginService.getCurrentUser();
 	    if(user != null) {
 	    	this.userPic = AppSettings.H4R_BACKEND_URL + user.avatar;
-	    	this.userName = user.lname + ", " + user.fname;
+	    	this.userName = user.fullName;
 	    	this.notifications = this.loginService.getNotifications();
 	    } else {
 	    	return false;

@@ -6,6 +6,8 @@ import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 import {Idle, DEFAULT_INTERRUPTSOURCES} from '@ng-idle/core';
 import {Keepalive} from '@ng-idle/keepalive';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { UserIdleWarningDialogComponent } from '../views/user-idle-warning-dialog/user-idle-warning-dialog.component';
 
 @Injectable()
 export class IdleService {
@@ -13,12 +15,13 @@ export class IdleService {
 	idleState = 'Not started.';
   	timedOut = false;
   	//lastPing?: Date = null;
-
+  	private dialogRef:any = null;
 	constructor(private localStorageService: LocalStorageService,
 				private logger: LoggingService,
 				private loginService: LoginService,
 				private idle: Idle, private keepalive: Keepalive,
-				private router: Router) { 
+				private router: Router,
+				private dialog: MatDialog) { 
 		
 	}
 
@@ -36,7 +39,8 @@ export class IdleService {
 
 	    this.idle.onIdleEnd.subscribe(() => {
 	      this.idleState = 'No longer idle.';
-	      this.logger.info("Ok user came back online, No longer idle.");
+	      this.logger.info("Ok user came back online, No longer idle...");
+	      that.closeDialog();
 	    });
 
 	    this.idle.onTimeout.subscribe(() => {
@@ -48,6 +52,7 @@ export class IdleService {
 	    this.idle.onIdleStart.subscribe(() => {
 	      this.idleState = 'You\'ve gone idle!';
 	      this.logger.info("You\'ve gone idle!");
+	      that.openDialog();
 	    });
 	  
 	    this.idle.onTimeoutWarning.subscribe(countdown => {
@@ -85,12 +90,48 @@ export class IdleService {
       this.logger.log(this,"Logout successful");
       that.localStorageService.removeItem('user');
       this.router.navigate(['login']);
+      that.closeDialog();
     }
     ,err => {
       this.logger.error(this,"Somehow Logout failed.");
       that.localStorageService.removeItem('user');
       this.router.navigate(['login']);
+      
     });
   }
 
+  openDialog(): void {
+  	this.logger.info("IdleService, request to open the dialog.");
+  	let that = this;
+  	if(this.dialogRef != null) {
+  		this.logger.info("IdleService, There is a dialog already open.");
+  		return;
+  	}
+  	this.logger.info("IdleService, Opening the dialog.");
+  	let user = this.loginService.getCurrentUser();
+  	let userName:string = "";
+	if(user != null) {
+	    userName = user.fullName;
+	}
+
+  	this.dialogRef = this.dialog.open(UserIdleWarningDialogComponent, {
+      width: '300px',
+      data: { userName: userName}
+    });
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('The idle dialog is closed');
+      //this.animal = result;
+      that.dialogRef = null;
+    });
+  }
+
+  closeDialog():void {
+  	this.logger.info("Request to close dialog on-demand.");
+  	if(this.dialogRef != null) {
+  		this.logger.info("Ok, dialogRef is not null.");
+      	this.dialogRef.close();
+    }
+    this.dialogRef = null;
+  }
 }

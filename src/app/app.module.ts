@@ -52,6 +52,7 @@ import { HouseContractComponent } from './views/house-contract/house-contract.co
 import { HouseContractNotesComponent } from './views/house-contract-notes/house-contract-notes.component';
 import { HouseContractNoteComponent } from './views/house-contract-note/house-contract-note.component';
 import { HouseContractPicsComponent } from './views/house-contract-pics/house-contract-pics.component';
+import { UserIdleWarningDialogComponent } from './views/user-idle-warning-dialog/user-idle-warning-dialog.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -64,7 +65,7 @@ library.add(fas, far);
 
 import {MatMenuModule} from '@angular/material/menu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import { MatDialogModule } from '@angular/material';
 
 const routes: Routes = [
     {
@@ -184,8 +185,13 @@ const routes: Routes = [
     HouseContractComponent,
     HouseContractNotesComponent,
     HouseContractNoteComponent,
-    HouseContractPicsComponent
+    HouseContractPicsComponent,
+    UserIdleWarningDialogComponent
   ], 
+  entryComponents: [
+    UserIdleWarningDialogComponent
+  ],
+
   imports: [
     BrowserModule,
     FormsModule,
@@ -193,7 +199,8 @@ const routes: Routes = [
     NgSelectModule,
     RouterModule.forRoot(routes, {useHash: true}),
     FontAwesomeModule, MatMenuModule,BrowserAnimationsModule,
-    NgIdleKeepaliveModule.forRoot()
+    NgIdleKeepaliveModule.forRoot(),
+    MatDialogModule
   ],
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService
