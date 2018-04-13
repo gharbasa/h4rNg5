@@ -9,6 +9,7 @@ import { AppSettingsService } from './services/AppSettingsService';
 import { LocalStorageService } from './services/LocalStorageService';
 import { Router } from '@angular/router';
 import { LoggingService, Config } from 'loggerservice';
+import { IdleService } from './services/IdleService';
 
 @Component({
   selector: 'h4r-root',
@@ -25,13 +26,15 @@ export class AppComponent {
   constructor(private loginService: LoginService
 		  		, private localStorageService: LocalStorageService
 		  		, private router: Router
-		  		, private logger: LoggingService) {
+		  		, private logger: LoggingService
+          , private idleService: IdleService) {
 	  this.logger.log(this,"AppComponent C'tor");
     let that = this;
     loginService.get().subscribe(res => {
     	this.logger.log(this,"Looks like usersession is still alive");
         that.localStorageService.setItem('user', JSON.stringify(res));
         this.router.navigate(['postlogin']);
+        this.idleService.startIdleService();
         //Do not show login dialog
     },
     err => {

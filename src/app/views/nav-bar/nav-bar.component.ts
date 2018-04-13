@@ -32,9 +32,7 @@ export class NavBarComponent implements OnInit {
   }
   logoutClicked() {
 	  let that = this;
-	  
-	  let userJSON = this.localStorageService.getItem('user');
-	  let user = JSON.parse(userJSON);
+	  let user = that.loginService.getCurrentUser();
 	  let userId = user.id;
 	  this.logger.log(this,"User wants to logout userId=" + userId);    
 	  that.loginService.remove(userId).subscribe(res => {
@@ -55,7 +53,7 @@ export class NavBarComponent implements OnInit {
 	  	let user = this.loginService.getCurrentUser();
 	    if(user != null) {
 	    	this.userPic = AppSettings.H4R_BACKEND_URL + user.avatar;
-	    	this.userName = user.lname + ", " + user.fname;
+	    	this.userName = user.fullName;
 	    	this.notifications = this.loginService.getNotifications();
 	    } else {
 	    	return false;
