@@ -11,7 +11,7 @@ export class ZoomPicAlbumComponent {
 
 	private housePics:any = [];
 	private viewIndex:number = 0;
-	private imageWidth:number = 450;
+	private imageWidth:number = 400;
 	private imageHeight:number = 500;
 
   	constructor(public dialogRef: MatDialogRef<ZoomPicAlbumComponent>,

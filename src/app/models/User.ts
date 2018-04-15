@@ -1,16 +1,18 @@
 
 export class User {
 	id: number = 0;
-    email: string = "";
+    email: string = ""; //used in self service password reset also
     fname: string = "";
     mname: string = "";
     lname: string = "";
     verified: boolean = false;
-    adhaar_no: string = "";
+    adhaar_no: string = ""; //used in self service password reset also
     created_by: number = 0;
     updated_by: number = 0;
     avatar: string = "";
-    login: string = "";
+	password: string = ""; //used in self service password reset also
+	password_confirmation: string = ""; //used in self service password reset also
+    login: string = ""; //used in self service password reset also
     phone1: string = "";
     addr1: string = "";
     addr2: string = "";
@@ -21,8 +23,8 @@ export class User {
     guest: boolean = false;
     
 	promote2Admin:boolean = false;
-	roleStr: string = "";
-	sexStr:string = "";
+	roleStr: string = ""; 
+	sexStr:string = ""; //used in self service password reset also
 	errorMessage:string = "";
     message:string = "";
     image:any=null;
