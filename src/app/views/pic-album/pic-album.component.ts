@@ -8,7 +8,10 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class PicAlbumComponent implements OnInit {
 
-	@Input() housePic:any; 
+	@Input() housePic:any;
+	@Input() imageWidth:number;
+	@Input() imageHeight:number;
+
 	constructor(private logger: LoggingService) { 
 		
 	}

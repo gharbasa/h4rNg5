@@ -11,13 +11,13 @@ export class UserIdleWarningDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<UserIdleWarningDialogComponent>,
   			  @Inject(MAT_DIALOG_DATA) public data: any,
-  			  private loggingService: LoggingService) { 
+  			  private logger: LoggingService) { 
 
 
   }
 
 	onNoClick(): void {
-		this.loggingService.info(this, "Closing the dialog.");
+		this.logger.info(this, "Closing the dialog.");
     this.dialogRef.close();
     this.dialogRef = null;
   }
