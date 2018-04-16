@@ -4,67 +4,85 @@
       {{userName}}
   </a>
   
-  <a class="navbar-brand" routerLink="notifications" *ngIf="isUserLogin()" title="Notifications">
-    <fa-icon [icon]="['fas', 'envelope']"></fa-icon>({{notifications.length}})
-    <!--<fa-icon [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>-->
-  </a>
-  
-  <a class="navbar-brand" routerLink="newUser" title='Create new user profile'>
-      <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
-  </a>
-  
-  <a class="navbar-brand" routerLink="login" *ngIf="!isUserLogin()">::Login</a>
-  
-  <a class="navbar-brand" title="search houses">
-        <fa-icon [icon]="['fas', 'search']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon>
-  </a>
-  
-  <a class="navbar-brand" routerLink="about" title='About us'> <!---->
-        About
-  </a>
-  <a class="navbar-brand" routerLink="editUser/-1" *ngIf="isUserLogin()" title="Edit my profile">
-      <fa-icon [icon]="['fas', 'edit']"></fa-icon>profile</a>
-  
-<a class="navbar-brand" style="color:white;cursor:pointer" *ngIf="isUserLogin()" title="Services" [matMenuTriggerFor]="menu">  
-    <fa-icon [icon]="['fas', 'barcode']" class='fa-lg'></fa-icon>
-</a>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-            <mat-icon>dialpad</mat-icon>
-            <span>Redial</span>
-        </button>
-        <button mat-menu-item routerLink="../users" *ngIf="isAdmin()" title="Users">
-            <span><fa-icon [icon]="['fas', 'users']"></fa-icon> Users</span>
-        </button>
-        <button mat-menu-item routerLink="../houses" title="Houses">
-            <fa-icon [icon]="['fas', 'home']"></fa-icon> Houses
-        </button>
-        <button mat-menu-item routerLink="../houses_users" title="User and house associations">
-            <fa-icon [icon]="['fas', 'users']"></fa-icon><fa-icon [icon]="['fas', 'arrows-alt-h']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon> Associations
-        </button>
-        <button mat-menu-item routerLink="../house_contracts" title="House contracts">
-            <fa-icon [icon]="['fas', 'handshake']"></fa-icon> House contracts
-        </button>
-        <button mat-menu-item routerLink="../communities" title="Co-op/Condos/Town houses">
-            <fa-icon [icon]="['fas', 'building']"></fa-icon> Co-Op/Condos
-        </button>
-        <button mat-menu-item routerLink="../notificationTypes" title="Notification types" *ngIf="isAdmin()">
-            <fa-icon [icon]="['fas', 'bell']"></fa-icon> Notification types 
-        </button>
-        <button mat-menu-item routerLink="../notificationTypes" *ngIf="isAdmin()" title="Notification types">
-            <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon> Receivables
-        </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="notifications" *ngIf="isUserLogin()" title="Notifications">
+            <fa-icon [icon]="['fas', 'envelope']"></fa-icon>({{notifications.length}})
+            <!--<fa-icon [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>-->
+        </a>
+      </li>
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="newUser" title='Create new user profile'>
+            <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
+        </a>
+      </li>
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="login" *ngIf="!isUserLogin()">
+            Login
+        </a>
+      </li>
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="about" title='About us'>
+            About
+        </a>
+      </li>
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="editUser/-1" *ngIf="isUserLogin()" title="Edit my profile">
+            <fa-icon [icon]="['fas', 'edit']"></fa-icon>profile
+        </a>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isUserLogin()" title="Services">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <fa-icon [icon]="['fas', 'barcode']" class='fa-lg'></fa-icon>
+          </a>
         
-        <button mat-menu-item routerLink="../notificationTypes" *ngIf="isAdmin()" title="Notification types">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" routerLink="../users" *ngIf="isAdmin()" title="Users">
+            <fa-icon [icon]="['fas', 'users']"></fa-icon> Users
+          </a>
+          <a class="dropdown-item" href="#" routerLink="../houses" title="Houses">
+            <fa-icon [icon]="['fas', 'home']"></fa-icon> Houses
+          </a>
+          <a class="dropdown-item" href="#" routerLink="../houses_users" title="User and house associations">
+            <fa-icon [icon]="['fas', 'users']"></fa-icon><fa-icon [icon]="['fas', 'arrows-alt-h']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon> Associations
+          </a>
+          <a class="dropdown-item" href="#" routerLink="../house_contracts" title="House contracts">
+            <fa-icon [icon]="['fas', 'handshake']"></fa-icon> House contracts
+          </a>
+          <a class="dropdown-item" href="#" routerLink="../communities" title="Co-op/Condos/Town houses">
+            <fa-icon [icon]="['fas', 'building']"></fa-icon> Co-Op/Condos
+          </a>
+          <a class="dropdown-item" href="#" routerLink="../notificationTypes" title="Notification types" *ngIf="isAdmin()">
+            <fa-icon [icon]="['fas', 'bell']"></fa-icon> Notification types
+          </a>
+          <a class="dropdown-item" href="#" routerLink="../notificationTypes" *ngIf="isAdmin()" title="Notification types">
+            <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon> Receivables
+          </a>
+          <a class="dropdown-item" href="#" routerLink="../notificationTypes" *ngIf="isAdmin()" title="Notification types">
             <fa-icon [icon]="['fas', 'chart-pie']"></fa-icon> Performance
-        </button>      
-    </mat-menu>
-
-    <a class="navbar-brand" href="#" (click)="logoutClicked()" *ngIf="isUserLogin()" title="Logout">
-      <fa-icon [icon]="['fas', 'power-off']"></fa-icon>
-    </a>
-  
-    <span style="color:#c67878;padding-left:50px">Welcome to Gharbasa-O</span>
-  
+          </a>
+        </div>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="#" (click)="logoutClicked()" *ngIf="isUserLogin()" title="Logout">
+                <fa-icon [icon]="['fas', 'power-off']"></fa-icon>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" style="color:#c67878;padding-left:10px">Welcome to Gharbasa-O</a>
+        </li>
+    </ul>
+    
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search homes" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fa-icon [icon]="['fas', 'search']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon></button>
+    </form>
+  </div>
 </nav>
 
