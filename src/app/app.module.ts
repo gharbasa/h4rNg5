@@ -55,6 +55,7 @@ import { HouseContractPicsComponent } from './views/house-contract-pics/house-co
 import { UserIdleWarningDialogComponent } from './views/user-idle-warning-dialog/user-idle-warning-dialog.component';
 import { ZoomPicAlbumComponent } from './views/zoom-pic-album/zoom-pic-album.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
+import { PerformanceChartsComponent } from './views/performance-charts/performance-charts.component'; 
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -68,6 +69,9 @@ library.add(fas, far);
 import {MatMenuModule} from '@angular/material/menu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material';
+
+//d3
+import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'angular-d3-charts';
 
 const routes: Routes = [
     {
@@ -161,6 +165,11 @@ const routes: Routes = [
         path: 'reset-password',
         component: ForgotPasswordComponent
     }
+    ,
+    {
+        path: 'performance',
+        component: PerformanceChartsComponent
+    }
 ];
 
 @NgModule({
@@ -195,8 +204,12 @@ const routes: Routes = [
     HouseContractPicsComponent,
     UserIdleWarningDialogComponent,
     ZoomPicAlbumComponent,
-    ForgotPasswordComponent
-  ], 
+    ForgotPasswordComponent,
+    DoughnutChartComponent, 
+    PieChartComponent, 
+    BarChartComponent, PerformanceChartsComponent
+  ],
+   
   entryComponents: [
     UserIdleWarningDialogComponent,
     ZoomPicAlbumComponent
