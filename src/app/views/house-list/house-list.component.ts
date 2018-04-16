@@ -17,6 +17,10 @@ export class HouseListComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.fetchHouses();
+	}
+
+	fetchHouses() {
 		let that = this;
 		this.houseService.list().subscribe(res => {
 			that.houses = res;
