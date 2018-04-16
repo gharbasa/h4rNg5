@@ -12,8 +12,8 @@
         
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="deleteImage()" href="#" title="Delete the picture">(<fa-icon [icon]="['fas', 'cut']"></fa-icon>)</a>
         
-        <span *ngFor="let housePic of housePics; let i = index">
-            <h4r-pic-album [housePic]="housePic" *ngIf="(i===viewIndex)"></h4r-pic-album>
+        <span *ngFor="let housePic of housePics; let i = index" (click)="zoom()">
+            <h4r-pic-album [housePic]="housePic" *ngIf="(i===viewIndex)" [imageWidth]="imageWidth" [imageHeight]="imageHeight"></h4r-pic-album>
         </span>
     </td>
     </tr>
@@ -24,7 +24,6 @@
         <br/>
          <input name="about_pic" type="text" size="25" [(ngModel)]="newHousePic.about_pic" placeholder="Describe">
             <button type="button" class="btn btn-success"  (click)="attachHousePic()">Attach</button>
-    
     </td>
     </tr>
 </table>

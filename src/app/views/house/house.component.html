@@ -1,4 +1,4 @@
-<h4>House</h4>
+House
 
 <div id='grad1' class="row justify-content-center">
       
@@ -69,21 +69,21 @@
                 </td>
         </tr>
          
-         <tr>
+         <tr *ngIf="!createNewHouse">
              <td>
             Land lord:</td><td> 
                 {{house.land_lord && house.land_lord.fullName}}
                 </td>
          </tr>
         
-         <tr>
+         <tr *ngIf="!createNewHouse">
              <td>
             Manager:</td><td>
                 {{house.property_mgmt_mgr.lname}}, {{house.property_mgmt_mgr.fname}} 
                 </td>
          </tr>
          
-          <tr>
+          <tr *ngIf="!createNewHouse">
              <td>
             Tenant:</td><td>
                 {{house.tenant.lname}}, {{house.tenant.fname}} 

@@ -11,8 +11,8 @@
         
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="deleteImage()" href="#" title="Delete the picture">(<fa-icon [icon]="['fas', 'cut']"></fa-icon>)</a>
         
-        <span *ngFor="let houseContractPic of houseContractPics; let i = index">
-            <h4r-pic-album [housePic]="houseContractPic" *ngIf="(i===viewIndex)"></h4r-pic-album>
+        <span *ngFor="let houseContractPic of houseContractPics; let i = index" (click)="zoom()">
+            <h4r-pic-album [housePic]="houseContractPic" *ngIf="(i===viewIndex)" [imageWidth]="imageWidth" [imageHeight]="imageHeight"></h4r-pic-album>
         </span>
     </td>
     </tr>

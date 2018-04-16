@@ -4,6 +4,8 @@ import { UserHouseContractPicService } from '../../services/UserHouseContractPic
 import { UserHouseContractPic } from '../../models/UserHouseContractPic';
 import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.component';
 
 @Component({
   selector: 'h4r-house-contract-pics',
@@ -17,7 +19,11 @@ export class HouseContractPicsComponent implements OnInit {
 	private viewIndex:number = 0;
 	private newHouseContractPic:UserHouseContractPic = new UserHouseContractPic();
 	private errorMessage:string = "";
-	constructor(private userHouseContractPicService: UserHouseContractPicService, private logger: LoggingService) { 
+	private imageWidth:number = 300;
+	private imageHeight:number = 350;
+	constructor(private userHouseContractPicService: UserHouseContractPicService
+					, private logger: LoggingService
+					, private dialog: MatDialog) { 
 		
 	}
 	
@@ -116,6 +122,20 @@ export class HouseContractPicsComponent implements OnInit {
 			that.logger.error(this,"Error deleting the pic");
 		});
 		return false;
+	}
+	
+	zoom() {
+		let that = this;
+		this.dialogRef = this.dialog.open(ZoomPicAlbumComponent, {
+			//width: '500px',
+			data: { housePics: this.houseContractPics}
+		});
+
+		this.dialogRef.afterClosed().subscribe(result => {
+			console.log('The house-contract-pics dialog is closed');
+			//this.animal = result;
+			that.dialogRef = null;
+		});
 	}
 
 }

@@ -4,6 +4,8 @@ import { HousePicsService } from '../../services/HousePicsService';
 import { HousePic } from '../../models/HousePic';
 import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.component';
 
 HousePicsService
 @Component({
@@ -17,8 +19,14 @@ export class HousePicsComponent implements OnInit {
 	private housePics:any = [];
 	private viewIndex:number = 0;
 	private newHousePic:HousePic = new HousePic();
+	private dialogRef:any = null;
 	private errorMessage:string = "";
-	constructor(private housePicsService: HousePicsService, private logger: LoggingService) { 
+	private imageWidth:number = 300;
+	private imageHeight:number = 350;
+	
+	constructor(private housePicsService: HousePicsService
+						, private logger: LoggingService
+						, private dialog: MatDialog) { 
 		
 	}
 	
@@ -117,4 +125,19 @@ export class HousePicsComponent implements OnInit {
 		});
 		return false;
 	}
+	
+	zoom() {
+		let that = this;
+		this.dialogRef = this.dialog.open(ZoomPicAlbumComponent, {
+			//width: '500px',
+			data: { housePics: this.housePics}
+		});
+
+		this.dialogRef.afterClosed().subscribe(result => {
+			console.log('The zoom-pic dialog is closed');
+			//this.animal = result;
+			that.dialogRef = null;
+		});
+	}
+	
 }

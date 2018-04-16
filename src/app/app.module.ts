@@ -53,6 +53,8 @@ import { HouseContractNotesComponent } from './views/house-contract-notes/house-
 import { HouseContractNoteComponent } from './views/house-contract-note/house-contract-note.component';
 import { HouseContractPicsComponent } from './views/house-contract-pics/house-contract-pics.component';
 import { UserIdleWarningDialogComponent } from './views/user-idle-warning-dialog/user-idle-warning-dialog.component';
+import { ZoomPicAlbumComponent } from './views/zoom-pic-album/zoom-pic-album.component';
+import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -154,6 +156,11 @@ const routes: Routes = [
         path: 'house_contract/:id',
         component: HouseContractComponent
     }
+    ,
+    {
+        path: 'reset-password',
+        component: ForgotPasswordComponent
+    }
 ];
 
 @NgModule({
@@ -186,10 +193,13 @@ const routes: Routes = [
     HouseContractNotesComponent,
     HouseContractNoteComponent,
     HouseContractPicsComponent,
-    UserIdleWarningDialogComponent
+    UserIdleWarningDialogComponent,
+    ZoomPicAlbumComponent,
+    ForgotPasswordComponent
   ], 
   entryComponents: [
-    UserIdleWarningDialogComponent
+    UserIdleWarningDialogComponent,
+    ZoomPicAlbumComponent
   ],
 
   imports: [

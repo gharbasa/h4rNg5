@@ -40,13 +40,14 @@ export class IdleService {
 	    this.idle.onIdleEnd.subscribe(() => {
 	      this.idleState = 'No longer idle.';
 	      this.logger.info("Ok user came back online, No longer idle...");
-	      that.closeDialog();
+	      that.closeAllDialogs();
 	    });
 
 	    this.idle.onTimeout.subscribe(() => {
 	      this.idleState = 'Timed out!';
 	      this.timedOut = true;
 	      this.logger.info("Timed out!");
+	      //close all the dialogs
 	      that.logout();
 	    });
 	    this.idle.onIdleStart.subscribe(() => {
@@ -89,7 +90,7 @@ export class IdleService {
       this.logger.log(this,"Logout successful");
       that.localStorageService.removeItem('user');
       this.router.navigate(['login']);
-      that.closeDialog();
+      that.closeAllDialogs();
     }
     ,err => {
       this.logger.error(this,"Somehow Logout failed.");
@@ -97,6 +98,7 @@ export class IdleService {
       this.router.navigate(['login']);
       
     });
+    return false;
   }
 
   //Stop the idle service, this is called from the login component
@@ -130,13 +132,10 @@ export class IdleService {
       that.dialogRef = null;
     });
   }
-
-  closeDialog():void {
+  
+  closeAllDialogs():void {
   	this.logger.info("Request to close dialog on-demand.");
-  	if(this.dialogRef != null) {
-  		this.logger.info("Ok, dialogRef is not null closing.");
-      	this.dialogRef.close();
-    }
+  	this.dialog.closeAll();
     this.dialogRef = null;
   }
 }

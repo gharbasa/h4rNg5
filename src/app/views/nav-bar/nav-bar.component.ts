@@ -5,6 +5,7 @@ import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
+import { IdleService } from '../../services/IdleService';
 
 @Component({
   selector: 'h4r-nav-bar',
@@ -19,7 +20,8 @@ export class NavBarComponent implements OnInit {
 	constructor(protected localStorageService: LocalStorageService
 		  ,private router: Router
 		  ,private loginService: LoginService
-		  ,private logger: LoggingService){ }
+		  ,private logger: LoggingService
+		  ,private idleService: IdleService){ }
   //@Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
   //@Output() onLogoutClick = new EventEmitter<string>();
   
@@ -30,22 +32,10 @@ export class NavBarComponent implements OnInit {
   isAdmin() {
 	  return this.loginService.isAdminUser();
   }
+  
   logoutClicked() {
-	  let that = this;
-	  let user = that.loginService.getCurrentUser();
-	  let userId = user.id;
-	  this.logger.log(this,"User wants to logout userId=" + userId);    
-	  that.loginService.remove(userId).subscribe(res => {
-		  this.logger.log(this,"Logout successful");
-		  that.localStorageService.removeItem('user');
-		  this.router.navigate(['login']);
-	  }
-	  ,err => {
-		  this.logger.error(this,"Somehow Logout failed.");
-		  that.localStorageService.removeItem('user');
-		  this.router.navigate(['login']);
-	  });
-	  
+	  this.idleService.logout();
+	  this.resetLocalBuffer();
 	  return false;
   }
   
@@ -56,6 +46,7 @@ export class NavBarComponent implements OnInit {
 	    	this.userName = user.fullName;
 	    	this.notifications = this.loginService.getNotifications();
 	    } else {
+	    	this.resetLocalBuffer();
 	    	return false;
 	    }
 	    return true;
@@ -63,5 +54,11 @@ export class NavBarComponent implements OnInit {
   
   isAdminUser() {
 	  return this.loginService.isAdminUser();
+  }
+  
+  resetLocalBuffer(): void {
+	this.userPic = "";
+  	this.userName = "";
+  	this.notifications = [];
   }
 }

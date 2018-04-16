@@ -25,8 +25,8 @@
   <a class="navbar-brand" routerLink="editUser/-1" *ngIf="isUserLogin()" title="Edit my profile">
       <fa-icon [icon]="['fas', 'edit']"></fa-icon>profile</a>
   
-<a class="navbar-brand" style="color:white;cursor:pointer" *ngIf="isUserLogin()" title="Authenticated services" [matMenuTriggerFor]="menu">  
-    <fa-icon [icon]="['fas', 'barcode']"></fa-icon>
+<a class="navbar-brand" style="color:white;cursor:pointer" *ngIf="isUserLogin()" title="Services" [matMenuTriggerFor]="menu">  
+    <fa-icon [icon]="['fas', 'barcode']" class='fa-lg'></fa-icon>
 </a>
     <mat-menu #menu="matMenu">
         <button mat-menu-item>
@@ -43,7 +43,7 @@
             <fa-icon [icon]="['fas', 'users']"></fa-icon><fa-icon [icon]="['fas', 'arrows-alt-h']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon> Associations
         </button>
         <button mat-menu-item routerLink="../house_contracts" title="House contracts">
-            House contracts
+            <fa-icon [icon]="['fas', 'handshake']"></fa-icon> House contracts
         </button>
         <button mat-menu-item routerLink="../communities" title="Co-op/Condos/Town houses">
             <fa-icon [icon]="['fas', 'building']"></fa-icon> Co-Op/Condos
@@ -52,7 +52,7 @@
             <fa-icon [icon]="['fas', 'bell']"></fa-icon> Notification types 
         </button>
         <button mat-menu-item routerLink="../notificationTypes" *ngIf="isAdmin()" title="Notification types">
-            <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon> Accounts receivable
+            <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon> Receivables
         </button>
         
         <button mat-menu-item routerLink="../notificationTypes" *ngIf="isAdmin()" title="Notification types">

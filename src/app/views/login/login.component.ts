@@ -70,8 +70,14 @@ export class LoginComponent implements OnInit {
         this.localStorageService.removeItem('user');
     }
     
-    newUserClicked() {
+    newUserClicked(): void {
     	this.router.navigate(['newUser']);
+    	return false;
+    }
+    
+    forgotPassword(): boolean {
+    	this.logger.info("user clicked forgot password");
+    	this.router.navigate(['reset-password']);
     	return false;
     }
 }
