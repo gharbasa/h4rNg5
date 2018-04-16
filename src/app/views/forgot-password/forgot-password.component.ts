@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { LoginService } from '../../services/login.service';
-import { LocalStorageService } from '../../services/LocalStorageService';
+import { UserService } from '../../services/UserService';
 import { LoggingService, Config } from 'loggerservice';
 import { User } from '../../models/User';
 
@@ -13,16 +11,27 @@ import { User } from '../../models/User';
 export class ForgotPasswordComponent implements OnInit {
 	
 	private user:any = new User();
-
-	constructor(private loginService: LoginService 
-  		,private localStorageService: LocalStorageService
-		,private logger: LoggingService) { }
+	private errorMessage:string = "";
+	private message: string = "";
+	constructor(private logger: LoggingService
+		,private userService: UserService) { }
 
 	ngOnInit() {
 	  
 	}
-
-	resetPassword(): void {
-		this.logger.info(this, "User clicked resetPassword btn, lets validate input fields.")
+	
+	forgotPassword(): void {
+		let that = this;
+		this.logger.info(this, "User clicked forgotPassword btn, lets validate input fields.")
+		//TODO: validate input fields.
+		this.userService.forgotPassword(this.user).subscribe(res => {
+			that.logger.info(this, "User clicked resetPassword btn, lets validate input fields.")
+			that.message = "Password is changed successful.";
+			that.errorMessage = "";
+		},
+		err => {
+			that.logger.info(this, "There is an error in resetPassword." + JSON.stringify(err));
+			that.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage:"There is an error in reset password.";
+		});
 	}
 }
