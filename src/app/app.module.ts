@@ -24,6 +24,7 @@ import { HouseContractsService } from './services/HouseContractsService';
 import { HouseContractNoteService } from './services/HouseContractNoteService';
 import { UserHouseContractPicService } from './services/UserHouseContractPicService';
 import { IdleService } from './services/IdleService';
+import { PaymentService } from './services/PaymentService';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
@@ -55,6 +56,8 @@ import { HouseContractPicsComponent } from './views/house-contract-pics/house-co
 import { UserIdleWarningDialogComponent } from './views/user-idle-warning-dialog/user-idle-warning-dialog.component';
 import { ZoomPicAlbumComponent } from './views/zoom-pic-album/zoom-pic-album.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
+import { PerformanceChartsComponent } from './views/performance-charts/performance-charts.component'; 
+import { ReceivablesComponent } from './views/receivables/receivables.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -68,6 +71,9 @@ library.add(fas, far);
 import {MatMenuModule} from '@angular/material/menu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material';
+
+//d3
+import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'angular-d3-charts';
 
 const routes: Routes = [
     {
@@ -161,6 +167,16 @@ const routes: Routes = [
         path: 'reset-password',
         component: ForgotPasswordComponent
     }
+    ,
+    {
+        path: 'performance',
+        component: PerformanceChartsComponent
+    }
+    ,
+    {
+        path: 'receivables/:id',
+        component: ReceivablesComponent
+    }
 ];
 
 @NgModule({
@@ -195,8 +211,12 @@ const routes: Routes = [
     HouseContractPicsComponent,
     UserIdleWarningDialogComponent,
     ZoomPicAlbumComponent,
-    ForgotPasswordComponent
-  ], 
+    ForgotPasswordComponent,
+    DoughnutChartComponent, 
+    PieChartComponent, 
+    BarChartComponent, PerformanceChartsComponent, ReceivablesComponent
+  ],
+   
   entryComponents: [
     UserIdleWarningDialogComponent,
     ZoomPicAlbumComponent
@@ -218,7 +238,7 @@ const routes: Routes = [
                 , CommunityService, HousePicsService, HouseNoteService
                 , NotificationService, UtilityService, UserHouseLinkService, HouseContractsService
                 , HouseContractNoteService, UserHouseContractPicService
-                , IdleService],
+                , IdleService, PaymentService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

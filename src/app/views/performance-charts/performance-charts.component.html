@@ -1,0 +1,19 @@
+<table><tr><td>
+	Performanace charts for House : 
+	<ng-select name="house_id" [items]="houses"
+    			bindLabel="name"
+                bindValue="id"
+                placeholder="House"
+                [(ngModel)]="house_id" 
+                (change)="update()">
+    </ng-select>
+</td></tr></table>
+<br/><br/>
+<!--Here dropdown to show the list of houses that you are an accountant -->
+<angular-d3-donut [id]="donutChartId" [data]="donutChartData"></angular-d3-donut>
+
+<angular-d3-pie [id]="pieChartId" [data]="pieChartData"></angular-d3-pie>
+
+<angular-d3-bar [id]="test2" [data]="barChartData" [dataColumns]="dataColumns" [colors]="colors" 
+		[yAxisTicks]=10 [width]=400 [height]=200 [transitionDuration]=1000 [transitionDelay]=30 [barWidth]="'16px'"></angular-d3-bar>
+
