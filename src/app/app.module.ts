@@ -56,6 +56,7 @@ import { UserIdleWarningDialogComponent } from './views/user-idle-warning-dialog
 import { ZoomPicAlbumComponent } from './views/zoom-pic-album/zoom-pic-album.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { PerformanceChartsComponent } from './views/performance-charts/performance-charts.component'; 
+import { ReceivablesComponent } from './views/receivables/receivables.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -170,6 +171,11 @@ const routes: Routes = [
         path: 'performance',
         component: PerformanceChartsComponent
     }
+    ,
+    {
+        path: 'receivables/:id',
+        component: ReceivablesComponent
+    }
 ];
 
 @NgModule({
@@ -207,7 +213,7 @@ const routes: Routes = [
     ForgotPasswordComponent,
     DoughnutChartComponent, 
     PieChartComponent, 
-    BarChartComponent, PerformanceChartsComponent
+    BarChartComponent, PerformanceChartsComponent, ReceivablesComponent
   ],
    
   entryComponents: [
