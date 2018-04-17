@@ -25,7 +25,7 @@ export class User {
 	promote2Admin:boolean = false;
 	roleStr: string = ""; 
 	sexStr:string = "";
-	sex:number = "";  //used in self service password reset also
+	sex:number = -1;  //used in self service password reset also
 	errorMessage:string = "";
     message:string = "";
     image:any=null;
