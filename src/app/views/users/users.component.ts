@@ -53,7 +53,7 @@ export class UsersComponent implements OnInit {
 	}
 
 	resetPassword(user:any) {
-		this.userService.resetPassword(user.id).subscribe(resp => {
+		this.userService.resetPasswordAdmin(user.id).subscribe(resp => {
 			this.logger.info(this, "Successfully reset the password.");
 			this.refreshUsersList();
 		},
@@ -61,7 +61,6 @@ export class UsersComponent implements OnInit {
 			this.logger.error(this, "Problem in resetting the password.");
 		});	
 		return false;
-
 	}
 
 }

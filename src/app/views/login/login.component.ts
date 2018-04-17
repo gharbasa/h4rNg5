@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
         this.localStorageService.removeItem('user');
     }
     
-    newUserClicked(): void {
+    newUserClicked() {
     	this.router.navigate(['newUser']);
     	return false;
     }

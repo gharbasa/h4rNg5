@@ -24,6 +24,7 @@ import { HouseContractsService } from './services/HouseContractsService';
 import { HouseContractNoteService } from './services/HouseContractNoteService';
 import { UserHouseContractPicService } from './services/UserHouseContractPicService';
 import { IdleService } from './services/IdleService';
+import { PaymentService } from './services/PaymentService';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
@@ -237,7 +238,7 @@ const routes: Routes = [
                 , CommunityService, HousePicsService, HouseNoteService
                 , NotificationService, UtilityService, UserHouseLinkService, HouseContractsService
                 , HouseContractNoteService, UserHouseContractPicService
-                , IdleService],
+                , IdleService, PaymentService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
