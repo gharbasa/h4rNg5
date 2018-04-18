@@ -4,12 +4,10 @@
       <form novalidate #form="ngForm">
 
           <div class="field" *ngIf='houseContract.message != ""' style="color:green">
-            <label>Message:</label>
-            <label>{{houseContract.message}}</label>
+            <label>{{message}}</label>
           </div>
           <div class="field" *ngIf='houseContract.errorMessage != ""' style="color:red">
-            <label>Error Message:</label>
-            <label>{{houseContract.errorMessage}}</label>
+            <label>{{errorMessage}}</label>
           </div>
        
          <table colspan="2">
@@ -84,7 +82,7 @@
 
             <tr><td><div class="field">
               
-              <p>Date: 
+              <p>Received Date: 
                   <input type="text" name="payment_date" [(ngModel)]="payment.payment_date">
                     </p>          
           </div></td></tr>
@@ -95,7 +93,7 @@
                   <textarea name="content" [(ngModel)]='payment.note' rows="3" cols="50" placeholder="Payment notes">                             
                     </textarea>
                     </p>          
-          </div></td></tr>
+          </div></td></tr> 
           
         </table>
           <br />
@@ -103,7 +101,5 @@
         <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
         
       </form>
-      <h4r-house-contract-notes *ngIf="newContract == false" [houseContract]="houseContract"></h4r-house-contract-notes>
-      
-      <h4r-house-contract-pics *ngIf="newContract == false" [houseContract]="houseContract"></h4r-house-contract-pics>
+      <h4r-received-payments [payments]="payments"></h4r-received-payments>
 </div>

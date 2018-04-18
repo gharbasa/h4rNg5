@@ -21,7 +21,9 @@ export class ReceivablesComponent implements OnInit {
 	private houseContract:any = new HouseContract();
 	private payment: any = new Payment();
 	private errorMessage:string = "";
-
+	private message:string = "";
+	private houseContractId:number = 0;
+	private payments: any = null;
   	constructor(private houseService: HouseService
 			, private router: Router
 			, private route: ActivatedRoute
@@ -35,6 +37,7 @@ export class ReceivablesComponent implements OnInit {
   		let that = this;
   		this.route.params.subscribe(res => {
   			if(res.id > 0) {
+  				that.houseContractId = res.id;
   				that.fetchExistingContract(res.id);
   			}
   		});
@@ -80,10 +83,27 @@ export class ReceivablesComponent implements OnInit {
 	  			let roleStr = that.houseContract.roles;
 	  			that.houseContract.roles = roleStr.substring(0, roleStr.length - 2);
 	  		}
+	  		that.fetchPayments();
   		},
   		err => {
-  			that.houseContract.message = "";
-	  		that.houseContract.errorMessage = "Problem retrieving house contract.";
+  			that.message = "";
+	  		that.errorMessage = "Problem retrieving house contract.";
+  		}); 
+  	}
+  	
+  	saveRecord() {
+  		let that = this;
+  		this.paymentService.create(this.payment).subscribe(res => {
+  			that.message = "Payment has been received successfully.";
+  			this.logger.log(this,that.message);
+	  		that.errorMessage = "";
+	  		//this.logger.info(this, "Trigerring onPaymentReceived.....");
+	  		that.fetchPayments();
+  		},
+  		err => {
+  			that.message = "";
+  			that.errorMessage = "Error in receiving payment. Please try again or contact support.";
+  			this.logger.log(this,that.message + " " + err.error.errorMessage);
   		});
   	}
   	
@@ -94,5 +114,17 @@ export class ReceivablesComponent implements OnInit {
   		var year = todayTime.getFullYear();
   		return day + "-" + month + "-" + year;
   	}
+  	
+  	fetchPayments() {
+		let that = this;
+  		this.logger.log(this,"Lets extract payments received so far for the contract is" + this.houseContractId);
+	  	this.houseContractsService.receivedPayments(this.houseContractId).subscribe(res => {
+	  		this.logger.log(this,"receivedPayments=" + res.length);
+	  		that.payments = res;
+	  	},
+	  	err => {
+	  		this.logger.log(this,"problem fetching receivedPayments");
+	  	});
+	}
 
 }
