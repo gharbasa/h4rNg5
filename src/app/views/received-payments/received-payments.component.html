@@ -8,6 +8,9 @@
                     <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon>
                         {{payment.createdAt}}: <i>Received</i> {{payment.payment}} on {{payment.paymentDate}} 
                         <br/><fa-icon [icon]="['fas', 'comment']"></fa-icon> {{payment.note}}
+                        <a href="#" (click)="deletePayment(payment)" title="Delete the payment">
+                                (<fa-icon [icon]="['fas', 'cut']"></fa-icon>)
+                        </a>
                 </p>
             </span>
         </span>

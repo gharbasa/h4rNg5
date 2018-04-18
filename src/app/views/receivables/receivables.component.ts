@@ -126,5 +126,21 @@ export class ReceivablesComponent implements OnInit {
 	  		this.logger.log(this,"problem fetching receivedPayments");
 	  	});
 	}
+  	
+  	deletePayment(payment:Payment) {
+  		let that = this;
+  		
+  		this.paymentService.remove(payment.id).subscribe(res => {
+  			that.message = "Successfully deleted payment " + payment.id;
+  			this.logger.log(this,that.message);
+	  		that.errorMessage = "";
+	  		that.fetchPayments();
+  		},
+  		err => {
+  			that.message = "";
+  			that.errorMessage = "Error in deleting payment. Please try again or contact support.";
+  			this.logger.log(this,that.message + " " + err.error.errorMessage);
+  		});
+  	}
 
 }

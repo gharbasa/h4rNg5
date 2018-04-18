@@ -101,5 +101,5 @@
         <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
         
       </form>
-      <h4r-received-payments [payments]="payments"></h4r-received-payments>
+      <h4r-received-payments [payments]="payments"  (onDeletePaymentClick)="deletePayment($event)"></h4r-received-payments>
 </div>
