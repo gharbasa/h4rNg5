@@ -58,6 +58,7 @@ import { ZoomPicAlbumComponent } from './views/zoom-pic-album/zoom-pic-album.com
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { PerformanceChartsComponent } from './views/performance-charts/performance-charts.component'; 
 import { ReceivablesComponent } from './views/receivables/receivables.component';
+import { ReceivedPaymentsComponent } from './views/received-payments/received-payments.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -74,6 +75,7 @@ import { MatDialogModule } from '@angular/material';
 
 //d3
 import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'angular-d3-charts';
+
 
 const routes: Routes = [
     {
@@ -214,7 +216,7 @@ const routes: Routes = [
     ForgotPasswordComponent,
     DoughnutChartComponent, 
     PieChartComponent, 
-    BarChartComponent, PerformanceChartsComponent, ReceivablesComponent
+    BarChartComponent, PerformanceChartsComponent, ReceivablesComponent, ReceivedPaymentsComponent
   ],
    
   entryComponents: [

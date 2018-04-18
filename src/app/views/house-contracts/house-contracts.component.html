@@ -16,7 +16,15 @@
     <tbody>
     	<tr *ngIf="errorMessage != ''"><td colspan="9">{{errorMessage}}</td><tr>
         <tr *ngFor="let houseContract of houseContracts"  [ngStyle]="{'color':houseContract.active? '' : '#959ba5' }">
-            <td><a routerLink="../house_contract/{{houseContract.id}}">{{houseContract.house.name}} &lt;-&gt; {{houseContract.user.fullName}}</a></td>
+            <td>
+                <a routerLink="../house_contract/{{houseContract.id}}">{{houseContract.house.name}} &lt;-&gt; {{houseContract.user.fullName}}</a>
+                &nbsp;
+                <a title="$$$ Receivables" href="#" routerLink="../receivables/{{houseContract.id}}">
+                        <!--<img [src]="activePng" height="15" width="30"/> -->
+                        ($$$)
+                </a>
+                
+            </td>
             <td>{{houseContract.roles}}</td>
             <td>{{houseContract.contract_start_date}}</td>
             <td>{{houseContract.contract_end_date}}</td>

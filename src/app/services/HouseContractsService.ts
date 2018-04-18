@@ -18,6 +18,10 @@ export class HouseContractsService {
 	get(contractId:number) {
 		return this.http.get(this.basePath_admin + "/" + contractId);
 	}
+	
+	receivedPayments(contractId:number) {
+		return this.http.get(this.basePath_admin + "/" + contractId + "/receivedPayments");
+	}
 
 	create(houseContract:HouseContract) {
 		this.nullifyNonServerAttrs(houseContract);

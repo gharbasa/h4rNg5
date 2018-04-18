@@ -14,7 +14,7 @@ export class PaymentService {
 		return this.http.get(this.basePath);
 	}
 
-	add(payment:Payment) {
+	create(payment:Payment) {
 		return this.http.post(this.basePath, payment);
 	}
 	
