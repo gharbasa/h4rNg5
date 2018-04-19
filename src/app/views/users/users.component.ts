@@ -13,19 +13,37 @@ export class UsersComponent implements OnInit {
 
 	private users: any;
 	private currentUser:any = null;
+	private communities:any = null;
+	private community_id:number = null;
 	constructor(private userService: UserService,
 			private logger: LoggingService, 	
 			private loginService: LoginService) {
   	}
 	
 	ngOnInit() {
+		this.currentUser = this.loginService.getCurrentUser();
+		this.communities = this.loginService.getCommunities();
 		this.refreshUsersList();
 	}
 
 	refreshUsersList() {
 		let that = this;
-		this.currentUser = this.loginService.getCurrentUser();
-		this.users = this.loginService.getUsers();	
+		this.logger.info(this, "this.community_id=" + this.community_id);
+		if(this.community_id == null)
+			this.users = this.loginService.getUsers();
+		else {
+			this.userService.filterByCommunity(this.community_id).subscribe(resp => {
+				this.logger.info(this, "Successfully filterByCommunity.");
+				that.users = resp;
+				that.users.forEach(function (user) {
+					that.loginService.appendUserViewAttrs(user);
+				});
+			},
+			err => {
+				that.users.length = 0;
+				this.logger.error(this, "Problem in resetting the password.");
+			});	
+		}
 	}
 	
 	promoteUser(user:any) {
@@ -52,7 +70,7 @@ export class UsersComponent implements OnInit {
 		}
 	}
 
-	resetPassword(user:any) {
+	resetPasswordAdmin(user:any) {
 		this.userService.resetPasswordAdmin(user.id).subscribe(resp => {
 			this.logger.info(this, "Successfully reset the password.");
 			this.refreshUsersList();
@@ -62,5 +80,4 @@ export class UsersComponent implements OnInit {
 		});	
 		return false;
 	}
-
 }

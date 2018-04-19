@@ -32,10 +32,13 @@ export class HouseService {
 		return this.http.delete(this.basePath_admin + "/" + houseId);
 	}
 	
-	list() {
+	list(community_id:number) {
 		if(this.loginService.isAdminUser()) {
 			this.logger.log(this, "Hey Admin, fetching all houses")
-			return this.http.get(this.basePath_admin);
+			let path = this.basePath_admin; 
+			if(community_id != null)
+				path = path + "?community_id=" + community_id;
+			return this.http.get(path);
 		}else {
 			let userId:number = this.loginService.getCurrentUser().id;
 			this.logger.log(this, "houses for Userid=" + userId)

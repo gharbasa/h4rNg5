@@ -90,6 +90,7 @@ export class IdleService {
       this.logger.log(this,"Logout successful");
       that.localStorageService.removeItem('user');
       this.router.navigate(['login']);
+      this.loginService.clearBuffer();
       that.closeAllDialogs();
     }
     ,err => {

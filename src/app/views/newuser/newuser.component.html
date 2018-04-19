@@ -51,6 +51,18 @@ User Profile
          
           </div></li>
           
+          <li *ngIf="isUserLogin()"><div class="field">
+          
+            <p>Community:
+                <ng-select name="community_id" [items]="communities"
+                   bindLabel="name"
+                   bindValue="id"
+                   placeholder="Community"
+                   [(ngModel)]="user.community_id">
+                </ng-select> 
+            </p>
+         
+          </div></li>
           
        </ul>  
        
@@ -77,9 +89,10 @@ User Profile
           </div>
         
           <div class="field">
-           Gender: <input name="sex" [value]=1 type="radio" [(ngModel)]="user.sex"> Male
-                &nbsp;&nbsp;&nbsp;<input name="sex" [value]=2 type="radio" [(ngModel)]="user.sex"> Female
-                &nbsp;&nbsp;&nbsp;<input name="sex" [value]=0 type="radio" [(ngModel)]="user.sex"> Other
+           Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                <input name="sex" [value]=1 type="radio" [(ngModel)]="user.sex"> Male
+                &nbsp;<input name="sex" [value]=2 type="radio" [(ngModel)]="user.sex"> Female
+                &nbsp;<input name="sex" [value]=0 type="radio" [(ngModel)]="user.sex"> Other
           </div>
           
           <div class="field">

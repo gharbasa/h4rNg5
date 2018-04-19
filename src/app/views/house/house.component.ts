@@ -32,10 +32,12 @@ export class HouseComponent implements OnInit {
   		let that = this;
   		this.communities = this.loginService.getCommunities();//JSON.parse(this.localStorageService.getItem('communities'));
   		this.users = this.loginService.getUsers();
+  		let user = this.loginService.getCurrentUser();
   		this.route.params.subscribe(res => {
   			if(res.id == -1) {
   				this.logger.log(this,"User wants to create a new house");
   				that.editHouse = false;
+  				that.house.community_id = user.community_id;
   				that.house.message = "";
   				that.house.errorMessage = "";
   				that.createNewHouse = true;
