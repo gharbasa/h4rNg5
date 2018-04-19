@@ -40,6 +40,10 @@ export class UserService {
 		return this.http.get(this.basePath);
 	}
 	
+	filterByCommunity(commnunity_id:number) {
+		return this.http.get(this.basePath + "?commnunity_id=" + commnunity_id);
+	}
+	
 	promote2Admin(user:any) {
 		let url = this.basePath + "/" + user.id + "/" + "promote2Admin"
 		return this.http.put(url,"");

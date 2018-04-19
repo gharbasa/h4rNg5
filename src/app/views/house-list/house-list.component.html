@@ -1,4 +1,20 @@
-  Houses <a routerLink="../house/-1">(+)</a>
+<table width="40%">
+    <tr>
+        <td width="30%">
+    Houses <a routerLink="../house/-1">(+)</a>
+        </td>
+        <td width="70%">
+        <ng-select name="community_id" [items]="communities"
+                   bindLabel="name"
+                   bindValue="id"
+                   placeholder="Community"
+                   [(ngModel)]="community_id"
+                   (change)="fetchHouses()">
+           </ng-select>
+        </td>
+    </tr>
+</table>
+
   <table>
       <tbody>
     <tr>
@@ -7,7 +23,8 @@
         <th>Description</th>
         <th>No. of floors</th>
         <th>Land lord</th>
-        <th>Manager</th>
+        <th>Tenant</th>
+        <th>Community</th>
     </tr>
     </tbody>
     <tbody>
@@ -17,7 +34,8 @@
             <td>{{house.description}}</td>
             <td>{{house.no_of_floors}}</td>
             <td>{{house.land_lord && house.land_lord.fullName}}</td>
-            <td>{{house.property_mgmt_mgr && house.property_mgmt_mgr.fullName}}, {{house.property_mgmt_mgr && house.property_mgmt_mgr.fullName}}</td>
+            <td>{{house.tenant && house.tenant.fullName}}</td>
+            <td>{{house.community && house.community.name}}</td>
         </tr>
     </tbody>
   </table>

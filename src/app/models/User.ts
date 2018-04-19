@@ -21,7 +21,7 @@ export class User {
     role: number = 0;
     admin: boolean = false;
     guest: boolean = false;
-    
+    community_id:number = 0;
 	promote2Admin:boolean = false;
 	roleStr: string = ""; 
 	sexStr:string = "";

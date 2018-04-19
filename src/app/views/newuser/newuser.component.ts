@@ -5,7 +5,7 @@ import { UserService } from '../../services/UserService';
 import { LocalStorageService } from '../../services/LocalStorageService';
 import { AppSettings } from '../../models/AppSettings';
 import { LoggingService, Config } from 'loggerservice';
-
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'h4r-newuser',
@@ -18,15 +18,18 @@ export class NewuserComponent implements OnInit {
 	public selfEditUserProfile:boolean = false;
 	public fileToUpload: File = null;
 	private avatar:any = null;//require("../../assets/img/logo.png");
+	private communities:any = null;
   	constructor(private userService: UserService
   			, private router: Router
   			, private route: ActivatedRoute 
-  			,private localStorageService: LocalStorageService
-  			, private logger: LoggingService) {
+  			, private localStorageService: LocalStorageService
+  			, private logger: LoggingService
+  			, private loginService: LoginService) {
   	}
   	
   	ngOnInit() {
   		let that = this;
+  		this.communities = this.loginService.getCommunities();
   		this.route.params.subscribe(res => {
   			if(res.feature == -1) {
   				that.selfEditUserProfile = true;
@@ -57,7 +60,11 @@ export class NewuserComponent implements OnInit {
   		});
   	}
   	
-  	saveRecord() {
+  isUserLogin() {
+	  	return this.loginService.isUserLogin();
+  }
+  
+  saveRecord() {
   		if(this.user.id !== 0) {
   			this.update();
   		} else {

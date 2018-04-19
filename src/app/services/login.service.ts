@@ -15,6 +15,7 @@ export class LoginService {
 	private notificationTypes:any = [];
 	private users:any = [];
 	private communities:any = [];
+	private runPostLoginActivity:boolean = false;
 	constructor(private http: HttpClient, 
 				private communityService:CommunityService,
 				private localStorageService: LocalStorageService,
@@ -36,6 +37,7 @@ export class LoginService {
 	}
 
 	remove(userId) {
+		this.runPostLoginActivity = false;
 		return this.http.delete(this.basePath + "/" + userId);
 	}
 
@@ -44,6 +46,11 @@ export class LoginService {
 	}
 
 	postLoginActivity() {
+		if(this.runPostLoginActivity === true) {
+			this.logger.info(this,"skipping postLoginActivity, as it is already ran.");
+			return;
+		}
+		this.logger.info(this,"Running postLoginActivity");
 		let that = this;
 		this.communityService.list().subscribe(res => {
 			this.logger.log(this,"Fetched communities");
@@ -64,6 +71,7 @@ export class LoginService {
 		}, err=> {
 			this.logger.error(this,"notificationTypes err=" + JSON.stringify(err));
 		});
+		this.runPostLoginActivity = true;
 		
 	}
 	
@@ -127,19 +135,23 @@ export class LoginService {
 	getUsers() {
 		let that = this;
 		this.users.forEach(function (user) {
-			user.avatar = AppSettings.H4R_BACKEND_URL + user.avatar;
-			user.fullName = user.lname + ", " + user.fname;
-			if(user.sex==1)
-				user.sexStr = "Male";
-			else if(user.sex==2)
-				user.sexStr = "Female";
-			else
-				user.sexStr = "Other";
-			user.roleStr = that.populateUserRoleString(user);
-			user.promote2Admin = user.admin;
+			that.appendUserViewAttrs(user);
 		});
 		
 		return this.users;
+	}
+	
+	appendUserViewAttrs(user:any) {
+		user.avatar = AppSettings.H4R_BACKEND_URL + user.avatar;
+		user.fullName = user.lname + ", " + user.fname;
+		if(user.sex==1)
+			user.sexStr = "Male";
+		else if(user.sex==2)
+			user.sexStr = "Female";
+		else
+			user.sexStr = "Other";
+		user.roleStr = this.populateUserRoleString(user);
+		user.promote2Admin = user.admin;
 	}
 	
 	getUserName(userId:number) {
@@ -167,5 +179,13 @@ export class LoginService {
 			}
 		}
 		return str;
+	}
+	
+	clearBuffer(): void {
+		this.notifications.length = 0;
+		this.notificationTypes.length = 0;
+		this.users.length = 0;
+		this.communities.length = 0;
+		this.runPostLoginActivity = false;
 	}
 }
