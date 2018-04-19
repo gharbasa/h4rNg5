@@ -21,6 +21,8 @@ export class UserHouseLinksComponent implements OnInit {
 	private staticRoles:any = [];
 	private users:any = [];
 	private errorMessage:string = "";
+	private community_id:number = null;
+	private communities:any = null;
   	constructor(private userService: UserService,
   			private logger: LoggingService,
 			private loginService: LoginService,
@@ -40,7 +42,8 @@ export class UserHouseLinksComponent implements OnInit {
 	  this.staticRoles = AppSettings.ROLES;
 	  this.users = this.loginService.getUsers();
 	  that.userHouseLinks.length = 0;
-	  this.userHouseLinkService.list().subscribe(resp => {
+	  this.communities = this.loginService.getCommunities();
+	  this.userHouseLinkService.list(this.community_id).subscribe(resp => {
 		  for(var i in resp) {
 			  	let link:any = resp[i];
 		  		//if(link.house != null && link.role > 0) {
