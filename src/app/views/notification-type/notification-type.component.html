@@ -12,29 +12,26 @@
             <label>{{notificationType.errorMessage}}</label>
           </div>
        
-         <table colspan="2">
-          <tr>
-              <td><div class="field">
+         
+             <div class="field">
           
             <p>Subject: 
                 <input [autofocus]="true" name="subject" type="text" size="25" [(ngModel)]="notificationType.subject" placeholder="Subject"/>
              </p>
           
-          </div></td>
-          
-          </tr>
-          
-          <tr><td><div class="field">
+          </div>
+    
+         <div class="field">
               
               <p>Content: 
-                  <textarea name="content" [(ngModel)]='notificationType.content' rows="3" cols="50" placeholder="Content">                             
+                  <textarea name="content" [(ngModel)]='notificationType.content' rows="3" cols="50" placeholder="Content:Welcome to H4R, We are excited to have you in H4R family. --H4R Team">                             
                     </textarea>
                     </p>          
-          </div></td></tr>
-          <tr><td>
+          </div>
+          
             <div class="field">
             <p>
-                <ng-select name="ntype" [items]="noticeTypeOptions"
+                Type:<ng-select [items]="noticeTypeOptions"
                    bindLabel="description"
                    bindValue="id"
                    placeholder="Select Type"
@@ -42,8 +39,8 @@
                 </ng-select>
             </p>
           </div>
-          </td></tr>
-          <tr><td>
+          
+        
           <div class="field">
           
             <p>Active? :
@@ -51,8 +48,8 @@
             </p>
          
           </div>
-          </td></tr>
-        </table>
+         
+       
           <br />
           
         <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>

@@ -6,30 +6,31 @@ import { LocalStorageService } from '../../services/LocalStorageService';
 import { AppSettings } from '../../models/AppSettings';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
+import {H4rbaseComponent} from '../h4rbase/h4rbase.component';
 
 @Component({
   selector: 'h4r-newuser',
   templateUrl: './newuser.component.html',
   styleUrls: ['./newuser.component.scss']
 })
-export class NewuserComponent implements OnInit {
+export class NewuserComponent extends H4rbaseComponent {
 	
 	public user: any = new User();
 	public selfEditUserProfile:boolean = false;
 	public fileToUpload: File = null;
 	private avatar:any = null;//require("../../assets/img/logo.png");
-	private communities:any = null;
+	
   	constructor(private userService: UserService
   			, private router: Router
   			, private route: ActivatedRoute 
   			, private localStorageService: LocalStorageService
   			, private logger: LoggingService
-  			, private loginService: LoginService) {
+  			, public loginService: LoginService) {
+				  super(loginService);
   	}
   	
   	ngOnInit() {
   		let that = this;
-  		this.communities = this.loginService.getCommunities();
   		this.route.params.subscribe(res => {
   			if(res.feature == -1) {
   				that.selfEditUserProfile = true;
@@ -120,7 +121,7 @@ export class NewuserComponent implements OnInit {
   	    	avatar.filename = name;
   	    	avatar.content_type = type;
   	    	that.user.avatar = avatar;
-  	    	this.logger.log(this,"avatar::", that.user.avatar);
+  	    	that.logger.log(this,"avatar::", that.user.avatar);
   	    };
   	    reader.readAsBinaryString(file);
   	}

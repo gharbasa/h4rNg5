@@ -60,6 +60,7 @@ import { PerformanceChartsComponent } from './views/performance-charts/performan
 import { ReceivablesComponent } from './views/receivables/receivables.component';
 import { ReceivedPaymentsComponent } from './views/received-payments/received-payments.component';
 
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -75,6 +76,7 @@ import { MatDialogModule } from '@angular/material';
 
 //d3
 import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'angular-d3-charts';
+import { H4rbaseComponent } from './views/h4rbase/h4rbase.component';
 
 
 const routes: Routes = [
@@ -216,7 +218,8 @@ const routes: Routes = [
     ForgotPasswordComponent,
     DoughnutChartComponent, 
     PieChartComponent, 
-    BarChartComponent, PerformanceChartsComponent, ReceivablesComponent, ReceivedPaymentsComponent
+    BarChartComponent, PerformanceChartsComponent, ReceivablesComponent
+    , ReceivedPaymentsComponent, H4rbaseComponent
   ],
    
   entryComponents: [

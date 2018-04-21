@@ -43,16 +43,19 @@ export class HouseContractsService {
 		return this.http.put(this.basePath_admin + "/" + houseContract.id + "/deactivate", "");
 	}
 	
-	list() {
+	list(community_id:number) {
+		let url = "";
 		if(this.loginService.isAdminUser()) {
 			this.logger.log(this, "Hey Admin, fetching all houseContracts")
-			return this.http.get(this.basePath_admin);
+			url = this.basePath_admin;
+			if(community_id != null)
+				url = url + "?community_id=" + community_id;
 		}else {
 			let userId:number = this.loginService.getCurrentUser().id;
 			this.logger.log(this, "houseContracts for Userid=" + userId)
-			let url:string = this.basePath_nondmin.replace("{user.id}", userId+"");
-			return this.http.get(url);
+			url = this.basePath_nondmin.replace("{user.id}", userId+"");
 		}
+		return this.http.get(url);
 	}
 	
 	setSharedKey(sharedKey:any) {

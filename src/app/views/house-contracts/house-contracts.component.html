@@ -1,4 +1,19 @@
-  House Contracts
+  <table width="40%">
+    <tr>
+        <td width="30%">
+            House Contracts
+        </td>
+        <td width="70%" *ngIf="isAdminUser()">
+        <ng-select name="community_id" [items]="communities"
+                   bindLabel="name"
+                   bindValue="id"
+                   placeholder="Community"
+                   [(ngModel)]="community_id"
+                   (change)="refreshHouseContracts()">
+           </ng-select>
+        </td>
+    </tr>
+</table>
   <table>
       <tbody>
     <tr>

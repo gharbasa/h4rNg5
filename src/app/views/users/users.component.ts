@@ -3,26 +3,23 @@ import { UserService } from '../../services/UserService';
 import { LoginService } from '../../services/login.service';
 import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
+import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 
 @Component({
   selector: 'h4r-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent extends H4rbaseComponent {
 
 	private users: any;
-	private currentUser:any = null;
-	private communities:any = null;
-	private community_id:number = null;
 	constructor(private userService: UserService,
 			private logger: LoggingService, 	
-			private loginService: LoginService) {
+			public loginService: LoginService) {
+				super(loginService);
   	}
 	
 	ngOnInit() {
-		this.currentUser = this.loginService.getCurrentUser();
-		this.communities = this.loginService.getCommunities();
 		this.refreshUsersList();
 	}
 

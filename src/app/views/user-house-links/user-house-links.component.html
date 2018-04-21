@@ -1,10 +1,10 @@
 
-<table width="60%">
+<table width="50%">
     <tr>
-        <td width="50%">
+        <td width="40%">
     User and house associations
         </td>
-        <td width="50%">
+        <td width="60%" *ngIf="isAdminUser()">
         <ng-select name="community_id" [items]="communities"
                    bindLabel="name"
                    bindValue="id"
@@ -27,7 +27,7 @@
         <th>{{staticRoles["AGENCY_COLLECTION_EMP"].label}}</th>
     </tr>
     <tr *ngIf="errorMessage != ''">
-        <td colspan="8">{{errorMessage}}</td>
+        <td colspan="8"  style="color:red">{{errorMessage}}</td>
     </tr>
     <tr *ngFor="let user_house_link of userHouseLinks">
         <td>
