@@ -3,10 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';  // replaces previous Http service
 
 import {FormsModule} from "@angular/forms";
-import { ImportComponent } from './import/import.component';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './views/login/login.component';
+import { h4rRoutes } from './h4rRoutes';
+
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from './services/login.service';
 import { NotificationTypeService } from './services/NotificationTypeService';
@@ -27,6 +26,9 @@ import { IdleService } from './services/IdleService';
 import { PaymentService } from './services/PaymentService';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
+import { ImportComponent } from './import/import.component';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './views/login/login.component';
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
 import { AboutComponent } from './views/about/about.component';
 import { HomeComponent } from './views/home/home.component';
@@ -78,111 +80,6 @@ import { MatDialogModule } from '@angular/material';
 import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'angular-d3-charts';
 import { H4rbaseComponent } from './views/h4rbase/h4rbase.component';
 
-
-const routes: Routes = [
-    {
-        path: 'about',
-        component: AboutComponent
-    },
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path: '',
-        component: HomeComponent
-    }
-    ,
-    {
-        path: 'postlogin',
-        component: HomeComponent
-    }
-    ,
-    {
-        path: 'postlogout',
-        component: HomeComponent
-    }
-    ,
-    {
-        path: 'newUser',
-        component: NewuserComponent
-    }
-    ,
-    {
-        path: 'editUser/:feature',
-        component: NewuserComponent
-    }
-    ,
-    {
-        path: 'postupdate',
-        component: HomeComponent
-    }
-    ,
-    {
-        path: 'admin',
-        component: AdminComponent
-    },
-    {
-        path: 'users',
-        component: UsersComponent
-    }
-    ,
-    {
-        path: 'notificationTypes',
-        component: NotificationTypeListComponent
-    }
-    ,
-    {
-        path: 'houses',
-        component: HouseListComponent
-    }
-    ,
-    {
-        path: 'house/:id',
-        component: HouseComponent
-    }
-    ,
-    {
-        path: 'notificationType/:id',
-        component: NotificationTypeComponent
-    }
-    ,
-    {
-        path: 'notifications',
-        component: NotificationsComponent
-    }
-    ,
-    {
-        path: 'houses_users',
-        component: UserHouseLinksComponent
-    }
-    ,
-    {
-        path: 'house_contracts',
-        component: HouseContractsComponent
-    }
-    ,
-    {
-        path: 'house_contract/:id',
-        component: HouseContractComponent
-    }
-    ,
-    {
-        path: 'reset-password',
-        component: ForgotPasswordComponent
-    }
-    ,
-    {
-        path: 'performance',
-        component: PerformanceChartsComponent
-    }
-    ,
-    {
-        path: 'receivables/:id',
-        component: ReceivablesComponent
-    }
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -221,7 +118,7 @@ const routes: Routes = [
     BarChartComponent, PerformanceChartsComponent, ReceivablesComponent
     , ReceivedPaymentsComponent, H4rbaseComponent
   ],
-   
+  
   entryComponents: [
     UserIdleWarningDialogComponent,
     ZoomPicAlbumComponent
@@ -232,7 +129,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule,
     NgSelectModule,
-    RouterModule.forRoot(routes, {useHash: true}),
+    RouterModule.forRoot(h4rRoutes.routes, {useHash: true}),
     FontAwesomeModule, MatMenuModule,BrowserAnimationsModule,
     NgIdleKeepaliveModule.forRoot(),
     MatDialogModule
