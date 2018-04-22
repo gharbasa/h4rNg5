@@ -93,7 +93,7 @@ export class PerformanceChartsComponent implements OnInit {
 		});
 	}
 
-	update() {
-		this.logger.info("Changed house to " + this.house_id);
+	houseChanged() {
+		this.logger.info("House changed to " + this.house_id);
 	}
 }
