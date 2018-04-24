@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 
 //d3
-import { DoughnutChartComponent, PieChartComponent, BarChartComponent } from 'angular-d3-charts';
 import { H4rbaseComponent } from './views/h4rbase/h4rbase.component';
 
 import { ImportComponent } from './import/import.component';
@@ -176,9 +175,7 @@ export class h4rRoutes {
         UserIdleWarningDialogComponent,
         ZoomPicAlbumComponent,
         ForgotPasswordComponent,
-        DoughnutChartComponent, 
-        PieChartComponent, 
-        BarChartComponent, PerformanceChartsComponent, ReceivablesComponent
+        PerformanceChartsComponent, ReceivablesComponent
         , ReceivedPaymentsComponent, H4rbaseComponent
       ]
 

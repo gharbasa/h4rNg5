@@ -26,6 +26,14 @@ export class PaymentService {
 			url = url + "&year=" + year
 		return this.http.get(url);
 	}
+
+	yearlyPayments(house_id:number) {
+		let url:string = this.basePath + "/yearlyPayments";
+		if(house_id != null)
+			url = url + "?house_id=" + house_id;
+		return this.http.get(url);
+	}
+
 	/**
 	 * Remove 
 	 */

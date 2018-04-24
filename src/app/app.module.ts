@@ -43,6 +43,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material';
 import { NgSelectModule } from '@ng-select/ng-select';
 
+import { NvD3Module } from 'ng2-nvd3';
+// d3 and nvd3 should be included somewhere
+import 'd3';
+import 'nvd3';
+
 @NgModule({
   declarations: h4rRoutes.componentDeclarations,
   
@@ -56,7 +61,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     RouterModule.forRoot(h4rRoutes.routes, {useHash: true}),
     FontAwesomeModule, MatMenuModule,BrowserAnimationsModule,
     NgIdleKeepaliveModule.forRoot(),
-    MatDialogModule
+    MatDialogModule,NvD3Module
   ],
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService

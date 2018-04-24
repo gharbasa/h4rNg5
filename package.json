@@ -27,7 +27,6 @@
     "rxjs": "^5.5.6",
     "sass": "^1.1.1",
     "zone.js": "^0.8.19",
-    "angular-d3-charts": "5.0.0",
     "@fortawesome/fontawesome-svg-core":"",
     "@fortawesome/free-solid-svg-icons":"",
     "@fortawesome/angular-fontawesome":"",
@@ -37,7 +36,8 @@
     "@angular/cdk":"",
     "@ng-idle/core":"",
     "@ng-idle/keepalive":"",
-    "loggerservice": "2.0.2"
+    "loggerservice": "2.0.2",
+    "ng2-nvd3":"2.0.0"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.3",
