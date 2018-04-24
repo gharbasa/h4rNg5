@@ -7,13 +7,14 @@ import { UserHouseLinkService } from '../../services/UserHouseLinkService';
 import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
 import { UserHouseLink } from '../../models/UserHouseLink';
+import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 
 @Component({
   selector: 'h4r-user-house-links',
   templateUrl: './user-house-links.component.html',
   styleUrls: ['./user-house-links.component.scss']
 })
-export class UserHouseLinksComponent implements OnInit {
+export class UserHouseLinksComponent  extends H4rbaseComponent {
 	private activePng:any = require("assets/img/active.png");
 	private inactivePng:any = require("assets/img/inactive.png");
 	private newcontractPng:any = require("assets/img/new_contract.png");
@@ -21,26 +22,29 @@ export class UserHouseLinksComponent implements OnInit {
 	private staticRoles:any = [];
 	private users:any = [];
 	private errorMessage:string = "";
+	private message:string = "";
+
   	constructor(private userService: UserService,
   			private logger: LoggingService,
-			private loginService: LoginService,
+			public loginService: LoginService,
 			private userHouseLinkService: UserHouseLinkService,
 			private router: Router,
 			private houseContractsService: HouseContractsService) { 
+				super(loginService);
 	  
   	}
 
-  ngOnInit() {
-	  this.refreshHouseUserLinks();
-  }
+	ngOnInit() {
+		this.refreshHouseUserLinks();
+  	}
   
   refreshHouseUserLinks() {
 	  let that = this;
-	  this.errorMessage = "";
+	  this.setEmptyMessage();
 	  this.staticRoles = AppSettings.ROLES;
 	  this.users = this.loginService.getUsers();
 	  that.userHouseLinks.length = 0;
-	  this.userHouseLinkService.list().subscribe(resp => {
+	  this.userHouseLinkService.list(this.community_id).subscribe(resp => {
 		  for(var i in resp) {
 			  	let link:any = resp[i];
 		  		//if(link.house != null && link.role > 0) {
@@ -274,6 +278,7 @@ export class UserHouseLinksComponent implements OnInit {
 	  let that = this;
 	  that.logger.log(this,changeType + " changed for the house=" + userHouseLink.house.name);
 	  userHouseLink.updateType=changeType;
+	  this.setEmptyMessage();
 	  that.logger.log(this,"New Payload=" + JSON.stringify(userHouseLink));
 	  this.userHouseLinkService.update(userHouseLink).subscribe(resp => {
 		  that.logger.log(this,changeType + " of this house '" + userHouseLink.house.name + "' is successfully changed");
@@ -323,5 +328,10 @@ export class UserHouseLinksComponent implements OnInit {
   	this.houseContractsService.setSharedKey(key);
   	this.router.navigate(['../house_contract/0']);
   	return false;
+  }
+
+  setEmptyMessage() {
+	this.errorMessage = "";
+	this.message = "";
   }
 }

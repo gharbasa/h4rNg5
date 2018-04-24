@@ -42,7 +42,7 @@
           </a>
         
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#" routerLink="../users" *ngIf="isAdmin()" title="Users">
+          <a class="dropdown-item" href="#" routerLink="../users" *ngIf="isAdminUser()" title="Users">
             <fa-icon [icon]="['fas', 'users']"></fa-icon> Users
           </a>
           <a class="dropdown-item" href="#" routerLink="../houses" title="Houses">
@@ -57,13 +57,10 @@
           <a class="dropdown-item" href="#" routerLink="../communities" title="Co-op/Condos/Town houses">
             <fa-icon [icon]="['fas', 'building']"></fa-icon> Co-Op/Condos
           </a>
-          <a class="dropdown-item" href="#" routerLink="../notificationTypes" title="Notification types" *ngIf="isAdmin()">
+          <a class="dropdown-item" href="#" routerLink="../notificationTypes" title="Notification types" *ngIf="isAdminUser()">
             <fa-icon [icon]="['fas', 'bell']"></fa-icon> Notification types
           </a>
-          <a class="dropdown-item" href="#" routerLink="../notificationTypes" *ngIf="isAdmin()" title="Notification types">
-            <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon> Receivables
-          </a>
-          <a class="dropdown-item" href="#" routerLink="../performance" *ngIf="isAdmin()" title="Notification types">
+          <a class="dropdown-item" href="#" routerLink="../performance" *ngIf="isAdminUser()" title="Notification types">
             <fa-icon [icon]="['fas', 'chart-pie']"></fa-icon> Performance
           </a>
         </div>
@@ -81,6 +78,7 @@
     
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search homes" aria-label="Search">
+      
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fa-icon [icon]="['fas', 'search']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon></button>
     </form>
   </div>

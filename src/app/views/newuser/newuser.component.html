@@ -1,4 +1,4 @@
-User Profile
+<h4>User Profile</h4>
 
 <div id='formDiv' class="row justify-content-center">
       <form novalidate #form="ngForm">
@@ -88,11 +88,11 @@ User Profile
           
           </div>
         
-          <div class="field">
-           Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                <input name="sex" [value]=1 type="radio" [(ngModel)]="user.sex"> Male
-                &nbsp;<input name="sex" [value]=2 type="radio" [(ngModel)]="user.sex"> Female
-                &nbsp;<input name="sex" [value]=0 type="radio" [(ngModel)]="user.sex"> Other
+          <div class="field1">
+          Gender:
+                <span id="right"><input name="sex" [value]=1 type="radio" [(ngModel)]="user.sex"> Male&nbsp;&nbsp;
+               <input name="sex" [value]=2 type="radio" [(ngModel)]="user.sex"> Female&nbsp;&nbsp;
+               <input name="sex" [value]=0 type="radio" [(ngModel)]="user.sex"> Other</span>
           </div>
           
           <div class="field">
@@ -124,6 +124,7 @@ User Profile
           <br />
             Picture <img [src]="avatar" alt="Avatar" *ngIf='avatar != null && avatar != ""'  height="50" width="50">&nbsp;&nbsp;&nbsp;<input name="avatar" type="file" (change)="handleFileInput($event)">
             <br/> 
+            <br/>
         <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
         
       </form>

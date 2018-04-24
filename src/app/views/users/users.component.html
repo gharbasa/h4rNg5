@@ -3,7 +3,7 @@
         <td width="30%">
     Users <a routerLink="../newUser">(+)</a>
         </td>
-        <td width="70%">
+        <td width="70%" *ngIf="isAdminUser()">
         <ng-select name="community_id" [items]="communities"
                    bindLabel="name"
                    bindValue="id"

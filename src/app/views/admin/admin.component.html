@@ -1,5 +1,5 @@
 <p>
-  <a routerLink="../users" *ngIf="isAdmin" title="Users">
+  <a routerLink="../users" *ngIf="isAdminUser()" title="Users">
         Users (<fa-icon [icon]="['fas', 'users']"></fa-icon>)
   </a>
   <br/>
@@ -17,15 +17,15 @@
   <br/>
   <a routerLink="../communities">Co-Op/Condos (<fa-icon [icon]="['fas', 'building']"></fa-icon>)</a>
   <br/>
-  <a routerLink="../notificationTypes" *ngIf="isAdmin" title="Notification types">
+  <a routerLink="../notificationTypes" *ngIf="isAdminUser()" title="Notification types">
       Notification types (<fa-icon [icon]="['fas', 'bell']"></fa-icon>)
   </a>
   <br/>
-  <a routerLink="../notificationTypes" *ngIf="isAdmin" title="Notification types">
+  <a routerLink="../notificationTypes" *ngIf="isAdminUser()" title="Notification types">
       Accounts receivable (<fa-icon [icon]="['fas', 'bell']"></fa-icon>)
   </a>
   <br/>
-  <a routerLink="../notificationTypes" *ngIf="isAdmin" title="Notification types">
+  <a routerLink="../notificationTypes" *ngIf="isAdminUser()" title="Notification types">
       Charts (<fa-icon [icon]="['fas', 'chart-pie']"></fa-icon>)
   </a>
 </p>

@@ -18,6 +18,22 @@ export class PaymentService {
 		return this.http.post(this.basePath, payment);
 	}
 	
+	monthlyPayments(house_id:number, year:number) {
+		let url:string = this.basePath + "/monthlyPayments";
+		if(house_id != null)
+			url = url + "?house_id=" + house_id;
+		if(year != null)
+			url = url + "&year=" + year
+		return this.http.get(url);
+	}
+
+	yearlyPayments(house_id:number) {
+		let url:string = this.basePath + "/yearlyPayments";
+		if(house_id != null)
+			url = url + "?house_id=" + house_id;
+		return this.http.get(url);
+	}
+
 	/**
 	 * Remove 
 	 */

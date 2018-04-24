@@ -27,10 +27,13 @@ export class UserHouseLinkService {
 		return this.http.delete(this.basePath_admin + "/" + UserHouseLinkId);
 	}
 	
-	list() { 
+	list(community_id:number) { 
 		if(this.loginService.isAdminUser()) {
 			this.logger.log(this, "Hey Admin, fetching all user house links")
-			return this.http.get(this.basePath_admin);
+			let url = this.basePath_admin;
+			if(community_id != null)
+				url = url + "?community_id=" + community_id;
+			return this.http.get(url);
 		}else {
 			let userId:number = this.loginService.getCurrentUser().id;
 			this.logger.log(this, "user house links for Userid=" + userId)

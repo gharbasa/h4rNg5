@@ -2,19 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { HouseContractsService } from '../../services/HouseContractsService';
 import {HouseContract} from '../../models/HouseContract';
 import { LoggingService, Config } from 'loggerservice';
+import { LoginService } from '../../services/login.service';
+import {H4rbaseComponent} from '../h4rbase/h4rbase.component';
 
 @Component({
   selector: 'h4r-house-contracts',
   templateUrl: './house-contracts.component.html',
   styleUrls: ['./house-contracts.component.scss']
 })
-export class HouseContractsComponent implements OnInit {
+export class HouseContractsComponent extends H4rbaseComponent {
 
 	private houseContracts: any = [];
 	private errorMessage:string = "";
 	constructor(private houseContractsService: HouseContractsService,
-			private logger: LoggingService) {
-
+			private logger: LoggingService,
+			public loginService: LoginService) {
+				super(loginService);
 	}
 
 	ngOnInit() {
@@ -23,7 +26,8 @@ export class HouseContractsComponent implements OnInit {
 
 	refreshHouseContracts() {
 		let that = this;
-		this.houseContractsService.list().subscribe(resp => {
+		that.houseContracts.length = 0;
+		this.houseContractsService.list(this.community_id).subscribe(resp => {
 			this.logger.log(this,"Fetched all the houseContracts");
 			for(var i in resp) {
 			  	let contract:any = resp[i];

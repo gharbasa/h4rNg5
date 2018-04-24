@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
+import {H4rbaseComponent} from '../h4rbase/h4rbase.component';
 
 @Component({
   selector: 'h4r-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent extends H4rbaseComponent {
 
-	private isAdmin:boolean = false;
   constructor(private logger: LoggingService
-		  ,private loginService: LoginService) { }
+		  ,public loginService: LoginService) { 
+        super(loginService);
+  }
 
   ngOnInit() {
-	  this.isAdmin = this.loginService.isAdminUser();
+	  
   }
 
 }

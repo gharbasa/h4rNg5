@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {HouseContractsService} from  '../../services/HouseContractsService';
 import { Payment } from '../../models/Payment';
 import { LoggingService, Config } from 'loggerservice';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'h4r-received-payments',
@@ -12,12 +12,21 @@ export class ReceivedPaymentsComponent implements OnInit {
 	
 	@Input() private payments: any = null;
 	@Output() onDeletePaymentClick = new EventEmitter<Payment>();
-  	constructor(private logger: LoggingService
-			, private houseContractsService:HouseContractsService) { }
+	private totalReceivedAmt:number = 0;
+
+  	constructor(private logger: LoggingService) { }
   	
-  	
-	ngOnInit() {
-		
+	ngOnInit() {}
+	ngOnChanges() {
+		this.totalReceivedAmt = 0;
+		let that = this;
+		if(this.payments != null && this.payments.length > 0) {
+			that.logger.info(this, "number of entries=" + this.payments.length);
+			this.payments.forEach(function(payment) {
+				that.logger.info(that, "value=" + payment.payment);
+				that.totalReceivedAmt +=  payment.payment;
+			});
+		}
 	}
 	
 	deletePayment(payment:any) {

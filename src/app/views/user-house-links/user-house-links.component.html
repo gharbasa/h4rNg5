@@ -1,4 +1,20 @@
-User and house associations
+
+<table width="50%">
+    <tr>
+        <td width="40%">
+    User and house associations
+        </td>
+        <td width="60%" *ngIf="isAdminUser()">
+        <ng-select name="community_id" [items]="communities"
+                   bindLabel="name"
+                   bindValue="id"
+                   placeholder="Community"
+                   [(ngModel)]="community_id"
+                   (change)="refreshHouseUserLinks()">
+           </ng-select>
+        </td>
+    </tr>
+</table>
 <table>
     <tr>
         <th>House</th>
@@ -11,7 +27,7 @@ User and house associations
         <th>{{staticRoles["AGENCY_COLLECTION_EMP"].label}}</th>
     </tr>
     <tr *ngIf="errorMessage != ''">
-        <td colspan="8">{{errorMessage}}</td>
+        <td colspan="8"  style="color:red">{{errorMessage}}</td>
     </tr>
     <tr *ngFor="let user_house_link of userHouseLinks">
         <td>

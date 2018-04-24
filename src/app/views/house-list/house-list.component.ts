@@ -2,21 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { HouseService } from '../../services/HouseService';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
+import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 
 @Component({
   selector: 'h4r-house-list',
   templateUrl: './house-list.component.html',
   styleUrls: ['./house-list.component.scss']
 })
-export class HouseListComponent implements OnInit {
+export class HouseListComponent extends H4rbaseComponent {
 
 	private houses: any = [];
-	private communities:any = null;
-	private community_id:number = null;
 	constructor(private houseService: HouseService,
 			private logger: LoggingService, 	
-			private loginService: LoginService) {
-
+			public loginService: LoginService) {
+				super(loginService);
 	}
 
 	ngOnInit() {

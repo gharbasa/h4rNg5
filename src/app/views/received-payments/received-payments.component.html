@@ -1,12 +1,12 @@
 <span *ngIf="payments != null">
-    <h4 title="Notes"> <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon>Received ({{payments.length}}) installments</h4>
+    <h4 title="Notes"> <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon>Received {{payments.length}} payments, total: {{totalReceivedAmt | currency}}</h4>
     <p> 
         <br/>
         <span *ngIf="payments.length > 0">
             <span *ngFor="let payment of payments; let i = index">
                 <p>
                     <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon>
-                        {{payment.createdAt}}: <i>Received</i> {{payment.payment}} on {{payment.paymentDate}} 
+                        {{payment.createdAt}}: <i>Received</i> {{payment.payment}}({{payment.paymentDate}})
                         <br/><fa-icon [icon]="['fas', 'comment']"></fa-icon> {{payment.note}}
                         <a href="#" (click)="deletePayment(payment)" title="Delete the payment">
                                 (<fa-icon [icon]="['fas', 'cut']"></fa-icon>)

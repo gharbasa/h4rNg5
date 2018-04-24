@@ -117,7 +117,7 @@ export class ReceivablesComponent implements OnInit {
   	
   	fetchPayments() {
 		let that = this;
-  		this.logger.log(this,"Lets extract payments received so far for the contract is" + this.houseContractId);
+  		this.logger.log(this,"Lets extract payments received so far for the contract is " + this.houseContractId);
 	  	this.houseContractsService.receivedPayments(this.houseContractId).subscribe(res => {
 	  		this.logger.log(this,"receivedPayments=" + res.length);
 	  		that.payments = res;
