@@ -70,7 +70,7 @@ export class PerformanceChartsComponent implements OnInit {
 
   	fetchHouses() {
 		let that = this;
-		this.houseService.list(null).subscribe(res => {
+		this.houseService.list4Reports().subscribe(res => {
 			that.houses = res;
 			//this.logger.log(this,"notificationTypes =" + JSON.stringify(res));
 		}, err=> {
@@ -90,17 +90,41 @@ export class PerformanceChartsComponent implements OnInit {
 		this.fetchMonthlyPayments();
 	}
 
+	/**
+	 * If payment received more than once in a given month,
+	 * 	Sum them all and show as a single payment in that month
+	 * @param label 
+	 * @param payment 
+	 */
+	isPaymentRepeatedInMonth(label:string, payment:number) {
+		let repeatedNumber = 0;
+		let existingRow:any = null;
+		this.discreteBarChartDataMonthly[0].values.forEach(function(row:any) {
+				if (row.label === label) //There is a month entry already
+					existingRow = row;
+		});
+		return existingRow;
+	}
+
 	fetchMonthlyPayments() {
 		let that = this;
 		this.discreteBarChartDataMonthly[0].values.length = 0;
 		this.paymentService.monthlyPayments(this.house_id, this.year).subscribe(res => {
 			that.payments = res;
 			that.payments.forEach(element => {
-				let row = {
-					value: element.payment,
-					label: element.paymentMonth + "-" + element.paymentYear
-				};
-				that.discreteBarChartDataMonthly[0].values.push(row);
+				let label = element.paymentMonth + "-" + element.paymentYear;
+				let value = element.payment;
+				let existingRow = that.isPaymentRepeatedInMonth(label, value);
+				if(existingRow == null) {
+					existingRow = {
+						value: value,
+						label: label
+					};
+					that.discreteBarChartDataMonthly[0].values.push(existingRow);
+				}
+				else {
+					existingRow.value = existingRow.value + value;
+				}
 				if(that.year == null) that.year = element.paymentYear;
 			});
 			that.logger.log(that,", detectChanges..that.monthlyBarChartData.values.length=" 
