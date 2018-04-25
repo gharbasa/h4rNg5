@@ -16,7 +16,7 @@ export class House {
     created_at:string = "";
     updated_at:string = "";
 	description:string = "";
-
+	is_open:boolean = false;
 	land_lord:any = {};
 	guest:any = {};
 	tenant:any =  {};

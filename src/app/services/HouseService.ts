@@ -46,7 +46,13 @@ export class HouseService {
 			return this.http.get(url);
 		}
 	}
-	
+
+	list4Reports() {
+		this.logger.log(this, "list4Reports")
+		let path = this.basePath_admin + "/list4Reports"; 
+		return this.http.get(path);
+	}
+
 	/**
 	 * Following attributes are not needed to the backend server.
 	 */
@@ -54,5 +60,23 @@ export class HouseService {
 		house.images = null;
 		house.errorMessage = "";
 		house.message = "";
+	}
+
+	updateOpenHouseFlag(house:House) {
+		let partUrl:string = "";
+		if(house.is_open === true) //user wants to bring the house open
+			partUrl = "/makeitOpen";
+		else
+			partUrl = "/makeitClosed";
+		return this.http.put(this.basePath_admin + "/" + house.id + partUrl, null);
+	}
+	
+	updateActiveFlag(house:House) {
+		let partUrl:string = "";
+		if(house.active === true) //user wants to activate the house
+			partUrl = "/activate";
+		else
+			partUrl = "/inactivate";
+		return this.http.put(this.basePath_admin + "/" + house.id + partUrl, null);
 	}
 }
