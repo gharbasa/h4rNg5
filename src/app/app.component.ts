@@ -7,7 +7,7 @@ import { Usersession } from './models/Usersession';
 import { AppSettings } from './models/AppSettings';
 import { AppSettingsService } from './services/AppSettingsService';
 import { LocalStorageService } from './services/LocalStorageService';
-import { Router } from '@angular/router';
+import { Router , NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 import { LoggingService, Config } from 'loggerservice';
 import { IdleService } from './services/IdleService';
 
@@ -42,5 +42,24 @@ export class AppComponent {
             that.localStorageService.removeItem('user');
             this.router.navigate(['login']);
     });
+    
+    router.events.forEach((event) => {
+      if(event instanceof NavigationEnd) {
+        this.logger.info(this, "Hey NavigationEnd event. url=" + event.urlAfterRedirects);
+      }
+      // NavigationEnd
+      // NavigationCancel
+      // NavigationError
+      // RoutesRecognized
+    });
+    
+    /*
+    router.events.subscribe(event: Event => {
+      if(event instanceof NavigationEnd) {
+        this.logger.info(this, "Hey NavigationEnd event.url=" + event.url);
+      }
+    });
+    */
+
   }
 }
