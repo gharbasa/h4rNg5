@@ -1,6 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
 
-//d3
 import { H4rbaseComponent } from './views/h4rbase/h4rbase.component';
 
 import { ImportComponent } from './import/import.component';

@@ -7,7 +7,6 @@ import { AppSettings } from '../../models/AppSettings';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.component';
 
-HousePicsService
 @Component({
   selector: 'h4r-house-pics',
   templateUrl: './house-pics.component.html',
