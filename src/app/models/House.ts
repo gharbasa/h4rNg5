@@ -8,7 +8,10 @@ export class House {
     no_of_portions:number = 0;
     no_of_floors:number = 0;
     verified:boolean = false
-    processing_fee:number = 0;
+	processing_fee:number = 0;
+	no_of_bedrooms:number = 0;
+	no_of_bathrooms:number = 0;
+	floor_number:number = 0;
     community_id:number = null;
     active:boolean = true;
     created_by:number = 0;

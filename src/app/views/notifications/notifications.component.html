@@ -1,5 +1,7 @@
 <p>
-  <span *ngFor="let notification of notifications; let i = index">
+  <h4r-pagination [pageSettings]="pageSettings" (onChangePageClick)="changePage($event)"></h4r-pagination>
+  <span *ngFor="let notification of pageSettings.getPaginatedList(); let i = index">
             <h4r-notification [notification]="notification" (onDeleteNotificationClick)="deleteNotification($event)"></h4r-notification>
-    </span>
+  </span>
+  <h4r-pagination [pageSettings]="pageSettings" (onChangePageClick)="changePage($event)"></h4r-pagination>
 </p>

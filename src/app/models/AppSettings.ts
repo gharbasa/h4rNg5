@@ -1,5 +1,5 @@
 export class AppSettings {
-	static H4R_BACKEND_URL:string = "http://localhost:3000";
+	static H4R_BACKEND_URL:string = "http://localhost:3000"; //This is for renderring attachment images
 	/*
 	static ADMIN_ROLE_STR:string = "Admin";
 	static GUEST_ROLE_STR:string = "Guest";
@@ -34,7 +34,6 @@ export class AppSettings {
 	                    "AGENCY_COLLECTION_EMP": {value: 1 << 10, label: "Agency Emp"},
 	                    "AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr"}
 	};
-	static IDLE_TIME = 15 * 60; //15 minutes
-	static WAIT_TIME_AFTER_IDLE = 1 * 60; //1 minutes, after this user session is logged-out
-	
+	static IDLE_TIME:number = 15 * 60; //15 minutes
+	static WAIT_TIME_AFTER_IDLE:number = 1 * 60; //1 minutes, after this user session is logged-out
 }

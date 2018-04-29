@@ -31,19 +31,19 @@ House
         </tr>
         <tr>
           <td>
-            House No.:</td>
-            <td><input name="addr1" type="text" size="25" [(ngModel)]="house.addr1" placeholder="House no."/>
+            House No., Street:</td>
+            <td><input name="addr1" type="text" size="25" [(ngModel)]="house.addr1" placeholder="House no., Street"/>
           </td>
          </tr>
          <tr>
           <td>
-            Street:</td><td> <input name="addr2" type="text" size="25" [(ngModel)]="house.addr2" placeholder="Street"/>
+            City, District:</td><td> <input name="addr2" type="text" size="25" [(ngModel)]="house.addr2" placeholder="City, District"/>
           </td>
           </tr>
           <tr>
          <td>
-            City, Zipcode:</td>
-            <td><input name="addr3" type="text" size="25" [(ngModel)]="house.addr3" placeholder="City, Zip code"/>
+            Zipcode:</td>
+            <td><input name="addr3" type="text" size="25" [(ngModel)]="house.addr3" placeholder="Zip code"/>
             </td>
          
           </tr>
@@ -55,20 +55,36 @@ House
          </tr>
 
         <tr>
-            <td>No. of floors:</td><td> <input name="no_of_floors" type="text" size="25" [(ngModel)]="house.no_of_floors" placeholder="No. of Floors"/>
+            <td>Total floors:</td><td> <input name="no_of_floors" type="text" size="25" [(ngModel)]="house.no_of_floors" placeholder="No. of Floors"/>
                 </td>
         </tr>
 
         <tr>
-            <td>No. of Portions:</td><td> <input name="no_of_portions" type="text" size="25" [(ngModel)]="house.no_of_portions" placeholder="No. of Portions"/>
+            <td>Total Portions:</td><td> <input name="no_of_portions" type="text" size="25" [(ngModel)]="house.no_of_portions" placeholder="No. of Portions"/>
                 </td>
         </tr>
-  
+        
         <tr>
-            <td>Processing fee:</td><td> <input name="processing_fee" type="text" size="25" [(ngModel)]="house.processing_fee" placeholder="Processing fee"/>
-                </td>
+            <td>BHK:</td>
+            <td> 
+                <input name="no_of_bedrooms" type="text" size="4" [(ngModel)]="house.no_of_bedrooms" placeholder="No. Of bedrooms"/>
+            </td>
         </tr>
          
+        <tr>
+                <td>Bathrooms:</td>
+                <td> 
+                    <input name="no_of_bathrooms" type="text" size="4" [(ngModel)]="house.no_of_bathrooms" placeholder="No. Of bathrooms"/>
+                </td>
+        </tr>
+
+        <tr>
+                <td>Floor No:</td>
+                <td> 
+                    <input name="floor_number" type="text" size="4" [(ngModel)]="house.floor_number" placeholder="Floor number"/>
+                </td>
+        </tr>
+
          <tr *ngIf="!createNewHouse">
              <td>
             Land lord:</td><td> 
