@@ -11,10 +11,10 @@ import { AppSettings } from '../models/AppSettings';
 @Injectable()
 export class LoginService {
 
-	private notifications:any = [];
-	private notificationTypes:any = [];
-	private users:any = [];
-	private communities:any = [];
+	private notifications:Array<any> = [];
+	private notificationTypes:Array<any> = [];
+	private users:Array<any> = [];
+	private communities:Array<any> = [];
 	private runPostLoginActivity:boolean = false;
 	constructor(private http: HttpClient, 
 				private communityService:CommunityService,
@@ -100,7 +100,11 @@ export class LoginService {
 			this.logger.error(this,"error in fetching notifications");
 		});
 	}
-	
+
+	setNotifications(notifications:Array<any>) {
+		this.notifications = notifications;
+	}
+
 	/**Fetch the list of users
 	 * 
 	 */
@@ -111,7 +115,7 @@ export class LoginService {
 			that.users = res;
 		},
 		err =>{
-			this.logger.error(this,"error in fetching notifications");
+			this.logger.error(this,"error in fetching users list.");
 		});
 	}
 	

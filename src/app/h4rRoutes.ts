@@ -36,6 +36,7 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
 import { PerformanceChartsComponent } from './views/performance-charts/performance-charts.component'; 
 import { ReceivablesComponent } from './views/receivables/receivables.component';
 import { ReceivedPaymentsComponent } from './views/received-payments/received-payments.component';
+import { PaginationComponent } from './views/pagination/pagination.component';
 
 export class h4rRoutes {
     static routes: Routes = [
@@ -175,7 +176,8 @@ export class h4rRoutes {
         ZoomPicAlbumComponent,
         ForgotPasswordComponent,
         PerformanceChartsComponent, ReceivablesComponent
-        , ReceivedPaymentsComponent, H4rbaseComponent
+        , ReceivedPaymentsComponent, H4rbaseComponent,
+        PaginationComponent
       ]
 
       static modalDialogEntryPoints = [

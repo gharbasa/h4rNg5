@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { Notification } from '../../models/Notification';
+import {Pagination} from  '../../models/Pagination';
 import { NotificationService } from '../../services/NotificationService';
 import { LoggingService, Config } from 'loggerservice';
 
@@ -10,25 +11,33 @@ import { LoggingService, Config } from 'loggerservice';
   styleUrls: ['./notifications.component.scss']
 })
 export class NotificationsComponent implements OnInit {
+
+	private pageSettings:Pagination = new Pagination(null);
 	
-	private notifications:any = []; 
-  	constructor(private loginService: LoginService
+	constructor(private loginService: LoginService
   			,private notificationService: NotificationService
   			,private logger: LoggingService) { 
   		
   	}
-
+	
   	ngOnInit() {
-  		this.notifications = this.loginService.getNotifications();
+		this.refreshNotifications();
   	}
   	
   	ngOnChanges() {
-  		//this.notifications = this.loginService.getNotifications();
+		
   	}
   	
-  	refreshNotifications() {
-  		this.loginService.refreshNotifications();
-  		this.notifications = this.loginService.getNotifications();
+  	refreshNotifications():void {
+		let that = this;
+		this.notificationService.list(this.loginService.getCurrentUser().id).subscribe(res => {
+			that.logger.log(that,"Fetched notifications of length.." + res.length);
+			that.pageSettings = new Pagination(res); //We have to build a new instance of pagination, existing instance will not refresh the view.
+			that.loginService.setNotifications(res);
+		},
+		err =>{
+			this.logger.error(this,"error in fetching notifications");
+		});
   	}
   	
   	deleteNotification(notification: Notification) {
