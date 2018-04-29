@@ -4,7 +4,6 @@ import { Notification } from '../../models/Notification';
 import {Pagination} from  '../../models/Pagination';
 import { NotificationService } from '../../services/NotificationService';
 import { LoggingService, Config } from 'loggerservice';
-import {PaginationComponent} from '../pagination/pagination.component';
 
 @Component({
   selector: 'h4r-notifications',
