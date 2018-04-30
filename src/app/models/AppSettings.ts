@@ -1,5 +1,5 @@
 export class AppSettings {
-	static H4R_BACKEND_URL:string = "http://localhost:3000"; //This is for renderring attachment images
+	public static readonly H4R_BACKEND_URL:string = "http://localhost:3000"; //This is for renderring attachment images
 	/*
 	static ADMIN_ROLE_STR:string = "Admin";
 	static GUEST_ROLE_STR:string = "Guest";
@@ -23,7 +23,7 @@ export class AppSettings {
 	static AGENCY_COLLECTION_MGR:number    = 1 << 9 //#Collection agency mgr
 	*/
 	
-	static ROLES:any = {
+	public static readonly ROLES:any = {
 	                    "GUEST": {value:0, label: "Guest"},
 	                    "ADMIN": {value:1 << 16, label: "Admin"},
 	                    "TENANT": {value: 1 << 15, label: " Tenant "},

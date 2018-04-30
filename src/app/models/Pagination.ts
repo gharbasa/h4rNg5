@@ -1,14 +1,14 @@
 export class Pagination {
-    public static readonly LIST_PAGE_SIZE:number = 20; //Number of records to display per page.
+    public static readonly LIST_PAGE_SIZE:number = 5; //Number of records to display per page.
     public currentPage: number = 1;
     public startIndex:number = 0;
     public endIndex:number = Pagination.LIST_PAGE_SIZE - 1;
     public list:Array<any> = [];
     public paginatedList:Array<any> = [];
-
     public numberOfPages: number = 0;
 
     constructor(list:Array<any>) {
+        if(list == null) list = [];
         this.list = list;
     }
 

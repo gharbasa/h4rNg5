@@ -2,7 +2,7 @@ House
 
 <div id='grad1' class="row justify-content-center">
       
-    <table>
+    <table width="100%">
         <tr align="left"><td width="50%">
             <form novalidate #form="ngForm">
           <div class="field" *ngIf='house.message != ""' style="color:green">
@@ -141,7 +141,7 @@ House
       <td *ngIf="!createNewHouse" valign="top">
         <h4r-house-pics [house]="house"></h4r-house-pics>    
       </td>
-      <tr *ngIf="!createNewHouse"><td colspan="2">
+      <tr *ngIf="!createNewHouse"><td colspan="2" width="100%">
         <h4r-house-notes [house]="house"></h4r-house-notes>
       </td></tr>
       </table>

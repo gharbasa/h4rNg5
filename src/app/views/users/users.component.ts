@@ -4,6 +4,7 @@ import { LoginService } from '../../services/login.service';
 import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
 import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
+import {Pagination} from  '../../models/Pagination';
 
 @Component({
   selector: 'h4r-users',
@@ -12,7 +13,8 @@ import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 })
 export class UsersComponent extends H4rbaseComponent {
 
-	private users: any;
+	private pageSettings:Pagination = new Pagination(null);
+
 	constructor(private userService: UserService,
 			private logger: LoggingService, 	
 			public loginService: LoginService) {
@@ -27,17 +29,17 @@ export class UsersComponent extends H4rbaseComponent {
 		let that = this;
 		this.logger.info(this, "this.community_id=" + this.community_id);
 		if(this.community_id == null)
-			this.users = this.loginService.getUsers();
+			this.pageSettings = new Pagination(this.loginService.getUsers()); //We have to build a new instance of pagination, existing instance will not refresh the view.
 		else {
 			this.userService.filterByCommunity(this.community_id).subscribe(resp => {
 				this.logger.info(this, "Successfully filterByCommunity.");
-				that.users = resp;
-				that.users.forEach(function (user) {
+				resp.forEach(function (user) {
 					that.loginService.appendUserViewAttrs(user);
 				});
+				that.pageSettings = new Pagination(resp);
 			},
 			err => {
-				that.users.length = 0;
+				that.pageSettings = new Pagination(null);
 				this.logger.error(this, "Problem in resetting the password.");
 			});	
 		}

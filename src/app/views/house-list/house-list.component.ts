@@ -3,6 +3,7 @@ import { HouseService } from '../../services/HouseService';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
 import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
+import {Pagination} from  '../../models/Pagination';
 
 @Component({
   selector: 'h4r-house-list',
@@ -11,7 +12,7 @@ import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 })
 export class HouseListComponent extends H4rbaseComponent {
 
-	private houses: any = [];
+	private pageSettings:Pagination = new Pagination(null);
 	private errorMessage:string = "";
 	constructor(private houseService: HouseService,
 			private logger: LoggingService, 	
@@ -23,13 +24,14 @@ export class HouseListComponent extends H4rbaseComponent {
 		this.fetchHouses();
 		this.communities = this.loginService.getCommunities();
 	}
-
+	
 	fetchHouses() {
 		let that = this;
 		this.houseService.list(this.community_id).subscribe(res => {
-			that.houses = res;
+			that.pageSettings = new Pagination(res); //We have to build a new instance of pagination, existing instance will not refresh the view.
 			//this.logger.log(this,"notificationTypes =" + JSON.stringify(res));
 		}, err=> {
+			that.pageSettings = new Pagination(null);
 			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
 		});
 	}
