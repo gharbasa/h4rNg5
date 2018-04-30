@@ -1,11 +1,12 @@
-<h4 title="Notes"><fa-icon [icon]="['fas', 'comments']"></fa-icon>({{houseNotes.length}})</h4>
+<h4 title="Notes"><fa-icon [icon]="['fas', 'comments']"></fa-icon>({{pageSettings.list.length}})</h4>
 <p> 
     <br/>
-    <span *ngIf="houseNotes.length > 0">
-        <span *ngFor="let houseNote of houseNotes; let i = index">
+    <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
+        <span *ngFor="let houseNote of pageSettings.getPaginatedList(); let i = index">
             <h4r-house-note [houseNote] = "houseNote" (onDeleteNoteClick)="deleteNote($event)"></h4r-house-note>
         </span>
-    </span>
+    
+    <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
     <br/>
     <span>
         <input type="checkbox" name="private_note" [(ngModel)]='newHouseNote.private_note' /> Private note?

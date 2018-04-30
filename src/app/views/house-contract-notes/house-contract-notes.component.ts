@@ -3,6 +3,7 @@ import { HouseContractNoteService } from '../../services/HouseContractNoteServic
 import { HouseContractNote } from '../../models/HouseContractNote';
 import { HouseContract } from '../../models/HouseContract';
 import { LoggingService, Config } from 'loggerservice';
+import {Pagination} from  '../../models/Pagination';
 
 @Component({
   selector: 'h4r-house-contract-notes',
@@ -11,8 +12,8 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class HouseContractNotesComponent implements OnInit {
 
+	private pageSettings:Pagination = new Pagination(null);
 	@Input() houseContract:HouseContract;
-	private houseContractNotes:any = [];//HouseContractNote[];// = new HouseContractNote()[];
 	private newHouseContractNote:HouseContractNote = new HouseContractNote();
 	constructor(private houseContractNoteService: HouseContractNoteService, private logger: LoggingService) { }
 	
@@ -29,15 +30,11 @@ export class HouseContractNotesComponent implements OnInit {
 	
 	fetchHouseContractNotes() {
 		let that = this;
-		this.houseContractNotes = [];
 		this.newHouseContractNote = new HouseContractNote();
 		this.houseContractNoteService.list(this.houseContract.id).subscribe(resp => {
-			for(var i in resp) {
-				let row = resp[i];
-				that.houseContractNotes.push(row);
-			}
+			that.pageSettings = new Pagination(resp); //We have to build a new instance of pagination, existing instance will not refresh the view.
 			that.newHouseContractNote.user_house_contract_id = that.houseContract.id;
-			this.logger.log(this, "Number of HouseContract Notes=" +  that.houseContractNotes.length);
+			this.logger.log(this, "Number of HouseContract Notes=" +  that.pageSettings.list.length);
 		},
 		err => {
 			this.logger.error(this, "Error fetching houseContract notes associated with the houseContract=" +  this.houseContract.id);	

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HouseNoteService } from '../../services/HouseNoteService';
 import { HouseNote } from '../../models/HouseNote';
 import { LoggingService, Config } from 'loggerservice';
+import {Pagination} from  '../../models/Pagination';
 
 @Component({
   selector: 'h4r-house-notes',
@@ -10,8 +11,8 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class HouseNotesComponent implements OnInit {
 
+	private pageSettings:Pagination = new Pagination(null);
 	@Input() house:any;
-	private houseNotes:any = [];
 	private newHouseNote:HouseNote = new HouseNote();
 	constructor(private houseNoteService: HouseNoteService, private logger: LoggingService) { }
 	
@@ -28,15 +29,11 @@ export class HouseNotesComponent implements OnInit {
 	
 	fetchHouseNotes() {
 		let that = this;
-		this.houseNotes = [];
 		this.newHouseNote = new HouseNote();
 		this.houseNoteService.list(this.house.id).subscribe(resp => {
-			for(var i in resp) {
-				let row = resp[i];
-				that.houseNotes.push(row);
-			}
+			that.pageSettings = new Pagination(resp); //We have to build a new instance of pagination, existing instance will not refresh the view.
 			that.newHouseNote.house_id = that.house.id;
-			this.logger.log(this, "Number of House Notes=" +  that.houseNotes.length);
+			this.logger.log(this, "Number of House Notes=" +  that.pageSettings.list.length);
 		},
 		err => {
 			this.logger.log(this, "Error fetching house notes associated with the house=" +  this.house.id);	
