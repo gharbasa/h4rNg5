@@ -14,7 +14,7 @@
         </td>
     </tr>
 </table>
-
+<h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
   <table width="100%">
       <tbody>
           <tr *ngIf="errorMessage != ''">
@@ -35,7 +35,7 @@
     </tr>
     </tbody>
     <tbody>
-        <tr *ngFor="let house of houses"  [ngStyle]="{'color':house.active? '' : '#959ba5' }">
+        <tr *ngFor="let house of pageSettings.getPaginatedList()"  [ngStyle]="{'color':house.active? '' : '#959ba5' }">
             <td><a routerLink="../house/{{house.id}}">{{house.name}}</a></td>
             <td>{{house.addr1}}, {{house.addr2}}<br/>{{house.addr3}}, {{house.addr4}}</td>
             <td>{{house.description}}</td>
@@ -52,4 +52,4 @@
         </tr>
     </tbody>
   </table>
-
+  <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>

@@ -14,6 +14,7 @@
         </td>
     </tr>
 </table>
+<h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
   <table>
       <tbody>
     <tr>
@@ -30,7 +31,7 @@
     </tbody>
     <tbody>
     	<tr *ngIf="errorMessage != ''"><td colspan="9">{{errorMessage}}</td><tr>
-        <tr *ngFor="let houseContract of houseContracts"  [ngStyle]="{'color':houseContract.active? '' : '#959ba5' }">
+        <tr *ngFor="let houseContract of pageSettings.getPaginatedList()"  [ngStyle]="{'color':houseContract.active? '' : '#959ba5' }">
             <td>
                 <a routerLink="../house_contract/{{houseContract.id}}">{{houseContract.house.name}} &lt;-&gt; {{houseContract.user.fullName}}</a>
                 &nbsp;
@@ -51,3 +52,4 @@
         </tr>
     </tbody>
   </table>
+  <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
