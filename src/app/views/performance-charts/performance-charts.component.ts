@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { HouseService } from '../../services/HouseService';
 import { LoggingService, Config } from 'loggerservice';
 import {PaymentService} from  '../../services/PaymentService';
+import { House } from '../../models/House';
+import { Payment } from '../../models/Payment';
 declare let d3: any;
 
 @Component({
@@ -38,9 +40,9 @@ export class PerformanceChartsComponent implements OnInit {
 		}
 	  };
 
-	private houses: any = [];
+	private houses:Array<House> = [];
 	private house_id: number = null;
-	private payments: any = [];
+	private payments:Array<any> = [];
 	private year:number = null;
 	private years:any = [];
 	

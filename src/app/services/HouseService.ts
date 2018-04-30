@@ -48,10 +48,10 @@ export class HouseService {
 		return this.http.get(url).map(res => res as House[] || []);
 	}
 
-	list4Reports() {
+	list4Reports():Observable<House[]> {
 		this.logger.log(this, "list4Reports")
 		let path = this.basePath_admin + "/list4Reports"; 
-		return this.http.get(path);
+		return this.http.get(path).map(res => res as House[] || []);
 	}
 
 	/**

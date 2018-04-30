@@ -12,7 +12,7 @@ import {Pagination} from  '../../models/Pagination';
 export class ReceivedPaymentsComponent implements OnInit {
 	
 	private pageSettings:Pagination = new Pagination(null);
-	@Input() private payments: any = null;
+	@Input() private payments: Array<Payment> = [];
 	@Output() onDeletePaymentClick = new EventEmitter<Payment>();
 	private totalReceivedAmt:number = 0;
 

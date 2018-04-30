@@ -130,19 +130,19 @@ export class LoginService {
 		  return (user != null && user.admin===true);
 	 }
 	
-	getNotifications() {
+	getNotifications():Array<Notification> {
 		return this.notifications;
 	}
 	
-	getNotificationTypes() {
+	getNotificationTypes():Array<NotificationType> {
 		return this.notificationTypes;
 	}
 	
-	getCommunities() {
+	getCommunities():Array<Community> {
 		return this.communities;
 	}
 	
-	getUsers() {
+	getUsers():Array<User> {
 		let that = this;
 		this.users.forEach(function (user) {
 			that.appendUserViewAttrs(user);

@@ -10,7 +10,7 @@ import { User } from '../../models/User';
 })
 export class ForgotPasswordComponent implements OnInit {
 	
-	private user:any = new User();
+	private user:User = new User();
 	private errorMessage:string = "";
 	private message: string = "";
 	constructor(private logger: LoggingService

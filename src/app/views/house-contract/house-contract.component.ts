@@ -16,7 +16,7 @@ import { AppSettings } from '../../models/AppSettings';
 })
 export class HouseContractComponent implements OnInit {
 
- 	private houseContract:any = new HouseContract();
+ 	private houseContract:HouseContract = new HouseContract();
 	private errorMessage:string = "";
 	private newContract:boolean = false;
  	constructor(private houseService: HouseService

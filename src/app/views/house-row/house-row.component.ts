@@ -1,5 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { LoggingService, Config } from 'loggerservice';
+import { House } from '../../models/House';
 /**
  * This is not used at this moment
  */
@@ -10,7 +11,7 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class HouseRowComponent implements OnInit {
 
-	@Input() house:any;
+	@Input() house:House;
 	constructor() { }
 
 	ngOnInit() {

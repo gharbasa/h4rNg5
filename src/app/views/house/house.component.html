@@ -95,14 +95,14 @@ House
          <tr *ngIf="!createNewHouse">
              <td>
             Manager:</td><td>
-                {{house.property_mgmt_mgr.lname}}, {{house.property_mgmt_mgr.fname}} 
+                {{house.property_mgmt_mgr && house.property_mgmt_mgr.fullName}}
                 </td>
          </tr>
          
           <tr *ngIf="!createNewHouse">
              <td>
             Tenant:</td><td>
-                {{house.tenant.lname}}, {{house.tenant.fname}} 
+                {{house.tenant && house.tenant.fullName}}
                 </td>
          </tr>
          

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { AppSettings } from '../../models/AppSettings';
+import { User } from '../../models/User';
+import { Community } from '../../models/Community';
+import { Notification } from '../../models/Notification';
 
 @Component({
   selector: 'h4r-h4rbase',
@@ -10,11 +13,11 @@ export class H4rbaseComponent implements OnInit {
 
   public userPic:string = ""; 
 	public userName:string = "";
-  public notifications:any = [];
+  public notifications:Array<Notification> = [];
   
   public community_id:number = null;
-  public communities:any = null;
-  public currentUser:any = null;
+  public communities:Array<Community> = [];
+  public currentUser:User = null;
   constructor(public loginService: LoginService) { 
     this.communities = loginService.getCommunities();
     this.currentUser = loginService.getCurrentUser();
