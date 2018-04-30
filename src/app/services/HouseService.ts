@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { LoggingService, Config } from 'loggerservice';
 import { House } from '../models/House';
-
 import { LoginService } from '../services/login.service';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HouseService {
@@ -14,8 +15,8 @@ export class HouseService {
 	private basePath_admin:string = '/api/1/houses';
 	private basePath_nondmin:string = '/api/1/users/{user.id}/houses';
 	
-	get(houseId:number) {
-		return this.http.get(this.basePath_admin + "/" + houseId);
+	get(houseId:number):Observable<House> {
+		return this.http.get(this.basePath_admin + "/" + houseId).map(res => res as House || null);
 	}
 
 	create(house:House) {
@@ -32,19 +33,19 @@ export class HouseService {
 		return this.http.delete(this.basePath_admin + "/" + houseId);
 	}
 	
-	list(community_id:number) {
+	list(community_id:number):Observable<House[]>  {
+		let url:string = "";
 		if(this.loginService.isAdminUser()) {
 			this.logger.log(this, "Hey Admin, fetching all houses")
-			let path = this.basePath_admin; 
+			url = this.basePath_admin; 
 			if(community_id != null)
-				path = path + "?community_id=" + community_id;
-			return this.http.get(path);
+				url = url + "?community_id=" + community_id;
 		}else {
 			let userId:number = this.loginService.getCurrentUser().id;
 			this.logger.log(this, "houses for Userid=" + userId)
-			let url:string = this.basePath_nondmin.replace("{user.id}", userId+"");
-			return this.http.get(url);
+			url = this.basePath_nondmin.replace("{user.id}", userId+"");
 		}
+		return this.http.get(url).map(res => res as House[] || []);
 	}
 
 	list4Reports() {

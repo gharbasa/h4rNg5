@@ -22,4 +22,7 @@ export class Community {
 		this.fname = fname;
 		this.email = email;
 	}*/
+	constructor(obj:any) {
+		
+	}
 }

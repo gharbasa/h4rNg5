@@ -15,7 +15,7 @@ import {H4rbaseComponent} from '../h4rbase/h4rbase.component';
 })
 export class NewuserComponent extends H4rbaseComponent {
 	
-	public user: any = new User();
+	public user: User = new User();
 	public selfEditUserProfile:boolean = false;
 	public fileToUpload: File = null;
 	private avatar:any = null;//require("../../assets/img/logo.png");

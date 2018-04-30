@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 import { Community } from '../models/Community';
 
 @Injectable()
@@ -10,8 +11,8 @@ export class CommunityService {
 	
 	private basePath:string = '/api/1/communities';
 	
-	get(communityId:number) {
-		return this.http.get(this.basePath + "/" + communityId);
+	get(communityId:number):Observable<Community> {
+		return this.http.get(this.basePath + "/" + communityId).map(res => res as Community || null);
 	}
 
 	create(community:Community) {
@@ -28,8 +29,9 @@ export class CommunityService {
 		return this.http.delete(this.basePath + "/" + communityId);
 	}
 	
-	list() {
-		return this.http.get(this.basePath);
+	list():Observable<Community[]>  {
+		console.log("Fetching Communities");
+		return this.http.get(this.basePath).map(res => res as Community[] || []);
 	}
 	
 	/**

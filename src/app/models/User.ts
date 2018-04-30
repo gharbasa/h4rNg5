@@ -5,6 +5,7 @@ export class User {
     fname: string = "";
     mname: string = "";
     lname: string = "";
+    fullName: string = "";
     verified: boolean = false;
     adhaar_no: string = ""; //used in self service password reset also
     created_by: number = 0;

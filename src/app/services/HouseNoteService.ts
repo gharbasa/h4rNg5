@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
 import { HouseNote } from '../models/HouseNote';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HouseNoteService {
@@ -10,9 +11,9 @@ export class HouseNoteService {
 	
 	private basePath:string = 'api/1/houses/{houseId}/notes';
 	
-	list(houseId:any) {
+	list(houseId:any):Observable<HouseNote[]>  {
 		let path = this.basePath.replace('{houseId}', houseId);
-		return this.http.get(path);
+		return this.http.get(path).map(res => res as HouseNote[] || []);
 	}
 
 	add(houseNote:HouseNote) {

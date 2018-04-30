@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
 import { NotificationType } from '../models/NotificationType';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class NotificationTypeService {
@@ -10,8 +11,8 @@ export class NotificationTypeService {
 	
 	private basePath:string = '/api/1/notification_types';
 	
-	get(id:number) {
-		return this.http.get(this.basePath + "/" + id);
+	get(id:number):Observable<NotificationType> {
+		return this.http.get(this.basePath + "/" + id).map(res => res as NotificationType || null);
 	}
 
 	create(notificationType:NotificationType) {
@@ -26,7 +27,7 @@ export class NotificationTypeService {
 		return this.http.delete(this.basePath + "/" + id);
 	}
 	
-	list() {
-		return this.http.get(this.basePath);
+	list():Observable<NotificationType[]> {
+		return this.http.get(this.basePath).map(res => res as NotificationType[] || []);
 	}
 }
