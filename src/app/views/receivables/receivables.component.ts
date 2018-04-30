@@ -23,7 +23,7 @@ export class ReceivablesComponent implements OnInit {
 	private errorMessage:string = "";
 	private message:string = "";
 	private houseContractId:number = 0;
-	private payments: any = null;
+	private payments: Array<Payment> = null;
   	constructor(private houseService: HouseService
 			, private router: Router
 			, private route: ActivatedRoute

@@ -1,6 +1,8 @@
 <h4>Receivables</h4>
 
 <div id='formDiv' class="row justify-content-center">
+  <table width="100%">
+    <tr><td width="50%">
       <form novalidate #form="ngForm">
 
           <div class="field" *ngIf='houseContract.message != ""' style="color:green">
@@ -75,14 +77,14 @@
 
           <tr><td><div class="field">
               
-              <p>Amount Received: 
+              <p>Actual amount received: 
                   <input type="text" name="payment" [(ngModel)]="payment.payment">
                     </p>          
           </div></td></tr>
 
             <tr><td><div class="field">
               
-              <p>Received Date: 
+              <p>For the date(dd-mm-yyyy): 
                   <input type="text" name="payment_date" [(ngModel)]="payment.payment_date">
                     </p>          
           </div></td></tr>
@@ -94,12 +96,18 @@
                     </textarea>
                     </p>          
           </div></td></tr> 
-          
+          <tr>
+            <td>
+                <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
+            </td>
+          </tr>
         </table>
-          <br />
-          
-        <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
         
       </form>
-      <h4r-received-payments [payments]="payments"  (onDeletePaymentClick)="deletePayment($event)"></h4r-received-payments>
+      </td>
+      <td valign="top">
+        <h4r-received-payments [payments]="payments"  (onDeletePaymentClick)="deletePayment($event)"></h4r-received-payments>
+      </td>
+      </tr>
+    </table>
 </div>
