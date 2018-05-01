@@ -9,15 +9,16 @@ declare let d3: any;
 @Component({
   selector: 'h4r-performance-charts',
   templateUrl: './performance-charts.component.html',
-  styleUrls: ['../../../../node_modules/nvd3/build/nv.d3.css'],
+  styleUrls: ['./performance-charts.component.scss', '../../../../node_modules/nvd3/build/nv.d3.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class PerformanceChartsComponent implements OnInit {
 	private discreteBarChartOptions: any = {
 		chart: {
 		  type: 'discreteBarChart',
-		  height: 450,
-		  margin : {
+		  height: 250,
+		  width: 600,
+		  margin : { 
 			top: 20,
 			right: 20,
 			bottom: 50,
@@ -35,10 +36,32 @@ export class PerformanceChartsComponent implements OnInit {
 		  },
 		  yAxis: {
 			axisLabel: 'Revenue',
-			axisLabelDistance: -10
+			axisLabelDistance: -5
 		  }
 		}
-	  };
+	};
+
+	private pieChartOptions: any = {
+		chart: {
+		  type: 'pieChart',
+		  height: 250,
+		  x: function(d){return d.key;},
+		  y: function(d){return d.y;},
+		  showLabels: true,
+		  duration: 100,
+		  labelThreshold: 0.01,
+		  labelSunbeamLayout: true,
+		  legend: {
+			margin: {
+			  top: 5,
+			  right: 35,
+			  bottom: 5,
+			  left: 0
+			}
+		  }
+		}
+	};
+
 
 	private houses:Array<House> = [];
 	private house_id: number = null;
@@ -46,18 +69,25 @@ export class PerformanceChartsComponent implements OnInit {
 	private year:number = null;
 	private years:any = [];
 	
-	public  discreteBarChartDataMonthly: any = [{
-		key: "Cumulative Return",
-		values: []
-	  }];
+	
 	@ViewChild('discreteBarChartMonthlyTag') discreteBarChartMonthlyTag;
+	public  discreteBarChartDataMonthly: any = [{
+		key: "Monthly",
+		values: []
+	}];	
 
+	@ViewChild('discretePieChartYearlyTag') discretePieChartYearlyTag;
+	public  pieChartDataYearly: any = [{
+		key: 2013,
+		y: 0
+	}];
+
+	@ViewChild('discreteBarChartYearlyTag') discreteBarChartYearlyTag;
 	public  discreteBarChartDataYearly: any = [{
-		key: "Cumulative Return",
+		key: "Yearly",
 		values: []
 	}];
-	@ViewChild('discreteBarChartYearlyTag') discreteBarChartYearlyTag;
-
+	
 	constructor(private houseService: HouseService,
 			private logger: LoggingService,
 			private paymentService: PaymentService) { 
@@ -141,6 +171,7 @@ export class PerformanceChartsComponent implements OnInit {
 	fetchYearlyPayments() {
 		let that = this;
 		that.discreteBarChartDataYearly[0].values.length = 0;
+		that.pieChartDataYearly.length = 0;
 		this.paymentService.yearlyPayments(this.house_id).subscribe(res => {
 			that.payments = res;
 			that.payments.forEach(element => {
@@ -149,11 +180,15 @@ export class PerformanceChartsComponent implements OnInit {
 					label: element.year
 				};
 				that.discreteBarChartDataYearly[0].values.push(row);
+				that.pieChartDataYearly.push(
+					{key: row.label, y: row.value}
+				);
 			});
 			that.logger.log(that,", detectChanges..that.discreteBarChartDataYearly.values.length=" 
 				+ that.discreteBarChartDataMonthly[0].values.length + ",that.discreteBarChartDataYearly="
 				 + JSON.stringify(that.discreteBarChartDataYearly));
 			that.discreteBarChartYearlyTag.chart.update();
+			that.discretePieChartYearlyTag.chart.update();
 		}, err=> {
 			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
 		});
