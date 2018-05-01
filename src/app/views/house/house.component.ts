@@ -5,6 +5,8 @@ import { HouseService } from '../../services/HouseService';
 import { LocalStorageService } from '../../services/LocalStorageService';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
+import { Community } from '../../models/Community';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'h4r-house',
@@ -14,10 +16,9 @@ import { LoginService } from '../../services/login.service';
 })
 export class HouseComponent implements OnInit {
 	
-	private house:any = new House();
+	private house:House = new House();
 	private editHouse:boolean = false;
-	private communities:any = null;
-	private users: any = [];
+	private communities:Array<Community> = null;
 	private createNewHouse:boolean = false;
   	constructor(private houseService: HouseService
 			, private router: Router
@@ -31,7 +32,6 @@ export class HouseComponent implements OnInit {
   	ngOnInit() {
   		let that = this;
   		this.communities = this.loginService.getCommunities();//JSON.parse(this.localStorageService.getItem('communities'));
-  		this.users = this.loginService.getUsers();
   		let user = this.loginService.getCurrentUser();
   		this.route.params.subscribe(res => {
   			if(res.id == -1) {

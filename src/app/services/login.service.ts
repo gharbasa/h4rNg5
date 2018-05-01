@@ -7,14 +7,20 @@ import { NotificationService } from './NotificationService';
 import { NotificationTypeService } from './NotificationTypeService';
 import { UserService } from './UserService';
 import { AppSettings } from '../models/AppSettings';
+import { Community } from '../models/Community';
+import { NotificationType } from '../models/NotificationType';
+import { Notification } from '../models/Notification';
+import { User } from '../models/User';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class LoginService {
 
-	private notifications:Array<any> = [];
-	private notificationTypes:Array<any> = [];
-	private users:Array<any> = [];
-	private communities:Array<any> = [];
+	private notifications:Array<Notification> = [];
+	private notificationTypes:Array<NotificationType> = [];
+	private users:Array<User> = [];
+	private communities:Array<Community> = [];
 	private runPostLoginActivity:boolean = false;
 	constructor(private http: HttpClient, 
 				private communityService:CommunityService,
@@ -28,12 +34,12 @@ export class LoginService {
 	
 	private basePath = '/api/1/usersession';
 	
-	get() {
-		return this.http.get(this.basePath);
+	get():Observable<User> {
+		return this.http.get(this.basePath).map(res => res as User || null);
 	}
 
-	login(payload) {
-		return this.http.post(this.basePath, payload);
+	login(payload):Observable<User> {
+		return this.http.post(this.basePath, payload).map(res => res as User || null);
 	}
 
 	remove(userId) {
@@ -45,7 +51,7 @@ export class LoginService {
 		return this.http.patch(this.basePath + '/${payload.id}.json', payload);
 	}
 
-	postLoginActivity() {
+	postLoginActivity():void {
 		if(this.runPostLoginActivity === true) {
 			this.logger.info(this,"skipping postLoginActivity, as it is already ran.");
 			return;
@@ -58,7 +64,7 @@ export class LoginService {
 			that.communities = res;
 		},
 		err =>{
-			this.logger.error(this,"error in fetching communities");
+			this.logger.error(this,"error in fetching communities..." + JSON.stringify(err));
 		});
 		
 		this.refreshNotifications();
@@ -124,19 +130,19 @@ export class LoginService {
 		  return (user != null && user.admin===true);
 	 }
 	
-	getNotifications() {
+	getNotifications():Array<Notification> {
 		return this.notifications;
 	}
 	
-	getNotificationTypes() {
+	getNotificationTypes():Array<NotificationType> {
 		return this.notificationTypes;
 	}
 	
-	getCommunities() {
+	getCommunities():Array<Community> {
 		return this.communities;
 	}
 	
-	getUsers() {
+	getUsers():Array<User> {
 		let that = this;
 		this.users.forEach(function (user) {
 			that.appendUserViewAttrs(user);

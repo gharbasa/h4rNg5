@@ -18,12 +18,12 @@ import { AppSettings } from '../../models/AppSettings';
 })
 export class ReceivablesComponent implements OnInit {
 
-	private houseContract:any = new HouseContract();
-	private payment: any = new Payment();
+	private houseContract:HouseContract = new HouseContract();
+	private payment: Payment = new Payment();
 	private errorMessage:string = "";
 	private message:string = "";
 	private houseContractId:number = 0;
-	private payments: any = null;
+	private payments: Array<Payment> = [];
   	constructor(private houseService: HouseService
 			, private router: Router
 			, private route: ActivatedRoute

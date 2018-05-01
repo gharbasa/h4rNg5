@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Payment } from '../../models/Payment';
 import { LoggingService, Config } from 'loggerservice';
 import { CurrencyPipe } from '@angular/common';
+import {Pagination} from  '../../models/Pagination';
 
 @Component({
   selector: 'h4r-received-payments',
@@ -10,7 +11,8 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ReceivedPaymentsComponent implements OnInit {
 	
-	@Input() private payments: any = null;
+	private pageSettings:Pagination = new Pagination(null);
+	@Input() private payments: Array<Payment> = [];
 	@Output() onDeletePaymentClick = new EventEmitter<Payment>();
 	private totalReceivedAmt:number = 0;
 
@@ -21,6 +23,7 @@ export class ReceivedPaymentsComponent implements OnInit {
 		this.totalReceivedAmt = 0;
 		let that = this;
 		if(this.payments != null && this.payments.length > 0) {
+			that.pageSettings = new Pagination(this.payments); //We have to build a new instance of pagination, existing instance will not refresh the view.
 			that.logger.info(this, "number of entries=" + this.payments.length);
 			this.payments.forEach(function(payment) {
 				that.logger.info(that, "value=" + payment.payment);

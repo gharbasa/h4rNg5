@@ -15,6 +15,7 @@
         </td>
     </tr>
 </table>
+<h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
 <table>
     <tr>
         <th>House</th>
@@ -29,7 +30,7 @@
     <tr *ngIf="errorMessage != ''">
         <td colspan="8"  style="color:red">{{errorMessage}}</td>
     </tr>
-    <tr *ngFor="let user_house_link of userHouseLinks">
+    <tr *ngFor="let user_house_link of pageSettings.getPaginatedList(); let i = index">
         <td>
            <a routerLink="../house/{{user_house_link.house.id}}">{{user_house_link.house.name}}</a>
         </td>
@@ -310,3 +311,4 @@
     </tr>
    
 </table>
+<h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>

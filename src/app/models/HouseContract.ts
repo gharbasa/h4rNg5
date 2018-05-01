@@ -18,7 +18,15 @@ export class HouseContract {
     updated_at:string = "";
     note:string = "";
     roles:string = "";
-    role:number = 0;
+	role:number = 0;
+	tenant:boolean = false;
+	land_lord:boolean = false;
+	accountant:boolean = false;
+	property_mgmt_mgr:boolean = false;
+	property_mgmt_emp:boolean = false;
+	agency_collection_emp:boolean = false;
+	agency_collection_mgr:boolean = false;
+	
 	/*
 	constructor(fname: string, email: string) {
 		this.fname = fname;

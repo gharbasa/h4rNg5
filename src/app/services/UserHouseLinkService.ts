@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { LoggingService, Config } from 'loggerservice';
 import { UserHouseLink } from '../models/UserHouseLink';
+import { HouseContract } from '../models/HouseContract';
 import { LoginService } from '../services/login.service';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UserHouseLinkService {
@@ -27,24 +30,25 @@ export class UserHouseLinkService {
 		return this.http.delete(this.basePath_admin + "/" + UserHouseLinkId);
 	}
 	
-	list(community_id:number) { 
+	list(community_id:number):Observable<UserHouseLink[]>  {
+		let url:string = "";
 		if(this.loginService.isAdminUser()) {
 			this.logger.log(this, "Hey Admin, fetching all user house links")
-			let url = this.basePath_admin;
+			url = this.basePath_admin;
 			if(community_id != null)
 				url = url + "?community_id=" + community_id;
-			return this.http.get(url);
 		}else {
 			let userId:number = this.loginService.getCurrentUser().id;
 			this.logger.log(this, "user house links for Userid=" + userId)
-			let url:string = this.basePath_nondmin.replace("{user.id}", userId+"");
-			return this.http.get(url);
+			url = this.basePath_nondmin.replace("{user.id}", userId+"");
 		}
+		return this.http.get(url).map(res => res as UserHouseLink[] || []);
 	}
 	
-	contracts(key:string) {
-		return this.http.get(this.basePath_admin + "/" + key + "/contracts");
+	contracts(key:string):Observable<HouseContract[]>  {
+		return this.http.get(this.basePath_admin + "/" + key + "/contracts").map(res => res as HouseContract[] || []);
 	}
+	
 	/**
 	 * Following attributes are not needed to the backend server.
 	 */

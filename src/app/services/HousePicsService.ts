@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
 import { HousePic } from '../models/HousePic';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HousePicsService {
@@ -10,9 +11,9 @@ export class HousePicsService {
 	
 	private basePath:string = '/api/1/house_pics';
 	
-	listByHouse(houseId:any) {
+	listByHouse(houseId:any):Observable<HousePic[]>  {
 		var url = "/api/1/houses/" + houseId + "/house_pics";
-		return this.http.get(url);
+		return this.http.get(url).map(res => res as HousePic[] || []);
 	}
 
 	/**

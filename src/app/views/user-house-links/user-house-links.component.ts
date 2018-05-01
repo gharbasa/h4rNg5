@@ -7,7 +7,9 @@ import { UserHouseLinkService } from '../../services/UserHouseLinkService';
 import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
 import { UserHouseLink } from '../../models/UserHouseLink';
+import { User } from '../../models/User';
 import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
+import {Pagination} from  '../../models/Pagination';
 
 @Component({
   selector: 'h4r-user-house-links',
@@ -18,11 +20,12 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
 	private activePng:any = require("assets/img/active.png");
 	private inactivePng:any = require("assets/img/inactive.png");
 	private newcontractPng:any = require("assets/img/new_contract.png");
-	private userHouseLinks: any = [];
+	//private userHouseLinks:Array<UserHouseLink> = [];
 	private staticRoles:any = [];
-	private users:any = [];
+	private users:Array<User> = [];
 	private errorMessage:string = "";
 	private message:string = "";
+	private pageSettings:Pagination = new Pagination(null);
 
   	constructor(private userService: UserService,
   			private logger: LoggingService,
@@ -43,22 +46,22 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
 	  this.setEmptyMessage();
 	  this.staticRoles = AppSettings.ROLES;
 	  this.users = this.loginService.getUsers();
-	  that.userHouseLinks.length = 0;
+	  //that.userHouseLinks.length = 0;
+	  let userHouseLinks:Array<UserHouseLink> = [];
 	  this.userHouseLinkService.list(this.community_id).subscribe(resp => {
 		  for(var i in resp) {
 			  	let link:any = resp[i];
 		  		//if(link.house != null && link.role > 0) {
 		  		if(link.house != null) {
-		  			that.pushUserHouseLink(link);
+		  			that.pushUserHouseLink(userHouseLinks, link);
 		  		}
 		  }
 		  that.logger.log(this,"User house links are successfully fetched.");
 		  //Can we find the contracts based on user+house+role?
-		  that.userHouseLinks.forEach(function (userHouseLink) {
+		  userHouseLinks.forEach(function (userHouseLink) {
 		  	that.fetchContracts(userHouseLink);
 		  });
-
-
+		  that.pageSettings = new Pagination(userHouseLinks); //We have to build a new instance of pagination, existing instance will not refresh the view.
 	  },
 	  err => {
 		  that.logger.error(this,"Error fetching User house links.");
@@ -69,10 +72,10 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
    * If the House entry already exists in userHouseLinks, then add the appropriate user role to it than creating a new entry
    * 
    */
-  pushUserHouseLink(link) {
+  pushUserHouseLink(userHouseLinks, link) {
 	  let that = this;
 	  let foundLink = null;
-	  this.userHouseLinks.forEach(function (userHouseLink) {
+	  userHouseLinks.forEach(function (userHouseLink) {
 		  if(userHouseLink.house_id === link.house_id) {
 			  foundLink = userHouseLink;
 			  that.logger.info(that,"Hey, there is houseuserlink already in the array, lets use it.");
@@ -110,7 +113,7 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
 	  
 	  if(foundLink == null) {
 		  that.logger.info(that,"Hey, No houseuserlink in the array, pushing the entry.");
-		  this.userHouseLinks.push(link);
+		  userHouseLinks.push(link);
 	  } else {
 		  that.logger.info(that,"Hey, lets merge the link to an existing link in the array.");
 		  if(link.land_lord == true) {

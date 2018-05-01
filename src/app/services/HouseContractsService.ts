@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { LoggingService, Config } from 'loggerservice';
 import { HouseContract } from '../models/HouseContract';
-
+import { Payment } from '../models/Payment';
 import { LoginService } from '../services/login.service';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HouseContractsService {
@@ -15,12 +17,12 @@ export class HouseContractsService {
 	private basePath_admin:string = '/api/1/user_house_contracts';
 	private basePath_nondmin:string = '/api/1/users/{user.id}/user_house_contracts';
 	
-	get(contractId:number) {
-		return this.http.get(this.basePath_admin + "/" + contractId);
+	get(contractId:number):Observable<HouseContract> {
+		return this.http.get(this.basePath_admin + "/" + contractId).map(res => res as HouseContract || null);
 	}
 	
-	receivedPayments(contractId:number) {
-		return this.http.get(this.basePath_admin + "/" + contractId + "/receivedPayments");
+	receivedPayments(contractId:number):Observable<Payment[]>  {
+		return this.http.get(this.basePath_admin + "/" + contractId + "/receivedPayments").map(res => res as Payment[] || []);
 	}
 
 	create(houseContract:HouseContract) {
@@ -43,7 +45,7 @@ export class HouseContractsService {
 		return this.http.put(this.basePath_admin + "/" + houseContract.id + "/deactivate", "");
 	}
 	
-	list(community_id:number) {
+	list(community_id:number):Observable<HouseContract[]>  {
 		let url = "";
 		if(this.loginService.isAdminUser()) {
 			this.logger.log(this, "Hey Admin, fetching all houseContracts")
@@ -55,7 +57,7 @@ export class HouseContractsService {
 			this.logger.log(this, "houseContracts for Userid=" + userId)
 			url = this.basePath_nondmin.replace("{user.id}", userId+"");
 		}
-		return this.http.get(url);
+		return this.http.get(url).map(res => res as HouseContract[] || []);
 	}
 	
 	setSharedKey(sharedKey:any) {

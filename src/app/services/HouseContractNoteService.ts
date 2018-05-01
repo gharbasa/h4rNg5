@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
 import { HouseContractNote } from '../models/HouseContractNote';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HouseContractNoteService {
@@ -10,9 +11,9 @@ export class HouseContractNoteService {
 	
 	private basePath:string = 'api/1/user_house_contracts/{user_house_contract_id}/notes';
 	
-	list(id:any) {
-		let path = this.basePath.replace('{user_house_contract_id}', id);
-		return this.http.get(path);
+	list(id:number):Observable<HouseContractNote[]> {
+		let path = this.basePath.replace('{user_house_contract_id}', id+"");
+		return this.http.get(path).map(res => res as HouseContractNote[] || []);
 	}
 
 	add(houseContractNote:HouseContractNote) {

@@ -1,5 +1,5 @@
 export class Pagination {
-    public static readonly LIST_PAGE_SIZE:number = 5; //Number of records to display per page.
+    public static readonly LIST_PAGE_SIZE:number = 10; //Number of records to display per page.
     public currentPage: number = 1;
     public startIndex:number = 0;
     public endIndex:number = Pagination.LIST_PAGE_SIZE - 1;
