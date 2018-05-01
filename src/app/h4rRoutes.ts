@@ -37,6 +37,7 @@ import { PerformanceChartsComponent } from './views/performance-charts/performan
 import { ReceivablesComponent } from './views/receivables/receivables.component';
 import { ReceivedPaymentsComponent } from './views/received-payments/received-payments.component';
 import { PaginationComponent } from './views/pagination/pagination.component';
+import { DatePickerComponent } from './views/date-picker/date-picker.component';
 
 export class h4rRoutes {
     static routes: Routes = [
@@ -177,7 +178,7 @@ export class h4rRoutes {
         ForgotPasswordComponent,
         PerformanceChartsComponent, ReceivablesComponent
         , ReceivedPaymentsComponent, H4rbaseComponent,
-        PaginationComponent
+        PaginationComponent, DatePickerComponent
       ]
 
       static modalDialogEntryPoints = [

@@ -31,29 +31,8 @@ export class HouseContractsComponent extends H4rbaseComponent {
 		this.houseContractsService.list(this.community_id).subscribe(resp => {
 			this.logger.log(this,"Fetched all the houseContracts");
 			for(var i in resp) {
-			  	let contract:any = resp[i];
-			  	contract.roles = "";
-	  			if(contract.tenant == true) {
-					contract.roles = contract.roles + AppSettings.ROLES["TENANT"].label + ", ";
-		  		}
-		  		if(contract.land_lord == true) {
-					contract.roles = contract.roles + AppSettings.ROLES["LAND_LORD"].label + ", ";
-		  		}
-		  		if(contract.accountant == true) {
-					contract.roles = contract.roles + AppSettings.ROLES["ACCOUNTANT"].label + ", ";
-		  		}
-		  		if(contract.property_mgmt_mgr == true) {
-					contract.roles = contract.roles + AppSettings.ROLES["PROPERTY_MGMT_MGR"].label + ", ";
-		  		}
-		  		if(contract.property_mgmt_emp == true) {
-					contract.roles = contract.roles + AppSettings.ROLES["PROPERTY_MGMT_EMP"].label + ", ";
-		  		}
-		  		if(contract.agency_collection_emp == true) {
-					contract.roles = contract.roles + AppSettings.ROLES["AGENCY_COLLECTION_EMP"].label + ", ";
-		  		}
-		  		if(contract.agency_collection_mgr == true) {
-					contract.roles = contract.roles + AppSettings.ROLES["AGENCY_COLLECTION_MGR"].label + ", ";
-		  		}
+				let contract:any = resp[i];
+				that.houseContractsService.appendRoles(contract);
 		  		
 		  		if(contract.roles != "") {
 		  			let roleStr = contract.roles;

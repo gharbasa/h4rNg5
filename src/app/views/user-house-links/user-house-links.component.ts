@@ -18,7 +18,7 @@ import {Pagination} from  '../../models/Pagination';
 })
 export class UserHouseLinksComponent  extends H4rbaseComponent {
 	private activePng:any = require("assets/img/active.png");
-	private inactivePng:any = require("assets/img/inactive.png");
+	private inactivePng:any = require("assets/img/inactive.png"); 
 	private newcontractPng:any = require("assets/img/new_contract.png");
 	//private userHouseLinks:Array<UserHouseLink> = [];
 	private staticRoles:any = [];
