@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { House } from '../../models/House';
 import { HouseService } from '../../services/HouseService';
@@ -8,6 +8,7 @@ import { LoginService } from '../../services/login.service';
 import {HouseContractsService} from  '../../services/HouseContractsService';
 import {HouseContract} from '../../models/HouseContract';
 import { AppSettings } from '../../models/AppSettings';
+import { DatePickerComponent } from '../date-picker/date-picker.component';
 
 @Component({
   selector: 'h4r-house-contract',
@@ -19,6 +20,13 @@ export class HouseContractComponent implements OnInit {
  	private houseContract:HouseContract = new HouseContract();
 	private errorMessage:string = "";
 	private newContract:boolean = false;
+
+	@ViewChild('contractStartDate')
+	contractStartDate: DatePickerComponent;
+
+	@ViewChild('contractEndDate')
+	contractEndDate: DatePickerComponent;
+
  	constructor(private houseService: HouseService
 			, private router: Router
 			, private route: ActivatedRoute
@@ -119,5 +127,15 @@ export class HouseContractComponent implements OnInit {
   				that.houseContract.errorMessage = "Problem saving the contract.";
   			});
   		}
-  	}
+		}
+		
+		startDateChanged(elementValue:string) {
+			this.logger.info(this,"Ok, start date changed to=" + this.contractStartDate.getValue());
+			this.houseContract.contract_start_date = elementValue;//this.paymentDate.getValue();
+		}
+
+		endDateChanged(elementValue:string) {
+			this.logger.info(this,"Ok, end date changed to=" + this.contractEndDate.getValue());
+			this.houseContract.contract_end_date = elementValue;//this.paymentDate.getValue();
+		}
 }

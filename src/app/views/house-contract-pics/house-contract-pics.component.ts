@@ -21,6 +21,7 @@ export class HouseContractPicsComponent implements OnInit {
 	private errorMessage:string = "";
 	private imageWidth:number = 300;
 	private imageHeight:number = 350;
+	
 	constructor(private userHouseContractPicService: UserHouseContractPicService
 					, private logger: LoggingService
 					, private dialog: MatDialog) { 
@@ -74,7 +75,7 @@ export class HouseContractPicsComponent implements OnInit {
 		return false;
 	}
 	
-	handleFileInput($event) {
+	handleFileInput($event: any) {
   		this.errorMessage = "";
 		var files:FileList = $event.target.files;
   		var file = files.item(0);
@@ -126,16 +127,19 @@ export class HouseContractPicsComponent implements OnInit {
 	
 	zoom() {
 		let that = this;
-		this.dialogRef = this.dialog.open(ZoomPicAlbumComponent, {
+		let dialogRef = this.dialog.open(ZoomPicAlbumComponent, {
 			//width: '500px',
 			data: { housePics: this.houseContractPics}
 		});
 
-		this.dialogRef.afterClosed().subscribe(result => {
+		dialogRef.afterClosed().subscribe(result => {
 			console.log('The house-contract-pics dialog is closed');
 			//this.animal = result;
-			that.dialogRef = null;
+			dialogRef = null;
 		});
 	}
 
+	fileUploadImageClicked() {
+		document.getElementById('fileUpload').click();
+	}
 }

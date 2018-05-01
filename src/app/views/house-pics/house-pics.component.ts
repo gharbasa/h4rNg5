@@ -139,4 +139,7 @@ export class HousePicsComponent implements OnInit {
 		});
 	}
 	
+	fileUploadImageClicked() {
+		document.getElementById('fileUpload').click();
+	}
 }

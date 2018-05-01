@@ -2,7 +2,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { H4rbaseComponent } from './views/h4rbase/h4rbase.component';
 
-import { ImportComponent } from './import/import.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { NavBarComponent } from './views/nav-bar/nav-bar.component';
@@ -148,7 +147,6 @@ export class h4rRoutes {
         AppComponent,
         LoginComponent,
         NavBarComponent,
-        ImportComponent,
         AboutComponent,
         HomeComponent,
         NewuserComponent,

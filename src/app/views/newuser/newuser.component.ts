@@ -82,7 +82,7 @@ export class NewuserComponent extends H4rbaseComponent {
   		},
   		err => {
   			this.logger.log(this,"problem creating the user: " + JSON.stringify(err));
-  			this.user.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage[0]:"Problem creating the user";
+  			this.user.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage:"Problem creating the user";
   		});
   	}
   	
@@ -97,7 +97,7 @@ export class NewuserComponent extends H4rbaseComponent {
   		},
   		err => {
   			this.logger.log(this,"Problem updating the user: " + JSON.stringify(err));
-  			this.user.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage[0]:"Problem updating the user";
+  			this.user.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage:"Problem updating the user";
   		});
   	}
   	
@@ -124,6 +124,10 @@ export class NewuserComponent extends H4rbaseComponent {
   	    	that.logger.log(this,"avatar::", that.user.avatar);
   	    };
   	    reader.readAsBinaryString(file);
-  	}
+	}
+	  
+	fileUploadImageClicked() {
+		document.getElementById('fileUpload').click();
+	}
 
 }

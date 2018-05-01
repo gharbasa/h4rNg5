@@ -47,9 +47,8 @@
           <tr>
           	<td>
             	<div class="field">
-          
-	            <p>Contract Start Date(dd-mm-yyyy): <input type="text" name="contract_start_date" [(ngModel)]="houseContract.contract_start_date" />
-
+	            <p>Contract Start Date(dd-mm-yyyy): 
+                  <h4r-date-picker (onDateChanged)="startDateChanged($event)" #contractStartDate name="contract_start_date" value="{{houseContract.contract_start_date}}"></h4r-date-picker>
 	             </p>
           
           		</div>
@@ -59,9 +58,8 @@
 			<tr>
           	<td>
             	<div class="field">
-          
-	            <p>Contract End Date(dd-mm-yyyy): <input type="text" name="contract_end_date" [(ngModel)]="houseContract.contract_end_date" />
-
+	            <p>Contract End Date(dd-mm-yyyy): 
+                <h4r-date-picker (onDateChanged)="endDateChanged($event)" #contractEndDate name="contract_end_date" value="{{houseContract.contract_end_date}}"></h4r-date-picker>
 	             </p>
           
           		</div>
@@ -106,11 +104,13 @@
                   <td><input type="checkbox" name="active" [(ngModel)]="houseContract.active"></td>
                     </p>          
           </div></td></tr>
+          <tr>
+            <td>
+                <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
+            </td>
+          </tr>
         </table>
-          <br />
-          
-        <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
-        
+
       </form>
       </td>
       <td>
