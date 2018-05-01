@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { House } from '../../models/House';
 import { Payment } from '../../models/Payment';
@@ -10,6 +10,7 @@ import {HouseContractsService} from  '../../services/HouseContractsService';
 import {PaymentService} from  '../../services/PaymentService';
 import {HouseContract} from '../../models/HouseContract';
 import { AppSettings } from '../../models/AppSettings';
+import { DatePickerComponent } from '../date-picker/date-picker.component';
 
 @Component({
   selector: 'h4r-receivables',
@@ -24,6 +25,10 @@ export class ReceivablesComponent implements OnInit {
 	private message:string = "";
 	private houseContractId:number = 0;
 	private payments: Array<Payment> = [];
+	
+	@ViewChild('paymentDate')
+	paymentDate: DatePickerComponent;
+
   	constructor(private houseService: HouseService
 			, private router: Router
 			, private route: ActivatedRoute
@@ -51,10 +56,8 @@ export class ReceivablesComponent implements OnInit {
   			that.houseContract = res;
   			that.houseContract.message = "";
 	  		that.houseContract.errorMessage = "";
-	  		//Populate defaults in payment object
-	  		that.payment.user_house_contract_id = res.id;
-	  		that.payment.payment = res.monthly_rent_amount;
-	  		that.payment.payment_date = this.getFormattedDate();
+			  //Populate defaults in payment object
+			that.resetDefaults();
 	  		that.houseContractsService.appendRoles(that.houseContract);
 	  		
 	  		if(that.houseContract.roles != "") {
@@ -68,7 +71,14 @@ export class ReceivablesComponent implements OnInit {
 	  		that.errorMessage = "Problem retrieving house contract.";
   		}); 
   	}
-  	
+	  
+	resetDefaults() {
+		this.payment.note = "";
+		this.payment.payment = this.houseContract.monthly_rent_amount;
+		this.payment.payment_date = this.getFormattedDate();
+		this.paymentDate.setDate(this.payment.payment_date);
+		this.payment.user_house_contract_id = this.houseContract.id;
+	}
   	saveRecord() {
   		let that = this;
   		this.paymentService.create(this.payment).subscribe(res => {
@@ -76,7 +86,8 @@ export class ReceivablesComponent implements OnInit {
   			this.logger.log(this,that.message);
 	  		that.errorMessage = "";
 	  		//this.logger.info(this, "Trigerring onPaymentReceived.....");
-	  		that.fetchPayments();
+			that.fetchPayments();
+			that.resetDefaults();
   		},
   		err => {
   			that.message = "";
@@ -119,6 +130,13 @@ export class ReceivablesComponent implements OnInit {
   			that.errorMessage = "Error in deleting payment. Please try again or contact support.";
   			this.logger.log(this,that.message + " " + err.error.errorMessage);
   		});
-  	}
+	  }
+	  
+	  paymentDateChanged(eventData:string) {
+		this.logger.log(this,"Date changed to " + JSON.stringify(this.paymentDate.getDate()));
+		//let selectedDate = this.paymentDate.getDate();//{"year":2018,"month":4,"day":1}
+		//this.payment.payment_date = selectedDate.day + "-" + selectedDate.month + "-" + selectedDate.year;
+		this.payment.payment_date = this.paymentDate.getDate();
+	  }
 
 }

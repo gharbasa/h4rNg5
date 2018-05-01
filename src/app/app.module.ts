@@ -48,6 +48,10 @@ import { NvD3Module } from 'ng2-nvd3';
 import 'd3';
 import 'nvd3';
 
+//date-picker
+import {NgbModule, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateCustomParserFormatter } from './date-formatter/NgbDateCustomParserFormatter';
+//ngx-file-drop
 @NgModule({
   declarations: h4rRoutes.componentDeclarations,
   
@@ -61,7 +65,7 @@ import 'nvd3';
     RouterModule.forRoot(h4rRoutes.routes, {useHash: true}),
     FontAwesomeModule, MatMenuModule,BrowserAnimationsModule,
     NgIdleKeepaliveModule.forRoot(),
-    MatDialogModule,NvD3Module
+    MatDialogModule,NvD3Module, NgbModule.forRoot()
   ],
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService
@@ -69,7 +73,8 @@ import 'nvd3';
                 , CommunityService, HousePicsService, HouseNoteService
                 , NotificationService, UtilityService, UserHouseLinkService, HouseContractsService
                 , HouseContractNoteService, UserHouseContractPicService
-                , IdleService, PaymentService],
+                , IdleService, PaymentService,{provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+              ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
