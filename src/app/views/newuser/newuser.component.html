@@ -122,9 +122,13 @@
           </ul>
           
           <br />
-            Picture <img [src]="avatar" alt="Avatar" *ngIf='avatar != null && avatar != ""'  height="50" width="50">&nbsp;&nbsp;&nbsp;<input name="avatar" type="file" (change)="handleFileInput($event)">
-            <br/> 
+            <img [src]="avatar" alt="Avatar" *ngIf='avatar != null && avatar != ""'  height="50" width="50">&nbsp;&nbsp;
+
+            <fa-icon class='fa-lg' [icon]="['fas', 'upload']"  (click)="fileUploadImageClicked()" style="cursor:pointer" title="Upload image (png, jpeg, gif)"></fa-icon>
+            <input name="image" type="file" (change)="handleFileInput($event)" style="display:none" id='fileUpload'>
             <br/>
+            <label name="uploadedFileName" *ngIf="user.avatar && user.avatar.filename">{{user.avatar.filename}}</label>
+          <br/>
         <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
         
       </form>
