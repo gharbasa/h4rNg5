@@ -18,10 +18,12 @@
     </tr>
     <tr>
     <td>
-        <input name="avatar" type="file" (change)="handleFileInput($event)">
+        <fa-icon class='fa-lg' [icon]="['fas', 'upload']"  (click)="fileUploadImageClicked()" style="cursor:pointer" title="Upload image (png, jpeg, gif)"></fa-icon>
+        <input name="image" type="file" (change)="handleFileInput($event)" style="display:none" id='fileUpload'>
+        <input name="about_pic" type="text" size="25" [(ngModel)]="newHouseContractPic.about_pic" placeholder="Describe">
+        <button type="button" class="btn btn-success"  (click)="attachContractPic()">Attach</button>
         <br/>
-         <input name="about_pic" type="text" size="25" [(ngModel)]="newHouseContractPic.about_pic" placeholder="Describe">
-            <button type="button" class="btn btn-success"  (click)="attachContractPic()">Attach</button>
+        <label name="uploadedFileName" *ngIf="newHouseContractPic && newHouseContractPic.picture && newHouseContractPic.picture.filename">{{newHouseContractPic.picture.filename}}</label>
     
     </td>
     </tr>

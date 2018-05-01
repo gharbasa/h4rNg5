@@ -76,7 +76,6 @@ export class ReceivablesComponent implements OnInit {
 		this.payment.note = "";
 		this.payment.payment = this.houseContract.monthly_rent_amount;
 		this.payment.payment_date = this.getFormattedDate();
-		this.paymentDate.setDate(this.payment.payment_date);
 		this.payment.user_house_contract_id = this.houseContract.id;
 	}
   	saveRecord() {
@@ -85,7 +84,6 @@ export class ReceivablesComponent implements OnInit {
   			that.message = "Payment has been received successfully.";
   			this.logger.log(this,that.message);
 	  		that.errorMessage = "";
-	  		//this.logger.info(this, "Trigerring onPaymentReceived.....");
 			that.fetchPayments();
 			that.resetDefaults();
   		},
@@ -132,11 +130,11 @@ export class ReceivablesComponent implements OnInit {
   		});
 	  }
 	  
-	  paymentDateChanged(eventData:string) {
-		this.logger.log(this,"Date changed to " + JSON.stringify(this.paymentDate.getDate()));
+	  paymentDateChanged(elementValue:string) {
+		this.logger.log(this, elementValue + " date changed");// to " + JSON.stringify(this.paymentDate.getValue()));
 		//let selectedDate = this.paymentDate.getDate();//{"year":2018,"month":4,"day":1}
 		//this.payment.payment_date = selectedDate.day + "-" + selectedDate.month + "-" + selectedDate.year;
-		this.payment.payment_date = this.paymentDate.getDate();
+		this.payment.payment_date = elementValue;//this.paymentDate.getValue();
 	  }
 
 }

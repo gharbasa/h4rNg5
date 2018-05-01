@@ -83,7 +83,7 @@
             <tr><td><div class="field">
               
               <p>For the date(dd-mm-yyyy): 
-                  <h4r-date-picker (onDateChanged)="paymentDateChanged()" #paymentDate></h4r-date-picker>
+                  <h4r-date-picker (onDateChanged)="paymentDateChanged($event)" #paymentDate name="payment_date" value="{{payment.payment_date}}"></h4r-date-picker>
                     </p>
           </div></td></tr>
           

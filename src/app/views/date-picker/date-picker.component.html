@@ -1,6 +1,6 @@
 
   <input placeholder="dd-mm-yyyy"
-          name="dp" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="dateChanged()">
+          name="dp" [(ngModel)]="value" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="dateChanged()" readonly size="12">
           
     <button class="btn-outline-secondary"  type="button">
         <fa-icon [icon]="['fas', 'calendar']" (click)="d.toggle()"></fa-icon>
