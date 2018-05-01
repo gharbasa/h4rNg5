@@ -1,5 +1,6 @@
+
 <table><tr><td>
-	Performanace charts for House : 
+	<b>Performanace charts for House : </b>
 	<ng-select name="house_id" [items]="houses"
     			bindLabel="name"
                 bindValue="id"
@@ -11,10 +12,16 @@
 </tr>
 </table>
 <br/><br/>
+<table align='left'><tr><td>
+    <b>Yearly Performanace</b>
 <nvd3 #discreteBarChartYearlyTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataYearly"></nvd3>
+</td><td>
+<nvd3 #discretePieChartYearlyTag  [options]="pieChartOptions" [data]="pieChartDataYearly"></nvd3>
+</td></tr>
 
-<table><tr><td>
-Year 
+<tr><td solspan="2">
+    <br/><br/>
+<b>Year </b>
     <ng-select name="year" [items]="years"
     			bindLabel="year"
                 bindValue="year"
@@ -24,9 +31,17 @@ Year
     </ng-select>
 
 </td>
-</tr></table>
-<br/><br/>
+</tr>
+<tr>
+    <td colspan="2">
+            <b>Monthly Performanace</b>
+            <nvd3 #discreteBarChartMonthlyTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataMonthly"></nvd3>
+    </td>
+</tr>
+</table>
+
 <!--Here dropdown to show the list of houses that you are an accountant -->
-<nvd3 #discreteBarChartMonthlyTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataMonthly"></nvd3>
+
+
 
 
