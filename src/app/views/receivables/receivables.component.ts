@@ -55,29 +55,7 @@ export class ReceivablesComponent implements OnInit {
 	  		that.payment.user_house_contract_id = res.id;
 	  		that.payment.payment = res.monthly_rent_amount;
 	  		that.payment.payment_date = this.getFormattedDate();
-	  		
-	  		that.houseContract.roles = "";
-  			if(that.houseContract.tenant == true) {
-				that.houseContract.roles = that.houseContract.roles + "tenant, ";
-	  		}
-	  		if(that.houseContract.land_lord == true) {
-				that.houseContract.roles = that.houseContract.roles + "land_lord, ";
-	  		}
-	  		if(that.houseContract.accountant == true) {
-				that.houseContract.roles = that.houseContract.roles + "accountant, ";
-	  		}
-	  		if(that.houseContract.property_mgmt_mgr == true) {
-				that.houseContract.roles = that.houseContract.roles + "property_mgmt_mgr, ";
-	  		}
-	  		if(that.houseContract.property_mgmt_emp == true) {
-				that.houseContract.roles = that.houseContract.roles + "property_mgmt_emp, ";
-	  		}
-	  		if(that.houseContract.agency_collection_emp == true) {
-				that.houseContract.roles = that.houseContract.roles + "agency_collection_emp, ";
-	  		}
-	  		if(that.houseContract.agency_collection_mgr == true) {
-				that.houseContract.roles = that.houseContract.roles + "agency_collection_mgr, ";
-	  		}
+	  		that.houseContractsService.appendRoles(that.houseContract);
 	  		
 	  		if(that.houseContract.roles != "") {
 	  			let roleStr = that.houseContract.roles;
