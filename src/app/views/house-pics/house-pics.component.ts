@@ -87,7 +87,7 @@ export class HousePicsComponent implements OnInit {
   	    var type = file.type;
   	    var reader = new FileReader();
   	    let that = this;
-  	    reader.onload = function(readerEvt) {
+  	    reader.onload = function(readerEvt:any) {
   	    	content = btoa(readerEvt.target.result);
   	    	that.logger.log(this, name +":"+size+":"+type);
   	    	var picturePayload:any = {data:"",filename:"",content_type:""};

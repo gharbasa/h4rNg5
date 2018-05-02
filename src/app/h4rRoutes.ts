@@ -37,6 +37,7 @@ import { ReceivablesComponent } from './views/receivables/receivables.component'
 import { ReceivedPaymentsComponent } from './views/received-payments/received-payments.component';
 import { PaginationComponent } from './views/pagination/pagination.component';
 import { DatePickerComponent } from './views/date-picker/date-picker.component';
+import { HouseSearchResultsComponent } from './views/house-search-results/house-search-results.component';
 
 export class h4rRoutes {
     static routes: Routes = [
@@ -141,6 +142,16 @@ export class h4rRoutes {
             path: 'receivables/:id',
             component: ReceivablesComponent
         }
+        ,
+        {
+            path: 'hsearch',
+            component: HouseSearchResultsComponent
+        }
+        ,
+        {
+            path: 'hsearch2',
+            component: HouseSearchResultsComponent
+        }
     ];
     
     static componentDeclarations = [
@@ -176,7 +187,7 @@ export class h4rRoutes {
         ForgotPasswordComponent,
         PerformanceChartsComponent, ReceivablesComponent
         , ReceivedPaymentsComponent, H4rbaseComponent,
-        PaginationComponent, DatePickerComponent
+        PaginationComponent, DatePickerComponent, HouseSearchResultsComponent
       ]
 
       static modalDialogEntryPoints = [

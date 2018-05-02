@@ -113,7 +113,7 @@ export class NewuserComponent extends H4rbaseComponent {
   	    var type = file.type;
   	    var reader = new FileReader();
   	    let that = this;
-  	    reader.onload = function(readerEvt) {
+  	    reader.onload = function(readerEvt:any) {
   	    	content = btoa(readerEvt.target.result);
   	    	//this.logger.log(this,name +":"+size+":"+type);
   	    	var avatar:any = {data:null,filename:null,content_type:null};

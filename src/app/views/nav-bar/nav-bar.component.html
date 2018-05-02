@@ -77,9 +77,9 @@
     </ul>
     
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search homes" aria-label="Search">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search homes" aria-label="Search" [(ngModel)]="search" name='Search'>
       
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fa-icon [icon]="['fas', 'search']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon></button>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="houseSearch()"><fa-icon [icon]="['fas', 'search']"></fa-icon><fa-icon [icon]="['fas', 'home']"></fa-icon></button>
     </form>
   </div>
 </nav>
