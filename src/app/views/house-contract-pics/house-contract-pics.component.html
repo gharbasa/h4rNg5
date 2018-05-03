@@ -1,10 +1,10 @@
-<table width="100%">
+<table width="100%" valign='top'>
 <tr *ngIf="errorMessage != ''">
     <td>{{errorMessage}}</td>
 </tr>
 <tr *ngIf="houseContractPics.length > 0">
     <td>
-        Pictures::
+        Contract pictures
         <a (click)="prevImage()" href="#" title="Previous picture"><fa-icon [icon]="['fas', 'backward']"></fa-icon></a>
         ({{viewIndex+1}}/{{houseContractPics.length}})
         <a (click)="nextImage()" href="#" title="Next picture"><fa-icon [icon]="['fas', 'forward']"></fa-icon></a>

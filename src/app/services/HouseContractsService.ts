@@ -61,31 +61,6 @@ export class HouseContractsService {
 		return this.http.get(url).map(res => res as HouseContract[] || []);
 	}
 	
-	appendRoles(contract:HouseContract):void {
-		contract.roles = "";
-		if(contract.tenant == true) {
-			contract.roles = contract.roles + AppSettings.ROLES["TENANT"].label + ", ";
-		}
-		if(contract.land_lord == true) {
-			contract.roles = contract.roles + AppSettings.ROLES["LAND_LORD"].label + ", ";
-		}
-		if(contract.accountant == true) {
-			contract.roles = contract.roles + AppSettings.ROLES["ACCOUNTANT"].label + ", ";
-		}
-		if(contract.property_mgmt_mgr == true) {
-			contract.roles = contract.roles + AppSettings.ROLES["PROPERTY_MGMT_MGR"].label + ", ";
-		}
-		if(contract.property_mgmt_emp == true) {
-			contract.roles = contract.roles + AppSettings.ROLES["PROPERTY_MGMT_EMP"].label + ", ";
-		}
-		if(contract.agency_collection_emp == true) {
-			contract.roles = contract.roles + AppSettings.ROLES["AGENCY_COLLECTION_EMP"].label + ", ";
-		}
-		if(contract.agency_collection_mgr == true) {
-			contract.roles = contract.roles + AppSettings.ROLES["AGENCY_COLLECTION_MGR"].label + ", ";
-		}
-	}
-	
 	setSharedKey(sharedKey:any) {
 		this.sharedKey = sharedKey;
 	}

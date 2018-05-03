@@ -9,6 +9,7 @@ import {HouseContractsService} from  '../../services/HouseContractsService';
 import {HouseContract} from '../../models/HouseContract';
 import { AppSettings } from '../../models/AppSettings';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
+import * as moment from 'moment'; 
 
 @Component({
   selector: 'h4r-house-contract',
@@ -90,8 +91,9 @@ export class HouseContractComponent implements OnInit {
   			that.houseContract = res;
   			that.houseContract.message = "";
 	  		that.houseContract.errorMessage = "";
-			that.houseContractsService.appendRoles(that.houseContract);
-	  		
+			HouseContract.determineRoles(that.houseContract);
+			HouseContract.determineContractTypeStr(that.houseContract);
+
 	  		if(that.houseContract.roles != "") {
 	  			let roleStr = that.houseContract.roles;
 	  			that.houseContract.roles = roleStr.substring(0, roleStr.length - 2);
@@ -137,5 +139,12 @@ export class HouseContractComponent implements OnInit {
 		endDateChanged(elementValue:string) {
 			this.logger.info(this,"Ok, end date changed to=" + this.contractEndDate.getValue());
 			this.houseContract.contract_end_date = elementValue;//this.paymentDate.getValue();
+		}
+
+		getMonthsDuration() {
+			let startDate:any = moment(this.houseContract.contract_start_date, 'DD-MM-YYYY');
+			let endDate:any = moment(this.houseContract.contract_end_date, 'DD-MM-YYYY');
+			var count:number = Math.round(moment.duration(endDate.diff(startDate)).asMonths());
+			return count + " months";
 		}
 }

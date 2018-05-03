@@ -1,4 +1,4 @@
-<h4>House Contract</h4>
+<h4>House Contract({{getMonthsDuration()}})</h4>
 
 <div id='formDiv' class="row justify-content-center">
     <table width="100%">
@@ -67,10 +67,22 @@
           </tr>
 
           <tr>
+                <td>
+                  <div class="field">
+                  <p>Contract Type: 
+                        <input name="contract_type" [value]=1 type="radio" [(ngModel)]="houseContract.contract_type"> Income&nbsp;&nbsp;
+                        <input name="contract_type" [value]=2 type="radio" [(ngModel)]="houseContract.contract_type"> Expense
+                   </p>
+            
+                    </div>
+                </td>
+            </tr>
+
+          <tr>
           	<td>
             	<div class="field">
           
-	            <p>Annual Contract Amount: <input type="text" name="annual_rent_amount" [(ngModel)]="houseContract.annual_rent_amount" />
+	            <p>Total Contract Amount: <input type="text" name="annual_rent_amount" [(ngModel)]="houseContract.annual_rent_amount" />
 
 	             </p>
           
@@ -82,7 +94,7 @@
           	<td>
             	<div class="field">
           
-	            <p>Monthly Contract Amount: <input type="text" name="monthly_rent_amount" [(ngModel)]="houseContract.monthly_rent_amount" />
+	            <p>Installment Contract Amount: <input type="text" name="monthly_rent_amount" [(ngModel)]="houseContract.monthly_rent_amount" />
 
 	             </p>
           

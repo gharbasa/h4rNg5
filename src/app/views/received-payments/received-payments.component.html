@@ -1,5 +1,5 @@
 <span *ngIf="payments != null">
-    <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon> Received <b>{{payments.length}}</b> payments, total: <b>{{totalReceivedAmt | currency}}</b>
+    <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon> {{houseContract.contract_type_str}} installments so far <b>{{payments.length}}</b>, total: <b>{{totalReceivedAmt | currency}}</b>
     <p> 
         <br/>
         <span *ngIf="payments.length > 0">

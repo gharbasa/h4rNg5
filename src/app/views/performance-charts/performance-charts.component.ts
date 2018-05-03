@@ -17,7 +17,7 @@ export class PerformanceChartsComponent implements OnInit {
 		chart: {
 		  type: 'discreteBarChart',
 		  height: 250,
-		  width: 600,
+		  width: 400,
 		  margin : { 
 			top: 20,
 			right: 20,
@@ -70,20 +70,37 @@ export class PerformanceChartsComponent implements OnInit {
 	private years:any = [];
 	
 	
-	@ViewChild('discreteBarChartMonthlyTag') discreteBarChartMonthlyTag;
-	public  discreteBarChartDataMonthly: any = [{
+	@ViewChild('discreteBarChartMonthlyIncomeTag') discreteBarChartMonthlyIncomeTag;
+	@ViewChild('discretePieChartYearlyIncomeTag') discretePieChartYearlyIncomeTag;
+	@ViewChild('discreteBarChartYearlyIncomeTag') discreteBarChartYearlyIncomeTag;
+
+	@ViewChild('discreteBarChartMonthlyExpenseTag') discreteBarChartMonthlyExpenseTag;
+	@ViewChild('discretePieChartYearlyExpenseTag') discretePieChartYearlyExpenseTag;
+	@ViewChild('discreteBarChartYearlyExpenseTag') discreteBarChartYearlyExpenseTag;
+
+	public  discreteBarChartDataMonthlyIncome: any = [{
+		key: "Monthly",
+		values: []
+	}];	
+	public  discreteBarChartDataMonthlyExpense: any = [{
 		key: "Monthly",
 		values: []
 	}];	
 
-	@ViewChild('discretePieChartYearlyTag') discretePieChartYearlyTag;
-	public  pieChartDataYearly: any = [{
+	public  pieChartDataYearlyIncome: any = [{
+		key: 2013,
+		y: 0
+	}];
+	public  pieChartDataYearlyExpense: any = [{
 		key: 2013,
 		y: 0
 	}];
 
-	@ViewChild('discreteBarChartYearlyTag') discreteBarChartYearlyTag;
-	public  discreteBarChartDataYearly: any = [{
+	public  discreteBarChartDataYearlyIncome: any = [{
+		key: "Yearly",
+		values: []
+	}];
+	public  discreteBarChartDataYearlyExpense: any = [{
 		key: "Yearly",
 		values: []
 	}];
@@ -97,8 +114,13 @@ export class PerformanceChartsComponent implements OnInit {
   	ngOnInit() {
 		this.fetchHouses();
 		let currentYear:number =  (new Date()).getFullYear();
-		this.years = [{year: currentYear}, {year: currentYear - 1}, {year: currentYear - 2}, {year: currentYear - 3}, {year: currentYear - 4}];
-  	}
+		this.years = [{year: currentYear, label:"Year-"+currentYear}, 
+					  {year: currentYear - 1, label:"Year-"+(currentYear-1)}, 
+					  {year: currentYear - 2, label:"Year-"+(currentYear-2)}, 
+					  {year: currentYear - 3, label:"Year-"+(currentYear-3)}, 
+					  {year: currentYear - 4, label:"Year-"+(currentYear-4)}
+					] 
+  	};
 
   	fetchHouses() {
 		let that = this;
@@ -112,14 +134,18 @@ export class PerformanceChartsComponent implements OnInit {
 
 	houseChanged() {
 		this.logger.info("House changed to " + this.house_id);
-		this.discreteBarChartDataMonthly[0].values.length = 0;
-		this.fetchMonthlyPayments();
-		this.fetchYearlyPayments();
+		this.discreteBarChartDataMonthlyIncome[0].values.length = 0;
+		this.discreteBarChartDataMonthlyExpense[0].values.length = 0;
+		this.fetchMonthlyIncome();
+		this.fetchYearlyIncome();
+		this.fetchMonthlyExpense();
+		this.fetchYearlyExpense();
 	}
 
 	yearChanged() {
 		this.logger.info("Year changed to " + this.house_id);		
-		this.fetchMonthlyPayments();
+		this.fetchMonthlyIncome();
+		this.fetchMonthlyExpense();
 	}
 
 	/**
@@ -128,31 +154,31 @@ export class PerformanceChartsComponent implements OnInit {
 	 * @param label 
 	 * @param payment 
 	 */
-	isPaymentRepeatedInMonth(label:string, payment:number) {
+	isPaymentRepeatedInMonth(label:string, payment:number, discreteBarChartDataMonthly) {
 		let repeatedNumber = 0;
 		let existingRow:any = null;
-		this.discreteBarChartDataMonthly[0].values.forEach(function(row:any) {
+		discreteBarChartDataMonthly[0].values.forEach(function(row:any) {
 				if (row.label === label) //There is a month entry already
 					existingRow = row;
 		});
 		return existingRow;
 	}
 
-	fetchMonthlyPayments() {
+	fetchMonthlyIncome() {
 		let that = this;
-		this.discreteBarChartDataMonthly[0].values.length = 0;
-		this.paymentService.monthlyPayments(this.house_id, this.year).subscribe(res => {
+		this.discreteBarChartDataMonthlyIncome[0].values.length = 0;
+		this.paymentService.monthlyIncome(this.house_id, this.year).subscribe(res => {
 			that.payments = res;
 			that.payments.forEach(element => {
 				let label = element.paymentMonth + "-" + element.paymentYear;
 				let value = element.payment;
-				let existingRow = that.isPaymentRepeatedInMonth(label, value);
+				let existingRow = that.isPaymentRepeatedInMonth(label, value, that.discreteBarChartDataMonthlyIncome);
 				if(existingRow == null) {
 					existingRow = {
 						value: value,
 						label: label
 					};
-					that.discreteBarChartDataMonthly[0].values.push(existingRow);
+					that.discreteBarChartDataMonthlyIncome[0].values.push(existingRow);
 				}
 				else {
 					existingRow.value = existingRow.value + value;
@@ -160,35 +186,91 @@ export class PerformanceChartsComponent implements OnInit {
 				if(that.year == null) that.year = element.paymentYear;
 			});
 			that.logger.log(that,", detectChanges..that.monthlyBarChartData.values.length=" 
-				+ that.discreteBarChartDataMonthly[0].values.length + ",that.monthlyBarChartData="
-				 + JSON.stringify(that.discreteBarChartDataMonthly));
-			that.discreteBarChartMonthlyTag.chart.update();
+				+ that.discreteBarChartDataMonthlyIncome[0].values.length + ",that.monthlyBarChartData="
+				 + JSON.stringify(that.discreteBarChartDataMonthlyIncome));
+			that.discreteBarChartMonthlyIncomeTag.chart.update();
 		}, err=> {
 			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
 		});
 	}
 
-	fetchYearlyPayments() {
+	fetchMonthlyExpense() {
 		let that = this;
-		that.discreteBarChartDataYearly[0].values.length = 0;
-		that.pieChartDataYearly.length = 0;
-		this.paymentService.yearlyPayments(this.house_id).subscribe(res => {
+		this.discreteBarChartDataMonthlyExpense[0].values.length = 0;
+		this.paymentService.monthlyExpense(this.house_id, this.year).subscribe(res => {
+			that.payments = res;
+			that.payments.forEach(element => {
+				let label = element.paymentMonth + "-" + element.paymentYear;
+				let value = element.payment;
+				let existingRow = that.isPaymentRepeatedInMonth(label, value, that.discreteBarChartDataMonthlyExpense);
+				if(existingRow == null) {
+					existingRow = {
+						value: value,
+						label: label
+					};
+					that.discreteBarChartDataMonthlyExpense[0].values.push(existingRow);
+				}
+				else {
+					existingRow.value = existingRow.value + value;
+				}
+				if(that.year == null) that.year = element.paymentYear;
+			});
+			that.logger.log(that,", detectChanges..that.monthlyBarChartData.values.length=" 
+				+ that.discreteBarChartDataMonthlyExpense[0].values.length + ",that.monthlyBarChartData="
+				 + JSON.stringify(that.discreteBarChartDataMonthlyExpense));
+			that.discreteBarChartMonthlyExpenseTag.chart.update();
+		}, err=> {
+			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
+		});
+	}
+
+	fetchYearlyIncome() {
+		let that = this;
+		that.discreteBarChartDataYearlyIncome[0].values.length = 0;
+		that.pieChartDataYearlyIncome.length = 0;
+		this.paymentService.yearlyIncome(this.house_id).subscribe(res => {
 			that.payments = res;
 			that.payments.forEach(element => {
 				let row = {
 					value: element.value,
 					label: element.year
 				};
-				that.discreteBarChartDataYearly[0].values.push(row);
-				that.pieChartDataYearly.push(
+				that.discreteBarChartDataYearlyIncome[0].values.push(row);
+				that.pieChartDataYearlyIncome.push(
 					{key: row.label, y: row.value}
 				);
 			});
 			that.logger.log(that,", detectChanges..that.discreteBarChartDataYearly.values.length=" 
-				+ that.discreteBarChartDataMonthly[0].values.length + ",that.discreteBarChartDataYearly="
-				 + JSON.stringify(that.discreteBarChartDataYearly));
-			that.discreteBarChartYearlyTag.chart.update();
-			that.discretePieChartYearlyTag.chart.update();
+				+ that.discreteBarChartDataMonthlyIncome[0].values.length + ",that.discreteBarChartDataYearly="
+				 + JSON.stringify(that.discreteBarChartDataYearlyIncome));
+			that.discreteBarChartYearlyIncomeTag.chart.update();
+			that.discretePieChartYearlyIncomeTag.chart.update();
+		}, err=> {
+			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
+		});
+	}
+
+	fetchYearlyExpense() {
+		let that = this;
+		that.discreteBarChartDataYearlyExpense[0].values.length = 0;
+		that.pieChartDataYearlyExpense.length = 0;
+		this.paymentService.yearlyExpense(this.house_id).subscribe(res => {
+			that.payments = res;
+			that.payments.forEach(element => {
+				let row = {
+					value: element.value,
+					label: element.year
+				};
+				that.discreteBarChartDataYearlyExpense[0].values.push(row);
+				that.pieChartDataYearlyExpense.push(
+					{key: row.label, y: row.value}
+				);
+			});
+			that.logger.log(that,", detectChanges..that.discreteBarChartDataYearly.values.length=" 
+				+ that.discreteBarChartDataMonthlyExpense[0].values.length + ",that.discreteBarChartDataYearly="
+				 + JSON.stringify(that.discreteBarChartDataYearlyExpense));
+			that.discreteBarChartYearlyExpenseTag.chart.update();
+			that.discretePieChartYearlyExpenseTag.chart.update();
 		}, err=> {
 			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
 		});

@@ -19,8 +19,8 @@ export class PaymentService {
 		return this.http.post(this.basePath, payment);
 	}
 	
-	monthlyPayments(house_id:number, year:number):Observable<any[]> {
-		let url:string = this.basePath + "/monthlyPayments";
+	monthlyIncome(house_id:number, year:number):Observable<any[]> {
+		let url:string = this.basePath + "/monthlyIncome";
 		if(house_id != null)
 			url = url + "?house_id=" + house_id;
 		if(year != null)
@@ -28,8 +28,24 @@ export class PaymentService {
 		return this.http.get(url).map(res => res as any[] || []);
 	}
 
-	yearlyPayments(house_id:number):Observable<any[]> {
-		let url:string = this.basePath + "/yearlyPayments";
+	monthlyExpense(house_id:number, year:number):Observable<any[]> {
+		let url:string = this.basePath + "/monthlyExpense";
+		if(house_id != null)
+			url = url + "?house_id=" + house_id;
+		if(year != null)
+			url = url + "&year=" + year
+		return this.http.get(url).map(res => res as any[] || []);
+	}
+
+	yearlyIncome(house_id:number):Observable<any[]> {
+		let url:string = this.basePath + "/yearlyIncome";
+		if(house_id != null)
+			url = url + "?house_id=" + house_id;
+		return this.http.get(url).map(res => res as any[] || []);
+	}
+
+	yearlyExpense(house_id:number):Observable<any[]> {
+		let url:string = this.basePath + "/yearlyExpense";
 		if(house_id != null)
 			url = url + "?house_id=" + house_id;
 		return this.http.get(url).map(res => res as any[] || []);
