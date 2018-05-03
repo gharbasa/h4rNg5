@@ -31,9 +31,9 @@ export class HouseContractsComponent extends H4rbaseComponent {
 		this.houseContractsService.list(this.community_id).subscribe(resp => {
 			this.logger.log(this,"Fetched all the houseContracts");
 			for(var i in resp) {
-				let contract:any = resp[i];
-				that.houseContractsService.appendRoles(contract);
-		  		
+				let contract:HouseContract = resp[i];
+				HouseContract.determineContractTypeStr(contract);
+				HouseContract.determineRoles(contract);
 		  		if(contract.roles != "") {
 		  			let roleStr = contract.roles;
 		  			contract.roles = roleStr.substring(0, roleStr.length - 2);

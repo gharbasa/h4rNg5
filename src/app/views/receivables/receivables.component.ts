@@ -48,7 +48,6 @@ export class ReceivablesComponent implements OnInit {
   		});
   	}
   	
-  	
   	fetchExistingContract(id:number) {
   		let that = this;
   		this.logger.log(this,"Lets extract house contract, id=" + id);
@@ -58,8 +57,8 @@ export class ReceivablesComponent implements OnInit {
 	  		that.houseContract.errorMessage = "";
 			  //Populate defaults in payment object
 			that.resetDefaults();
-	  		that.houseContractsService.appendRoles(that.houseContract);
-	  		
+	  		HouseContract.determineContractTypeStr(that.houseContract);
+	  		HouseContract.determineRoles(that.houseContract);
 	  		if(that.houseContract.roles != "") {
 	  			let roleStr = that.houseContract.roles;
 	  			that.houseContract.roles = roleStr.substring(0, roleStr.length - 2);

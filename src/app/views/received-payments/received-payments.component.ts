@@ -3,6 +3,7 @@ import { Payment } from '../../models/Payment';
 import { LoggingService, Config } from 'loggerservice';
 import { CurrencyPipe } from '@angular/common';
 import {Pagination} from  '../../models/Pagination';
+import { HouseContract } from '../../models/HouseContract';
 
 @Component({
   selector: 'h4r-received-payments',
@@ -13,6 +14,7 @@ export class ReceivedPaymentsComponent implements OnInit {
 	
 	private pageSettings:Pagination = new Pagination(null);
 	@Input() private payments: Array<Payment> = [];
+	@Input() private houseContract:HouseContract;
 	@Output() onDeletePaymentClick = new EventEmitter<Payment>();
 	private totalReceivedAmt:number = 0;
 

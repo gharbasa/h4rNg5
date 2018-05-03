@@ -1,5 +1,5 @@
 <span *ngIf="payments != null">
-    <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon> Received <b>{{payments.length}}</b> payments, total: <b>{{totalReceivedAmt | currency}}</b>
+    <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon> {{houseContract.contract_type_str}} installments so far <b>{{payments.length}}</b>, total: <b>{{totalReceivedAmt | currency}}</b>
     <p> 
         <br/>
         <span *ngIf="payments.length > 0">
@@ -7,7 +7,7 @@
             <span *ngFor="let payment of pageSettings.getPaginatedList(); let i = index">
                 <p>
                     <fa-icon [icon]="['fas', 'info-circle']"></fa-icon>
-                        {{payment.createdAt}}: Received <b>{{payment.payment}}</b> for the date <b>{{payment.paymentDate}}</b>
+                        {{payment.createdAt}}: {{houseContract.contract_type_str}} <b>{{payment.payment}}</b> for the date <b>{{payment.paymentDate}}</b>
                         <a href="#" (click)="deletePayment(payment)" title="Delete the payment">
                                 (<fa-icon [icon]="['fas', 'cut']"></fa-icon>)
                         </a>

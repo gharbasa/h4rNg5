@@ -12,32 +12,60 @@
 </tr>
 </table>
 <br/><br/>
-<table align='left'><tr><td>
-    <b>Yearly Performanace</b>
-<nvd3 #discreteBarChartYearlyTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataYearly"></nvd3>
-</td><td>
-<nvd3 #discretePieChartYearlyTag  [options]="pieChartOptions" [data]="pieChartDataYearly"></nvd3>
-</td></tr>
+<table width="100%">
+    <tr>
+        <td width="50%">
+                <table align='left'><tr><td>
+                        <b>Past 5 Years Income</b>
+                    <nvd3 #discreteBarChartYearlyIncomeTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataYearlyIncome"></nvd3>
+                    </td><td>
+                    <nvd3 #discretePieChartYearlyIncomeTag  [options]="pieChartOptions" [data]="pieChartDataYearlyIncome"></nvd3>
+                    </td></tr>
+                    
+                    <tr><td colspan="2">
+                        <br/><br/>
+                    <b>Monthly Income</b>
+                        <ng-select name="year" [items]="years"
+                                    bindLabel="label"
+                                    bindValue="year"
+                                    placeholder="Year"
+                                    [(ngModel)]="year" 
+                                    (change)="yearChanged()">
+                        </ng-select>
+                    
+                    </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                                <b></b>
+                                <nvd3 #discreteBarChartMonthlyIncomeTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataMonthlyIncome"></nvd3>
+                        </td>
+                    </tr>
+                    </table>
+        </td>
+        <td width="50%">
+                <table align='left'><tr><td>
+                        <b>Past 5 Years Expense</b>
+                    <nvd3 #discreteBarChartYearlyExpenseTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataYearlyExpense"></nvd3>
+                    </td><td>
+                    <nvd3 #discretePieChartYearlyExpenseTag  [options]="pieChartOptions" [data]="pieChartDataYearlyExpense"></nvd3>
+                    </td></tr>
+                    
+                    <tr><td colspan="2">
+                        <br/><br/>
+                    
+                    </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                                <b></b>
+                                <nvd3 #discreteBarChartMonthlyExpenseTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataMonthlyExpense"></nvd3>
+                        </td>
+                    </tr>
+                    </table>
 
-<tr><td solspan="2">
-    <br/><br/>
-<b>Year </b>
-    <ng-select name="year" [items]="years"
-    			bindLabel="year"
-                bindValue="year"
-                placeholder="Year"
-                [(ngModel)]="year" 
-                (change)="yearChanged()">
-    </ng-select>
-
-</td>
-</tr>
-<tr>
-    <td colspan="2">
-            <b>Monthly Performanace</b>
-            <nvd3 #discreteBarChartMonthlyTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataMonthly"></nvd3>
-    </td>
-</tr>
+        </td>
+    </tr>
 </table>
 
 <!--Here dropdown to show the list of houses that you are an accountant -->

@@ -39,7 +39,7 @@
             <td>
                 <div class="field">
           
-                <p>Contract Start Date(dd-mm-yyyy): {{houseContract.contract_start_date}}</p>
+                <p>Contract Start Date(dd-mm-yyyy): <b>{{houseContract.contract_start_date}}</b></p>
                 </div>
             </td>
           </tr>
@@ -48,7 +48,22 @@
             <td>
                 <div class="field">
           
-                <p>Contract End Date(dd-mm-yyyy): {{houseContract.contract_end_date}}</p>
+                <p>Contract End Date(dd-mm-yyyy): <b>{{houseContract.contract_end_date}}</b></p>
+          
+                </div>
+            </td>
+          </tr>
+          <tr><td><div class="field">
+              
+              <p>Contract Type: <b>{{houseContract.contract_type_str}}</b>
+                  
+                    </p>
+          </div></td></tr>
+          <tr>
+            <td>
+                <div class="field">
+          
+                <p>Total Contract Amount: <b>{{houseContract.annual_rent_amount}}</b></p>
           
                 </div>
             </td>
@@ -57,25 +72,13 @@
           <tr>
             <td>
                 <div class="field">
-          
-                <p>Annual Contract Amount: {{houseContract.annual_rent_amount}}</p>
-          
-                </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-                <div class="field">
-          
-                <p>Monthly Contract Amount: {{houseContract.monthly_rent_amount}}</p>
+                  <p>Installment Contract Amount: <b>{{houseContract.monthly_rent_amount}}</b></p>
                 </div>
             </td>
           </tr>
 
           <tr><td><div class="field">
-              
-              <p>Actual amount received: 
+              <p>Present {{houseContract.contract_type_str}} amount: 
                   <input type="text" name="payment" [(ngModel)]="payment.payment">
                     </p>          
           </div></td></tr>
@@ -104,7 +107,7 @@
       </form>
       </td>
       <td valign="top">
-        <h4r-received-payments [payments]="payments"  (onDeletePaymentClick)="deletePayment($event)"></h4r-received-payments>
+        <h4r-received-payments [payments]="payments" [houseContract]="houseContract"  (onDeletePaymentClick)="deletePayment($event)"></h4r-received-payments>
       </td>
       </tr>
     </table>
