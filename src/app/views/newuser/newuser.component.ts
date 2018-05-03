@@ -130,4 +130,8 @@ export class NewuserComponent extends H4rbaseComponent {
 		document.getElementById('fileUpload').click();
 	}
 
+	changeGender(type) {
+		this.user.sex = type;
+	}
+
 }

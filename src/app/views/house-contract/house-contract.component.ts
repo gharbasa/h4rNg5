@@ -141,10 +141,20 @@ export class HouseContractComponent implements OnInit {
 			this.houseContract.contract_end_date = elementValue;//this.paymentDate.getValue();
 		}
 
-		getMonthsDuration() {
+		getDuration() {
 			let startDate:any = moment(this.houseContract.contract_start_date, 'DD-MM-YYYY');
 			let endDate:any = moment(this.houseContract.contract_end_date, 'DD-MM-YYYY');
-			var count:number = Math.round(moment.duration(endDate.diff(startDate)).asMonths());
-			return count + " months";
+			var months:number = Math.round(moment.duration(endDate.diff(startDate)).asMonths());
+			if(months > 0)
+				return months + " months";
+			else {
+				let days:number = Math.round(moment.duration(endDate.diff(startDate)).asDays());
+				return days + " days";
+			}
+
+		}
+
+		changeContractType(type) {
+			this.houseContract.contract_type  = type;
 		}
 }

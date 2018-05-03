@@ -14,17 +14,16 @@
 <br/><br/>
 <table width="100%">
     <tr>
-        <td width="50%">
+        <td width="50%" valign="top">
                 <table align='left'><tr><td>
-                        <b>Past 5 Years Income</b>
+                        <b>Past 5 Years Income</b> (<fa-icon [icon]="['fas', 'sign-in-alt']"></fa-icon>)
                     <nvd3 #discreteBarChartYearlyIncomeTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataYearlyIncome"></nvd3>
                     </td><td>
                     <nvd3 #discretePieChartYearlyIncomeTag  [options]="pieChartOptions" [data]="pieChartDataYearlyIncome"></nvd3>
                     </td></tr>
                     
                     <tr><td colspan="2">
-                        <br/><br/>
-                    <b>Monthly Income</b>
+                    <b>Monthly breakdown</b>
                         <ng-select name="year" [items]="years"
                                     bindLabel="label"
                                     bindValue="year"
@@ -43,9 +42,9 @@
                     </tr>
                     </table>
         </td>
-        <td width="50%">
+        <td width="50%" valign="top">
                 <table align='left'><tr><td>
-                        <b>Past 5 Years Expense</b>
+                        <b>Past 5 Years Expense</b> (<fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>)
                     <nvd3 #discreteBarChartYearlyExpenseTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataYearlyExpense"></nvd3>
                     </td><td>
                     <nvd3 #discretePieChartYearlyExpenseTag  [options]="pieChartOptions" [data]="pieChartDataYearlyExpense"></nvd3>
