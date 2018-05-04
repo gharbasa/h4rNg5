@@ -4,6 +4,7 @@ import { HouseNote } from '../../models/HouseNote';
 import { LoggingService, Config } from 'loggerservice';
 import {Pagination} from  '../../models/Pagination';
 import { House } from '../../models/House';
+import { HouseService } from '../../services/HouseService';
 
 @Component({
   selector: 'h4r-house-notes',
@@ -15,9 +16,12 @@ export class HouseNotesComponent implements OnInit {
 	private pageSettings:Pagination = new Pagination(null);
 	@Input() house:House;
 	private newHouseNote:HouseNote = new HouseNote();
-	constructor(private houseNoteService: HouseNoteService, private logger: LoggingService) { }
+	constructor(private houseNoteService: HouseNoteService
+				, private logger: LoggingService
+				, private houseService:HouseService) { }
 	
 	ngOnInit() {
+		
 	}
 	
 	ngOnChanges() {

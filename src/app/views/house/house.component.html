@@ -130,7 +130,7 @@ House
          
           
           </tr>
-          <tr align='center'>
+          <tr align='center' *ngIf="houseService.isReadonlyView() == false">
               <td colspan="2">
                   <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
               </td>

@@ -23,7 +23,7 @@
             <fa-icon class='fa-lg' [icon]="['fas', 'upload']"  (click)="fileUploadImageClicked()" style="cursor:pointer" title="Upload image (png, jpeg, gif)"></fa-icon>
             <input name="image" type="file" (change)="handleFileInput($event)" style="display:none" id='fileUpload'>
             <input name="about_pic" type="text" size="25" [(ngModel)]="newHousePic.about_pic" placeholder="Describe">
-            <button type="button" class="btn btn-success"  (click)="attachHousePic()">Attach</button>
+            <button  *ngIf="houseService.isReadonlyView() == false" type="button" class="btn btn-success"  (click)="attachHousePic()">Attach</button>
             <br/>
             <label name="uploadedFileName" *ngIf="newHousePic && newHousePic.picture && newHousePic.picture.filename">{{newHousePic.picture.filename}}</label>
     </td>

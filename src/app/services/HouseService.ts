@@ -15,6 +15,7 @@ export class HouseService {
 	private basePath_admin:string = '/api/1/houses';
 	private basePath_nondmin:string = '/api/1/users/{user.id}/houses';
 	private searchKeyword:string = "";
+	private view:string = "";
 	get(houseId:number):Observable<House> {
 		return this.http.get(this.basePath_admin + "/" + houseId).map(res => res as House || null);
 	}
@@ -89,5 +90,13 @@ export class HouseService {
 		this.logger.log(this, "search for houses, keyword=" + this.searchKeyword);
 		let path = this.basePath_admin + "/search?search=" + this.searchKeyword; 
 		return this.http.get(path).map(res => res as House[] || []);
+	}
+
+	setOperation(operation) {
+		this.view = operation;
+	}
+	
+	isReadonlyView() {
+		return this.view === "read";
 	}
 }

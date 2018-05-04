@@ -32,7 +32,7 @@ export class HouseComponent implements OnInit {
   	ngOnInit() {
   		let that = this;
   		this.communities = this.loginService.getCommunities();//JSON.parse(this.localStorageService.getItem('communities'));
-  		let user = this.loginService.getCurrentUser();
+		let user = this.loginService.getCurrentUser();
   		this.route.params.subscribe(res => {
   			if(res.id == -1) {
   				this.logger.log(this,"User wants to create a new house");
@@ -40,7 +40,7 @@ export class HouseComponent implements OnInit {
   				that.house.community_id = user.community_id;
   				that.house.message = "";
   				that.house.errorMessage = "";
-  				that.createNewHouse = true;
+				  that.createNewHouse = true;
   			} else if(res.id > 0) {
   				//if not -1, then it is a id
   				this.logger.log(this,"User wants to edit house, id=" + res.id);

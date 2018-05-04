@@ -13,6 +13,6 @@
         <br/>
          <textarea name="content" [(ngModel)]='newHouseNote.note' rows="3" cols="50" placeholder="Note"></textarea>
         <br/>
-         <button type="button" class="btn btn-success"  (click)="attachHouseNote()">Save Note</button>
+         <button *ngIf="houseService.isReadonlyView() == false" type="button" class="btn btn-success"  (click)="attachHouseNote()">Save Note</button>
     </span>      
 </p>

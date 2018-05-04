@@ -6,6 +6,7 @@ import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.component';
+import { HouseService } from '../../services/HouseService';
 
 @Component({
   selector: 'h4r-house-pics',
@@ -25,7 +26,8 @@ export class HousePicsComponent implements OnInit {
 	
 	constructor(private housePicsService: HousePicsService
 						, private logger: LoggingService
-						, private dialog: MatDialog) { 
+						, private dialog: MatDialog
+						, private houseService:HouseService) { 
 		
 	}
 	

@@ -21,7 +21,7 @@
         <th width="20%">House &lt;-&gt; User</th>
         <th width="5%">Role</th>
         <th width="20%">Start & End Date(d-m-y)</th>
-        <th width="5%">Type</th>
+        <th width="10%">Type</th>
         <th width="5%">Renewable?</th>
         <th width="10%">Fee</th>
         <th width="20%">Details</th>
@@ -41,7 +41,11 @@
             </td>
             <td>{{houseContract.roles}}</td>
             <td>{{houseContract.contract_start_date}} - {{houseContract.contract_end_date}}</td>
-            <td>{{houseContract.contract_type_str}}</td>
+            <td>
+                <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="houseContract.contract_type == 1"></fa-icon>
+                <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="houseContract.contract_type == 2"></fa-icon>
+                {{houseContract.contract_type_str}}
+            </td>
             <td class="orange">{{houseContract.isRenewable}}</td>
             <td>{{houseContract.annual_rent_amount}}@{{houseContract.monthly_rent_amount}}</td>
             <td>{{houseContract.note}}</td>

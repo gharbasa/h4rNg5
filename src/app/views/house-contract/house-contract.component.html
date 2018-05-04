@@ -36,7 +36,7 @@
           	<td>
             	<div class="field">
           
-	            <p>User: <b>{{houseContract.user.fullName}} ({{houseContract.roles}})</b> - ({{getMonthsDuration()}})
+	            <p>User: <b>{{houseContract.user.fullName}} ({{houseContract.roles}})</b> - ({{getDuration()}})
 
 	             </p>
           
@@ -70,8 +70,12 @@
                 <td>
                   <div class="field">
                   <p>Contract Type: 
-                        <input name="contract_type" [value]=1 type="radio" [(ngModel)]="houseContract.contract_type"> Income&nbsp;&nbsp;
-                        <input name="contract_type" [value]=2 type="radio" [(ngModel)]="houseContract.contract_type"> Expense
+                        <fa-icon style="cursor:pointer" [ngStyle]="{'color':houseContract.contract_type != 1? '#292d2a54' : '' }" [icon]="['fas', 'sign-in-alt']" (click)="changeContractType(1)"></fa-icon>
+                        Income
+                        &nbsp;&nbsp;
+                        
+                        <fa-icon style="cursor:pointer" [ngStyle]="{'color':houseContract.contract_type != 2? '#292d2a54' : '' }" [icon]="['fas', 'sign-out-alt']" (click)="changeContractType(2)"></fa-icon>
+                        Expense
                    </p>
             
                     </div>

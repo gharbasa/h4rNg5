@@ -26,6 +26,7 @@ export class HouseListComponent extends H4rbaseComponent {
 	}
 	
 	fetchHouses() {
+		this.houseService.setOperation("");
 		let that = this;
 		this.houseService.list(this.community_id).subscribe(res => {
 			that.pageSettings = new Pagination(res); //We have to build a new instance of pagination, existing instance will not refresh the view.

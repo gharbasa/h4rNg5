@@ -20,7 +20,7 @@
     </tbody>
     <tbody>
         <tr *ngFor="let house of pageSettings.getPaginatedList()"  [ngStyle]="{'color':house.is_open? '' : '#959ba5' }">
-            <td><a routerLink="../house/{{house.id}}">{{house.name}}</a></td>
+            <td><a href="#" (click)="showHouseDetails(house)">{{house.name}}</a></td>
             <td>{{house.addr1}}, {{house.addr2}}<br/>{{house.addr3}}, {{house.addr4}}</td>
             <td>{{house.description}}</td>
             <td>{{house.is_open}}</td>

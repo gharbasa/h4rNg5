@@ -4,6 +4,7 @@ import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 import { LoginService } from '../../services/login.service';
 import { House } from '../../models/House';
 import { Pagination } from '../../models/Pagination';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'h4r-house-search-results',
@@ -15,12 +16,14 @@ export class HouseSearchResultsComponent extends H4rbaseComponent {
   private pageSettings:Pagination = new Pagination(null);
   //private houses:Array<House> = [];
   constructor(private houseService:HouseService,
-            public loginService:LoginService) { 
+            public loginService:LoginService,
+            private router: Router) { 
               super(loginService);
   }
 
   ngOnInit() {
     this.performSearch();
+    this.houseService.setOperation("read");
   }
 
   performSearch() {
@@ -29,5 +32,11 @@ export class HouseSearchResultsComponent extends H4rbaseComponent {
     this.houseService.search().subscribe(res => {
       that.pageSettings = new Pagination(res); //We have to build a new instance of pagination, existing instance will not refresh the view.
     });
+  }
+
+  //routerLink="../house/{{house.id}}"
+  showHouseDetails(house:House) {
+    this.router.navigate(['house/' + house.id]);
+    return false;
   }
 }
