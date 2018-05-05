@@ -28,7 +28,8 @@
             <td>{{house.addr1}}, {{house.addr2}}<br/>{{house.addr3}}, {{house.addr4}}</td>
             <td>{{house.description}}</td>
             <td>
-                <a title="House pics" href="#" (click)="openHousePics(house)">[&hellip;]</a>
+                <a *ngIf="house.no_of_pics > 0" title="House pics" href="#" (click)="openHousePics(house)">[&hellip;]</a>
+                <span *ngIf="house.no_of_pics == 0">no pics</span>
             </td>
             <td>{{house.is_open}}</td>
             <td>{{house.community && house.community.name}}</td>
