@@ -1,0 +1,72 @@
+Community
+
+<div id='grad1' class="row justify-content-center">
+      
+    <table width="100%">
+        <tr align="left"><td width="50%">
+            <form novalidate #form="ngForm">
+          <div class="field" *ngIf='community.message != ""' style="color:green">
+            <label>Message:</label>
+            <label>{{community.message}}</label>
+          </div>
+          <div class="field" *ngIf='community.errorMessage != ""' style="color:red">
+            <label>Error Message:</label>
+            <label>{{community.errorMessage}}</label>
+          </div>
+       
+         <table><tr>
+             <td width="20%">
+            Name: </td>
+            <td><input [autofocus]="true" name="name" type="text" size="25" [(ngModel)]="community.name" placeholder="Community name"/>
+                </td>
+               </tr>
+        <tr>
+          <td>
+            Gate No., Street:</td>
+            <td><input name="addr1" type="text" size="25" [(ngModel)]="community.addr1" placeholder="Gate no., Street"/>
+          </td>
+         </tr>
+         <tr>
+          <td>
+            City, District:</td><td> <input name="addr2" type="text" size="25" [(ngModel)]="community.addr2" placeholder="City, District"/>
+          </td>
+          </tr>
+          <tr>
+         <td>
+            Zipcode:</td>
+            <td><input name="addr3" type="text" size="25" [(ngModel)]="community.addr3" placeholder="Zip code"/>
+            </td>
+         
+          </tr>
+         <tr>
+             <td>
+            State, Country:</td><td>
+                 <input name="addr4" type="text" size="25" [(ngModel)]="community.addr4" placeholder="State,Country"/>
+                 </td>
+         </tr>
+         
+        <tr>
+
+          <td>
+             Manager:</td>
+             <td width="40%">
+                <ng-select name="manager" [items]="users"
+                   bindLabel="fullName"
+                   bindValue="id"
+                   placeholder="Prop Mgr Emp"
+                   [(ngModel)]="community.manager_id">
+                </ng-select>
+            </td>
+          </tr>
+          <tr align='center'>
+              <td colspan="2">
+                  <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
+              </td>
+          </tr>
+        </table>
+      </form>
+      </td>
+</tr>
+</table>
+      
+</div>

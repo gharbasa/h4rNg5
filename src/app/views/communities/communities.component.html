@@ -1,0 +1,36 @@
+<table>
+    <tr>
+        <td align='center'>
+    Communities <a routerLink="../community/-1">(+)</a>
+        </td>
+    </tr>
+</table>
+<h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
+  <table width="100%">
+      <tbody>
+          <tr *ngIf="errorMessage != ''">
+              <td colspan="9" style="color:red">
+                  {{errorMessage}}
+              </td>
+          </tr>
+    <tr>
+        <th width="10%">Name</th>
+        <th width="15%">Address</th>
+        <th width="5%">Manager</th>
+        <th width="5%">Total Units</th>
+        <th width="5%">Open Units</th>
+        <th width="5%">Created by</th>
+    </tr>
+    </tbody>
+    <tbody>
+        <tr *ngFor="let community of pageSettings.getPaginatedList()">
+            <td><a routerLink="../community/{{community.id}}">{{community.name}}</a></td>
+            <td>{{community.addr1}}, {{community.addr2}}<br/>{{community.addr3}}, {{community.addr4}}</td>
+            <td><a routerLink="../editUser/{{community.manager_id}}">{{community.manager.fullName}}</a></td>
+            <td>{{community.unitsCount}}</td>
+            <td>{{community.openUnits}}</td>
+            <td>{{community.createdBy.fullName}}</td>
+        </tr>
+    </tbody>
+  </table>
+  <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>

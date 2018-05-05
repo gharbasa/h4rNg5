@@ -38,6 +38,8 @@ import { ReceivedPaymentsComponent } from './views/received-payments/received-pa
 import { PaginationComponent } from './views/pagination/pagination.component';
 import { DatePickerComponent } from './views/date-picker/date-picker.component';
 import { HouseSearchResultsComponent } from './views/house-search-results/house-search-results.component';
+import { CommunitiesComponent } from './views/communities/communities.component';
+import { CommunityComponent } from './views/community/community.component';
 
 export class h4rRoutes {
     static routes: Routes = [
@@ -119,6 +121,16 @@ export class h4rRoutes {
         }
         ,
         {
+            path: 'communities',
+            component: CommunitiesComponent
+        }
+        ,
+        {
+            path: 'community/:id',
+            component: CommunityComponent
+        }
+        ,
+        {
             path: 'house_contracts',
             component: HouseContractsComponent
         }
@@ -187,7 +199,8 @@ export class h4rRoutes {
         ForgotPasswordComponent,
         PerformanceChartsComponent, ReceivablesComponent
         , ReceivedPaymentsComponent, H4rbaseComponent,
-        PaginationComponent, DatePickerComponent, HouseSearchResultsComponent
+        PaginationComponent, DatePickerComponent, HouseSearchResultsComponent,
+        CommunitiesComponent, CommunityComponent
       ]
 
       static modalDialogEntryPoints = [
