@@ -18,20 +18,24 @@
  <table>
   <tr>
     <th>User</th>
-    <th>LoginID</th> 
+    <th>Login</th> 
     <th>Email</th>
-    <th>Sex</th>
     <th>Role</th>
     <th>Avatar</th>
     <th>Community</th>
     <th>Admin?</th>
-    <th>Reset Password</th>
+    <th>Reset Cred</th>
   </tr>
   <tr *ngFor="let user of pageSettings.getPaginatedList()">
-    <td><a routerLink="../editUser/{{user.id}}">{{user.fullName}}</a></td>
+    <td>
+        <a routerLink="../editUser/{{user.id}}">{{user.fullName}} (
+        <fa-icon *ngIf="user.sex == 1" [icon]="['fas', 'male']"></fa-icon>
+        <fa-icon *ngIf="user.sex == 2" [icon]="['fas', 'female']"></fa-icon>
+        <fa-icon *ngIf="user.sex == 0" [icon]="['fas', 'transgender']"></fa-icon>
+        )
+    </a></td>
     <td>{{user.login}}</td>
     <td>{{user.email}}</td>
-    <td>{{user.sexStr}}</td>
     <td>{{user.roleStr}}</td>
     <td><img [src]="user.avatarURL" height="30" width="30"></td>
     <td>{{user.community && user.community.name}}</td>

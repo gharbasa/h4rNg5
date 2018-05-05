@@ -111,7 +111,7 @@ export class HousePicsComponent implements OnInit {
 			that.fetchHousePics();
 		}, err => {
 			that.logger.error(this,"Error in saving the new pic to the house " + this.newHousePic.house_id);
-			that.errorMessage = err.error.errorMessage;
+			that.errorMessage = err.error.errorMessage[0];
 		});
 	}
 	
