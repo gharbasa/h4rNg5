@@ -28,7 +28,7 @@ export class House {
 	property_mgmt_emp:any = {};
 	agency_collection_emp:any = {};
 	agency_collection_mgr:any = {};
-
+	no_of_pics:number = 0;
 	errorMessage:string = "";
 	message:string  = "";
 	images:any = [];
