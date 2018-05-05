@@ -1,5 +1,6 @@
-
-        Pictures::
+<span *ngIf="housePics.length == 0" style="color:red">No Pics attached</span>
+<span *ngIf="housePics.length != 0">
+        Pictures of <b>{{housePics[0].house.name}}</b>
         <a (click)="prevImage()" href="#" title="Previous picture"><fa-icon [icon]="['fas', 'backward']"></fa-icon></a>
         ({{viewIndex+1}}/{{housePics.length}})
         <a (click)="nextImage()" href="#" title="Next picture"><fa-icon [icon]="['fas', 'forward']"></fa-icon></a>
@@ -7,3 +8,4 @@
         <span *ngFor="let housePic of housePics; let i = index">
             <h4r-pic-album [housePic]="housePic" *ngIf="(i===viewIndex)" [imageWidth]="imageWidth" [imageHeight]="imageHeight"></h4r-pic-album>
         </span>
+</span>

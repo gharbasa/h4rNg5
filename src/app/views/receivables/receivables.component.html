@@ -1,4 +1,8 @@
-<h4>Receivables</h4>
+<h4>
+  <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="houseContract.contract_type == 1"></fa-icon>
+  <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="houseContract.contract_type == 2"></fa-icon>
+  {{houseContract.contract_type_str}}
+</h4>
 
 <div id='formDiv' class="row justify-content-center">
   <table width="100%">
@@ -53,12 +57,6 @@
                 </div>
             </td>
           </tr>
-          <tr><td><div class="field">
-              
-              <p>Contract Type: <b>{{houseContract.contract_type_str}}</b>
-                  
-                    </p>
-          </div></td></tr>
           <tr>
             <td>
                 <div class="field">

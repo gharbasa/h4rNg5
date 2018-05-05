@@ -45,7 +45,8 @@
                 <span *ngIf="user_house_link.tenant_active_contract">
                     <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.tenant_active_contract.id}}">
                         <!--<img [src]="activePng" height="15" width="30"/> -->
-                        Active
+                        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.tenant_active_contract.contract_type == 1"></fa-icon>
+                        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.tenant_active_contract.contract_type == 2"></fa-icon>Active
                     </a>
                     &nbsp;
                     <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.tenant_active_contract.id}}">
@@ -84,7 +85,8 @@
              <span *ngIf="user_house_link.land_lord_active_contract">
                     <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.land_lord_active_contract.id}}">
                         <!--<img [src]="activePng" height="15" width="30"/> -->
-                        Active
+                        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.land_lord_active_contract.contract_type == 1"></fa-icon>
+                        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.land_lord_active_contract.contract_type == 2"></fa-icon>Active
                     </a>
                     &nbsp;
                     <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.land_lord_active_contract.id}}">
@@ -124,7 +126,8 @@
             <span *ngIf="user_house_link.accountant_active_contract">
                     <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.accountant_active_contract.id}}">
                         <!--<img [src]="activePng" height="15" width="30"/> -->
-                        Active
+                        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.accountant_active_contract.contract_type == 1"></fa-icon>
+                        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.accountant_active_contract.contract_type == 2"></fa-icon>Active
                     </a>
                     &nbsp;
                     <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.accountant_active_contract.id}}">
@@ -163,7 +166,8 @@
             <span *ngIf="user_house_link.property_mgmt_mgr_active_contract">
                 <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.property_mgmt_mgr_active_contract.id}}">
                     <!--<img [src]="activePng" height="15" width="30"/> -->
-                        Active
+                    <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.property_mgmt_mgr_active_contract.contract_type == 1"></fa-icon>
+                    <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.property_mgmt_mgr_active_contract.contract_type == 2"></fa-icon>Active
                 </a>
                 &nbsp;
                 <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.property_mgmt_mgr_active_contract.id}}">
@@ -202,7 +206,8 @@
             <span *ngIf="user_house_link.property_mgmt_emp_active_contract">
                 <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.property_mgmt_emp_active_contract.id}}">
                     <!--<img [src]="activePng" height="15" width="30"/> -->
-                        Active
+                    <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.property_mgmt_emp_active_contract.contract_type == 1"></fa-icon>
+                    <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.property_mgmt_emp_active_contract.contract_type == 2"></fa-icon>Active
                 </a>
                 &nbsp;
                 <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.property_mgmt_emp_active_contract.id}}">
@@ -241,7 +246,8 @@
              <span *ngIf="user_house_link.agency_collection_mgr_active_contract">
                 <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.agency_collection_mgr_active_contract.id}}">
                     <!--<img [src]="activePng" height="15" width="30"/> -->
-                        Active
+                    <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.agency_collection_mgr_active_contract.contract_type == 1"></fa-icon>
+                    <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.agency_collection_mgr_active_contract.contract_type == 2"></fa-icon>Active
                 </a>
                 &nbsp;
                 <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.agency_collection_mgr_active_contract.id}}">
@@ -280,7 +286,8 @@
             <span *ngIf="user_house_link.agency_collection_emp_active_contract">
                 <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.agency_collection_emp_active_contract.id}}">
                     <!--<img [src]="activePng" height="15" width="30"/> -->
-                        Active
+                    <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.agency_collection_emp_active_contract.contract_type == 1"></fa-icon>
+                    <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.agency_collection_emp_active_contract.contract_type == 2"></fa-icon>Active
                 </a>
                 &nbsp;
                 <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.agency_collection_emp_active_contract.id}}">

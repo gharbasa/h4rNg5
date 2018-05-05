@@ -29,7 +29,7 @@ export class H4rbaseComponent implements OnInit {
   isUserLogin() {
     let user = this.loginService.getCurrentUser();
     if(user != null) {
-      this.userPic = AppSettings.H4R_BACKEND_URL + user.avatar;
+      this.userPic = user.avatar;//AppSettings.H4R_BACKEND_URL + user.avatar;
       this.userName = user.fullName;
       this.notifications = this.loginService.getNotifications();
     } else {

@@ -11,6 +11,7 @@
         <th width="10%">House</th>
         <th width="15%">Address</th>
         <th width="20%">Description</th>
+        <th width="5%">Pics</th>
         <th width="5%">Open?</th>
         <th width="10%">Community</th>
         <th width="5%" title="Floors">BHK</th>
@@ -20,9 +21,15 @@
     </tbody>
     <tbody>
         <tr *ngFor="let house of pageSettings.getPaginatedList()"  [ngStyle]="{'color':house.is_open? '' : '#959ba5' }">
-            <td><a href="#" (click)="showHouseDetails(house)">{{house.name}}</a></td>
+            <td>
+                <a *ngIf="isUserLogin()" href="#" (click)="showHouseDetails(house)">{{house.name}}</a>
+                <span *ngIf="!isUserLogin()">{{house.name}}</span>
+            </td>
             <td>{{house.addr1}}, {{house.addr2}}<br/>{{house.addr3}}, {{house.addr4}}</td>
             <td>{{house.description}}</td>
+            <td>
+                <a title="House pics" href="#" (click)="openHousePics(house)">[...]</a>
+            </td>
             <td>{{house.is_open}}</td>
             <td>{{house.community && house.community.name}}</td>
             <td>{{house.no_of_bedrooms}}</td>

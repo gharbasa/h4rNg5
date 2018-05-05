@@ -1,5 +1,5 @@
 export class AppSettings {
-	public static readonly H4R_BACKEND_URL:string = "http://localhost:3000"; //This is for renderring attachment images
+	//public static readonly H4R_BACKEND_URL:string = "http://localhost:3000"; //This is for renderring attachment images
 	/*
 	static ADMIN_ROLE_STR:string = "Admin";
 	static GUEST_ROLE_STR:string = "Guest";
