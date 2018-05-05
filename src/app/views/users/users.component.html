@@ -28,7 +28,7 @@
     <th>Reset Password</th>
   </tr>
   <tr *ngFor="let user of pageSettings.getPaginatedList()">
-    <td><a routerLink="../editUser/{{user.id}}">{{user.lname}}, {{user.fname}}</a></td>
+    <td><a routerLink="../editUser/{{user.id}}">{{user.fullName}}</a></td>
     <td>{{user.login}}</td>
     <td>{{user.email}}</td>
     <td>{{user.sexStr}}</td>
