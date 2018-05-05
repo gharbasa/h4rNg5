@@ -47,7 +47,7 @@ export class HouseContractPicsComponent implements OnInit {
 		this.userHouseContractPicService.list(this.houseContract.id).subscribe(resp => {
 			for(var i in resp) {
 				var row = resp[i];
-				row.image = AppSettings.H4R_BACKEND_URL + row.picture;
+				row.image = row.picture;//AppSettings.H4R_BACKEND_URL + row.picture;
 				that.houseContractPics.push(row);
 			}
 			that.newHouseContractPic.user_house_contract_id = that.houseContract.id;

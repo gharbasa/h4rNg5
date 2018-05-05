@@ -50,7 +50,8 @@ export class HousePicsComponent implements OnInit {
 		this.housePicsService.listByHouse(this.house.id).subscribe(resp => {
 			for(var i in resp) {
 				var row = resp[i];
-				row.image = AppSettings.H4R_BACKEND_URL + row.picture;
+				//row.image = AppSettings.H4R_BACKEND_URL + row.picture;
+				row.image = row.picture;
 				that.housePics.push(row);
 			}
 			that.newHousePic.house_id = that.house.id;
@@ -117,12 +118,14 @@ export class HousePicsComponent implements OnInit {
 	deleteImage() {
 		this.logger.log(this,"User wants to delete the image at index " + this.viewIndex);
 		let that = this;
+		that.errorMessage = "";
 		var currentHousePic = this.housePics[this.viewIndex];
 		this.housePicsService.removeHousePic(currentHousePic.id).subscribe(resp => {
 			that.logger.log(this,"Successfully deleted the pic");
 			that.fetchHousePics();
 		}, err => {
 			that.logger.error(this,"Error deleting the pic");
+			that.errorMessage = err.error.errorMessage;
 		});
 		return false;
 	}

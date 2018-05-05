@@ -152,7 +152,7 @@ export class LoginService {
 	}
 	
 	appendUserViewAttrs(user:any) {
-		user.avatarURL = AppSettings.H4R_BACKEND_URL + user.avatar;
+		user.avatarURL = user.avatar;//AppSettings.H4R_BACKEND_URL + user.avatar;
 		user.fullName = user.lname + ", " + user.fname;
 		if(user.sex==1)
 			user.sexStr = "Male";

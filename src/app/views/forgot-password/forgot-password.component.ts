@@ -34,4 +34,8 @@ export class ForgotPasswordComponent implements OnInit {
 			that.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage:"There is an error in reset password.";
 		});
 	}
+	
+	changeGender(gender:number) {
+		this.user.sex = gender;
+	}
 }
