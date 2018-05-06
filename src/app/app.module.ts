@@ -51,6 +51,8 @@ import 'nvd3';
 //date-picker
 import {NgbModule, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from './date-formatter/NgbDateCustomParserFormatter';
+import { TicketService } from './services/TicketService';
+import { TicketNoteService } from './services/TicketNoteService';
 
 //ngx-file-drop
 @NgModule({
@@ -74,7 +76,9 @@ import { NgbDateCustomParserFormatter } from './date-formatter/NgbDateCustomPars
                 , CommunityService, HousePicsService, HouseNoteService
                 , NotificationService, UtilityService, UserHouseLinkService, HouseContractsService
                 , HouseContractNoteService, UserHouseContractPicService
-                , IdleService, PaymentService,{provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+                , IdleService, PaymentService
+                ,{provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+                ,TicketService, TicketNoteService
               ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

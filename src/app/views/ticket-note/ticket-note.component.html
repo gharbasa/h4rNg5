@@ -1,0 +1,8 @@
+
+<p [ngStyle]="{'font-style':ticketNote.private_note? 'oblique' : 'normal' }">
+    <fa-icon [icon]="['fas', 'comment']"></fa-icon>
+    {{ticketNote.createdAt}} - {{ticketNote.createdBy.fullName}} :: 
+    {{ticketNote.note}} <a *ngIf="canDeleteNote()" href="#" (click)="deleteNote()" title="Delete note">
+              (<fa-icon [icon]="['fas', 'cut']"></fa-icon>)</a>
+  </p>
+  

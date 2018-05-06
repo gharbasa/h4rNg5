@@ -1,0 +1,69 @@
+<h4>Feedback</h4>
+<br/>
+<label *ngIf="createNewTicket == true">Note: We take your review comments seriously and will try to respond asap.</label>
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+<div id='grad1' class="row justify-content-left">
+      
+    <table width="100%" align='left' valign="top">
+        <tr><td width="50%">
+            <form novalidate #form="ngForm" class="form-inline my-2 my-lg-0">
+          <div class="field" *ngIf='ticket.message != ""' style="color:green">
+            <label>Message:</label>
+            <label>{{ticket.message}}</label>
+          </div>
+          <div class="field" *ngIf='ticket.errorMessage != ""' style="color:red">
+            <label>Error Message:</label>
+            <label>{{ticket.errorMessage}}</label>
+          </div>
+       
+         <table><tr>
+            <td><input class="form-control mr-sm-2" [autofocus]="true" name="name" type="text" size="40" [(ngModel)]="ticket.subject" placeholder="Subject"/>
+                </td>
+               </tr>
+        <tr>
+          <td>
+            <textarea class="form-control mr-sm-2" name="description" [(ngModel)]='ticket.description' rows="3" cols="50" placeholder="Description"> </textarea>
+            <br/>
+            <label *ngIf="!isUserLogin()">(Please leave your email in the message)</label>
+          </td>
+         </tr>
+         <tr *ngIf="canChangeStatus()">
+            <td>
+                Status: <ng-select  name="status" [items]="TicketStatuses"
+                  bindLabel="name"
+                  bindValue="id"
+                  placeholder="Status"
+                  [(ngModel)]="ticket.status">
+                </ng-select>
+            </td>
+           </tr>
+           <tr *ngIf="!canChangeStatus() && editticket">
+              <td>
+                  Status: {{getTicketStatus()}}
+              </td>
+             </tr>
+        <tr align='center'>
+              <td colspan="2">
+                  <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
+              </td>
+          </tr>
+        </table>
+      </form>
+
+
+      </td>
+</tr>
+</table>
+</div>
+</td>
+<td valign="top">
+    <h4r-ticket-notes [ticket]="ticket"></h4r-ticket-notes>
+</td>
+</tr>
+</table>
+
+
+

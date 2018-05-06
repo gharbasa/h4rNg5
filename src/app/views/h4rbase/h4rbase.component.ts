@@ -18,6 +18,15 @@ export class H4rbaseComponent implements OnInit {
   public community_id:number = null;
   public communities:Array<Community> = [];
   public currentUser:User = null;
+  public TicketStatuses:Array<any> = [
+    {id:0, name: "All"},
+    {id:1, name: "Created"},
+    {id:2, name: "Open"},
+    {id:3, name: "Waiting"},
+    {id:4, name: "Pending"},
+    {id:5, name: "Done"}
+  ];
+
   constructor(public loginService: LoginService) { 
     this.communities = loginService.getCommunities();
     this.currentUser = loginService.getCurrentUser();
@@ -25,7 +34,7 @@ export class H4rbaseComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
   isUserLogin() {
     let user = this.loginService.getCurrentUser();
     if(user != null) {
@@ -47,6 +56,7 @@ export class H4rbaseComponent implements OnInit {
     this.userPic = "";
       this.userName = "";
       this.notifications = [];
-    }
+  }
+  
 
 }

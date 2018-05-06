@@ -1,0 +1,60 @@
+<table width="40%">
+    <tr>
+        <td width="30%">
+          Tickets <a routerLink="../ticket/-1">(+)</a>
+        </td>
+        <td width="70%">
+            <ng-select name="status" [items]="TicketStatuses"
+              bindLabel="name"
+              bindValue="id"
+              placeholder="Status"
+              [(ngModel)]="filter.status"
+              (change)="fetchTickets()">
+            </ng-select>
+        </td>
+    </tr>
+</table>
+<h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
+  <table width="100%">
+      <tbody>
+          <tr *ngIf="errorMessage != ''">
+              <td colspan="9" style="color:red">
+                  {{errorMessage}}
+              </td>
+          </tr>
+    <tr>
+        <th width="5%">#</th>
+        <th width="20%">Subject</th>
+        <th width="35%">Description</th>
+        <th width="5%">#notes</th>
+        <th width="5%">Status</th>
+        <th width="5%">Created by</th>
+        <th width="5%">Active?</th>
+    </tr>
+    </tbody>
+    <tbody>
+        <tr *ngFor="let ticket of pageSettings.getPaginatedList()"  [ngStyle]="{'color':ticket.active? '' : '#959ba5' }">
+            <td><a routerLink="../ticket/{{ticket.id}}">{{ticket.id}}</a></td>
+            <td>{{ticket.subject}}</td>
+            <td>{{ticket.description}}</td>
+            <td>{{ticket.notesCount}}</td>
+            <td *ngIf="canChangeStatus()">
+                <ng-select name="status" [items]="TicketStatuses"
+                   bindLabel="name"
+                   bindValue="id"
+                   placeholder="Status"
+                   [(ngModel)]="ticket.status"
+                   (change)="updateStatus(ticket)">
+                </ng-select>
+            </td>
+            <td *ngIf="!canChangeStatus()">
+                {{getTicketStatus(ticket)}}
+            </td>
+            <td>{{ticket.createdBy && ticket.createdBy.fullName}}</td>
+            <td>
+                <input type="checkbox" [(ngModel)]="ticket.active" (change)="updateActiveFlag(ticket)">
+            </td>
+        </tr>
+    </tbody>
+  </table>
+  <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
