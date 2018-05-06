@@ -1,60 +1,49 @@
 <h4>User Profile</h4>
 
 <div id='formDiv' class="row justify-content-center">
-      <form novalidate #form="ngForm">
+      <form novalidate #form="ngForm" class="form-inline my-2 my-lg-0">
 
           <div class="field" *ngIf='user.message != ""' style="color:green">
-            <label>Message:</label>
             <label>{{user.message}}</label>
           </div>
           <div class="field" *ngIf='user.errorMessage != ""' style="color:red">
-            <label>Error Message:</label>
             <label>{{user.errorMessage}}</label>
           </div>
-       
-         <ul class="form">
+          <div class="form">
           
-         <li><div class="field">
+         <div class="field">
           
-            <p>First Name: <input [autofocus]="true" name="fname" type="text" size="25" [(ngModel)]="user.fname" placeholder="First name"/></p>
+            <p>First Name: <input class="form-control mr-sm-2" [autofocus]="true" name="fname" type="text" size="25" [(ngModel)]="user.fname" placeholder="First name"/></p>
           
-          </div></li>
+          </div>
           
-         <li><div class="field">
+         <div class="field">
               
-            <p>Middle Name: <input name="mname" type="text" size="25" [(ngModel)]="user.mname" placeholder="Middle name"/></p>
+            <p>Middle Name: <input class="form-control mr-sm-2" name="mname" type="text" size="25" [(ngModel)]="user.mname" placeholder="Middle name"/></p>
           
-          </div></li>
+          </div>
           
-         <li><div class="field">
+         <div class="field">
          
-            <p>Last Name: <input name="lname" type="text" size="25" [(ngModel)]="user.lname" placeholder="Last name"></p>
+            <p>Last Name: <input class="form-control mr-sm-2" name="lname" type="text" size="25" [(ngModel)]="user.lname" placeholder="Last name"></p>
           
-          </div></li>
+          </div>
           
-          <li><div class="field">
+          <div class="field">
           
-            <p>Login ID: <input name="login" [(ngModel)]="user.login" type="text" size="25" placeholder="Login ID"></p>
+            <p>Login ID: <input class="form-control mr-sm-2" name="login" [(ngModel)]="user.login" type="text" size="25" placeholder="Login ID"></p>
          
-          </div></li>
+          </div>
           
-          <li><div class="field">
+          <div class="field">
           
-            <p>Email: <input name="email" type="text" [(ngModel)]="user.email" size="25" placeholder="Email"></p>
+            <p>Email: <input class="form-control mr-sm-2" name="email" type="text" [(ngModel)]="user.email" size="25" placeholder="Email"></p>
          
-          </div></li>
-    
-              
-          <li><div class="field">
+          </div>
           
-            <p>Identification: <input name="adhaar_no" [(ngModel)]="user.adhaar_no" type="text" size="25" placeholder="Aadhar or Driving license No"></p>
-         
-          </div></li>
+          <div class="field" *ngIf="isUserLogin()">
           
-          <li *ngIf="isUserLogin()"><div class="field">
-          
-            <p>Community:
-                <ng-select name="community_id" [items]="communities"
+            <p>Community: <ng-select name="community_id" [items]="communities"
                    bindLabel="name"
                    bindValue="id"
                    placeholder="Community"
@@ -62,77 +51,81 @@
                 </ng-select> 
             </p>
          
-          </div></li>
+          </div>
           
-       </ul>  
-       
-       <ul class="form">
-                   
-                
-         
           <div class="field">
           
-            <p>Password: <input name="password" [(ngModel)]="user.password" type="password" size="25" placeholder="Password"></p>
-         
-          </div>
+              <p>Password: <input class="form-control mr-sm-2" name="password" [(ngModel)]="user.password" type="password" size="25" placeholder="Password"></p>
+           
+            </div>
+            
+             <div class="field">
+            
+              <p>Confirm Password: <input class="form-control mr-sm-2" name="password_confirmation" [(ngModel)]="user.password_confirmation" type="password" size="25" placeholder="Confirm Password"></p>
+           
+            </div>
+
+        </div>
+        <div class="form">
+
+            <div class="field1">
+                Gender:
+                      <fa-icon id="gender" style="cursor:pointer" [ngStyle]="{'color':user.sex!= 1? '#292d2a54' : '' }" [icon]="['fas', 'male']" (click)="changeGender(1)"></fa-icon> Male&nbsp;&nbsp;
+                      <fa-icon style="cursor:pointer" [ngStyle]="{'color':user.sex!= 2? '#292d2a54' : '' }" [icon]="['fas', 'female']" (click)="changeGender(2)"></fa-icon> Female&nbsp;&nbsp;
+                      <fa-icon style="cursor:pointer" [ngStyle]="{'color':user.sex!= 0? '#292d2a54' : '' }" [icon]="['fas', 'transgender']" (click)="changeGender(0)"></fa-icon> Other&nbsp;&nbsp;
+                </div>
+
+            <div class="field">
           
-           <div class="field">
-          
-            <p>Confirm Password: <input name="password_confirmation" [(ngModel)]="user.password_confirmation" type="password" size="25" placeholder="Confirm Password"></p>
-         
-          </div>
-          
+                <p>Identification: <input class="form-control mr-sm-2" name="adhaar_no" [(ngModel)]="user.adhaar_no" type="text" size="25" placeholder="Aadhar or Driving license No"></p>
+             
+              </div>
+
           <div class="field">
               
-          <p>Phone Number:<input name="phone1" type="text" size="25"  [(ngModel)]="user.phone1" placeholder="Quick Contact"></p>
+          <p>Phone Number:<input class="form-control mr-sm-2" name="phone1" type="text" size="25"  [(ngModel)]="user.phone1" placeholder="Quick Contact"></p>
           
           </div>
         
-          <div class="field1">
-          Gender:
-               <span id="right">
-                   
-                <fa-icon style="cursor:pointer" [ngStyle]="{'color':user.sex!= 1? '#292d2a54' : '' }" [icon]="['fas', 'male']" (click)="changeGender(1)"></fa-icon> Male&nbsp;&nbsp;
-                <fa-icon style="cursor:pointer" [ngStyle]="{'color':user.sex!= 2? '#292d2a54' : '' }" [icon]="['fas', 'female']" (click)="changeGender(2)"></fa-icon> Female&nbsp;&nbsp;
-                <fa-icon style="cursor:pointer" [ngStyle]="{'color':user.sex!= 0? '#292d2a54' : '' }" [icon]="['fas', 'transgender']" (click)="changeGender(0)"></fa-icon> Other&nbsp;&nbsp;
-              </span>
-          </div>
+          
           
           <div class="field">
           
-            <p>Address: <input name="addr1" [(ngModel)]="user.addr1" type="text" size="25" placeholder="House No."></p>
+            <p>Address: <input class="form-control mr-sm-2" name="addr1" [(ngModel)]="user.addr1" type="text" size="25" placeholder="House No., Street"></p>
          
           </div>
           
            <div class="field">
           
-            <p>: <input name="addr2" [(ngModel)]="user.addr2" type="text" size="25" placeholder="Street name"></p>
+            <p>&nbsp; <input class="form-control mr-sm-2" name="addr2" [(ngModel)]="user.addr2" type="text" size="25" placeholder="City, District"></p>
          
           </div>
           
           <div class="field">
           
-            <p>: <input name="addr3" [(ngModel)]="user.addr3" type="text" size="25" placeholder="City, Zip code"></p>
+            <p>&nbsp; <input class="form-control mr-sm-2" name="addr3" [(ngModel)]="user.addr3" type="text" size="25" placeholder="Zip code"/></p>
          
           </div>
           
            <div class="field">
           
-            <p>: <input name="addr4" type="text" size="25" [(ngModel)]="user.addr4" placeholder="State, Country"></p>
+            <p>&nbsp; <input class="form-control mr-sm-2" name="addr4" type="text" size="25" [(ngModel)]="user.addr4" placeholder="State,Country"/></p>
          
           </div>
           
-          </ul>
-          
-          <br />
-            <img [src]="avatar" alt="Avatar" *ngIf='avatar != null && avatar != ""'  height="50" width="50">&nbsp;&nbsp;
+        </div>
 
-            <fa-icon class='fa-lg' [icon]="['fas', 'upload']"  (click)="fileUploadImageClicked()" style="cursor:pointer" title="Upload image (png, jpeg, gif)"></fa-icon>
-            <input name="image" type="file" (change)="handleFileInput($event)" style="display:none" id='fileUpload'>
-            <br/>
-            <label name="uploadedFileName" *ngIf="user.avatar && user.avatar.filename">{{user.avatar.filename}}</label>
-          <br/>
-        <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
-        
       </form>
+        
+</div>
+<div id='formDiv' class="row justify-content-center">
+    <p>Avatar: <img [src]="avatar" alt="Avatar" *ngIf='avatar != null && avatar != ""'  height="50" width="50">&nbsp;&nbsp;</p>
+    <fa-icon class='fa-lg' [icon]="['fas', 'upload']"  (click)="fileUploadImageClicked()" style="cursor:pointer" title="Upload image (png, jpeg, gif)"></fa-icon>
+    <input name="image" type="file" (change)="handleFileInput($event)" style="display:none" id='fileUpload'>
+    <label name="uploadedFileName" *ngIf="user.avatar && user.avatar.filename">{{user.avatar.filename}}</label>
+    
+</div>
+<div id='formDiv' class="row justify-content-center">
+    <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
+
 </div>
