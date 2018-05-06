@@ -8,7 +8,7 @@
     
     <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
     <br/>
-    <span *ngIf="ticket.id > 0">
+    <span>
         <input type="checkbox" name="private_note" [(ngModel)]='newTicketNote.private_note' /> Private note?
         <br/>
          <textarea class="form-control mr-sm-2" name="content" [(ngModel)]='newTicketNote.note' rows="3" cols="50" placeholder="Note"></textarea>
