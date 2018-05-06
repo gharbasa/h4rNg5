@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, HostListener} from '@angular/core';
 import { House } from '../../models/House';
 import { HousePicsService } from '../../services/HousePicsService';
 import { HousePic } from '../../models/HousePic';
@@ -146,5 +146,23 @@ export class HousePicsComponent implements OnInit {
 	
 	fileUploadImageClicked() {
 		document.getElementById('fileUpload').click();
+	}
+
+	@HostListener('document:keypress', ['$event'])
+	handleKeyboardEvent(event: KeyboardEvent) {
+		// || event.code === 38 || event.code === 37
+  		if (event.code === "Enter" || event.code === "Space") {
+			this.nextImage();
+		}
+	}
+	
+	@HostListener('document:keyup', ['$event'])
+  	keyEvent(event: KeyboardEvent) {
+    	if (event.keyCode === 37) {
+			this.prevImage();
+		}
+		if (event.keyCode === 39) {
+			this.nextImage();
+    	}
 	}
 }

@@ -26,10 +26,10 @@
         <tr *ngFor="let community of pageSettings.getPaginatedList()">
             <td><a routerLink="../community/{{community.id}}">{{community.name}}</a></td>
             <td>{{community.addr1}}, {{community.addr2}}<br/>{{community.addr3}}, {{community.addr4}}</td>
-            <td><a routerLink="../editUser/{{community.manager_id}}">{{community.manager.fullName}}</a></td>
+            <td><a routerLink="../editUser/{{community.manager_id}}">{{community.manager && community.manager.fullName}}</a></td>
             <td>{{community.unitsCount}}</td>
             <td>{{community.openUnits}}</td>
-            <td>{{community.createdBy.fullName}}</td>
+            <td>{{community.createdBy && community.createdBy.fullName}}</td>
         </tr>
     </tbody>
   </table>
