@@ -1,6 +1,6 @@
 <p *ngIf="pageSettings.list != null && pageSettings.list.length > 0 && pageNumbers.length  > 1">
   <a *ngFor="let page of pageNumbers" href="#" (click)="pageClicked(page)"
       [ngClass]="{'boldUnderline':page == pageSettings.currentPage}">
-    &nbsp;{{page}}&nbsp;
+      &nbsp;{{page}}&nbsp;
   </a>
 </p>
