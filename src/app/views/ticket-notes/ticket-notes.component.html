@@ -1,0 +1,18 @@
+<h4 title="Notes"><fa-icon [icon]="['fas', 'comments']"></fa-icon>({{pageSettings.list.length}})</h4>
+<p> 
+    <br/>
+    <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
+        <span *ngFor="let ticketNote of pageSettings.getPaginatedList(); let i = index">
+            <h4r-ticket-note [ticketNote] = "ticketNote" (onDeleteNoteClick)="deleteNote($event)"></h4r-ticket-note>
+        </span>
+    
+    <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
+    <br/>
+    <span *ngIf="ticket.id > 0">
+        <input type="checkbox" name="private_note" [(ngModel)]='newTicketNote.private_note' /> Private note?
+        <br/>
+         <textarea class="form-control mr-sm-2" name="content" [(ngModel)]='newTicketNote.note' rows="3" cols="50" placeholder="Note"></textarea>
+        <br/>
+         <button type="button" class="btn btn-success"  (click)="attachTicketNote()">Save Note</button>
+    </span>      
+</p>

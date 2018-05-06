@@ -14,10 +14,10 @@ import { User } from '../../models/User';
 })
 export class CommunityComponent implements OnInit {
 
-  private community:Community = new Community();
+  	private community:Community = new Community();
 	private editcommunity:boolean = false;
-  private communities:Array<Community> = null;
-  private users:Array<User> = [];
+  	private communities:Array<Community> = null;
+  	private users:Array<User> = [];
 	private createNewCommunity:boolean = false;
   	constructor(private communityService: CommunityService
 			, private router: Router

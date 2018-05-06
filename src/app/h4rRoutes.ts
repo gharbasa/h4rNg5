@@ -40,6 +40,10 @@ import { DatePickerComponent } from './views/date-picker/date-picker.component';
 import { HouseSearchResultsComponent } from './views/house-search-results/house-search-results.component';
 import { CommunitiesComponent } from './views/communities/communities.component';
 import { CommunityComponent } from './views/community/community.component';
+import { TicketsComponent } from './views/tickets/tickets.component';
+import { TicketComponent } from './views/ticket/ticket.component';
+import { TicketNoteComponent } from './views/ticket-note/ticket-note.component';
+import { TicketNotesComponent } from './views/ticket-notes/ticket-notes.component';
 
 export class h4rRoutes {
     static routes: Routes = [
@@ -164,6 +168,16 @@ export class h4rRoutes {
             path: 'hsearch2',
             component: HouseSearchResultsComponent
         }
+        ,
+        {
+            path: 'tickets',
+            component: TicketsComponent
+        }
+        ,
+        {
+            path: 'ticket/:id',
+            component: TicketComponent
+        }
     ];
     
     static componentDeclarations = [
@@ -200,7 +214,8 @@ export class h4rRoutes {
         PerformanceChartsComponent, ReceivablesComponent
         , ReceivedPaymentsComponent, H4rbaseComponent,
         PaginationComponent, DatePickerComponent, HouseSearchResultsComponent,
-        CommunitiesComponent, CommunityComponent
+        CommunitiesComponent, CommunityComponent,
+        TicketsComponent, TicketComponent, TicketNoteComponent, TicketNotesComponent
       ]
 
       static modalDialogEntryPoints = [
