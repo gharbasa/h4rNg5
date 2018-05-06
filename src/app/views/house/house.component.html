@@ -13,11 +13,11 @@ House
             <label>Error Message:</label>
             <label>{{house.errorMessage}}</label>
           </div>
-       
+          <div class="form">
          <table><tr>
              <td width="20%">
             Name: </td>
-            <td><input [autofocus]="true" name="name" type="text" size="25" [(ngModel)]="house.name" placeholder="House name"/>
+            <td><input class="form-control mr-sm-2" [autofocus]="true" name="name" type="text" size="25" [(ngModel)]="house.name" placeholder="House name"/>
                 </td>
                </tr>
          <tr>
@@ -26,62 +26,62 @@ House
             Description:
             </td>
             <td> 
-            <textarea name="description" [(ngModel)]='house.description' rows="3" cols="30" placeholder="Description"> </textarea>
+            <textarea class="form-control mr-sm-2" name="description" [(ngModel)]='house.description' rows="3" cols="30" placeholder="Description"> </textarea>
           </td>
         </tr>
         <tr>
           <td>
             House No., Street:</td>
-            <td><input name="addr1" type="text" size="25" [(ngModel)]="house.addr1" placeholder="House no., Street"/>
+            <td><input class="form-control mr-sm-2" name="addr1" type="text" size="25" [(ngModel)]="house.addr1" placeholder="House no., Street"/>
           </td>
          </tr>
          <tr>
           <td>
-            City, District:</td><td> <input name="addr2" type="text" size="25" [(ngModel)]="house.addr2" placeholder="City, District"/>
+            City, District:</td><td> <input class="form-control mr-sm-2" name="addr2" type="text" size="25" [(ngModel)]="house.addr2" placeholder="City, District"/>
           </td>
           </tr>
           <tr>
          <td>
             Zipcode:</td>
-            <td><input name="addr3" type="text" size="25" [(ngModel)]="house.addr3" placeholder="Zip code"/>
+            <td><input class="form-control mr-sm-2" name="addr3" type="text" size="25" [(ngModel)]="house.addr3" placeholder="Zip code"/>
             </td>
          
           </tr>
          <tr>
              <td>
             State, Country:</td><td>
-                 <input name="addr4" type="text" size="25" [(ngModel)]="house.addr4" placeholder="State,Country"/>
+                 <input class="form-control mr-sm-2" name="addr4" type="text" size="25" [(ngModel)]="house.addr4" placeholder="State,Country"/>
                  </td>
          </tr>
 
         <tr>
-            <td>Total floors:</td><td> <input name="no_of_floors" type="text" size="25" [(ngModel)]="house.no_of_floors" placeholder="No. of Floors"/>
+            <td>Total floors:</td><td> <input class="form-control mr-sm-2" name="no_of_floors" type="text" size="25" [(ngModel)]="house.no_of_floors" placeholder="No. of Floors"/>
                 </td>
         </tr>
 
         <tr>
-            <td>Total Portions:</td><td> <input name="no_of_portions" type="text" size="25" [(ngModel)]="house.no_of_portions" placeholder="No. of Portions"/>
+            <td>Total Portions:</td><td> <input class="form-control mr-sm-2" name="no_of_portions" type="text" size="25" [(ngModel)]="house.no_of_portions" placeholder="No. of Portions"/>
                 </td>
         </tr>
         
         <tr>
             <td>BHK:</td>
             <td> 
-                <input name="no_of_bedrooms" type="text" size="4" [(ngModel)]="house.no_of_bedrooms" placeholder="No. Of bedrooms"/>
+                <input class="form-control mr-sm-2" name="no_of_bedrooms" type="text" size="4" [(ngModel)]="house.no_of_bedrooms" placeholder="No. Of bedrooms"/>
             </td>
         </tr>
          
         <tr>
                 <td>Bathrooms:</td>
                 <td> 
-                    <input name="no_of_bathrooms" type="text" size="4" [(ngModel)]="house.no_of_bathrooms" placeholder="No. Of bathrooms"/>
+                    <input class="form-control mr-sm-2" name="no_of_bathrooms" type="text" size="4" [(ngModel)]="house.no_of_bathrooms" placeholder="No. Of bathrooms"/>
                 </td>
         </tr>
 
         <tr>
                 <td>Floor No:</td>
                 <td> 
-                    <input name="floor_number" type="text" size="4" [(ngModel)]="house.floor_number" placeholder="Floor number"/>
+                    <input class="form-control mr-sm-2" name="floor_number" type="text" size="4" [(ngModel)]="house.floor_number" placeholder="Floor number"/>
                 </td>
         </tr>
 
@@ -136,6 +136,7 @@ House
               </td>
           </tr>
         </table>
+          </div>
       </form>
       </td>
       <td *ngIf="!createNewHouse" valign="top">
