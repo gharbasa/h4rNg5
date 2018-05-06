@@ -27,7 +27,7 @@
           <td>
             <textarea class="form-control mr-sm-2" name="description" [(ngModel)]='ticket.description' rows="3" cols="50" placeholder="Description"> </textarea>
             <br/>
-            <label *ngIf="!isUserLogin()">Description:(Please leave your email in the message)</label>
+            <label *ngIf="!isUserLogin()">(Please leave your email in the message)</label>
           </td>
          </tr>
          <tr *ngIf="canChangeStatus()">
@@ -40,7 +40,7 @@
                 </ng-select>
             </td>
            </tr>
-           <tr *ngIf="!canChangeStatus()">
+           <tr *ngIf="!canChangeStatus() && editticket">
               <td>
                   Status: {{getTicketStatus()}}
               </td>
