@@ -3,14 +3,14 @@
 <div id='formDiv' class="row justify-content-center">
       <form novalidate #form="ngForm" class="form-inline my-2 my-lg-0">
 
-          <div class="field" *ngIf='user.message != ""' style="color:green">
-            <label>{{user.message}}</label>
-          </div>
-          <div class="field" *ngIf='user.errorMessage != ""' style="color:red">
-            <label>{{user.errorMessage}}</label>
-          </div>
           <div class="form">
-          
+              <div class="field" *ngIf='user.message != ""' style="color:green">
+                  <label>{{user.message}}</label>
+                </div>
+                <div class="field" *ngIf='user.errorMessage != ""' style="color:red">
+                  <label>{{user.errorMessage}}</label>
+                </div>
+                
          <div class="field">
           
             <p>First Name: <input class="form-control mr-sm-2" [autofocus]="true" name="fname" type="text" size="25" [(ngModel)]="user.fname" placeholder="First name"/></p>
@@ -70,11 +70,11 @@
 
             <div class="field1">
                 Gender:
-                      <fa-icon id="gender" style="cursor:pointer" [ngStyle]="{'color':user.sex!= 1? '#292d2a54' : '' }" [icon]="['fas', 'male']" (click)="changeGender(1)"></fa-icon> Male&nbsp;&nbsp;
+                      <fa-icon id="gender" style="cursor:pointer" [ngStyle]="{'color':user.sex!= 1? '#292d2a54' : '' }" [icon]="['fas', 'male']" (click)="changeGender(1)"></fa-icon>Male&nbsp;&nbsp;
                       <fa-icon style="cursor:pointer" [ngStyle]="{'color':user.sex!= 2? '#292d2a54' : '' }" [icon]="['fas', 'female']" (click)="changeGender(2)"></fa-icon> Female&nbsp;&nbsp;
                       <fa-icon style="cursor:pointer" [ngStyle]="{'color':user.sex!= 0? '#292d2a54' : '' }" [icon]="['fas', 'transgender']" (click)="changeGender(0)"></fa-icon> Other&nbsp;&nbsp;
                 </div>
-
+                <br/>
             <div class="field">
           
                 <p>Identification: <input class="form-control mr-sm-2" name="adhaar_no" [(ngModel)]="user.adhaar_no" type="text" size="25" placeholder="Aadhar or Driving license No"></p>

@@ -16,6 +16,8 @@ import { IdleService } from '../../services/IdleService';
 })
 
 export class LoginComponent implements OnInit {
+
+    private errorMessage: string = "";
     constructor(private loginService: LoginService 
     		,private localStorageService: LocalStorageService
     		,private router: Router
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit {
         //this.onLoginClick.emit(user session);
     	this.logger.log(this,"Login with userid " + this.usersession.login);
         let that = this;
+        this.errorMessage = "";
         this.loginService.login(this.usersession).subscribe(res => {
             //this.logger.log(this,"Login successful " + res.fname);
             that.updateUserInLocalStorage(res);
@@ -53,7 +56,8 @@ export class LoginComponent implements OnInit {
             this.idleService.startIdleService();
         }
         ,err => {
-        	this.logger.error(this,"Login failed.");
+            this.logger.error(this,"Login failed.");
+            this.errorMessage = "Login failed.";
             that.removeUserFromLocalStorage();
         });
         this.usersession.login = '';
