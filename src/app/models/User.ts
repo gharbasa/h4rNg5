@@ -10,6 +10,7 @@ export class User {
     adhaar_no: string = ""; //used in self service password reset also
     created_by: number = 0;
     updated_by: number = 0;
+    createdAt:string = "";
     avatar: string = "";
 	password: string = ""; //used in self service password reset also
 	password_confirmation: string = ""; //used in self service password reset also
@@ -19,6 +20,8 @@ export class User {
     addr2: string = "";
     addr3: string = "";
     addr4: string = "";
+    subscriptionType: number = 1; //default is 1 year in schema.
+    subscriptionEndDate:string = ""; 
     role: number = 0;
     admin: boolean = false;
     guest: boolean = false;

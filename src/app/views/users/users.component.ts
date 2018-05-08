@@ -5,6 +5,7 @@ import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
 import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 import {Pagination} from  '../../models/Pagination';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'h4r-users',
@@ -78,5 +79,16 @@ export class UsersComponent extends H4rbaseComponent {
 			this.logger.error(this, "Problem in resetting the password.");
 		});	
 		return false;
+	}
+
+	changeSubscription(user:User):void {
+		this.logger.info("user.subscriptionType=" + user.subscriptionType);
+		this.userService.changeSubscription(user).subscribe(resp => {
+			this.logger.info(this, "Successfully changed subscription.");
+			this.refreshUsersList();
+		},
+		err => {
+			this.logger.error(this, "Probleming changing subscription.");
+		});	
 	}
 }

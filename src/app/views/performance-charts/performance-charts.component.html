@@ -16,7 +16,7 @@
     <tr>
         <td width="50%" valign="top">
                 <table align='left'><tr><td>
-                        <b>Past 5 Years Income</b> (<fa-icon [icon]="['fas', 'sign-in-alt']"></fa-icon>)
+                        <b>Past {{currentUser.subscriptionType}} Years Income</b> (<fa-icon [icon]="['fas', 'sign-in-alt']"></fa-icon>)
                     <nvd3 #discreteBarChartYearlyIncomeTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataYearlyIncome"></nvd3>
                     </td><td>
                     <nvd3 #discretePieChartYearlyIncomeTag  [options]="pieChartOptions" [data]="pieChartDataYearlyIncome"></nvd3>
@@ -44,7 +44,7 @@
         </td>
         <td width="50%" valign="top">
                 <table align='left'><tr><td>
-                        <b>Past 5 Years Expense</b> (<fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>)
+                        <b>Past {{currentUser.subscriptionType}} Years Expense</b> (<fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>)
                     <nvd3 #discreteBarChartYearlyExpenseTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataYearlyExpense"></nvd3>
                     </td><td>
                     <nvd3 #discretePieChartYearlyExpenseTag  [options]="pieChartOptions" [data]="pieChartDataYearlyExpense"></nvd3>

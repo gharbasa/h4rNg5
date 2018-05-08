@@ -4,6 +4,8 @@ import { LoggingService, Config } from 'loggerservice';
 import {PaymentService} from  '../../services/PaymentService';
 import { House } from '../../models/House';
 import { Payment } from '../../models/Payment';
+import { LoginService } from '../../services/login.service';
+import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 declare let d3: any;
 
 @Component({
@@ -12,7 +14,7 @@ declare let d3: any;
   styleUrls: ['./performance-charts.component.scss', '../../../../node_modules/nvd3/build/nv.d3.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class PerformanceChartsComponent implements OnInit {
+export class PerformanceChartsComponent extends H4rbaseComponent {
 	private discreteBarChartOptions: any = {
 		chart: {
 		  type: 'discreteBarChart',
@@ -107,19 +109,18 @@ export class PerformanceChartsComponent implements OnInit {
 	
 	constructor(private houseService: HouseService,
 			private logger: LoggingService,
-			private paymentService: PaymentService) { 
-
+			private paymentService: PaymentService,
+			public loginService: LoginService) { 
+				super(loginService);
   	}
   	
   	ngOnInit() {
 		this.fetchHouses();
 		let currentYear:number =  (new Date()).getFullYear();
-		this.years = [{year: currentYear, label:"Year-"+currentYear}, 
-					  {year: currentYear - 1, label:"Year-"+(currentYear-1)}, 
-					  {year: currentYear - 2, label:"Year-"+(currentYear-2)}, 
-					  {year: currentYear - 3, label:"Year-"+(currentYear-3)}, 
-					  {year: currentYear - 4, label:"Year-"+(currentYear-4)}
-					] 
+		this.years.length = 0;
+		for(let i=0; i<this.currentUser.subscriptionType; i++) {
+			this.years.push({year: currentYear - i, label:"Year-"+(currentYear - i)});
+		}
   	};
 
   	fetchHouses() {

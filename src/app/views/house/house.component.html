@@ -5,16 +5,23 @@ House
     <table width="100%">
         <tr align="left"><td width="50%">
             <form novalidate #form="ngForm">
-          <div class="field" *ngIf='house.message != ""' style="color:green">
-            <label>Message:</label>
-            <label>{{house.message}}</label>
-          </div>
-          <div class="field" *ngIf='house.errorMessage != ""' style="color:red">
-            <label>Error Message:</label>
-            <label>{{house.errorMessage}}</label>
-          </div>
-          <div class="form">
-         <table><tr>
+                    <div class="form">
+         <table>
+            <tr>
+                <td colspan="2">
+                        <div class="field" *ngIf='house.message != ""' style="color:green">
+                                <label>Message:</label>
+                                <label>{{house.message}}</label>
+                              </div>
+                              <div class="field" *ngIf='house.errorMessage != ""' style="color:red">
+                                <label>Error Message:</label>
+                                <label>{{house.errorMessage}}</label>
+                              </div>
+                              
+                </td>
+            </tr> 
+            
+            <tr>
              <td width="20%">
             Name: </td>
             <td><input class="form-control mr-sm-2" [autofocus]="true" name="name" type="text" size="25" [(ngModel)]="house.name" placeholder="House name"/>

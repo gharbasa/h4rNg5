@@ -45,16 +45,20 @@ export class UserService {
 		return this.http.get(this.basePath + "?commnunity_id=" + commnunity_id).map(res => res as User[] || []);
 	}
 	
-	promote2Admin(user:any) {
+	promote2Admin(user:User) {
 		let url = this.basePath + "/" + user.id + "/" + "promote2Admin"
 		return this.http.put(url,"");
 	}
 	
-	demoteFromAdmin(user:any) {
+	demoteFromAdmin(user:User) { 
 		let url = this.basePath + "/" + user.id + "/" + "demoteFromAdmin"
 		return this.http.put(url,"");
 	}
 
+	changeSubscription(user:User) {
+		let url = this.basePath + "/" + user.id + "/" + "changeSubscription"
+		return this.http.put(url,{subscriptionType: user.subscriptionType});
+	}
 	
 	/**
 	 * Following attributes are not needed to the backend server.
