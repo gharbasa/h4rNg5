@@ -5,20 +5,26 @@ import { TicketNoteService } from '../../services/TicketNoteService';
 import { TicketService } from '../../services/TicketService';
 import { Ticket } from '../../models/Ticket';
 import { LoggingService } from 'loggerservice';
+import { LoginService } from '../../services/login.service';
+import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 
 @Component({
   selector: 'h4r-ticket-notes',
   templateUrl: './ticket-notes.component.html',
   styleUrls: ['./ticket-notes.component.scss']
 })
-export class TicketNotesComponent implements OnInit {
+export class TicketNotesComponent extends H4rbaseComponent {
 
-  private pageSettings:Pagination = new Pagination(null);
+	public pageSettings:Pagination = new Pagination(null);
 	@Input() ticket:Ticket;
-	private newTicketNote:TicketNote = new TicketNote();
+	public isadminUser:boolean = false;
+	public newTicketNote:TicketNote = new TicketNote();
 	constructor(private ticketNoteService: TicketNoteService
 				, private logger: LoggingService
-				, private ticketService:TicketService) { }
+				, private ticketService:TicketService
+				, public loginService: LoginService) { 
+					super(loginService);
+				}
 	
 	ngOnInit() {
 		
@@ -30,6 +36,7 @@ export class TicketNotesComponent implements OnInit {
 			if(this.ticket.id == 0) return;
 			this.logger.log(this,"TicketNotes ticketid=" + this.ticket.id);
 			this.fetchTicketNotes();
+			this.isadminUser = this.isAdminUser();
 	}
 	
 	fetchTicketNotes() {

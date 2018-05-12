@@ -13,12 +13,12 @@ import { HouseService } from '../../services/HouseService';
 })
 export class HouseNotesComponent implements OnInit {
 
-	private pageSettings:Pagination = new Pagination(null);
+	public pageSettings:Pagination = new Pagination(null);
 	@Input() house:House;
-	private newHouseNote:HouseNote = new HouseNote();
+	public newHouseNote:HouseNote = new HouseNote();
 	constructor(private houseNoteService: HouseNoteService
 				, private logger: LoggingService
-				, private houseService:HouseService) { }
+				, public houseService:HouseService) { }
 	
 	ngOnInit() {
 		

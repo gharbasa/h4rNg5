@@ -15,7 +15,7 @@ declare let d3: any;
   encapsulation: ViewEncapsulation.None
 })
 export class PerformanceChartsComponent extends H4rbaseComponent {
-	private discreteBarChartOptions: any = {
+	public discreteBarChartOptions: any = {
 		chart: {
 		  type: 'discreteBarChart',
 		  height: 250,
@@ -43,7 +43,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		}
 	};
 
-	private pieChartOptions: any = {
+	public pieChartOptions: any = {
 		chart: {
 		  type: 'pieChart',
 		  height: 250,
@@ -65,11 +65,11 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 	};
 
 
-	private houses:Array<House> = [];
-	private house_id: number = null;
-	private payments:Array<any> = [];
-	private year:number = null;
-	private years:any = [];
+	public houses:Array<House> = [];
+	public house_id: number = null;
+	public payments:Array<any> = [];
+	public year:number = null;
+	public years:any = [];
 	
 	
 	@ViewChild('discreteBarChartMonthlyIncomeTag') discreteBarChartMonthlyIncomeTag;

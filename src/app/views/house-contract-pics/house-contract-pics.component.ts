@@ -15,10 +15,10 @@ import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.componen
 export class HouseContractPicsComponent implements OnInit {
 
 	@Input() houseContract:HouseContract;
-	private houseContractPics:Array<UserHouseContractPic> = [];
+	public houseContractPics:Array<UserHouseContractPic> = [];
 	private viewIndex:number = 0;
-	private newHouseContractPic:UserHouseContractPic = new UserHouseContractPic();
-	private errorMessage:string = "";
+	public newHouseContractPic:UserHouseContractPic = new UserHouseContractPic();
+	public errorMessage:string = "";
 	private imageWidth:number = 300;
 	private imageHeight:number = 350;
 	

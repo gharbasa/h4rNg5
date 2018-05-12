@@ -14,10 +14,10 @@ import { Ticket } from '../../models/Ticket';
 })
 export class TicketsComponent extends H4rbaseComponent {
 
-  private pageSettings:Pagination = new Pagination(null);
-  private errorMessage:string = "";
-  private users:Array<User> = [];
-  private filter:any = {status:0};
+  public pageSettings:Pagination = new Pagination(null);
+  public errorMessage:string = "";
+  public users:Array<User> = [];
+  public filter:any = {status:0};
 
 	constructor(private logger: LoggingService, public loginService: LoginService, private ticketService: TicketService) {
 				super(loginService);

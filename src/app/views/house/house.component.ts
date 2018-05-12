@@ -16,11 +16,11 @@ import { User } from '../../models/User';
 })
 export class HouseComponent implements OnInit {
 	
-	private house:House = new House();
-	private editHouse:boolean = false;
-	private communities:Array<Community> = null;
-	private createNewHouse:boolean = false;
-  	constructor(private houseService: HouseService
+	public house:House = new House();
+	public editHouse:boolean = false;
+	public communities:Array<Community> = null;
+	public createNewHouse:boolean = false;
+  	constructor(public houseService: HouseService
 			, private router: Router
 			, private route: ActivatedRoute
 			, private localStorageService: LocalStorageService

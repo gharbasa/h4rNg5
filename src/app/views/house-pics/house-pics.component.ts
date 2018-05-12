@@ -16,18 +16,18 @@ import { HouseService } from '../../services/HouseService';
 export class HousePicsComponent implements OnInit {
 	
 	@Input() house:House;
-	private housePics:Array<HousePic> = [];
+	public housePics:Array<HousePic> = [];
 	private viewIndex:number = 0;
-	private newHousePic:HousePic = new HousePic();
+	public newHousePic:HousePic = new HousePic();
 	private dialogRef:any = null;
-	private errorMessage:string = "";
+	public errorMessage:string = "";
 	private imageWidth:number = 300;
 	private imageHeight:number = 350;
 	
 	constructor(private housePicsService: HousePicsService
 						, private logger: LoggingService
 						, private dialog: MatDialog
-						, private houseService:HouseService) { 
+						, public houseService:HouseService) { 
 		
 	}
 	

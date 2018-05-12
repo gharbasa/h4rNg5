@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build --prod",
+    "build": "ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -40,7 +40,8 @@
     "@ng-idle/core":"",
     "@ng-idle/keepalive":"",
     "loggerservice": "2.0.2",
-    "ng2-nvd3":"2.0.0"
+    "ng2-nvd3":"2.0.0",
+    "@angular/cli": "~1.7.3"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.3",

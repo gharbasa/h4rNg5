@@ -11,7 +11,7 @@ import { Pagination } from '../../models/Pagination';
 export class PaginationComponent implements OnInit {
 
   @Input() pageSettings:Pagination = null;
-  private pageNumbers:Array<number> = [];
+  public pageNumbers:Array<number> = [];
   constructor(private logger: LoggingService) { }
 
   ngOnInit() {

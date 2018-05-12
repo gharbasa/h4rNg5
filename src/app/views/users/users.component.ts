@@ -14,7 +14,7 @@ import { User } from '../../models/User';
 })
 export class UsersComponent extends H4rbaseComponent {
 
-	private pageSettings:Pagination = new Pagination(null);
+	public pageSettings:Pagination = new Pagination(null);
 
 	constructor(private userService: UserService,
 			private logger: LoggingService, 	
