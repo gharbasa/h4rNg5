@@ -12,12 +12,12 @@ import { HouseContract } from '../../models/HouseContract';
 })
 export class ReceivedPaymentsComponent implements OnInit {
 	
-	private pageSettings:Pagination = new Pagination(null);
-	@Input() private payments: Array<Payment> = [];
-	@Input() private houseContract:HouseContract;
+	public pageSettings:Pagination = new Pagination(null);
+	@Input() public payments: Array<Payment> = [];
+	@Input() public houseContract:HouseContract;
 	@Output() onDeletePaymentClick = new EventEmitter<Payment>();
-	private totalReceivedAmt:number = 0;
-
+	public totalReceivedAmt:number = 0;
+	
   	constructor(private logger: LoggingService) { }
   	
 	ngOnInit() {}

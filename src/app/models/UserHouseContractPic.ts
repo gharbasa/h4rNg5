@@ -1,7 +1,7 @@
 export class UserHouseContractPic {
 	id: number = 0;
 	user_house_contract_id: number = 0;
-	picture:string = "";// "/system/house_pics/pictures/000/000/001/original/rose.jpg?1458412701",
+	picture:any = "";// "/system/house_pics/pictures/000/000/001/original/rose.jpg?1458412701",
 	about_pic:string = "";
 	primary_pic:boolean = false;
 	created_by:number = 0;

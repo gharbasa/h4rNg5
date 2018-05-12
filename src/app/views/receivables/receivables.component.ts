@@ -19,12 +19,12 @@ import { DatePickerComponent } from '../date-picker/date-picker.component';
 })
 export class ReceivablesComponent implements OnInit {
 
-	private houseContract:HouseContract = new HouseContract();
-	private payment: Payment = new Payment();
-	private errorMessage:string = "";
-	private message:string = "";
-	private houseContractId:number = 0;
-	private payments: Array<Payment> = [];
+	public houseContract:HouseContract = new HouseContract();
+	public payment: Payment = new Payment();
+	public errorMessage:string = "";
+	public message:string = "";
+	public houseContractId:number = 0;
+	public payments: Array<Payment> = [];
 	
 	@ViewChild('paymentDate')
 	paymentDate: DatePickerComponent;

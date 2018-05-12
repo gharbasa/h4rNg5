@@ -12,9 +12,9 @@ import {Pagination} from  '../../models/Pagination';
 })
 export class HouseContractNotesComponent implements OnInit {
 
-	private pageSettings:Pagination = new Pagination(null);
+	public pageSettings:Pagination = new Pagination(null);
 	@Input() houseContract:HouseContract;
-	private newHouseContractNote:HouseContractNote = new HouseContractNote();
+	public newHouseContractNote:HouseContractNote = new HouseContractNote();
 	constructor(private houseContractNoteService: HouseContractNoteService, private logger: LoggingService) { }
 	
 	ngOnInit() {

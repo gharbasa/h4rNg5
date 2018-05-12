@@ -18,9 +18,9 @@ import * as moment from 'moment';
 })
 export class HouseContractComponent implements OnInit {
 
- 	private houseContract:HouseContract = new HouseContract();
-	private errorMessage:string = "";
-	private newContract:boolean = false;
+ 	public houseContract:HouseContract = new HouseContract();
+	public errorMessage:string = "";
+	public newContract:boolean = false;
 
 	@ViewChild('contractStartDate')
 	contractStartDate: DatePickerComponent;

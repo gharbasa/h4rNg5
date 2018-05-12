@@ -8,7 +8,8 @@ export class TicketNote {
     updated_by: number = 0;
     created_at:string = "";
     updated_at:string = "";
-
+    createdAt:string = "";
+    createdBy:any = "";
 	errorMessage:string = "";
 	message:string  = "";
 	/*

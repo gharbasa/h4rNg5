@@ -25,7 +25,7 @@ export class NavBarComponent  extends H4rbaseComponent {
 		  }
   //@Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
   //@Output() onLogoutClick = new EventEmitter<string>();
-  private search:string = "";
+  public search:string = "";
   ngOnInit() {
 	  
   }

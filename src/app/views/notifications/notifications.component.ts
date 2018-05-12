@@ -12,7 +12,7 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class NotificationsComponent implements OnInit {
 
-	private pageSettings:Pagination = new Pagination(null);
+	public pageSettings:Pagination = new Pagination(null);
 	
 	constructor(private loginService: LoginService
   			,private notificationService: NotificationService

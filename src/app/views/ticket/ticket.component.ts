@@ -13,9 +13,9 @@ import { Ticket } from '../../models/Ticket';
 })
 export class TicketComponent extends H4rbaseComponent {
 
-  private ticket:Ticket = new Ticket();
-  private editticket:boolean = true;
-  private createNewTicket:boolean = false;
+  public ticket:Ticket = new Ticket();
+  public editticket:boolean = true;
+  public createNewTicket:boolean = false;
   constructor(private logger: LoggingService, public loginService: LoginService, private ticketService: TicketService
                 , private router: Router
                 , private route: ActivatedRoute) {

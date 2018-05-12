@@ -11,7 +11,7 @@ export class User {
     created_by: number = 0;
     updated_by: number = 0;
     createdAt:string = "";
-    avatar: string = "";
+    avatar: any = "";
 	password: string = ""; //used in self service password reset also
 	password_confirmation: string = ""; //used in self service password reset also
     login: string = ""; //used in self service password reset also

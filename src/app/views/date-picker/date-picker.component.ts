@@ -10,8 +10,8 @@ import { LoggingService } from 'loggerservice';
 })
 export class DatePickerComponent implements OnInit {
 
-  @Input() private value:any;
-  @Input() private name:string = ""; //Optional
+  @Input() public value:any;
+  @Input() public name:string = ""; //Optional
   @Output() onDateChanged:EventEmitter<string> = new EventEmitter();
   constructor(private config: NgbDatepickerConfig, 
               private dateFormatter:NgbDateParserFormatter,

@@ -12,7 +12,7 @@ import { NotificationType } from '../../models/NotificationType';
 
 export class NotificationTypeListComponent implements OnInit {
 
-	private notificationTypes: Array<NotificationType> = [];
+	public notificationTypes: Array<NotificationType> = [];
 
 	constructor(private notificationTypeService: NotificationTypeService
 			, private logger: LoggingService

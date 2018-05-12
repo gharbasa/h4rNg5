@@ -11,10 +11,10 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class NotificationTypeComponent implements OnInit {
 
-	private notificationType: any = new NotificationType();
-	private editNotificationType:boolean = false;
+	public notificationType: any = new NotificationType();
+	public editNotificationType:boolean = false;
 
-	private noticeTypeOptions = [
+	public noticeTypeOptions = [
 	                         {id:1, description:"New user"},
 	                         {id:2, description: "House Verified"},
 	                         {id:3, description: "User house record updated"},

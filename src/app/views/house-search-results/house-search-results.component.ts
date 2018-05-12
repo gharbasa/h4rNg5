@@ -18,8 +18,9 @@ import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.componen
 })
 export class HouseSearchResultsComponent extends H4rbaseComponent {
 
-  private pageSettings:Pagination = new Pagination(null);
+  public pageSettings:Pagination = new Pagination(null);
   private dialogRef:any = null;
+  public errorMessage:string = "";
   //private houses:Array<House> = [];
   constructor(private houseService:HouseService,
             public loginService:LoginService,

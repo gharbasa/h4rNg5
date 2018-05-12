@@ -9,8 +9,10 @@
     <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
     <br/>
     <span>
+        <label *ngIf="isadminUser">
         <input type="checkbox" name="private_note" [(ngModel)]='newTicketNote.private_note' /> Private note?
         <br/>
+        </label>
          <textarea class="form-control mr-sm-2" name="content" [(ngModel)]='newTicketNote.note' rows="3" cols="50" placeholder="Note"></textarea>
         <br/>
          <button type="button" class="btn btn-success"  (click)="attachTicketNote()">Save Note</button>

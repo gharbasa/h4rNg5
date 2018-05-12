@@ -17,7 +17,7 @@ import { IdleService } from '../../services/IdleService';
 
 export class LoginComponent implements OnInit {
 
-    private errorMessage: string = "";
+    public errorMessage: string = "";
     constructor(private loginService: LoginService 
     		,private localStorageService: LocalStorageService
     		,private router: Router

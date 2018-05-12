@@ -18,7 +18,7 @@ export class NewuserComponent extends H4rbaseComponent {
 	public user: User = new User();
 	public selfEditUserProfile:boolean = false;
 	public fileToUpload: File = null;
-	private avatar:any = null;//require("../../assets/img/logo.png");
+	public avatar:any = null;//require("../../assets/img/logo.png");
 	
   	constructor(private userService: UserService
   			, private router: Router

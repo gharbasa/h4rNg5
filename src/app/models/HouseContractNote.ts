@@ -8,7 +8,7 @@ export class HouseContractNote {
     updated_by: number = 0;
     created_at:string = "";
     updated_at:string = "";
-
+	createdAt:string = "";
 	errorMessage:string = "";
 	message:string  = "";
 	/*

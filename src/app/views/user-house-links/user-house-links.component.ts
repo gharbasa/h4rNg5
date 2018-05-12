@@ -21,11 +21,11 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
 	private inactivePng:any = require("assets/img/inactive.png"); 
 	private newcontractPng:any = require("assets/img/new_contract.png");
 	//private userHouseLinks:Array<UserHouseLink> = [];
-	private staticRoles:any = [];
+	public staticRoles:any = [];
 	private users:Array<User> = [];
-	private errorMessage:string = "";
+	public errorMessage:string = "";
 	private message:string = "";
-	private pageSettings:Pagination = new Pagination(null);
+	public pageSettings:Pagination = new Pagination(null);
 
   	constructor(private userService: UserService,
   			private logger: LoggingService,

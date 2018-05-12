@@ -9,7 +9,7 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class ZoomPicAlbumComponent {
 
-	private housePics:any = [];
+	public housePics:any = [];
 	private viewIndex:number = 0;
 	private imageWidth:number = 400;
 	private imageHeight:number = 500;

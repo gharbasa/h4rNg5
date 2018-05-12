@@ -14,8 +14,8 @@ import { AppSettings } from '../../models/AppSettings';
 })
 export class HouseContractsComponent extends H4rbaseComponent {
 
-	private pageSettings:Pagination = new Pagination(null);
-	private errorMessage:string = "";
+	public pageSettings:Pagination = new Pagination(null);
+	public errorMessage:string = "";
 	constructor(private houseContractsService: HouseContractsService,
 			private logger: LoggingService,
 			public loginService: LoginService) {
