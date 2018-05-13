@@ -1,6 +1,5 @@
-<p *ngIf="notification != null">
-    
-    <span>{{notification.subject}}&nbsp;&nbsp;({{notification.created_at}})</span>
+<p *ngIf="notification != null">   
+    <span><i>{{notification.created_at}}</i> - {{notification.subject}}</span>
     <br/>
     <span>{{notification.content}}</span>
     <a href="#" (click)="deleteNotification()" title="Delete notification">
