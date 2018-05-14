@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { House } from '../../models/House';
 import { HouseService } from '../../services/HouseService';
@@ -7,6 +7,7 @@ import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
 import { Community } from '../../models/Community';
 import { User } from '../../models/User';
+import { AgmMap } from '@agm/core';
 
 @Component({
   selector: 'h4r-house',
@@ -20,6 +21,16 @@ export class HouseComponent implements OnInit {
 	public editHouse:boolean = false;
 	public communities:Array<Community> = null;
 	public createNewHouse:boolean = false;
+
+	public latitude: number;
+  	public longitude: number;
+  	public zoom: number;
+	public errorInMap:boolean = false;
+	
+	@ViewChild(AgmMap)
+	public agmMap: AgmMap;
+
+
   	constructor(public houseService: HouseService
 			, private router: Router
 			, private route: ActivatedRoute
@@ -30,6 +41,10 @@ export class HouseComponent implements OnInit {
   	}
 
   	ngOnInit() {
+		this.zoom = 4;
+		this.latitude = 39.8282;
+		this.longitude = -98.5795;
+		this.setCurrentPosition();
   		let that = this;
   		this.communities = this.loginService.getCommunities();//JSON.parse(this.localStorageService.getItem('communities'));
 		let user = this.loginService.getCurrentUser();
@@ -45,7 +60,8 @@ export class HouseComponent implements OnInit {
   				//if not -1, then it is a id
   				this.logger.log(this,"User wants to edit house, id=" + res.id);
   				this.houseService.get(res.id).subscribe(res => {
-  					that.house = res;
+					  that.house = res;
+					  that.identifyHouseLocation();
   					if(!that.house.property_mgmt_mgr) {
   						this.logger.log(this,"No Manager to this house");
   						that.house.property_mgmt_mgr = {id:0,fname:"",lname:""};
@@ -99,5 +115,35 @@ export class HouseComponent implements OnInit {
 			this.house.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage[0]:"Problem updating the house";
 		});
 	}
-	
+
+	private setCurrentPosition() {
+		let that = this;
+		if ("geolocation" in navigator) {
+		  navigator.geolocation.getCurrentPosition((position) => {
+			that.latitude = position.coords.latitude;
+			that.longitude = position.coords.longitude;
+			that.zoom = 12;
+			that.agmMap.triggerResize();
+		  });
+		}
+	}
+
+	private identifyHouseLocation() {
+		let that = this;
+		that.house.errorMessage = "";
+		that.errorInMap = false;
+		this.houseService.getlatlng(that.house).subscribe(res => {
+			if(res.status == "OK") {
+				that.latitude = res.results[0].geometry.location.lat;
+				that.longitude = res.results[0].geometry.location.lng;
+				that.logger.info(this, "Ok found house address, that.latitude=" + that.latitude + ", that.longitude=" + that.longitude);
+				that.zoom = 12;
+				that.agmMap.triggerResize();
+			} else {
+				that.logger.error("Unable to locate house address in google maps.");
+				that.house.errorMessage = "Unable to locate house address in google maps.";
+				that.errorInMap = true;
+			}
+		});
+	}
 }

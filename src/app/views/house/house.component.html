@@ -147,7 +147,15 @@ House
       </form>
       </td>
       <td *ngIf="!createNewHouse" valign="top">
-        <h4r-house-pics [house]="house"></h4r-house-pics>    
+        <h4r-house-pics [house]="house"></h4r-house-pics>  
+        &nbsp;&nbsp;&nbsp;
+        <fa-icon [icon]="['fas', 'sync-alt']"  (click)="identifyHouseLocation()" style="cursor:pointer" title="Refresh google map"></fa-icon>
+        Refresh location in map
+        <div class="container" *ngIf="errorInMap == false">
+                <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+                  <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                </agm-map>
+        </div>
       </td>
       <tr *ngIf="!createNewHouse"><td colspan="2" width="100%">
         <h4r-house-notes [house]="house"></h4r-house-notes>
