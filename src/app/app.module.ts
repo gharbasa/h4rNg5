@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';  // replaces previous Http service
 
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { Routes, RouterModule } from '@angular/router';
 import { h4rRoutes } from './h4rRoutes';
 
@@ -53,6 +53,8 @@ import {NgbModule, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from './date-formatter/NgbDateCustomParserFormatter';
 import { TicketService } from './services/TicketService';
 import { TicketNoteService } from './services/TicketNoteService';
+import { AgmCoreModule } from '@agm/core';
+import { AppSettings } from './models/AppSettings';
 
 //ngx-file-drop
 @NgModule({
@@ -68,7 +70,11 @@ import { TicketNoteService } from './services/TicketNoteService';
     RouterModule.forRoot(h4rRoutes.routes, {useHash: true}),
     FontAwesomeModule, MatMenuModule,BrowserAnimationsModule,
     NgIdleKeepaliveModule.forRoot(),
-    MatDialogModule,NvD3Module, NgbModule.forRoot()
+    MatDialogModule,NvD3Module, NgbModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: AppSettings.MAPS_KEY,
+      libraries: ["places"]
+    }), ReactiveFormsModule
   ],
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService
