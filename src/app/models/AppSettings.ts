@@ -36,5 +36,5 @@ export class AppSettings {
 	};
 	static IDLE_TIME:number = 15 * 60; //15 minutes
 	static WAIT_TIME_AFTER_IDLE:number = 1 * 60; //1 minutes, after this user session is logged-out
-	public static MAPS_KEY:string = "";
+	public static MAPS_KEY:string = "<MAPS_KEY>";
 }
