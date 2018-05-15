@@ -46,6 +46,12 @@ export class AppComponent {
     router.events.forEach((event) => {
       if(event instanceof NavigationEnd) {
         this.logger.info(this, "Hey NavigationEnd event. url=" + event.urlAfterRedirects);
+        //(<any>window).ga('set', 'page', event.urlAfterRedirects);
+        let vpeJson:any = {
+              hitType: 'pageview',
+              page: event.urlAfterRedirects
+        };
+        (<any>window).ga('send', vpeJson);
       }
       // NavigationEnd
       // NavigationCancel
