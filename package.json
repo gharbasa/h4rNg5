@@ -43,7 +43,8 @@
     "ng2-nvd3":"2.0.0",
     "@angular/cli": "~1.7.3",
     "@types/googlemaps":"^3.30.8",
-    "@agm/core":"^1.0.0-beta.2"
+    "@agm/core":"^1.0.0-beta.2",
+    "classlist.js":"^1.1.20150312"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.3",
