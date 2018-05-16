@@ -15,18 +15,18 @@
     </tr>
 </table>
 <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
- <table>
+ <table width="100%"> 
   <tr>
-    <th>User</th>
+    <th width="17%">User</th>
     <th>Login</th> 
     <th>Email</th>
     <th>Avatar</th>
     <th>Community</th>
-    <th>Subscription</th>
+    <th>#</th>
     <th title="subscription end date">Ends(d-m-y)</th>
     <th>Created</th>
     <th>Admin?</th>
-    <th>Reset Cred</th>
+    <th>Reset</th>
   </tr>
   <tr *ngFor="let user of pageSettings.getPaginatedList()">
     <td>

@@ -1,4 +1,4 @@
-  <table width="40%">
+  <table width="50%">
     <tr>
         <td width="30%">
             House Contracts
@@ -15,14 +15,14 @@
     </tr>
 </table>
 <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
-  <table>
-      <tbody>
+  <table width="100%">
+      <tbody> 
     <tr>
         <th width="20%">House &lt;-&gt; User</th>
         <th width="5%">Role</th>
-        <th width="20%">Start & End Date(d-m-y)</th>
+        <th width="25%">Start & End Date(d-m-y)</th>
         <th width="10%">Type</th>
-        <th width="5%">Renewable?</th>
+        <th width="5%">Renew?</th>
         <th width="10%">Fee</th>
         <th width="20%">Details</th>
         <th width="5%">Active</th>
@@ -32,10 +32,11 @@
     	<tr *ngIf="errorMessage != ''"><td colspan="9">{{errorMessage}}</td><tr>
         <tr *ngFor="let houseContract of pageSettings.getPaginatedList()"  [ngStyle]="{'color':houseContract.active? '' : '#959ba5' }">
             <td>
-                <a routerLink="../house_contract/{{houseContract.id}}">{{houseContract.house.name}} &lt;-&gt; {{houseContract.user.fullName}}</a>
+                <a routerLink="../house_contract/{{houseContract.id}}">
+                    {{houseContract.house.name}} &lt;-&gt; {{houseContract.user.fullName}}
+                </a>
                 &nbsp;
-                <a title="$$$ Receivables" href="#" routerLink="../receivables/{{houseContract.id}}">
-                        <!--<img [src]="activePng" height="15" width="30"/> -->
+                <a style="color:#85bb65" title="$$$ Receivables" href="#" routerLink="../receivables/{{houseContract.id}}">
                         ($$$)
                 </a>
             </td>
