@@ -1,12 +1,11 @@
-<!-- Fixed navbar -->
-<!--<h4r-nav-bar [isUserlogin] = "userLoggedin" (onLogoutClick)="logout($event)"></h4r-nav-bar> -->
-<h4r-nav-bar></h4r-nav-bar>
+<main role="main" class="container">
+    <h4r-nav-bar></h4r-nav-bar>
 
-<div class="container-fluid text-center pb-5">
-    
-    <!--<h4r-login (onLoginClick)="validateLogin($event)" *ngIf="userLoggedin == false"></h4r-login> -->
-    
-    
-    <router-outlet></router-outlet>
-</div>
-    
+    <div class="container-fluid text-center pb-5">    
+        <router-outlet></router-outlet>
+    </div>
+</main>
+
+<nav class="navbar navbar-nav custom fixed-bottom navbar-dark bg-dark">
+        <span class="navbar-brand">© 2018 Copyright: http://www.maaghar.com</span>
+</nav>
