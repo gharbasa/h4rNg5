@@ -73,7 +73,7 @@ export class ReceivablesComponent implements OnInit {
 	  
 	resetDefaults() {
 		this.payment.note = "";
-		this.payment.payment = this.houseContract.monthly_rent_amount;
+		this.payment.amount = this.houseContract.monthly_rent_amount;
 		this.payment.payment_date = this.getFormattedDate();
 		this.payment.user_house_contract_id = this.houseContract.id;
 	}

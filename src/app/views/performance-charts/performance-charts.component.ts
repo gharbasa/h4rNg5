@@ -172,7 +172,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 			that.payments = res;
 			that.payments.forEach(element => {
 				let label = element.paymentMonth + "-" + element.paymentYear;
-				let value = element.payment;
+				let value = element.amount;
 				let existingRow = that.isPaymentRepeatedInMonth(label, value, that.discreteBarChartDataMonthlyIncome);
 				if(existingRow == null) {
 					existingRow = {
@@ -202,7 +202,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 			that.payments = res;
 			that.payments.forEach(element => {
 				let label = element.paymentMonth + "-" + element.paymentYear;
-				let value = element.payment;
+				let value = element.amount;
 				let existingRow = that.isPaymentRepeatedInMonth(label, value, that.discreteBarChartDataMonthlyExpense);
 				if(existingRow == null) {
 					existingRow = {

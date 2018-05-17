@@ -28,8 +28,8 @@ export class ReceivedPaymentsComponent implements OnInit {
 			that.pageSettings = new Pagination(this.payments); //We have to build a new instance of pagination, existing instance will not refresh the view.
 			that.logger.info(this, "number of entries=" + this.payments.length);
 			this.payments.forEach(function(payment) {
-				that.logger.info(that, "value=" + payment.payment);
-				that.totalReceivedAmt +=  payment.payment;
+				that.logger.info(that, "value=" + payment.amount);
+				that.totalReceivedAmt +=  payment.amount;
 			});
 		}
 	}

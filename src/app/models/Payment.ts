@@ -1,7 +1,7 @@
 export class Payment {
 	id: number = 0;
 	user_house_contract_id: number = 0;
-	payment:number = 0;// "/system/house_pics/pictures/000/000/001/original/rose.jpg?1458412701",
+	amount:number = 0;// "/system/house_pics/pictures/000/000/001/original/rose.jpg?1458412701",
 	payment_status:number = 0;
 	payment_type:number = 0;
 	payment_date:string = "";
