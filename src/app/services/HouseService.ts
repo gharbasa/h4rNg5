@@ -83,6 +83,15 @@ export class HouseService {
 		return this.http.put(this.basePath_admin + "/" + house.id + partUrl, null);
 	}
 
+	updateVerifyFlag(house:House) {
+		let partUrl:string = "";
+		if(house.verified === true) //user wants to activate the house
+			partUrl = "/verified";
+		else
+			partUrl = "/notverified";
+		return this.http.put(this.basePath_admin + "/" + house.id + partUrl, null);
+	}
+
 	setSearchKeyword(keyword:string) {
 		this.searchKeyword = keyword;
 	}

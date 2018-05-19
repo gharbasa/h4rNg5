@@ -61,4 +61,16 @@ export class HouseListComponent extends H4rbaseComponent {
 		});
 	}
 
+	updateVerifyFlag(house:any) {
+		let that = this;
+		this.logger.log(this,"updateVerifyFlag");
+		that.errorMessage = "";
+		this.houseService.updateVerifyFlag(house).subscribe(res => {
+			that.logger.log(that,"House has been successfully updated");
+		}, err => {
+			that.logger.error(that,"Error in updating the verify flag of the house, err=" + JSON.stringify(err));
+			that.errorMessage = (err.error && err.error.errorMessage)?err.error.errorMessage:"Problem updating the house";
+		});
+	}
+
 }

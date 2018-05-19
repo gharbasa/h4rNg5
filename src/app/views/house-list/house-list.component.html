@@ -32,6 +32,7 @@
         <th width="10%">Community</th>
         <th width="5%">Open?</th>
         <th width="5%">Active?</th>
+        <th *ngIf="isAdminUser()">Verified?</th>
     </tr>
     </tbody>
     <tbody>
@@ -48,6 +49,9 @@
             </td>
             <td>
                 <input type="checkbox" [(ngModel)]="house.active" (change)="updateActiveFlag(house)">
+            </td>
+            <td *ngIf="isAdminUser()">
+                    <input type="checkbox" [(ngModel)]="house.verified" (change)="updateVerifyFlag(house)">
             </td>
         </tr>
     </tbody>
