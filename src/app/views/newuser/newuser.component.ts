@@ -88,13 +88,15 @@ export class NewuserComponent extends H4rbaseComponent {
   	}
   	
   	update() {
-  		this.logger.log(this,"Udpating the user id=" + this.user.id);
+		this.logger.log(this,"Udpating the user id=" + this.user.id);
+		let that = this;
   		this.userService.update(this.user).subscribe(res => {
   			this.logger.log(this,"Successfully updated");
   			this.user.message = "Successfully updated the user.";
   			if(this.selfEditUserProfile === true)
   				this.localStorageService.setItem('user', JSON.stringify(res));
-  			this.router.navigate(['postupdate']);
+			that.loginService.refreshUsersList();  
+			this.router.navigate(['postupdate']);
   		},
   		err => {
   			this.logger.log(this,"Problem updating the user: " + JSON.stringify(err));
