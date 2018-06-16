@@ -7,6 +7,7 @@ import { AppSettings } from '../../models/AppSettings';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.component';
 import { HouseService } from '../../services/HouseService';
+import { UtilityService } from '../../services/UtilityService';
 
 @Component({
   selector: 'h4r-house-pics',
@@ -50,8 +51,8 @@ export class HousePicsComponent implements OnInit {
 		this.housePicsService.listByHouse(this.house.id).subscribe(resp => {
 			for(var i in resp) {
 				var row = resp[i];
-				//row.image = AppSettings.H4R_BACKEND_URL + row.picture;
-				row.image = row.picture;
+				row.image = UtilityService.prepareS3BucketUrl(row.picture);//AppSettings.IMAGE_BASE_URL + row.picture;
+				//row.image = row.picture;
 				that.housePics.push(row);
 			}
 			that.newHousePic.house_id = that.house.id;

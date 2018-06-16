@@ -3,13 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import { NotificationType } from '../models/NotificationType';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class NotificationTypeService {
 	
 	constructor(private http: HttpClient) { }
 	
-	private basePath:string = '/api/1/notification_types';
+	private basePath:string = AppSettings.H4R_BACKEND_URL + 'api/1/notification_types';
 	
 	get(id:number):Observable<NotificationType> {
 		return this.http.get(this.basePath + "/" + id).map(res => res as NotificationType || null);

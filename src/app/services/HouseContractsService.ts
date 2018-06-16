@@ -15,8 +15,8 @@ export class HouseContractsService {
 	constructor(private http: HttpClient, private loginService: LoginService,
 					private logger: LoggingService) { }
 	
-	private basePath_admin:string = '/api/1/user_house_contracts';
-	private basePath_nondmin:string = '/api/1/users/{user.id}/user_house_contracts';
+	private basePath_admin:string = AppSettings.H4R_BACKEND_URL + 'api/1/user_house_contracts';
+	private basePath_nondmin:string = AppSettings.H4R_BACKEND_URL + 'api/1/users/{user.id}/user_house_contracts';
 	
 	get(contractId:number):Observable<HouseContract> {
 		return this.http.get(this.basePath_admin + "/" + contractId).map(res => res as HouseContract || null);

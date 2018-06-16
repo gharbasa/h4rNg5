@@ -58,7 +58,7 @@ export class IdleService {
 	  
 	    this.idle.onTimeoutWarning.subscribe(countdown => {
 	      this.idleState = 'You will time out in ' + countdown + ' seconds!';
-	      this.logger.info("You will time out in ' + countdown + ' seconds!");
+	      this.logger.info('You will time out in ' + countdown + ' seconds!');
 	    });
 
 	    //sets the ping interval to 15 seconds

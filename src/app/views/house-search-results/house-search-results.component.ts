@@ -10,6 +10,8 @@ import { LoggingService } from 'loggerservice';
 import { MatDialog } from '@angular/material';
 import { HousePic } from '../../models/HousePic';
 import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.component';
+import { AppSettings } from '../../models/AppSettings';
+import { UtilityService } from '../../services/UtilityService';
 
 @Component({
   selector: 'h4r-house-search-results',
@@ -61,8 +63,8 @@ export class HouseSearchResultsComponent extends H4rbaseComponent {
 		this.housePicsService.listByHouse(house.id).subscribe(resp => {
 			for(var i in resp) {
 				var row = resp[i];
-				//row.image = AppSettings.H4R_BACKEND_URL + row.picture;
-				row.image = row.picture;
+				row.image = UtilityService.prepareS3BucketUrl(row.picture);//AppSettings.IMAGE_BASE_URL + row.picture;
+				//row.image = row.picture;
         housePics.push(row);
       }
       that.zoom(housePics);

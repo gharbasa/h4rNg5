@@ -3,13 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import { Community } from '../models/Community';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class CommunityService {
 	
 	constructor(private http: HttpClient) { }
 	
-	private basePath:string = '/api/1/communities';
+	private basePath:string = AppSettings.H4R_BACKEND_URL + 'api/1/communities';
 	
 	get(communityId:number):Observable<Community> {
 		return this.http.get(this.basePath + "/" + communityId).map(res => res as Community || null);

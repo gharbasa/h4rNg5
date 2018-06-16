@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import { UserHouseContractPic } from '../models/UserHouseContractPic';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class UserHouseContractPicService {
 	
 	constructor(private http: HttpClient) { }
 	
-	private basePath:string = '/api/1/user_house_contracts/{contract_id}/pics';
+	private basePath:string = AppSettings.H4R_BACKEND_URL + 'api/1/user_house_contracts/{contract_id}/pics';
 	
 	list(contractId:any) {
 		let path = this.basePath.replace('{contract_id}', contractId);

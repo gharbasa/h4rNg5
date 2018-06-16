@@ -3,13 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import { TicketNote } from '../models/TicketNote';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class TicketNoteService {
 	
 	constructor(private http: HttpClient) { }
 	
-	private basePath:string = 'api/1/tickets/{ticketId}/notes';
+	private basePath:string = AppSettings.H4R_BACKEND_URL + 'api/1/tickets/{ticketId}/notes';
 	
 	list(ticketId:any):Observable<TicketNote[]>  {
 		let path = this.basePath.replace('{ticketId}', ticketId);

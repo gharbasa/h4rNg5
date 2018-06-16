@@ -4,6 +4,7 @@ import { AppSettings } from '../../models/AppSettings';
 import { User } from '../../models/User';
 import { Community } from '../../models/Community';
 import { Notification } from '../../models/Notification';
+import { UtilityService } from '../../services/UtilityService';
 
 @Component({
   selector: 'h4r-h4rbase',
@@ -38,11 +39,11 @@ export class H4rbaseComponent implements OnInit {
   isUserLogin() {
     let user = this.loginService.getCurrentUser();
     if(user != null) {
-      this.userPic = user.avatar;//AppSettings.H4R_BACKEND_URL + user.avatar;
+      this.userPic = UtilityService.prepareS3BucketUrl(user.avatar);//AppSettings.IMAGE_BASE_URL + user.avatar;//user.avatar;
       this.userName = user.fullName;
       this.notifications = this.loginService.getNotifications();
-    } else {
-      this.resetLocalBuffer();
+    } else { 
+      this.resetLocalBuffer(); 
       return false;
     }
     return true;
@@ -54,8 +55,8 @@ export class H4rbaseComponent implements OnInit {
 
   resetLocalBuffer(): void {
     this.userPic = "";
-      this.userName = "";
-      this.notifications = [];
+    this.userName = "";
+    this.notifications = [];
   }
   
 

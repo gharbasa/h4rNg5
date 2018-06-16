@@ -7,6 +7,7 @@ import { AppSettings } from '../../models/AppSettings';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
 import {H4rbaseComponent} from '../h4rbase/h4rbase.component';
+import { UtilityService } from '../../services/UtilityService';
 
 @Component({
   selector: 'h4r-newuser',
@@ -37,7 +38,7 @@ export class NewuserComponent extends H4rbaseComponent {
   				that.user = JSON.parse(this.localStorageService.getItem('user'));
   				that.user.message = "";
   				that.user.errorMessage = "";
-  				that.avatar = that.user.avatar;//AppSettings.H4R_BACKEND_URL + that.user.avatar;
+  				that.avatar = UtilityService.prepareS3BucketUrl(that.user.avatar);//AppSettings.IMAGE_BASE_URL + that.user.avatar;
   				this.logger.log(this,"User wants to edit his/her own profile " +  that.user.id); 
   			} else if(res.feature > 0) {
   				//if not -1, then it is a userId 
@@ -45,7 +46,7 @@ export class NewuserComponent extends H4rbaseComponent {
 	  				that.user = resp;
   					that.user.message = "";
 	  				that.user.errorMessage = "";
-	  				that.avatar = that.user.avatar;;//AppSettings.H4R_BACKEND_URL + that.user.avatar;
+	  				that.avatar = UtilityService.prepareS3BucketUrl(that.user.avatar);//AppSettings.IMAGE_BASE_URL + that.user.avatar;
 	  				this.logger.log(this,"User wants to edit someother user profile, userID=" + that.user.id);
   				},
   				err => {
