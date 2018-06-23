@@ -15,6 +15,11 @@ declare let d3: any;
   encapsulation: ViewEncapsulation.None
 })
 export class PerformanceChartsComponent extends H4rbaseComponent {
+	public yearlyExpense:number = 0;
+	public yearlyIncome:number = 0;
+	public monthlyIncome:number = 0;
+	public monthlyExpense:number = 0;
+
 	public discreteRevenueBarChartOptions: any = {
 		chart: {
 		  type: 'discreteBarChart',
@@ -195,6 +200,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 
 	fetchMonthlyIncome() {
 		let that = this;
+		that.monthlyIncome = 0;
 		this.discreteBarChartDataMonthlyIncome[0].values.length = 0;
 		this.paymentService.monthlyIncome(this.house_id, this.year).subscribe(res => {
 			that.payments = res;
@@ -212,6 +218,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				else {
 					existingRow.value = existingRow.value + value;
 				}
+				that.monthlyIncome = that.monthlyIncome + existingRow.value;
 				if(that.year == null) that.year = element.paymentYear;
 			});
 			that.logger.log(that,", detectChanges..that.monthlyBarChartData.values.length=" 
@@ -225,6 +232,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 
 	fetchMonthlyExpense() {
 		let that = this;
+		that.monthlyExpense = 0;
 		this.discreteBarChartDataMonthlyExpense[0].values.length = 0;
 		this.paymentService.monthlyExpense(this.house_id, this.year).subscribe(res => {
 			that.payments = res;
@@ -242,6 +250,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				else {
 					existingRow.value = existingRow.value + value;
 				}
+				that.monthlyExpense = that.monthlyExpense + existingRow.value;
 				if(that.year == null) that.year = element.paymentYear;
 			});
 			that.logger.log(that,", detectChanges..that.monthlyBarChartData.values.length=" 
@@ -255,6 +264,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 
 	fetchYearlyIncome() {
 		let that = this;
+		that.yearlyIncome = 0;
 		that.discreteBarChartDataYearlyIncome[0].values.length = 0;
 		that.pieChartDataYearlyIncome.length = 0;
 		this.paymentService.yearlyIncome(this.house_id).subscribe(res => {
@@ -268,6 +278,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				that.pieChartDataYearlyIncome.push(
 					{key: row.label, y: row.value}
 				);
+				that.yearlyIncome = that.yearlyIncome + row.value;
 			});
 			that.logger.log(that,", detectChanges..that.discreteBarChartDataYearly.values.length=" 
 				+ that.discreteBarChartDataMonthlyIncome[0].values.length + ",that.discreteBarChartDataYearly="
@@ -281,6 +292,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 
 	fetchYearlyExpense() {
 		let that = this;
+		that.yearlyExpense = 0;
 		that.discreteBarChartDataYearlyExpense[0].values.length = 0;
 		that.pieChartDataYearlyExpense.length = 0;
 		this.paymentService.yearlyExpense(this.house_id).subscribe(res => {
@@ -294,6 +306,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				that.pieChartDataYearlyExpense.push(
 					{key: row.label, y: row.value}
 				);
+				that.yearlyExpense = that.yearlyExpense + row.value;
 			});
 			that.logger.log(that,", detectChanges..that.discreteBarChartDataYearly.values.length=" 
 				+ that.discreteBarChartDataMonthlyExpense[0].values.length + ",that.discreteBarChartDataYearly="

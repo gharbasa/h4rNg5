@@ -10,20 +10,32 @@
     </ng-select>
 </td>
 </tr>
+<tr>
+        <td width="100%" align='center' colspan="2" valign="top">
+                {{currentUser.subscriptionType}} Years net income ({{(yearlyIncome - yearlyExpense) | currency}})
+        </td>
+    </tr>
 </table>
 <br/><br/>
 <table width="100%">
     <tr>
         <td width="50%" valign="top">
                 <table align='left'><tr><td>
-                        <b>Past {{currentUser.subscriptionType}} Years Income</b> (<fa-icon [icon]="['fas', 'sign-in-alt']"></fa-icon>)
+                        <b>Past {{currentUser.subscriptionType}} Years Income {{yearlyIncome | currency}}</b> (<fa-icon [icon]="['fas', 'sign-in-alt']"></fa-icon>)
                     <nvd3 #discreteBarChartYearlyIncomeTag  [options]="discreteRevenueBarChartOptions" [data]="discreteBarChartDataYearlyIncome"></nvd3>
-                    </td><td>
+                    </td>
+                    <!--
+                    <td>
                     <nvd3 #discretePieChartYearlyIncomeTag  [options]="pieChartOptions" [data]="pieChartDataYearlyIncome"></nvd3>
-                    </td></tr>
+                    </td>
+                    -->
+                </tr>
                     
-                    <tr><td colspan="2">
+                    <tr>
+                        <!--<td colspan="2">-->
+                    <td>
                     <b>Monthly breakdown</b>
+                         , {{year}} Net income ({{(monthlyIncome - monthlyExpense) | currency}})
                         <ng-select name="year" [items]="years"
                                     bindLabel="label"
                                     bindValue="year"
@@ -31,11 +43,11 @@
                                     [(ngModel)]="year" 
                                     (change)="yearChanged()">
                         </ng-select>
-                    
                     </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <!--<td colspan="2">-->
+                                <td>
                                 <b></b>
                                 <nvd3 #discreteBarChartMonthlyIncomeTag  [options]="discreteRevenueBarChartOptions" [data]="discreteBarChartDataMonthlyIncome"></nvd3>
                         </td>
@@ -44,19 +56,26 @@
         </td>
         <td width="50%" valign="top">
                 <table align='left'><tr><td>
-                        <b>Past {{currentUser.subscriptionType}} Years Expense</b> (<fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>)
+                        <b>Past {{currentUser.subscriptionType}} Years Expense {{yearlyExpense | currency}}</b> (<fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>)
                     <nvd3 #discreteBarChartYearlyExpenseTag  [options]="discreteExpenseBarChartOptions" [data]="discreteBarChartDataYearlyExpense"></nvd3>
-                    </td><td>
+                    </td>
+                    <!--
+                    <td>
                     <nvd3 #discretePieChartYearlyExpenseTag  [options]="pieChartOptions" [data]="pieChartDataYearlyExpense"></nvd3>
-                    </td></tr>
+                    </td>
+                    -->
+                </tr>
                     
-                    <tr><td colspan="2">
+                    <tr>
+                        <!--<td colspan="2"> -->
+                                <td>
                         <br/><br/>
                     
                     </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <!--<td colspan="2"> -->
+                                <td>
                                 <b></b>
                                 <nvd3 #discreteBarChartMonthlyExpenseTag  [options]="discreteExpenseBarChartOptions" [data]="discreteBarChartDataMonthlyExpense"></nvd3>
                         </td>
