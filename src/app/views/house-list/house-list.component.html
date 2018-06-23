@@ -26,7 +26,7 @@
         <th width="10%">House</th>
         <th width="15%">Address</th>
         <th width="20%">Description</th>
-        <th width="5%" title="Floors">Fl#</th>
+        <th width="5%" title="Floor No.">Fl#</th>
         <th width="15%">Land lord</th>
         <th width="15%">Tenant</th>
         <th width="10%">Community</th>
@@ -40,7 +40,7 @@
             <td><a routerLink="../house/{{house.id}}">{{house.name}}</a></td>
             <td>{{house.addr1}}, {{house.addr2}}<br/>{{house.addr3}}, {{house.addr4}}</td>
             <td>{{house.description}}</td>
-            <td>{{house.no_of_floors}}</td>
+            <td>{{house.floor_number}}</td>
             <td>{{house.land_lord && house.land_lord.fullName}}</td>
             <td>{{house.tenant && house.tenant.fullName}}</td>
             <td>{{house.community && house.community.name}}</td>

@@ -17,7 +17,7 @@
         <td width="50%" valign="top">
                 <table align='left'><tr><td>
                         <b>Past {{currentUser.subscriptionType}} Years Income</b> (<fa-icon [icon]="['fas', 'sign-in-alt']"></fa-icon>)
-                    <nvd3 #discreteBarChartYearlyIncomeTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataYearlyIncome"></nvd3>
+                    <nvd3 #discreteBarChartYearlyIncomeTag  [options]="discreteRevenueBarChartOptions" [data]="discreteBarChartDataYearlyIncome"></nvd3>
                     </td><td>
                     <nvd3 #discretePieChartYearlyIncomeTag  [options]="pieChartOptions" [data]="pieChartDataYearlyIncome"></nvd3>
                     </td></tr>
@@ -37,7 +37,7 @@
                     <tr>
                         <td colspan="2">
                                 <b></b>
-                                <nvd3 #discreteBarChartMonthlyIncomeTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataMonthlyIncome"></nvd3>
+                                <nvd3 #discreteBarChartMonthlyIncomeTag  [options]="discreteRevenueBarChartOptions" [data]="discreteBarChartDataMonthlyIncome"></nvd3>
                         </td>
                     </tr>
                     </table>
@@ -45,7 +45,7 @@
         <td width="50%" valign="top">
                 <table align='left'><tr><td>
                         <b>Past {{currentUser.subscriptionType}} Years Expense</b> (<fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>)
-                    <nvd3 #discreteBarChartYearlyExpenseTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataYearlyExpense"></nvd3>
+                    <nvd3 #discreteBarChartYearlyExpenseTag  [options]="discreteExpenseBarChartOptions" [data]="discreteBarChartDataYearlyExpense"></nvd3>
                     </td><td>
                     <nvd3 #discretePieChartYearlyExpenseTag  [options]="pieChartOptions" [data]="pieChartDataYearlyExpense"></nvd3>
                     </td></tr>
@@ -58,7 +58,7 @@
                     <tr>
                         <td colspan="2">
                                 <b></b>
-                                <nvd3 #discreteBarChartMonthlyExpenseTag  [options]="discreteBarChartOptions" [data]="discreteBarChartDataMonthlyExpense"></nvd3>
+                                <nvd3 #discreteBarChartMonthlyExpenseTag  [options]="discreteExpenseBarChartOptions" [data]="discreteBarChartDataMonthlyExpense"></nvd3>
                         </td>
                     </tr>
                     </table>

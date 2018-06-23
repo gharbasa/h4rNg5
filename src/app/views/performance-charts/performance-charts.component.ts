@@ -15,7 +15,7 @@ declare let d3: any;
   encapsulation: ViewEncapsulation.None
 })
 export class PerformanceChartsComponent extends H4rbaseComponent {
-	public discreteBarChartOptions: any = {
+	public discreteRevenueBarChartOptions: any = {
 		chart: {
 		  type: 'discreteBarChart',
 		  height: 250,
@@ -38,6 +38,34 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		  },
 		  yAxis: {
 			axisLabel: 'Revenue',
+			axisLabelDistance: -5
+		  }
+		}
+	};
+
+	public discreteExpenseBarChartOptions: any = {
+		chart: {
+		  type: 'discreteBarChart',
+		  height: 250,
+		  width: 400,
+		  margin : { 
+			top: 20,
+			right: 20,
+			bottom: 50,
+			left: 55
+		  },
+		  x: function(d){return d.label;},
+		  y: function(d){return d.value;},
+		  showValues: true,
+		  valueFormat: function(d){
+			return d3.format(',.4f')(d);
+		  },
+		  duration: 100,
+		  xAxis: {
+			axisLabel: 'Timeline'
+		  },
+		  yAxis: {
+			axisLabel: 'Expense',
 			axisLabelDistance: -5
 		  }
 		}
@@ -171,7 +199,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		this.paymentService.monthlyIncome(this.house_id, this.year).subscribe(res => {
 			that.payments = res;
 			that.payments.forEach(element => {
-				let label = element.paymentMonth + "-" + element.paymentYear;
+				let label = element.paymentMonth;// + "-" + element.paymentYear;
 				let value = element.amount;
 				let existingRow = that.isPaymentRepeatedInMonth(label, value, that.discreteBarChartDataMonthlyIncome);
 				if(existingRow == null) {
@@ -201,7 +229,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		this.paymentService.monthlyExpense(this.house_id, this.year).subscribe(res => {
 			that.payments = res;
 			that.payments.forEach(element => {
-				let label = element.paymentMonth + "-" + element.paymentYear;
+				let label = element.paymentMonth;// + "-" + element.paymentYear;
 				let value = element.amount;
 				let existingRow = that.isPaymentRepeatedInMonth(label, value, that.discreteBarChartDataMonthlyExpense);
 				if(existingRow == null) {
