@@ -3,16 +3,17 @@ import {HttpClient} from '@angular/common/http';
 import { HousePic } from '../models/HousePic';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class HousePicsService {
 	
 	constructor(private http: HttpClient) { }
 	
-	private basePath:string = '/api/1/house_pics';
+	private basePath:string = AppSettings.H4R_BACKEND_URL + 'api/1/house_pics';
 	
 	listByHouse(houseId:any):Observable<HousePic[]>  {
-		var url = "/api/1/houses/" + houseId + "/house_pics";
+		var url = AppSettings.H4R_BACKEND_URL + "api/1/houses/" + houseId + "/house_pics";
 		return this.http.get(url).map(res => res as HousePic[] || []);
 	}
 

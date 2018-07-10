@@ -6,6 +6,7 @@ import { LoggingService, Config } from 'loggerservice';
 import { AppSettings } from '../../models/AppSettings';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.component';
+import { UtilityService } from '../../services/UtilityService';
 
 @Component({
   selector: 'h4r-house-contract-pics',
@@ -47,7 +48,8 @@ export class HouseContractPicsComponent implements OnInit {
 		this.userHouseContractPicService.list(this.houseContract.id).subscribe(resp => {
 			for(var i in resp) {
 				var row = resp[i];
-				row.image = row.picture;//AppSettings.H4R_BACKEND_URL + row.picture;
+				//row.image = row.picture;//AppSettings.H4R_BACKEND_URL + row.picture;
+				row.image = UtilityService.prepareS3BucketUrl(row.picture);//AppSettings.IMAGE_BASE_URL + row.picture;
 				that.houseContractPics.push(row);
 			}
 			that.newHouseContractPic.user_house_contract_id = that.houseContract.id;

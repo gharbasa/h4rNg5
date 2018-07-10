@@ -3,13 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import { HouseNote } from '../models/HouseNote';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class HouseNoteService {
 	
 	constructor(private http: HttpClient) { }
 	
-	private basePath:string = 'api/1/houses/{houseId}/notes';
+	private basePath:string = AppSettings.H4R_BACKEND_URL + 'api/1/houses/{houseId}/notes';
 	
 	list(houseId:any):Observable<HouseNote[]>  {
 		let path = this.basePath.replace('{houseId}', houseId);

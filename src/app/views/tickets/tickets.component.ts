@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
-import { Pagination } from '../../models/Pagination';
 import { LoggingService } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
 import { User } from '../../models/User';
@@ -14,7 +13,6 @@ import { Ticket } from '../../models/Ticket';
 })
 export class TicketsComponent extends H4rbaseComponent {
 
-  public pageSettings:Pagination = new Pagination(null);
   public errorMessage:string = "";
   public users:Array<User> = [];
   public filter:any = {status:0};
@@ -31,10 +29,10 @@ export class TicketsComponent extends H4rbaseComponent {
   fetchTickets():void {
 		let that = this;
 		this.ticketService.list(this.filter.status).subscribe(res => {
-			that.pageSettings = new Pagination(res); //We have to build a new instance of pagination, existing instance will not refresh the view.
+			that.pageSettings = this.createPaginationObject(res);
 			//this.logger.log(this,"notificationTypes =" + JSON.stringify(res));
 		}, err=> {
-			that.pageSettings = new Pagination(null);
+			that.pageSettings = this.createPaginationObject(null);
 			this.logger.error(this,"error fetching communities, err=" + JSON.stringify(err));
 		});
   }

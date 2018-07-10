@@ -3,13 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import { User } from '../models/User';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class UserService {
 	
 	constructor(private http: HttpClient) { }
 	
-	private basePath:string = '/api/1/users';
+	private basePath:string = AppSettings.H4R_BACKEND_URL + 'api/1/users';
 	
 	get(userId:number):Observable<User> {
 		return this.http.get(this.basePath + "/" + userId).map(res => res as User || null);

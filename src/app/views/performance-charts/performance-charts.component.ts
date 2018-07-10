@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, Input } from '@angular/core';
 import { HouseService } from '../../services/HouseService';
 import { LoggingService, Config } from 'loggerservice';
 import {PaymentService} from  '../../services/PaymentService';
@@ -15,7 +15,13 @@ declare let d3: any;
   encapsulation: ViewEncapsulation.None
 })
 export class PerformanceChartsComponent extends H4rbaseComponent {
-	public discreteBarChartOptions: any = {
+	public yearlyExpense:number = 0;
+	public yearlyIncome:number = 0;
+	public monthlyIncome:number = 0;
+	public monthlyExpense:number = 0;
+	@Input() houseInput:House; //Input from Account detail page
+
+	public discreteRevenueBarChartOptions: any = {
 		chart: {
 		  type: 'discreteBarChart',
 		  height: 250,
@@ -38,6 +44,34 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		  },
 		  yAxis: {
 			axisLabel: 'Revenue',
+			axisLabelDistance: -5
+		  }
+		}
+	};
+
+	public discreteExpenseBarChartOptions: any = {
+		chart: {
+		  type: 'discreteBarChart',
+		  height: 250,
+		  width: 400,
+		  margin : { 
+			top: 20,
+			right: 20,
+			bottom: 50,
+			left: 55
+		  },
+		  x: function(d){return d.label;},
+		  y: function(d){return d.value;},
+		  showValues: true,
+		  valueFormat: function(d){
+			return d3.format(',.4f')(d);
+		  },
+		  duration: 100,
+		  xAxis: {
+			axisLabel: 'Timeline'
+		  },
+		  yAxis: {
+			axisLabel: 'Expense',
 			axisLabelDistance: -5
 		  }
 		}
@@ -115,7 +149,13 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
   	}
   	
   	ngOnInit() {
-		this.fetchHouses();
+		if (this.houseInput == null) 
+			this.fetchHouses();
+		else {
+			this.house_id = this.houseInput.id
+			this.houseChanged();
+		}
+
 		let currentYear:number =  (new Date()).getFullYear();
 		this.years.length = 0;
 		for(let i=0; i<this.currentUser.subscriptionType; i++) {
@@ -124,6 +164,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
   	};
 
   	fetchHouses() {
+		this.logger.info(this,"Fetching houses");
 		let that = this;
 		this.houseService.list4Reports().subscribe(res => {
 			that.houses = res;
@@ -167,11 +208,12 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 
 	fetchMonthlyIncome() {
 		let that = this;
+		that.monthlyIncome = 0;
 		this.discreteBarChartDataMonthlyIncome[0].values.length = 0;
 		this.paymentService.monthlyIncome(this.house_id, this.year).subscribe(res => {
 			that.payments = res;
 			that.payments.forEach(element => {
-				let label = element.paymentMonth + "-" + element.paymentYear;
+				let label = element.paymentMonth;// + "-" + element.paymentYear;
 				let value = element.amount;
 				let existingRow = that.isPaymentRepeatedInMonth(label, value, that.discreteBarChartDataMonthlyIncome);
 				if(existingRow == null) {
@@ -184,6 +226,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				else {
 					existingRow.value = existingRow.value + value;
 				}
+				that.monthlyIncome = that.monthlyIncome + existingRow.value;
 				if(that.year == null) that.year = element.paymentYear;
 			});
 			that.logger.log(that,", detectChanges..that.monthlyBarChartData.values.length=" 
@@ -197,11 +240,12 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 
 	fetchMonthlyExpense() {
 		let that = this;
+		that.monthlyExpense = 0;
 		this.discreteBarChartDataMonthlyExpense[0].values.length = 0;
 		this.paymentService.monthlyExpense(this.house_id, this.year).subscribe(res => {
 			that.payments = res;
 			that.payments.forEach(element => {
-				let label = element.paymentMonth + "-" + element.paymentYear;
+				let label = element.paymentMonth;// + "-" + element.paymentYear;
 				let value = element.amount;
 				let existingRow = that.isPaymentRepeatedInMonth(label, value, that.discreteBarChartDataMonthlyExpense);
 				if(existingRow == null) {
@@ -214,6 +258,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				else {
 					existingRow.value = existingRow.value + value;
 				}
+				that.monthlyExpense = that.monthlyExpense + existingRow.value;
 				if(that.year == null) that.year = element.paymentYear;
 			});
 			that.logger.log(that,", detectChanges..that.monthlyBarChartData.values.length=" 
@@ -227,6 +272,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 
 	fetchYearlyIncome() {
 		let that = this;
+		that.yearlyIncome = 0;
 		that.discreteBarChartDataYearlyIncome[0].values.length = 0;
 		that.pieChartDataYearlyIncome.length = 0;
 		this.paymentService.yearlyIncome(this.house_id).subscribe(res => {
@@ -240,12 +286,12 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				that.pieChartDataYearlyIncome.push(
 					{key: row.label, y: row.value}
 				);
+				that.yearlyIncome = that.yearlyIncome + row.value;
 			});
 			that.logger.log(that,", detectChanges..that.discreteBarChartDataYearly.values.length=" 
 				+ that.discreteBarChartDataMonthlyIncome[0].values.length + ",that.discreteBarChartDataYearly="
 				 + JSON.stringify(that.discreteBarChartDataYearlyIncome));
 			that.discreteBarChartYearlyIncomeTag.chart.update();
-			that.discretePieChartYearlyIncomeTag.chart.update();
 		}, err=> {
 			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
 		});
@@ -253,6 +299,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 
 	fetchYearlyExpense() {
 		let that = this;
+		that.yearlyExpense = 0;
 		that.discreteBarChartDataYearlyExpense[0].values.length = 0;
 		that.pieChartDataYearlyExpense.length = 0;
 		this.paymentService.yearlyExpense(this.house_id).subscribe(res => {
@@ -266,12 +313,12 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				that.pieChartDataYearlyExpense.push(
 					{key: row.label, y: row.value}
 				);
+				that.yearlyExpense = that.yearlyExpense + row.value;
 			});
 			that.logger.log(that,", detectChanges..that.discreteBarChartDataYearly.values.length=" 
 				+ that.discreteBarChartDataMonthlyExpense[0].values.length + ",that.discreteBarChartDataYearly="
 				 + JSON.stringify(that.discreteBarChartDataYearlyExpense));
 			that.discreteBarChartYearlyExpenseTag.chart.update();
-			that.discretePieChartYearlyExpenseTag.chart.update();
 		}, err=> {
 			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
 		});

@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';  // replaces previous Http service
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';  // replaces previous Http service
 
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { Routes, RouterModule } from '@angular/router';
@@ -24,6 +24,7 @@ import { HouseContractNoteService } from './services/HouseContractNoteService';
 import { UserHouseContractPicService } from './services/UserHouseContractPicService';
 import { IdleService } from './services/IdleService';
 import { PaymentService } from './services/PaymentService';
+import { AccountService } from './services/AccountService';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 
@@ -55,6 +56,7 @@ import { TicketService } from './services/TicketService';
 import { TicketNoteService } from './services/TicketNoteService';
 import { AgmCoreModule } from '@agm/core';
 import { AppSettings } from './models/AppSettings';
+import { H4rHttpInterceptor } from './h4rHttpInterceptor';
 
 //ngx-file-drop
 @NgModule({
@@ -84,7 +86,13 @@ import { AppSettings } from './models/AppSettings';
                 , HouseContractNoteService, UserHouseContractPicService
                 , IdleService, PaymentService
                 ,{provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
-                ,TicketService, TicketNoteService
+                ,TicketService, TicketNoteService,
+                {
+                  provide: HTTP_INTERCEPTORS,
+                  useClass: H4rHttpInterceptor ,
+                  multi: true
+                },
+                AccountService
               ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

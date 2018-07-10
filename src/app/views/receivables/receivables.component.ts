@@ -11,6 +11,7 @@ import {PaymentService} from  '../../services/PaymentService';
 import {HouseContract} from '../../models/HouseContract';
 import { AppSettings } from '../../models/AppSettings';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { UtilityService } from '../../services/UtilityService';
 
 @Component({
   selector: 'h4r-receivables',
@@ -74,7 +75,7 @@ export class ReceivablesComponent implements OnInit {
 	resetDefaults() {
 		this.payment.note = "";
 		this.payment.amount = this.houseContract.monthly_rent_amount;
-		this.payment.payment_date = this.getFormattedDate();
+		this.payment.payment_date = UtilityService.getFormattedDate();
 		this.payment.user_house_contract_id = this.houseContract.id;
 	}
   	saveRecord() {
@@ -91,14 +92,6 @@ export class ReceivablesComponent implements OnInit {
   			that.errorMessage = "Error in receiving payment. Please try again or contact support.";
   			this.logger.log(this,that.message + " " + err.error.errorMessage);
   		});
-  	}
-  	
-  	getFormattedDate() {
-  		var todayTime = new Date();
-  		var month = todayTime.getMonth() + 1;
-  		var day = todayTime.getDate();
-  		var year = todayTime.getFullYear();
-  		return day + "-" + month + "-" + year;
   	}
   	
   	fetchPayments() {

@@ -12,7 +12,7 @@ import { HouseContract } from '../../models/HouseContract';
 })
 export class ReceivedPaymentsComponent implements OnInit {
 	
-	public pageSettings:Pagination = new Pagination(null);
+	public pageSettings:Pagination = new Pagination(null, true, true);
 	@Input() public payments: Array<Payment> = [];
 	@Input() public houseContract:HouseContract;
 	@Output() onDeletePaymentClick = new EventEmitter<Payment>();
@@ -25,7 +25,7 @@ export class ReceivedPaymentsComponent implements OnInit {
 		this.totalReceivedAmt = 0;
 		let that = this;
 		if(this.payments != null && this.payments.length > 0) {
-			that.pageSettings = new Pagination(this.payments); //We have to build a new instance of pagination, existing instance will not refresh the view.
+			that.pageSettings = new Pagination(this.payments, true, true); //We have to build a new instance of pagination, existing instance will not refresh the view.
 			that.logger.info(this, "number of entries=" + this.payments.length);
 			this.payments.forEach(function(payment) {
 				that.logger.info(that, "value=" + payment.amount);

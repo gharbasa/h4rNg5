@@ -1,3 +1,4 @@
+import { AppSettings } from "./AppSettings";
 
 export class User {
 	id: number = 0;
@@ -12,6 +13,7 @@ export class User {
     updated_by: number = 0;
     createdAt:string = "";
     avatar: any = "";
+    avatarURL:string = "";
 	password: string = ""; //used in self service password reset also
 	password_confirmation: string = ""; //used in self service password reset also
     login: string = ""; //used in self service password reset also
@@ -33,7 +35,8 @@ export class User {
 	errorMessage:string = "";
     message:string = "";
     image:any=null;
-	
+    active:boolean = true;
+    
 /*
     constructor(fname: string, email: string) {
         this.fname = fname;

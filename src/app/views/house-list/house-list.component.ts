@@ -12,7 +12,6 @@ import {Pagination} from  '../../models/Pagination';
 })
 export class HouseListComponent extends H4rbaseComponent {
 
-	public pageSettings:Pagination = new Pagination(null);
 	public errorMessage:string = "";
 	constructor(private houseService: HouseService,
 			private logger: LoggingService, 	
@@ -29,10 +28,10 @@ export class HouseListComponent extends H4rbaseComponent {
 		this.houseService.setOperation("");
 		let that = this;
 		this.houseService.list(this.community_id).subscribe(res => {
-			that.pageSettings = new Pagination(res); //We have to build a new instance of pagination, existing instance will not refresh the view.
+			that.pageSettings = this.createPaginationObject(res);
 			//this.logger.log(this,"notificationTypes =" + JSON.stringify(res));
 		}, err=> {
-			that.pageSettings = new Pagination(null);
+			that.pageSettings = this.createPaginationObject(null);
 			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
 		});
 	}

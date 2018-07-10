@@ -13,6 +13,7 @@ import { Notification } from '../models/Notification';
 import { User } from '../models/User';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
+import { UtilityService } from './UtilityService';
 
 @Injectable()
 export class LoginService {
@@ -32,7 +33,7 @@ export class LoginService {
 		
 	}
 	
-	private basePath = '/api/1/usersession';
+	private basePath = AppSettings.H4R_BACKEND_URL + 'api/1/usersession';
 	
 	get():Observable<User> {
 		return this.http.get(this.basePath).map(res => res as User || null);
@@ -151,8 +152,8 @@ export class LoginService {
 		return this.users;
 	}
 	
-	appendUserViewAttrs(user:any) {
-		user.avatarURL = user.avatar;//AppSettings.H4R_BACKEND_URL + user.avatar;
+	appendUserViewAttrs(user:User) {
+		user.avatarURL = UtilityService.prepareS3BucketUrl(user.avatar);//AppSettings.IMAGE_BASE_URL + user.avatar;
 		user.fullName = user.lname + ", " + user.fname;
 		if(user.sex==1)
 			user.sexStr = "Male";

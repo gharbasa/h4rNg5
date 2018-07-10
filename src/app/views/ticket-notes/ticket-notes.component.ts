@@ -15,7 +15,6 @@ import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 })
 export class TicketNotesComponent extends H4rbaseComponent {
 
-	public pageSettings:Pagination = new Pagination(null);
 	@Input() ticket:Ticket;
 	public isadminUser:boolean = false;
 	public newTicketNote:TicketNote = new TicketNote();
@@ -43,7 +42,7 @@ export class TicketNotesComponent extends H4rbaseComponent {
 		let that = this;
 		this.newTicketNote = new TicketNote();
 		this.ticketNoteService.list(this.ticket.id).subscribe(resp => {
-			that.pageSettings = new Pagination(resp); //We have to build a new instance of pagination, existing instance will not refresh the view.
+			that.pageSettings = this.createPaginationObject(resp);
 			that.newTicketNote.ticket_id = that.ticket.id;
 			this.logger.log(this, "Number of Ticket Notes=" +  that.pageSettings.list.length);
 		},

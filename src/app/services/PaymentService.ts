@@ -3,13 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import { Payment } from '../models/Payment';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class PaymentService {
 	
 	constructor(private http: HttpClient) { }
 	
-	private basePath:string = '/api/1/payments';
+	private basePath:string = AppSettings.H4R_BACKEND_URL + 'api/1/payments';
 	
 	list():Observable<Payment[]> {
 		return this.http.get(this.basePath).map(res => res as Payment[] || []);

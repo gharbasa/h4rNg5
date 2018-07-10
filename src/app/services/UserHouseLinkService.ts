@@ -6,6 +6,7 @@ import { HouseContract } from '../models/HouseContract';
 import { LoginService } from '../services/login.service';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class UserHouseLinkService {
@@ -13,8 +14,8 @@ export class UserHouseLinkService {
 	constructor(private http: HttpClient, private loginService: LoginService,
 					private logger: LoggingService) { }
 	
-	private basePath_admin:string = '/api/1/user_house_links';
-	private basePath_nondmin:string = '/api/1/users/{user.id}/user_house_links';
+	private basePath_admin:string = AppSettings.H4R_BACKEND_URL + 'api/1/user_house_links';
+	private basePath_nondmin:string = AppSettings.H4R_BACKEND_URL + 'api/1/users/{user.id}/user_house_links';
 	
 	create(userHouseLink:UserHouseLink) {
 		this.nullifyNonServerAttrs(userHouseLink);

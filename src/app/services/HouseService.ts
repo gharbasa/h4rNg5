@@ -13,10 +13,11 @@ export class HouseService {
 	constructor(private http: HttpClient, private loginService: LoginService,
 					private logger: LoggingService) { }
 	
-	private basePath_admin:string = '/api/1/houses';
-	private basePath_nondmin:string = '/api/1/users/{user.id}/houses';
+	private basePath_admin:string = AppSettings.H4R_BACKEND_URL + 'api/1/houses';
+	private basePath_nondmin:string = AppSettings.H4R_BACKEND_URL + 'api/1/users/{user.id}/houses';
 	private searchKeyword:string = "";
 	private view:string = "";
+	public static GoogleMaps_Url = "https://maps.googleapis.com/maps/api/geocode/json";
 	get(houseId:number):Observable<House> {
 		return this.http.get(this.basePath_admin + "/" + houseId).map(res => res as House || null);
 	}
@@ -182,7 +183,7 @@ export class HouseService {
 		let address:string = house.addr1 + "," + house.addr2 + "," + house.addr3 + "," + house.addr4;
 		address = address.replace(" ", "+");
 		this.logger.info(this,"House address going to search=" + address);
-		return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + address
+		return this.http.get(HouseService.GoogleMaps_Url + '?address=' + address
 		// + "&key=" + AppSettings.MAPS_KEY
 		);
 	}

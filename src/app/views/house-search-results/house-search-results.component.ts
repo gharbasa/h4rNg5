@@ -10,6 +10,8 @@ import { LoggingService } from 'loggerservice';
 import { MatDialog } from '@angular/material';
 import { HousePic } from '../../models/HousePic';
 import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.component';
+import { AppSettings } from '../../models/AppSettings';
+import { UtilityService } from '../../services/UtilityService';
 
 @Component({
   selector: 'h4r-house-search-results',
@@ -18,7 +20,6 @@ import { ZoomPicAlbumComponent } from '../zoom-pic-album/zoom-pic-album.componen
 })
 export class HouseSearchResultsComponent extends H4rbaseComponent {
 
-  public pageSettings:Pagination = new Pagination(null);
   private dialogRef:any = null;
   public errorMessage:string = "";
   //private houses:Array<House> = [];
@@ -40,7 +41,7 @@ export class HouseSearchResultsComponent extends H4rbaseComponent {
     let that = this;
     //this.houses.length = 0;
     this.houseService.search().subscribe(res => {
-      that.pageSettings = new Pagination(res); //We have to build a new instance of pagination, existing instance will not refresh the view.
+      that.pageSettings = new Pagination(res, true, true); //We have to build a new instance of pagination, existing instance will not refresh the view.
     });
   }
 
@@ -61,8 +62,8 @@ export class HouseSearchResultsComponent extends H4rbaseComponent {
 		this.housePicsService.listByHouse(house.id).subscribe(resp => {
 			for(var i in resp) {
 				var row = resp[i];
-				//row.image = AppSettings.H4R_BACKEND_URL + row.picture;
-				row.image = row.picture;
+				row.image = UtilityService.prepareS3BucketUrl(row.picture);//AppSettings.IMAGE_BASE_URL + row.picture;
+				//row.image = row.picture;
         housePics.push(row);
       }
       that.zoom(housePics);

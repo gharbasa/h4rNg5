@@ -2,12 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { House } from '../../models/House';
 import { HouseService } from '../../services/HouseService';
-import { LocalStorageService } from '../../services/LocalStorageService';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
 import { Community } from '../../models/Community';
-import { User } from '../../models/User';
+import { Account } from '../../models/Account';
 import { AgmMap } from '@agm/core';
+import { AccountService } from '../../services/AccountService';
 
 @Component({
   selector: 'h4r-house',
@@ -20,6 +20,7 @@ export class HouseComponent implements OnInit {
 	public house:House = new House();
 	public editHouse:boolean = false;
 	public communities:Array<Community> = null;
+	public accounts:Array<Account> = null;
 	public createNewHouse:boolean = false;
 
 	public latitude: number;
@@ -34,9 +35,9 @@ export class HouseComponent implements OnInit {
   	constructor(public houseService: HouseService
 			, private router: Router
 			, private route: ActivatedRoute
-			, private localStorageService: LocalStorageService
 			, private logger: LoggingService
-			, private loginService:LoginService) { 
+			, private loginService:LoginService
+			, private accountService:AccountService) { 
   		
   	}
 
@@ -46,8 +47,12 @@ export class HouseComponent implements OnInit {
 		this.longitude = -98.5795;
 		this.setCurrentPosition();
   		let that = this;
-  		this.communities = this.loginService.getCommunities();//JSON.parse(this.localStorageService.getItem('communities'));
+  		this.communities = this.loginService.getCommunities();
 		let user = this.loginService.getCurrentUser();
+		this.accountService.list().subscribe(res => {
+			that.accounts = res;
+		});
+
   		this.route.params.subscribe(res => {
   			if(res.id == -1) {
   				this.logger.log(this,"User wants to create a new house");

@@ -12,7 +12,8 @@ export class House {
 	no_of_bedrooms:number = 0;
 	no_of_bathrooms:number = 0;
 	floor_number:number = 0;
-    community_id:number = null;
+	community_id:number = null;
+	account_id:number = null;
     active:boolean = true;
     created_by:number = 0;
     updated_by:number = 0;

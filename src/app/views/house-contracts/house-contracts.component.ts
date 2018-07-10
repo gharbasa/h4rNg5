@@ -4,8 +4,6 @@ import {HouseContract} from '../../models/HouseContract';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
 import {H4rbaseComponent} from '../h4rbase/h4rbase.component';
-import {Pagination} from  '../../models/Pagination';
-import { AppSettings } from '../../models/AppSettings';
 
 @Component({
   selector: 'h4r-house-contracts',
@@ -14,7 +12,6 @@ import { AppSettings } from '../../models/AppSettings';
 })
 export class HouseContractsComponent extends H4rbaseComponent {
 
-	public pageSettings:Pagination = new Pagination(null);
 	public errorMessage:string = "";
 	constructor(private houseContractsService: HouseContractsService,
 			private logger: LoggingService,
@@ -39,11 +36,11 @@ export class HouseContractsComponent extends H4rbaseComponent {
 		  			contract.roles = roleStr.substring(0, roleStr.length - 2);
 		  		}
 			  }
-			  that.pageSettings = new Pagination(resp); //We have to build a new instance of pagination, existing instance will not refresh the view.
+			  that.pageSettings = this.createPaginationObject(resp);
 
 		}, err=> {
 			this.logger.error(this,"error fetching houseContracts, err=" + JSON.stringify(err));
-			that.pageSettings = new Pagination(null);
+			that.pageSettings = this.createPaginationObject(null);
 		});
 	}
 
@@ -54,6 +51,7 @@ export class HouseContractsComponent extends H4rbaseComponent {
 		if(houseContract.active == true) {
 			this.houseContractsService.activate(houseContract).subscribe(resp => {
 				this.logger.info(this," Successfully activated the contract.");	
+				that.refreshHouseContracts();
 			},err => {
 				that.errorMessage =  "Error in activating the contract.";
 				this.logger.error(that, that.errorMessage);	
@@ -64,6 +62,7 @@ export class HouseContractsComponent extends H4rbaseComponent {
 		if(houseContract.active == false) {
 			this.houseContractsService.deactivate(houseContract).subscribe(resp => {
 				this.logger.info(this," Successfully deactivated the contract.");	
+				that.refreshHouseContracts();
 			},err => {
 				that.errorMessage =  "Error in deactivating the contract.";
 				this.logger.error(that,that.errorMessage);	

@@ -1,7 +1,11 @@
-<table>
+<table width="50%">
     <tr>
-        <td align='center'>
+        <td align='center' width="20%">
     Communities <a routerLink="../community/-1">(+)</a>
+        </td>
+        <td width="30%">
+                <input type="checkbox" [(ngModel)]="activeRecords" (ngModelChange)="filterActiveRecords()"> Active
+                <input type="checkbox" [(ngModel)]="inactiveRecords" (ngModelChange)="filterActiveRecords()"> Inactive
         </td>
     </tr>
 </table>

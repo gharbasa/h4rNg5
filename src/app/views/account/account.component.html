@@ -1,0 +1,69 @@
+Account
+
+<div id='grad1' class="row justify-content-center">
+    <table width="100%">
+        <tr align="left"><td width="50%">
+            <form novalidate #form="ngForm">
+          <div class="field" *ngIf='account.message != ""' style="color:green">
+            <label>Message:</label>
+            <label>{{account.message}}</label>
+          </div>
+          <div class="field" *ngIf='account.errorMessage != ""' style="color:red">
+            <label>Error Message:</label>
+            <label>{{account.errorMessage}}</label>
+          </div>
+       
+         <table><tr>
+             <td width="20%">
+            Name: </td>
+            <td><input [autofocus]="true" name="note" type="text" size="25" [(ngModel)]="account.note" placeholder="Community or house name"/>
+                </td>
+               </tr>
+        <tr>
+          <td>
+            Baseline amount:</td>
+            <td><input name="baseline_amt" type="text" size="25" [(ngModel)]="account.baseline_amt" placeholder="Baseline amount"/>
+          </td>
+         </tr>
+         <tr>
+          <td>
+            Baseline date:</td><td> 
+              <h4r-date-picker (onDateChanged)="baselineDateChanged($event)" #baselineDate name="baseline_date" value="{{account.baselineDate}}"></h4r-date-picker>
+          </td>
+          </tr>
+          <tr>
+              <td>
+                Net Amount :</td><td> 
+                  <label>{{account.netAmount | currency}}</label>
+              </td>
+          </tr>
+          <tr align='center'>
+              <td colspan="2">
+                  <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
+              </td>
+          </tr>
+        </table>
+      </form>
+      </td>
+</tr>
+</table>
+
+</div>
+
+<ul class="nav nav-tabs" *ngIf="(createNewAccount == false) && (houses.length>0)">
+    <li class="nav-item" *ngFor="let house of houses" 
+                (click)="makeActiveHouse(house)">
+      <a class="nav-link" id="house{{house.id}}-tab" data-toggle="tab" href="#house{{house.id}}"
+          role="tab" attr.aria-controls="house{{house.id}}" attr.aria-selected="{{house.id == activeHouse.id}}">
+            {{house.name}}
+      </a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent" *ngIf="houses.length>0">
+    <div *ngFor="let house of houses" class="tab-pane fade" 
+          [ngClass]="{'show active':(house.id == activeHouse.id)}" 
+          id="house{{house.id}}" role="tabpanel" attr.aria-labelledby="house{{house.id}}-tab">
+        <h4r-performance-charts *ngIf="house.id == activeHouse.id" [houseInput]="house"></h4r-performance-charts>
+    </div>
+</div>

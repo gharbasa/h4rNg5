@@ -1,5 +1,7 @@
 export class AppSettings {
-	//public static readonly H4R_BACKEND_URL:string = "http://localhost:3000"; //This is for renderring attachment images
+	public static readonly H4R_BACKEND_URL:string = "http://api.maaghar.com:3000/";
+	//public static readonly IMAGE_BASE_URL:string = "http://api.maaghar.com/";
+	public static readonly IMAGE_S3_BUCKET_NAME:string = "maaghar";
 	/*
 	static ADMIN_ROLE_STR:string = "Admin";
 	static GUEST_ROLE_STR:string = "Guest";

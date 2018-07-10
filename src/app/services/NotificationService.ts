@@ -3,14 +3,15 @@ import {HttpClient} from '@angular/common/http';
 import { Notification } from '../models/Notification';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class NotificationService {
 	
 	constructor(private http: HttpClient) { }
 	
-	private userNotifications:string = '/api/1/users/{user.id}/notifications';
-	private basePath:string = '/api/1/notifications';
+	private userNotifications:string = AppSettings.H4R_BACKEND_URL + 'api/1/users/{user.id}/notifications';
+	private basePath:string = AppSettings.H4R_BACKEND_URL + 'api/1/notifications';
 	
 	update(notification:Notification) {
 		return this.http.put(this.basePath + "/" + notification.id, notification);

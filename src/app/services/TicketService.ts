@@ -5,12 +5,13 @@ import { Ticket } from '../models/Ticket';
 import { LoginService } from '../services/login.service';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
+import { AppSettings } from '../models/AppSettings';
 
 @Injectable()
 export class TicketService {
 	
 	constructor(private http: HttpClient, private logger: LoggingService) { }
-	private basePath:string = '/api/1/tickets';
+	private basePath:string = AppSettings.H4R_BACKEND_URL + 'api/1/tickets';
 	private searchKeyword:string = "";
 	private view:string = "";
 	get(ticketId:number):Observable<Ticket> {

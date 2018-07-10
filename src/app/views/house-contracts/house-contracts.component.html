@@ -3,7 +3,7 @@
         <td width="30%">
             House Contracts
         </td>
-        <td width="70%" *ngIf="isAdminUser()">
+        <td width="40%" *ngIf="isAdminUser()">
         <ng-select name="community_id" [items]="communities"
                    bindLabel="name"
                    bindValue="id"
@@ -11,6 +11,10 @@
                    [(ngModel)]="community_id"
                    (change)="refreshHouseContracts()">
            </ng-select>
+        </td>
+        <td width="30%">
+            <input type="checkbox" [(ngModel)]="activeRecords" (ngModelChange)="filterActiveRecords()"> Active
+            <input type="checkbox" [(ngModel)]="inactiveRecords" (ngModelChange)="filterActiveRecords()"> Inactive
         </td>
     </tr>
 </table>

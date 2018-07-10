@@ -14,8 +14,6 @@ import { User } from '../../models/User';
 })
 export class UsersComponent extends H4rbaseComponent {
 
-	public pageSettings:Pagination = new Pagination(null);
-
 	constructor(private userService: UserService,
 			private logger: LoggingService, 	
 			public loginService: LoginService) {
@@ -29,18 +27,19 @@ export class UsersComponent extends H4rbaseComponent {
 	refreshUsersList() {
 		let that = this;
 		this.logger.info(this, "this.community_id=" + this.community_id);
-		if(this.community_id == null)
-			this.pageSettings = new Pagination(this.loginService.getUsers()); //We have to build a new instance of pagination, existing instance will not refresh the view.
-		else {
+		if(this.community_id == null) {
+			let users:Array<User> = this.loginService.getUsers();
+			this.pageSettings = this.createPaginationObject(users); //We have to build a new instance of pagination, existing instance will not refresh the view.
+		} else {
 			this.userService.filterByCommunity(this.community_id).subscribe(resp => {
 				this.logger.info(this, "Successfully filterByCommunity.");
 				resp.forEach(function (user) {
 					that.loginService.appendUserViewAttrs(user);
 				});
-				that.pageSettings = new Pagination(resp);
+				that.pageSettings = that.createPaginationObject(resp);
 			},
 			err => {
-				that.pageSettings = new Pagination(null);
+				that.pageSettings = that.createPaginationObject(null);
 				this.logger.error(this, "Problem in resetting the password.");
 			});	
 		}
