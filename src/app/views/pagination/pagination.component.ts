@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AppSettings } from '../../models/AppSettings';
 import { LoggingService, Config } from 'loggerservice';
 import { Pagination } from '../../models/Pagination';
 
@@ -11,7 +10,6 @@ import { Pagination } from '../../models/Pagination';
 export class PaginationComponent implements OnInit {
 
   @Input() pageSettings:Pagination = null;
-  public pageNumbers:Array<number> = [];
   constructor(private logger: LoggingService) { }
 
   ngOnInit() {
@@ -30,10 +28,6 @@ export class PaginationComponent implements OnInit {
     
     this.pageSettings.identifyTotalNumberOfPages();
     
-    this.pageNumbers.length = 0;
-    for(let i:number = 1; i<=this.pageSettings.numberOfPages; i++ ) {
-      this.pageNumbers.push(i);
-    }
     let json:any = this.pageSettings.buildBoundaryIndexRange(1);  
   }
 

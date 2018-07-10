@@ -1,9 +1,9 @@
-<table width="40%">
+<table width="50%">
     <tr>
-        <td width="30%">
+        <td width="20%">
     Houses <a routerLink="../house/-1">(+)</a>
         </td>
-        <td width="70%" *ngIf="isAdminUser()">
+        <td width="40%" *ngIf="isAdminUser()">
         <ng-select name="community_id" [items]="communities"
                    bindLabel="name"
                    bindValue="id"
@@ -11,6 +11,10 @@
                    [(ngModel)]="community_id"
                    (change)="fetchHouses()">
            </ng-select>
+        </td>
+        <td width="40%">
+                <input type="checkbox" [(ngModel)]="activeRecords" (ngModelChange)="filterActiveRecords()"> Active
+                <input type="checkbox" [(ngModel)]="inactiveRecords" (ngModelChange)="filterActiveRecords()"> Inactive
         </td>
     </tr>
 </table>
@@ -29,21 +33,21 @@
         <th width="5%" title="Floor No.">Fl#</th>
         <th width="15%">Land lord</th>
         <th width="15%">Tenant</th>
-        <th width="10%">Community</th>
+        <th width="10%" *ngIf="!community_id">Community</th>
         <th width="5%">Open?</th>
         <th width="5%">Active?</th>
         <th *ngIf="isAdminUser()">Verified?</th>
     </tr>
     </tbody>
     <tbody>
-        <tr *ngFor="let house of pageSettings.getPaginatedList()"  [ngStyle]="{'color':house.active? '' : '#959ba5' }">
+        <tr *ngFor="let house of pageSettings.getPaginatedList()" [ngStyle]="{'color':house.active? '' : '#959ba5' }">
             <td><a routerLink="../house/{{house.id}}">{{house.name}}</a></td>
             <td>{{house.addr1}}, {{house.addr2}}<br/>{{house.addr3}}, {{house.addr4}}</td>
             <td>{{house.description}}</td>
             <td>{{house.floor_number}}</td>
             <td>{{house.land_lord && house.land_lord.fullName}}</td>
             <td>{{house.tenant && house.tenant.fullName}}</td>
-            <td>{{house.community && house.community.name}}</td>
+            <td *ngIf="!community_id">{{house.community && house.community.name}}</td>
             <td>
                 <input type="checkbox" [(ngModel)]="house.is_open" (change)="updateOpenHouseFlag(house)">
             </td>

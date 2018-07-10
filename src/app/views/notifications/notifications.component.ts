@@ -12,7 +12,7 @@ import { LoggingService, Config } from 'loggerservice';
 })
 export class NotificationsComponent implements OnInit {
 
-	public pageSettings:Pagination = new Pagination(null);
+	public pageSettings:Pagination = new Pagination(null, true, true);
 	
 	constructor(private loginService: LoginService
   			,private notificationService: NotificationService
@@ -32,7 +32,7 @@ export class NotificationsComponent implements OnInit {
 		let that = this;
 		this.notificationService.list(this.loginService.getCurrentUser().id).subscribe(res => {
 			that.logger.log(that,"Fetched notifications of length.." + res.length);
-			that.pageSettings = new Pagination(res); //We have to build a new instance of pagination, existing instance will not refresh the view.
+			that.pageSettings = new Pagination(res, true, true); //We have to build a new instance of pagination, existing instance will not refresh the view.
 			that.loginService.setNotifications(res);
 		},
 		err =>{

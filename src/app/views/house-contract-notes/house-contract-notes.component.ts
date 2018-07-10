@@ -12,7 +12,7 @@ import {Pagination} from  '../../models/Pagination';
 })
 export class HouseContractNotesComponent implements OnInit {
 
-	public pageSettings:Pagination = new Pagination(null);
+	public pageSettings:Pagination = new Pagination(null, true,true);
 	@Input() houseContract:HouseContract;
 	public newHouseContractNote:HouseContractNote = new HouseContractNote();
 	constructor(private houseContractNoteService: HouseContractNoteService, private logger: LoggingService) { }
@@ -32,7 +32,7 @@ export class HouseContractNotesComponent implements OnInit {
 		let that = this;
 		this.newHouseContractNote = new HouseContractNote();
 		this.houseContractNoteService.list(this.houseContract.id).subscribe(resp => {
-			that.pageSettings = new Pagination(resp); //We have to build a new instance of pagination, existing instance will not refresh the view.
+			that.pageSettings = new Pagination(resp, true,true);
 			that.newHouseContractNote.user_house_contract_id = that.houseContract.id;
 			this.logger.log(this, "Number of HouseContract Notes=" +  that.pageSettings.list.length);
 		},

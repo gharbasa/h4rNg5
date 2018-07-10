@@ -35,6 +35,7 @@ export class User {
 	errorMessage:string = "";
     message:string = "";
     image:any=null;
+    active:boolean = true;
     
 /*
     constructor(fname: string, email: string) {

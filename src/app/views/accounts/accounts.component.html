@@ -1,0 +1,40 @@
+<table width="50%">
+  <tr>
+      <td align='center' width="20%">
+  Accounts <a routerLink="../account/-1" *ngIf="isAdminUser()">(+)</a>
+      </td>
+      <td width="30%">
+            <input type="checkbox" [(ngModel)]="activeRecords" (ngModelChange)="filterActiveRecords()"> Active
+            <input type="checkbox" [(ngModel)]="inactiveRecords" (ngModelChange)="filterActiveRecords()"> Inactive
+        </td>
+  </tr>
+</table>
+<h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
+<table width="100%">
+    <tbody>
+        <tr *ngIf="errorMessage != ''">
+            <td colspan="9" style="color:red">
+                {{errorMessage}}
+            </td>
+        </tr>
+  <tr>
+      <th width="25%">Name</th>
+      <th width="5%">Houses</th>
+      <th width="20%">Baseline</th>
+      <th width="10%" style="color:orange">Net Amount</th>
+      <th width="20%">Created by</th>
+      <th width="5%">Active?</th>
+  </tr>
+  </tbody>
+  <tbody>
+      <tr *ngFor="let account of pageSettings.getPaginatedList()">
+          <td><a routerLink="../account/{{account.id}}">{{account.note}}({{account.id}})</a></td>
+          <td>{{account.unitsCount}}</td>
+          <td>{{account.baseline_amt}} (dated: {{account.baselineDate}})</td>
+          <td style="color:orange">{{account.netAmount}}</td>
+          <td>{{account.createdBy && account.createdBy.fullName}}</td>
+          <td>{{account.active}}</td>
+      </tr>
+  </tbody>
+</table>
+<h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>

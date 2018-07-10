@@ -20,7 +20,6 @@ import { UtilityService } from '../../services/UtilityService';
 })
 export class HouseSearchResultsComponent extends H4rbaseComponent {
 
-  public pageSettings:Pagination = new Pagination(null);
   private dialogRef:any = null;
   public errorMessage:string = "";
   //private houses:Array<House> = [];
@@ -42,7 +41,7 @@ export class HouseSearchResultsComponent extends H4rbaseComponent {
     let that = this;
     //this.houses.length = 0;
     this.houseService.search().subscribe(res => {
-      that.pageSettings = new Pagination(res); //We have to build a new instance of pagination, existing instance will not refresh the view.
+      that.pageSettings = new Pagination(res, true, true); //We have to build a new instance of pagination, existing instance will not refresh the view.
     });
   }
 

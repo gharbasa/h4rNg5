@@ -45,6 +45,8 @@ import { TicketComponent } from './views/ticket/ticket.component';
 import { TicketNoteComponent } from './views/ticket-note/ticket-note.component';
 import { TicketNotesComponent } from './views/ticket-notes/ticket-notes.component';
 import { AutofocusDirective } from './directives/Autofocus';
+import { AccountsComponent } from './views/accounts/accounts.component'
+import { AccountComponent } from './views/account/account.component'
 
 export class h4rRoutes {
     static routes: Routes = [
@@ -136,6 +138,17 @@ export class h4rRoutes {
         }
         ,
         {
+            path: 'account/:id',
+            component: AccountComponent
+        }
+        
+        ,
+        {
+            path: 'accounts',
+            component: AccountsComponent
+        }
+        ,
+        {
             path: 'house_contracts',
             component: HouseContractsComponent
         }
@@ -217,7 +230,7 @@ export class h4rRoutes {
         PaginationComponent, DatePickerComponent, HouseSearchResultsComponent,
         CommunitiesComponent, CommunityComponent,
         TicketsComponent, TicketComponent, TicketNoteComponent, TicketNotesComponent,
-        AutofocusDirective
+        AutofocusDirective, AccountComponent, AccountsComponent
       ]
 
       static modalDialogEntryPoints = [

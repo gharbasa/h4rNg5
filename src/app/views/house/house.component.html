@@ -137,6 +137,23 @@ House
          
           
           </tr>
+
+          <tr>
+
+                <td>
+                   Account:</td>
+                   <td width="40%">
+                      <ng-select name="account_id" [items]="accounts"
+                         bindLabel="note"
+                         bindValue="id"
+                         placeholder="Account"
+                         [(ngModel)]="house.account_id">
+                      </ng-select>
+                  </td>
+                
+                </tr>
+                <tr>
+
           <tr align='center' *ngIf="houseService.isReadonlyView() == false">
               <td colspan="2">
                   <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>

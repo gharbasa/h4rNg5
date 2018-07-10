@@ -24,6 +24,7 @@ import { HouseContractNoteService } from './services/HouseContractNoteService';
 import { UserHouseContractPicService } from './services/UserHouseContractPicService';
 import { IdleService } from './services/IdleService';
 import { PaymentService } from './services/PaymentService';
+import { AccountService } from './services/AccountService';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 
@@ -90,7 +91,8 @@ import { H4rHttpInterceptor } from './h4rHttpInterceptor';
                   provide: HTTP_INTERCEPTORS,
                   useClass: H4rHttpInterceptor ,
                   multi: true
-                }
+                },
+                AccountService
               ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

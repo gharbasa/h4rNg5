@@ -1,16 +1,18 @@
 
-<table><tr><td>
-	<b>Performanace charts for House : </b>
-	<ng-select name="house_id" [items]="houses"
-    			bindLabel="name"
-                bindValue="id"
-                placeholder="House"
-                [(ngModel)]="house_id" 
-                (change)="houseChanged()">
-    </ng-select>
-</td>
-</tr>
-<tr>
+<table>
+    <tr *ngIf="houses != null && houses.length > 0">
+        <td>
+        <b>Performanace charts for House : </b>
+        <ng-select name="house_id" [items]="houses"
+                    bindLabel="name"
+                    bindValue="id"
+                    placeholder="House"
+                    [(ngModel)]="house_id" 
+                    (change)="houseChanged()">
+        </ng-select>
+        </td>
+    </tr>
+    <tr>
         <td width="100%" align='center' colspan="2" valign="top">
                 {{currentUser.subscriptionType}} Years net income ({{(yearlyIncome - yearlyExpense) | currency}})
         </td>

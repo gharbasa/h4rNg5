@@ -25,7 +25,6 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
 	private users:Array<User> = [];
 	public errorMessage:string = "";
 	private message:string = "";
-	public pageSettings:Pagination = new Pagination(null);
 
   	constructor(private userService: UserService,
   			private logger: LoggingService,
@@ -61,7 +60,7 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
 		  userHouseLinks.forEach(function (userHouseLink) {
 		  	that.fetchContracts(userHouseLink);
 		  });
-		  that.pageSettings = new Pagination(userHouseLinks); //We have to build a new instance of pagination, existing instance will not refresh the view.
+		  that.pageSettings = this.createPaginationObject(userHouseLinks);
 	  },
 	  err => {
 		  that.logger.error(this,"Error fetching User house links.");

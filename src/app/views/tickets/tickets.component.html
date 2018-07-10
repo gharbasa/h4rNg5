@@ -1,9 +1,9 @@
-<table width="40%">
+<table width="60%">
     <tr>
         <td width="30%">
           Tickets <a routerLink="../ticket/-1">(+)</a>
         </td>
-        <td width="70%">
+        <td width="40%">
             <ng-select name="status" [items]="TicketStatuses"
               bindLabel="name"
               bindValue="id"
@@ -11,6 +11,10 @@
               [(ngModel)]="filter.status"
               (change)="fetchTickets()">
             </ng-select>
+        </td>
+        <td width="30%">
+                <input type="checkbox" [(ngModel)]="activeRecords" (ngModelChange)="filterActiveRecords()"> Active
+                <input type="checkbox" [(ngModel)]="inactiveRecords" (ngModelChange)="filterActiveRecords()"> Inactive
         </td>
     </tr>
 </table>

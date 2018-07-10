@@ -9,7 +9,7 @@
   "include": [
     "./app/models/**/*.ts",
     "./app/views/**/*.ts",
-    "./**/*.ts",
+    "./**/*.ts"
   ],
   "exclude": [
     "test.ts",

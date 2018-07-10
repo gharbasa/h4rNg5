@@ -10,6 +10,7 @@ import {HouseContract} from '../../models/HouseContract';
 import { AppSettings } from '../../models/AppSettings';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import * as moment from 'moment'; 
+import { UtilityService } from '../../services/UtilityService';
 
 @Component({
   selector: 'h4r-house-contract',
@@ -41,41 +42,44 @@ export class HouseContractComponent implements OnInit {
       that.newContract = true;
       that.houseContract.message = "";
       that.houseContract.errorMessage = "";
-  		this.route.params.subscribe(res => {
+  	  this.route.params.subscribe(res => {
   			if(res.id > 0) {
   				that.newContract = false;
   				that.fetchExistingContract(res.id);
   			} else if(res.id == 0) { //New contract launched from user-house-links
-          that.newContract = true;
-          let key:any = that.houseContractsService.getSharedKey(); //house_user_role
-          that.logger.log(that,"User is launched from House User Links, lets get the key=" + key);
-          that.houseContractsService.setSharedKey(null);
-          that.houseContract.renew = key.renew;
-          that.houseContract.user = key.user;
-          that.houseContract.user_id = key.user.id;
-          that.houseContract.house = key.house;
-          that.houseContract.house_id = key.house.id;
-          that.houseContract.user_house_link_id = key.user_house_link_id;
-          that.houseContract.roles = AppSettings.ROLES[key.role].label;
-          that.houseContract.role = AppSettings.ROLES[key.role].value;
-          that.houseContract.active = true;
+				that.newContract = true;
+				let key:any = that.houseContractsService.getSharedKey(); //house_user_role
+				that.logger.log(that,"User is launched from House User Links, lets get the key=" + key);
+				that.houseContractsService.setSharedKey(null);
+				that.houseContract.renew = key.renew;
+				that.houseContract.user = key.user;
+				that.houseContract.user_id = key.user.id;
+				that.houseContract.house = key.house;
+				that.houseContract.house_id = key.house.id;
+				that.houseContract.user_house_link_id = key.user_house_link_id;
+				that.houseContract.roles = AppSettings.ROLES[key.role].label;
+				that.houseContract.role = AppSettings.ROLES[key.role].value;
+				that.houseContract.active = true;
 
-          if(key.renew == true) {
-            this.logger.log(this, "User wants to renew an existing contractId=" + key.id + ", lets fetch it first.");
-            this.houseContractsService.get(key.id).subscribe(res => {
-              that.houseContract.contract_start_date = res.contract_end_date;
-              that.houseContract.contract_end_date = "";
-              that.houseContract.annual_rent_amount = res.annual_rent_amount;
-              that.houseContract.monthly_rent_amount = res.monthly_rent_amount;
-              that.houseContract.active = true;
-              that.houseContract.from_contract_id = key.id; //lets see if server can take this.
-            },err => {
-              that.houseContract.errorMessage = "Problem fetching existing contract. please try again after sometime.";
-              this.logger.error(this,that.houseContract.errorMessage);  
-            });
-          } else {
-            //Do nothing
-          }
+				that.houseContract.contract_start_date = UtilityService.getFormattedDate();
+				that.houseContract.contract_end_date = UtilityService.getFormattedDate();
+
+				if(key.renew == true) {
+					that.logger.log(this, "User wants to renew an existing contractId=" + key.id + ", lets fetch it first.");
+					that.houseContractsService.get(key.id).subscribe(res => {
+						that.houseContract.contract_start_date = res.contract_end_date;
+						that.houseContract.contract_end_date = "";
+						that.houseContract.annual_rent_amount = res.annual_rent_amount;
+						that.houseContract.monthly_rent_amount = res.monthly_rent_amount;
+						that.houseContract.active = true;
+						that.houseContract.from_contract_id = key.id; //lets see if server can take this.
+					},err => {
+						that.houseContract.errorMessage = "Problem fetching existing contract. please try again after sometime.";
+						that.logger.error(this,that.houseContract.errorMessage);  
+					});
+				} else {
+					//Do nothing
+				}
 
         } else {
   				that.logger.log(that,"User wants to create a new house contract from no where.");

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, Input } from '@angular/core';
 import { HouseService } from '../../services/HouseService';
 import { LoggingService, Config } from 'loggerservice';
 import {PaymentService} from  '../../services/PaymentService';
@@ -19,6 +19,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 	public yearlyIncome:number = 0;
 	public monthlyIncome:number = 0;
 	public monthlyExpense:number = 0;
+	@Input() houseInput:House; //Input from Account detail page
 
 	public discreteRevenueBarChartOptions: any = {
 		chart: {
@@ -148,7 +149,13 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
   	}
   	
   	ngOnInit() {
-		this.fetchHouses();
+		if (this.houseInput == null) 
+			this.fetchHouses();
+		else {
+			this.house_id = this.houseInput.id
+			this.houseChanged();
+		}
+
 		let currentYear:number =  (new Date()).getFullYear();
 		this.years.length = 0;
 		for(let i=0; i<this.currentUser.subscriptionType; i++) {
@@ -157,6 +164,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
   	};
 
   	fetchHouses() {
+		this.logger.info(this,"Fetching houses");
 		let that = this;
 		this.houseService.list4Reports().subscribe(res => {
 			that.houses = res;
@@ -284,7 +292,6 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				+ that.discreteBarChartDataMonthlyIncome[0].values.length + ",that.discreteBarChartDataYearly="
 				 + JSON.stringify(that.discreteBarChartDataYearlyIncome));
 			that.discreteBarChartYearlyIncomeTag.chart.update();
-			that.discretePieChartYearlyIncomeTag.chart.update();
 		}, err=> {
 			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
 		});
@@ -312,7 +319,6 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				+ that.discreteBarChartDataMonthlyExpense[0].values.length + ",that.discreteBarChartDataYearly="
 				 + JSON.stringify(that.discreteBarChartDataYearlyExpense));
 			that.discreteBarChartYearlyExpenseTag.chart.update();
-			that.discretePieChartYearlyExpenseTag.chart.update();
 		}, err=> {
 			this.logger.error(this,"error fetching houses, err=" + JSON.stringify(err));
 		});

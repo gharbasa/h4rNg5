@@ -8,7 +8,8 @@ export class UtilityService {
 	constructor(private logger: LoggingService) { }
 	
 	/**
-	 * returns 'Wed Apr 04 2018 21:54:35 GMT-0400 (EDT)'
+	 * Input date format: Wed Apr 04 2018 21:54:35 GMT-0400 (EDT)
+	 * returns 'Wed Apr 04 2018 21:54:35'
 	 * 			trims  GMT-0400 (EDT)
 	 */
 	convertDateUTC2Local(dateString:string) {
@@ -29,5 +30,13 @@ export class UtilityService {
 			return url;
 		}
 		return urlParam;
+	}
+
+	public static getFormattedDate():string {
+		var todayTime = new Date();
+		var month = todayTime.getMonth() + 1;
+		var day = todayTime.getDate();
+		var year = todayTime.getFullYear();
+		return day + "-" + month + "-" + year;
 	}
 }
