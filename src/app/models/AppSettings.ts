@@ -1,5 +1,6 @@
 export class AppSettings {
-	public static readonly H4R_BACKEND_URL:string = "http://api.maaghar.com:3000/";
+	public static readonly H4R_BACKEND_URL:string = "http://api.maaghar.com:3000/"; // etc/hosts file map this to localhost
+	//public static readonly H4R_BACKEND_URL:string = "http://api.maaghar.com/";
 	//public static readonly IMAGE_BASE_URL:string = "http://api.maaghar.com/";
 	public static readonly IMAGE_S3_BUCKET_NAME:string = "maaghar";
 	/*
@@ -26,15 +27,16 @@ export class AppSettings {
 	*/
 	
 	public static readonly ROLES:any = {
-	                    "GUEST": {value:0, label: "Guest"},
-	                    "ADMIN": {value:1 << 16, label: "Admin"},
-	                    "TENANT": {value: 1 << 15, label: " Tenant "},
-	                    "LAND_LORD": {value: 1 << 14, label: "Land Lord"},
-	                    "ACCOUNTANT": {value: 1 << 13, label: "Accountant"},
-	                    "PROPERTY_MGMT_MGR": {value: 1 << 12, label: "Prop. Mgr"},
-	                    "PROPERTY_MGMT_EMP": {value: 1 << 11, label: "Prop. Emp"},
-	                    "AGENCY_COLLECTION_EMP": {value: 1 << 10, label: "Agency Emp"},
-	                    "AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr"}
+	                    "GUEST": {value:0, label: "Guest", contract_type:1},
+	                    "ADMIN": {value:1 << 16, label: "Admin", contract_type:1},
+	                    "TENANT": {value: 1 << 15, label: " Tenant ", contract_type:1},
+	                    "LAND_LORD": {value: 1 << 14, label: "Land Lord", contract_type:1},
+	                    "ACCOUNTANT": {value: 1 << 13, label: "Accountant", contract_type:1},
+	                    "PROPERTY_MGMT_MGR": {value: 1 << 12, label: "Prop. Mgr", contract_type:1},
+	                    "PROPERTY_MGMT_EMP": {value: 1 << 11, label: "Prop. Emp", contract_type:1},
+	                    "AGENCY_COLLECTION_EMP": {value: 1 << 10, label: "Agency Emp", contract_type:1},
+						"AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr", contract_type:1},
+						"MAINTENANCE": {value: 1 << 8, label: "Maintenance", contract_type:2},
 	};
 	static IDLE_TIME:number = 15 * 60; //15 minutes
 	static WAIT_TIME_AFTER_IDLE:number = 1 * 60; //1 minutes, after this user session is logged-out

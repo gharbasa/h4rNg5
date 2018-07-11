@@ -18,6 +18,7 @@ export class UserHouseLink {
 	property_mgmt_emp:number = 0;
 	agency_coll_emp:number = 0;
 	agency_coll_mgr:number = 0;
+	maintenance:number = 0;
 
 	errorMessage:string = "";
 	message:string  = "";
