@@ -21,11 +21,13 @@
         <th>House</th>
         <th>{{staticRoles["TENANT"].label}}</th>
         <th>{{staticRoles["LAND_LORD"].label}}</th>
+        <th>{{staticRoles["MAINTENANCE"].label}}</th>
         <th>{{staticRoles["ACCOUNTANT"].label}}</th>
         <th>{{staticRoles["PROPERTY_MGMT_MGR"].label}}</th>
         <!--<th>{{staticRoles["PROPERTY_MGMT_EMP"].label}}</th> -->
-        <th>{{staticRoles["AGENCY_COLLECTION_MGR"].label}}</th>
+        <!--<th>{{staticRoles["AGENCY_COLLECTION_MGR"].label}}</th> --> <!--This is used as maintenance in the past-->
         <!--<th>{{staticRoles["AGENCY_COLLECTION_EMP"].label}}</th> -->
+        
     </tr>
     <tr *ngIf="errorMessage != ''">
         <td colspan="8"  style="color:red">{{errorMessage}}</td>
@@ -106,6 +108,42 @@
              </span>
              &nbsp;
                 
+        </td>
+        <td>
+                <ng-select name="maintenance" [items]="users"
+                       bindLabel="fullName"
+                       bindValue="id"
+                       placeholder="Maintenance"
+                       [(ngModel)]="user_house_link.maintenance_id"
+                       (change)="houseUserLinkChanged(user_house_link, 'maintenance')">
+                </ng-select>
+                <span *ngIf="user_house_link.maintenance_active_contract">
+                    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.maintenance_active_contract.id}}">
+                        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.maintenance_active_contract.contract_type == 1"></fa-icon>
+                        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.maintenance_active_contract.contract_type == 2"></fa-icon>Active
+                    </a>
+                    &nbsp;
+                    <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.maintenance_active_contract.id}}">
+                            ($$$)
+                    </a>
+                    &nbsp;
+                    <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
+                                        *ngIf="(user_house_link.maintenance_active_contract.isRenewable == true)"
+                                        (click)="createContract(user_house_link, user_house_link.maintenance,user_house_link.maintenance_id , 'MAINTENANCE', true, user_house_link.maintenance_active_contract.id)">
+                                (Renew)
+                    </a>
+                </span>
+                <span *ngIf="user_house_link.maintenance_inactive_contracts">
+                    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.maintenance_inactive_contracts[0].id}}">
+                            Inactive({{user_house_link.maintenance_inactive_contracts.length}})
+                    </a>
+                </span>
+                <span *ngIf="!user_house_link.maintenance_active_contract &&  (user_house_link.maintenance == true)">
+                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.maintenance,user_house_link.maintenance_id, 'MAINTENANCE', false, null)">
+                            Create(+)
+                    </a>
+                </span>
+                &nbsp;
         </td>
         <td>
             <ng-select name="accountant" [items]="users"
@@ -217,6 +255,7 @@
             &nbsp;
         </td>
         -->
+        <!--
         <td>
             <ng-select name="agency_coll_mgr" [items]="users"
                    bindLabel="fullName"
@@ -253,6 +292,7 @@
             </span>
             &nbsp;
         </td>
+        -->
         <!--
         <td>
             <ng-select name="agency_coll_emp" [items]="users"

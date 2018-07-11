@@ -59,6 +59,7 @@ export class HouseContractComponent implements OnInit {
 				that.houseContract.user_house_link_id = key.user_house_link_id;
 				that.houseContract.roles = AppSettings.ROLES[key.role].label;
 				that.houseContract.role = AppSettings.ROLES[key.role].value;
+				that.houseContract.contract_type = AppSettings.ROLES[key.role].contract_type;
 				that.houseContract.active = true;
 
 				that.houseContract.contract_start_date = UtilityService.getFormattedDate();

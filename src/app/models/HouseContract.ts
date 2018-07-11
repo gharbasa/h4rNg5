@@ -31,6 +31,7 @@ export class HouseContract {
 	property_mgmt_emp:boolean = false;
 	agency_collection_emp:boolean = false;
 	agency_collection_mgr:boolean = false;
+	maintenance:boolean = false;
 	
 	constructor() {
 
@@ -73,6 +74,9 @@ export class HouseContract {
 		}
 		if(contract.agency_collection_mgr == true) {
 			contract.roles = contract.roles + AppSettings.ROLES["AGENCY_COLLECTION_MGR"].label + ", ";
+		}
+		if(contract.maintenance == true) {
+			contract.roles = contract.roles + AppSettings.ROLES["MAINTENANCE"].label + ", ";
 		}
 	};
 }

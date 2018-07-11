@@ -109,6 +109,11 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
 		  link.agency_collection_mgr_id = link.user_id
 		  link.org_agency_collection_mgr_id = link.user_id
 	  }
+
+	  if(link.maintenance == true) {
+		link.maintenance_id = link.user_id //will introduce emp.id later if needed
+		link.org_maintenance_id = link.user_id
+	  }
 	  
 	  if(foundLink == null) {
 		  that.logger.info(that,"Hey, No houseuserlink in the array, pushing the entry.");
@@ -150,6 +155,11 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
 			  foundLink.agency_collection_mgr_id = link.user_id
 			  foundLink.org_agency_collection_mgr_id = link.user_id
 		  }
+		  if(link.maintenance == true) {
+			foundLink.maintenance = true;
+			foundLink.maintenance_id = link.user_id
+			foundLink.org_maintenance_id = link.user_id
+		}
 	  }
   }
 
@@ -273,6 +283,23 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
 			that.logger.info(that, "There is a problem in fetching agency_collection_emp house contract");
 		});
 	}
+
+	if(userHouseLink.maintenance === true) {
+		let key:string = userHouseLink.house_id + "_" + userHouseLink.maintenance_id + "_" + AppSettings.ROLES["MAINTENANCE"].value;
+		that.logger.info(that,"Lets find the contracts associated with house_user_MAINTENANCERole key=" + key);
+		that.userHouseLinkService.contracts(key).subscribe(resp => {
+		  if(resp && resp.length > 0) {
+			  that.logger.info(that, "There is a contract for maintenance_mgr key=" + key);
+			  var active_contracts = resp.filter(contract => (contract.active == true));
+			  var inactive_contracts = resp.filter(contract => (contract.active == false));
+			  userHouseLink.maintenance_active_contract = active_contracts.length > 0?active_contracts[0]:null;
+			  userHouseLink.maintenance_inactive_contracts = inactive_contracts.length > 0?inactive_contracts:null;
+		  }
+	  },
+	  err => {
+		  that.logger.info(that, "There is a problem in fetching agency_collection_emp house contract");
+	  });
+  }
 
   }
   
