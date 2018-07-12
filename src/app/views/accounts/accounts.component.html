@@ -20,9 +20,9 @@
   <tr>
       <th width="25%">Name</th>
       <th width="5%">Houses</th>
-      <th width="20%">Baseline</th>
-      <th width="10%" style="color:orange">Net Amount</th>
-      <th width="20%">Created by</th>
+      <th width="30%">Baseline</th>
+      <th width="10%" style="color:orange" title='Net amount includes baseline'>Net Amount</th>
+      <th width="10%">Created by</th>
       <th width="5%">Active?</th>
   </tr>
   </tbody>
@@ -30,8 +30,8 @@
       <tr *ngFor="let account of pageSettings.getPaginatedList()">
           <td><a routerLink="../account/{{account.id}}">{{account.note}}({{account.id}})</a></td>
           <td>{{account.unitsCount}}</td>
-          <td>{{account.baseline_amt}} (dated: {{account.baselineDate}})</td>
-          <td style="color:orange">{{account.netAmount}}</td>
+          <td>{{account.baseline_amt | currency}} ({{account.baselineDate}})</td>
+          <td style="color:orange">{{account.netAmount | currency}}</td>
           <td>{{account.createdBy && account.createdBy.fullName}}</td>
           <td>{{account.active}}</td>
       </tr>

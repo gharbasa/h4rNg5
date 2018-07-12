@@ -32,6 +32,7 @@ export class HouseContract {
 	agency_collection_emp:boolean = false;
 	agency_collection_mgr:boolean = false;
 	maintenance:boolean = false;
+	onetime_contract:boolean = false;
 	
 	constructor() {
 
