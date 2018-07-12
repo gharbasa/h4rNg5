@@ -27,16 +27,16 @@ export class AppSettings {
 	*/
 	
 	public static readonly ROLES:any = {
-	                    "GUEST": {value:0, label: "Guest", contract_type:1},
-	                    "ADMIN": {value:1 << 16, label: "Admin", contract_type:1},
-	                    "TENANT": {value: 1 << 15, label: " Tenant ", contract_type:1},
-	                    "LAND_LORD": {value: 1 << 14, label: "Land Lord", contract_type:1},
-	                    "ACCOUNTANT": {value: 1 << 13, label: "Accountant", contract_type:1},
-	                    "PROPERTY_MGMT_MGR": {value: 1 << 12, label: "Prop. Mgr", contract_type:1},
-	                    "PROPERTY_MGMT_EMP": {value: 1 << 11, label: "Prop. Emp", contract_type:1},
-	                    "AGENCY_COLLECTION_EMP": {value: 1 << 10, label: "Agency Emp", contract_type:1},
-						"AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr", contract_type:1},
-						"MAINTENANCE": {value: 1 << 8, label: "Maintenance", contract_type:2},
+	    "GUEST": {value:0, label: "Guest", contract_type:1},
+	    "ADMIN": {value:1 << 16, label: "Admin", contract_type:1},
+	    "TENANT": {value: 1 << 15, label: " Tenant ", contract_type:1, accessible:true},
+	    "LAND_LORD": {value: 1 << 14, label: "Land Lord", contract_type:1, accessible:true},
+	    "ACCOUNTANT": {value: 1 << 13, label: "Accountant", contract_type:1, accessible:false},
+	    "PROPERTY_MGMT_MGR": {value: 1 << 12, label: "Prop. Mgr", contract_type:1, accessible:true},
+	    "PROPERTY_MGMT_EMP": {value: 1 << 11, label: "Prop. Emp", contract_type:1, accessible:false},
+	    "AGENCY_COLLECTION_EMP": {value: 1 << 10, label: "Agency Emp", contract_type:1, accessible:false},
+		"AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr", contract_type:1, accessible:true},
+		"MAINTENANCE": {value: 1 << 8, label: "Maintenance", contract_type:2, accessible:true},
 	};
 	static IDLE_TIME:number = 15 * 60; //15 minutes
 	static WAIT_TIME_AFTER_IDLE:number = 1 * 60; //1 minutes, after this user session is logged-out
