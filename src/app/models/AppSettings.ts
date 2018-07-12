@@ -35,7 +35,7 @@ export class AppSettings {
 	    "PROPERTY_MGMT_MGR": {value: 1 << 12, label: "Prop. Mgr", contract_type:1, accessible:true},
 	    "PROPERTY_MGMT_EMP": {value: 1 << 11, label: "Prop. Emp", contract_type:1, accessible:false},
 	    "AGENCY_COLLECTION_EMP": {value: 1 << 10, label: "Agency Emp", contract_type:1, accessible:false},
-		"AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr", contract_type:1, accessible:true},
+		"AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr", contract_type:2, accessible:true},
 		"MAINTENANCE": {value: 1 << 8, label: "Maintenance", contract_type:2, accessible:true},
 	};
 	static IDLE_TIME:number = 15 * 60; //15 minutes

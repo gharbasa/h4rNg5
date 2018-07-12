@@ -21,11 +21,13 @@
           
 	            <p>House: <b>{{houseContract.house.name}}</b>
 	                       <b title="Contract is about to expire" class="orange" *ngIf="(houseContract.isRenewable == true)">(Renew Contract)</b>
-                         <a href="#" *ngIf="houseContract.next_contract_id != null && houseContract.next_contract_id != 0" 
+                        <a href="#" *ngIf="houseContract.next_contract_id != null && houseContract.next_contract_id != 0" 
                                 routerLink="../../house_contract/{{houseContract.next_contract_id}}" title="Next contract">
                                 <fa-icon [icon]="['fas', 'forward']"></fa-icon>
-                                </a>
-
+                        </a>
+                        <a *ngIf="newContract == false" style="color:#85bb65" title="$$$ Receivables/Payments" href="#" routerLink="../../receivables/{{houseContract.id}}">
+                            ($$$)
+                        </a>
 	             </p>
           
           		</div>
@@ -95,10 +97,22 @@
           </tr>
 
           <tr>
+                <td>
+                  <div class="field">
+            
+                  <p>Onetime payment?: <input type="checkbox" name="onetime_contract" [(ngModel)]="houseContract.onetime_contract" 
+                                                (change)="oneTimeContractSettingChanged()"/>
+                   </p>
+            
+                    </div>
+                </td>
+            </tr>
+
+          <tr>
           	<td>
             	<div class="field">
           
-	            <p>Installment Contract Amount: <input type="text" name="monthly_rent_amount" [(ngModel)]="houseContract.monthly_rent_amount" />
+	            <p>Installment Contract Amount: <input [readonly]="houseContract.onetime_contract == true" type="text" name="monthly_rent_amount" [(ngModel)]="houseContract.monthly_rent_amount" />
 
 	             </p>
           
@@ -117,7 +131,7 @@
           <tr><td><div class="field">
               
               <p>Active?: 
-                  <td><input type="checkbox" name="active" [(ngModel)]="houseContract.active"></td>
+                  <input type="checkbox" name="active" [(ngModel)]="houseContract.active">
                     </p>          
           </div></td></tr>
           <tr>

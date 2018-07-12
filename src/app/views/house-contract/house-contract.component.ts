@@ -162,4 +162,10 @@ export class HouseContractComponent implements OnInit {
 		changeContractType(type) {
 			this.houseContract.contract_type  = type;
 		}
+
+		oneTimeContractSettingChanged():void {
+			if(this.houseContract.onetime_contract === true) {
+				this.houseContract.monthly_rent_amount = this.houseContract.annual_rent_amount
+			}
+		}
 }

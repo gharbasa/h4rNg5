@@ -36,14 +36,14 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		  y: function(d){return d.value;},
 		  showValues: true,
 		  valueFormat: function(d){
-			return d3.format(',.4f')(d);
+			return d3.format('.0f')(d);
 		  },
 		  duration: 100,
 		  xAxis: {
-			axisLabel: 'Timeline'
+			axisLabel: ''
 		  },
 		  yAxis: {
-			axisLabel: 'Revenue',
+			axisLabel: '',
 			axisLabelDistance: -5
 		  }
 		}
@@ -64,14 +64,14 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		  y: function(d){return d.value;},
 		  showValues: true,
 		  valueFormat: function(d){
-			return d3.format(',.4f')(d);
+			return d3.format('.0f')(d);
 		  },
 		  duration: 100,
 		  xAxis: {
-			axisLabel: 'Timeline'
+			axisLabel: ''
 		  },
 		  yAxis: {
-			axisLabel: 'Expense',
+			axisLabel: '',
 			axisLabelDistance: -5
 		  }
 		}
