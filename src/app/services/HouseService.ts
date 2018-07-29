@@ -103,6 +103,12 @@ export class HouseService {
 		return this.http.get(path).map(res => res as House[] || []);
 	}
 
+	cloudSearch():Observable<House[]> {
+		this.logger.log(this, "cloud search for houses, keyword=" + this.searchKeyword);
+		let path = this.basePath_admin + "/cloudsearch?search=" + this.searchKeyword; 
+		return this.http.get(path).map(res => res as House[] || []);
+	}
+
 	setOperation(operation) {
 		this.view = operation;
 	}
