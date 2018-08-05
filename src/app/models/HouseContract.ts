@@ -22,7 +22,7 @@ export class HouseContract {
     created_at:string = ""; 
     updated_at:string = "";
     note:string = "";
-    roles:string = "";
+	roles:string = "";
 	role:number = 0;
 	tenant:boolean = false;
 	land_lord:boolean = false;
@@ -38,9 +38,8 @@ export class HouseContract {
 
 	}
 
-	user:any =  {"fullName": ""};
-    house:any = {"name": ""};
-
+	user:any = {id:0, fullName:""};
+    house:any = {id:0, name: ""};
     errorMessage:string = "";
 	message:string  = "";
 

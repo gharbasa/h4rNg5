@@ -19,17 +19,23 @@
           	<td>
             	<div class="field">
           
-	            <p>House: <b>{{houseContract.house.name}}</b>
-	                       <b title="Contract is about to expire" class="orange" *ngIf="(houseContract.isRenewable == true)">(Renew Contract)</b>
-                        <a href="#" *ngIf="houseContract.next_contract_id != null && houseContract.next_contract_id != 0" 
-                                routerLink="../../house_contract/{{houseContract.next_contract_id}}" title="Next contract">
-                                <fa-icon [icon]="['fas', 'forward']"></fa-icon>
-                        </a>
-                        <a *ngIf="newContract == false" style="color:#85bb65" title="$$$ Receivables/Payments" href="#" routerLink="../../receivables/{{houseContract.id}}">
-                            ($$$)
-                        </a>
+                <p>House: <b>{{houseContract.house.name}}</b>
+                    <a class='orange' title="Contract is about to expire. Current contract will be inactivated after renew."  href="#" 
+                            *ngIf="(houseContract.isRenewable == true) && newContract==false"
+                            (click)="renewContract()">(Renew)
+                    </a>
+                    <a href="#" *ngIf="houseContract.next_contract_id != null && houseContract.next_contract_id != 0" 
+                        routerLink="../../house_contract/{{houseContract.next_contract_id}}" title="Next contract">
+                        <fa-icon [icon]="['fas', 'forward']"></fa-icon>
+                    </a>
+                    <a class='orange' title="Clone the current contract. Current contract will become inactive."  href="#" 
+                            *ngIf="(houseContract.isRenewable != true) && newContract==false"
+                            (click)="cloneContract()">(Clone)
+                    </a>
+                    <a *ngIf="newContract == false" style="color:#85bb65" title="$$$ Receivables/Payments" href="#" routerLink="../../receivables/{{houseContract.id}}">
+                        ($$$)
+                    </a>
 	             </p>
-          
           		</div>
           	</td>
           </tr>	
@@ -100,7 +106,7 @@
                 <td>
                   <div class="field">
             
-                  <p>Onetime payment?: <input type="checkbox" name="onetime_contract" [(ngModel)]="houseContract.onetime_contract" 
+                  <p title="One time contract will post a onetime paymnet and will inactivated the contract. If you are cloning or renewing from original contract, the original contract will remain active.">Onetime payment?: <input type="checkbox" name="onetime_contract" [(ngModel)]="houseContract.onetime_contract" 
                                                 (change)="oneTimeContractSettingChanged()"/>
                    </p>
             

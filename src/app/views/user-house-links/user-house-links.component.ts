@@ -9,6 +9,7 @@ import { AppSettings } from '../../models/AppSettings';
 import { UserHouseLink } from '../../models/UserHouseLink';
 import { User } from '../../models/User';
 import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
+import { UserHouseContractSharedKey } from '../../models/UserHouseContractSharedKey';
 
 @Component({
   selector: 'h4r-user-house-links',
@@ -351,26 +352,16 @@ export class UserHouseLinksComponent  extends H4rbaseComponent {
   		return false;
   	}
 
-  	var userName = this.loginService.getUserName(userId);
-  	let key:any = {
-  		user: {
-  			id: userId
-  			,fullName: userName
-  		}
-  		,
-  		house: {
-  			id: userHouseLink.house.id
-  			,name: userHouseLink.house.name
-  		}
-  		,role: role
-  		,id: contract_id
-  		,renew: renew
-  		,user_house_link_id: userHouseLink.id
-  	}
-  	this.logger.log(this, "User wants to create contract " + JSON.stringify(key));
-  	this.houseContractsService.setSharedKey(key);
-  	this.router.navigate(['../house_contract/0']);
-  	return false;
+	var userName = this.loginService.getUserName(userId);
+	let sharedKey:UserHouseContractSharedKey = new UserHouseContractSharedKey();
+	sharedKey.house = userHouseLink.house;
+	sharedKey.id = contract_id;
+	sharedKey.role = role;
+	sharedKey.creationType = (renew == true)?AppSettings.CONTRACT_CREATION_TYPES["RENEW"]:AppSettings.CONTRACT_CREATION_TYPES["NEW"];
+	sharedKey.user_house_link_id = userHouseLink.id;
+	sharedKey.user = {id: userId, fullName: userName};
+	this.logger.log(this, "User wants to create contract " + JSON.stringify(sharedKey));
+	return this.launchNewContractWithSharedKey(this.router, this.houseContractsService, sharedKey);
   }
 
   setEmptyMessage() {

@@ -7,6 +7,7 @@ import { LoginService } from '../services/login.service';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import { AppSettings } from '../models/AppSettings';
+import { UserHouseContractSharedKey } from '../models/UserHouseContractSharedKey';
 
 @Injectable()
 export class HouseContractsService {
@@ -61,7 +62,7 @@ export class HouseContractsService {
 		return this.http.get(url).map(res => res as HouseContract[] || []);
 	}
 	
-	setSharedKey(sharedKey:any) {
+	setSharedKey(sharedKey:UserHouseContractSharedKey) {
 		this.sharedKey = sharedKey;
 	}
 

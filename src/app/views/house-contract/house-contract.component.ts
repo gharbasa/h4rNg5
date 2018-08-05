@@ -11,6 +11,7 @@ import { AppSettings } from '../../models/AppSettings';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import * as moment from 'moment'; 
 import { UtilityService } from '../../services/UtilityService';
+import { UserHouseContractSharedKey } from '../../models/UserHouseContractSharedKey';
 
 @Component({
   selector: 'h4r-house-contract',
@@ -48,10 +49,12 @@ export class HouseContractComponent implements OnInit {
   				that.fetchExistingContract(res.id);
   			} else if(res.id == 0) { //New contract launched from user-house-links
 				that.newContract = true;
-				let key:any = that.houseContractsService.getSharedKey(); //house_user_role
-				that.logger.log(that,"User is launched from House User Links, lets get the key=" + key);
-				that.houseContractsService.setSharedKey(null);
-				that.houseContract.renew = key.renew;
+				let key:UserHouseContractSharedKey = that.houseContractsService.getSharedKey(); //house_user_role
+				that.logger.log(that,"User is launched from House User Links, lets get the key=" + JSON.stringify(key));
+				that.houseContract.renew = (key.creationType == AppSettings.CONTRACT_CREATION_TYPES["RENEW"]
+													|| key.creationType == AppSettings.CONTRACT_CREATION_TYPES["CLONE"]);
+				const contract_id:number = key.id;
+				const creationType:number = key.creationType;
 				that.houseContract.user = key.user;
 				that.houseContract.user_id = key.user.id;
 				that.houseContract.house = key.house;
@@ -61,19 +64,24 @@ export class HouseContractComponent implements OnInit {
 				that.houseContract.role = AppSettings.ROLES[key.role].value;
 				that.houseContract.contract_type = AppSettings.ROLES[key.role].contract_type;
 				that.houseContract.active = true;
-
 				that.houseContract.contract_start_date = UtilityService.getFormattedDate();
 				that.houseContract.contract_end_date = UtilityService.getFormattedDate();
-
-				if(key.renew == true) {
-					that.logger.log(this, "User wants to renew an existing contractId=" + key.id + ", lets fetch it first.");
-					that.houseContractsService.get(key.id).subscribe(res => {
-						that.houseContract.contract_start_date = res.contract_end_date;
-						that.houseContract.contract_end_date = "";
+				that.houseContractsService.setSharedKey(null); //Do not refer to key variable after this statement.
+				if(that.houseContract.renew == true) 
+				{
+					that.logger.log(this, "User wants to renew/clone an existing contractId=" + contract_id + ", lets fetch it first.");
+					that.houseContractsService.get(contract_id).subscribe(res => {
+						if(creationType == AppSettings.CONTRACT_CREATION_TYPES["RENEW"]) {
+							that.houseContract.contract_start_date = res.contract_end_date;
+							that.houseContract.contract_end_date = "";
+						} else {
+							that.houseContract.contract_start_date = res.contract_start_date;
+							that.houseContract.contract_end_date = res.contract_end_date;
+						}
 						that.houseContract.annual_rent_amount = res.annual_rent_amount;
 						that.houseContract.monthly_rent_amount = res.monthly_rent_amount;
 						that.houseContract.active = true;
-						that.houseContract.from_contract_id = key.id; //lets see if server can take this.
+						that.houseContract.from_contract_id = contract_id; //lets see if server can take this.
 					},err => {
 						that.houseContract.errorMessage = "Problem fetching existing contract. please try again after sometime.";
 						that.logger.error(this,that.houseContract.errorMessage);  
@@ -112,7 +120,8 @@ export class HouseContractComponent implements OnInit {
   	}
 
   	saveRecord() {
-  		let that = this;
+		let that = this;
+		that.houseContractsService.setSharedKey(null);
   		if(this.newContract == false) {
   			this.logger.log(this,"User wants to edit/save a house contract, id=" + that.houseContract.id);
     		this.houseContractsService.update(that.houseContract).subscribe(res => {
@@ -134,38 +143,72 @@ export class HouseContractComponent implements OnInit {
   				that.houseContract.errorMessage = "Problem saving the contract.";
   			});
   		}
-		}
-		
-		startDateChanged(elementValue:string) {
-			this.logger.info(this,"Ok, start date changed to=" + this.contractStartDate.getValue());
-			this.houseContract.contract_start_date = elementValue;//this.paymentDate.getValue();
-		}
+	}
+	
+	startDateChanged(elementValue:string) {
+		this.logger.info(this,"Ok, start date changed to=" + this.contractStartDate.getValue());
+		this.houseContract.contract_start_date = elementValue;//this.paymentDate.getValue();
+	}
 
-		endDateChanged(elementValue:string) {
-			this.logger.info(this,"Ok, end date changed to=" + this.contractEndDate.getValue());
-			this.houseContract.contract_end_date = elementValue;//this.paymentDate.getValue();
-		}
+	endDateChanged(elementValue:string) {
+		this.logger.info(this,"Ok, end date changed to=" + this.contractEndDate.getValue());
+		this.houseContract.contract_end_date = elementValue;//this.paymentDate.getValue();
+	}
 
-		getDuration() {
-			let startDate:any = moment(this.houseContract.contract_start_date, 'DD-MM-YYYY');
-			let endDate:any = moment(this.houseContract.contract_end_date, 'DD-MM-YYYY');
-			var months:number = Math.round(moment.duration(endDate.diff(startDate)).asMonths());
+	getDuration() {
+		let startDate:any = moment(this.houseContract.contract_start_date, 'DD-MM-YYYY');
+		let endDate:any = moment(this.houseContract.contract_end_date, 'DD-MM-YYYY');
+		var months:number = Math.round(moment.duration(endDate.diff(startDate)).asMonths());
+		if(months) {
 			if(months > 0)
 				return months + " months";
 			else {
 				let days:number = Math.round(moment.duration(endDate.diff(startDate)).asDays());
 				return days + " days";
 			}
-
+		} else {
+			return "0 days";
 		}
 
-		changeContractType(type) {
-			this.houseContract.contract_type  = type;
-		}
+	}
 
-		oneTimeContractSettingChanged():void {
-			if(this.houseContract.onetime_contract === true) {
-				this.houseContract.monthly_rent_amount = this.houseContract.annual_rent_amount
-			}
+	changeContractType(type) {
+		this.houseContract.contract_type  = type;
+	}
+
+	oneTimeContractSettingChanged():void {
+		if(this.houseContract.onetime_contract === true) {
+			this.houseContract.monthly_rent_amount = this.houseContract.annual_rent_amount
 		}
+	}
+
+	prepareSharedKey():UserHouseContractSharedKey {
+		let sharedKey:UserHouseContractSharedKey = new UserHouseContractSharedKey();
+		sharedKey.house = this.houseContract.house;
+		sharedKey.id = this.houseContract.id;
+		sharedKey.role = AppSettings.identifyRoleStringConst(this.houseContract.role);
+		sharedKey.user_house_link_id = this.houseContract.user_house_link_id;
+		sharedKey.user = this.houseContract.user;
+		return sharedKey;
+	}
+
+	renewContract():boolean {
+		this.logger.info(this,"User clicked renewContract");
+		let sharedKey:UserHouseContractSharedKey = this.prepareSharedKey();
+		sharedKey.creationType = AppSettings.CONTRACT_CREATION_TYPES["RENEW"];
+		this.logger.log(this, "User wants to renew a contract " + JSON.stringify(sharedKey));
+		this.houseContractsService.setSharedKey(sharedKey);
+  		this.router.navigate(['../house_contract/0']);
+		return false;
+	}
+
+	cloneContract():boolean {
+		this.logger.info(this,"User clicked cloneContract");
+		let sharedKey:UserHouseContractSharedKey = this.prepareSharedKey();
+		sharedKey.creationType = AppSettings.CONTRACT_CREATION_TYPES["CLONE"];
+		this.logger.log(this, "User wants to renew a contract " + JSON.stringify(sharedKey));
+		this.houseContractsService.setSharedKey(sharedKey);
+  		this.router.navigate(['../house_contract/0']);
+		return false;
+	}
 }

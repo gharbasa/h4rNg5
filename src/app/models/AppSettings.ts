@@ -1,5 +1,6 @@
+
 export class AppSettings {
-	public static readonly H4R_BACKEND_URL:string = "http://api.maaghar.com:3000/"; // etc/hosts file map this to localhost
+	public static H4R_BACKEND_URL:string = "http://api.maaghar.com:3000/"; // etc/hosts file map this to localhost
 	//public static readonly H4R_BACKEND_URL:string = "http://api.maaghar.com/";
 	//public static readonly IMAGE_BASE_URL:string = "http://api.maaghar.com/";
 	public static readonly IMAGE_S3_BUCKET_NAME:string = "maaghar";
@@ -29,7 +30,7 @@ export class AppSettings {
 	public static readonly ROLES:any = {
 	    "GUEST": {value:0, label: "Guest", contract_type:1},
 	    "ADMIN": {value:1 << 16, label: "Admin", contract_type:1},
-	    "TENANT": {value: 1 << 15, label: " Tenant ", contract_type:1, accessible:true},
+	    "TENANT": {value: 1 << 15, label: "Tenant ", contract_type:1, accessible:true},
 	    "LAND_LORD": {value: 1 << 14, label: "Land Lord", contract_type:1, accessible:true},
 	    "ACCOUNTANT": {value: 1 << 13, label: "Accountant", contract_type:1, accessible:false},
 	    "PROPERTY_MGMT_MGR": {value: 1 << 12, label: "Prop. Mgr", contract_type:1, accessible:true},
@@ -42,4 +43,37 @@ export class AppSettings {
 	static WAIT_TIME_AFTER_IDLE:number = 1 * 60; //1 minutes, after this user session is logged-out
 	public static MAPS_KEY:string =  "<MAPS_KEY>";
 	public static CLOUD_SEARCH:boolean = true;
+
+	public static setEnvironment(environmentParam: any):void {
+		AppSettings.H4R_BACKEND_URL = environmentParam.API_URL;
+	}
+	
+	public static identifyRoleStringConst(role:number) {
+		if(role == 0)
+			return "GUEST";
+		if(role == 1 << 16)
+			return "ADMIN";
+		if(role == 1 << 15)
+			return "TENANT";
+		if(role == 1 << 14)
+			return "LAND_LORD";
+		if(role == 1 << 13)
+			return "ACCOUNTANT";
+		if(role == 1 << 12)
+			return "PROPERTY_MGMT_MGR";
+		if(role == 1 << 11)
+			return "PROPERTY_MGMT_EMP";
+		if(role == 1 << 10)
+			return "AGENCY_COLLECTION_EMP";
+		if(role == 1 << 9)
+			return "AGENCY_COLLECTION_MGR";
+		if(role == 1 << 8)
+			return "MAINTENANCE";
+	}
+
+	public static readonly CONTRACT_CREATION_TYPES:any = {
+		"NEW":1,
+		"CLONE":2,
+		"RENEW":3
+	};
 }
