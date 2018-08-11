@@ -38,7 +38,8 @@ export class PaginationComponent implements OnInit {
   pageClicked(page:number): boolean {
     this.logger.info(this, "clicked pageIndex=" + page);
     this.pageSettings.currentPage = page;
-    this.pageSettings.buildBoundaryIndexRange(page);  
+    this.pageSettings.buildBoundaryIndexRange(page);
+    this.pageSettings.pageChanged.emit(page);
     return false;
   }
 }

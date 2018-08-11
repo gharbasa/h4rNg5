@@ -45,32 +45,14 @@
                    [(ngModel)]="user_house_link.tenant_id"
                    (change)="houseUserLinkChanged(user_house_link, 'tenant')">
                 </ng-select>
-                <span *ngIf="user_house_link.tenant_active_contract">
-                    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.tenant_active_contract.id}}">
-                        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.tenant_active_contract.contract_type == 1"></fa-icon>
-                        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.tenant_active_contract.contract_type == 2"></fa-icon>Active
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.tenant_active_contract.id}}">
-                        ($$$)
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
-                                            *ngIf="(user_house_link.tenant_active_contract.isRenewable == true)"
-                                             (click)="createContract(user_house_link, user_house_link.tenant,user_house_link.tenant_id , 'TENANT', true, user_house_link.tenant_active_contract.id)">
-                            (Renew)
-                    </a>
-                </span>
-                <span *ngIf="user_house_link.tenant_inactive_contracts">
-                    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.tenant_inactive_contracts[0].id}}">
-                        Inactive({{user_house_link.tenant_inactive_contracts.length}})
-                    </a>
-                </span>
-                <span *ngIf="!user_house_link.tenant_active_contract &&  (user_house_link.tenant == true)">
-                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.tenant,user_house_link.tenant_id , 'TENANT', false, null)">
-                        Create(+)
-                    </a>
-                </span>
+                <h4r-user-house-links-dropdown
+                    [userHouseLink]="user_house_link"
+                    [activeContract]="user_house_link.tenant_active_contract"
+                    [inactiveContracts]="user_house_link.tenant_inactive_contracts"
+                    [userId]="user_house_link.tenant_id"
+                    [hasRole]="user_house_link.tenant"
+                    [role]="'TENANT'">
+                </h4r-user-house-links-dropdown>
                 &nbsp;
         </td>
         <td>
@@ -81,32 +63,15 @@
                    [(ngModel)]="user_house_link.land_lord_id"
                    (change)="houseUserLinkChanged(user_house_link, 'land_lord')">
              </ng-select>
-             <span *ngIf="user_house_link.land_lord_active_contract">
-                    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.land_lord_active_contract.id}}">
-                        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.land_lord_active_contract.contract_type == 1"></fa-icon>
-                        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.land_lord_active_contract.contract_type == 2"></fa-icon>Active
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.land_lord_active_contract.id}}">
-                        ($$$)
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
-                                            *ngIf="(user_house_link.land_lord_active_contract.isRenewable == true)"
-                                             (click)="createContract(user_house_link, user_house_link.land_lord,user_house_link.land_lord_id , 'LAND_LORD', true, user_house_link.land_lord_active_contract.id)">
-                            (Renew)
-                    </a>
-             </span>
-             <span *ngIf="user_house_link.land_lord_inactive_contracts">
-                    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.land_lord_inactive_contracts[0].id}}">
-                        Inactive({{user_house_link.land_lord_inactive_contracts.length}})
-                    </a>
-             </span>
-             <span *ngIf="!user_house_link.land_lord_active_contract &&  (user_house_link.land_lord == true)">
-                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.land_lord,user_house_link.land_lord_id, 'LAND_LORD', false, null)">
-                        Create(+)
-                    </a>
-             </span>
+            <h4r-user-house-links-dropdown
+                    [userHouseLink]="user_house_link"
+                    [activeContract]="user_house_link.land_lord_active_contract"
+                    [inactiveContracts]="user_house_link.land_lord_inactive_contracts"
+                    [userId]="user_house_link.land_lord_id"
+                    [hasRole]="user_house_link.land_lord"
+                    [role]="'LAND_LORD'">
+            </h4r-user-house-links-dropdown>
+
              &nbsp;
                 
         </td>
@@ -118,32 +83,15 @@
                        [(ngModel)]="user_house_link.maintenance_id"
                        (change)="houseUserLinkChanged(user_house_link, 'maintenance')">
                 </ng-select>
-                <span *ngIf="user_house_link.maintenance_active_contract">
-                    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.maintenance_active_contract.id}}">
-                        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.maintenance_active_contract.contract_type == 1"></fa-icon>
-                        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.maintenance_active_contract.contract_type == 2"></fa-icon>Active
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.maintenance_active_contract.id}}">
-                            ($$$)
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
-                                        *ngIf="(user_house_link.maintenance_active_contract.isRenewable == true)"
-                                        (click)="createContract(user_house_link, user_house_link.maintenance,user_house_link.maintenance_id , 'MAINTENANCE', true, user_house_link.maintenance_active_contract.id)">
-                                (Renew)
-                    </a>
-                </span>
-                <span *ngIf="user_house_link.maintenance_inactive_contracts">
-                    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.maintenance_inactive_contracts[0].id}}">
-                            Inactive({{user_house_link.maintenance_inactive_contracts.length}})
-                    </a>
-                </span>
-                <span *ngIf="!user_house_link.maintenance_active_contract &&  (user_house_link.maintenance == true)">
-                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.maintenance,user_house_link.maintenance_id, 'MAINTENANCE', false, null)">
-                            Create(+)
-                    </a>
-                </span>
+
+                <h4r-user-house-links-dropdown
+                    [userHouseLink]="user_house_link"
+                    [activeContract]="user_house_link.maintenance_active_contract"
+                    [inactiveContracts]="user_house_link.maintenance_inactive_contracts"
+                    [userId]="user_house_link.maintenance_id"
+                    [hasRole]="user_house_link.maintenance"
+                    [role]="'MAINTENANCE'">
+                </h4r-user-house-links-dropdown>
                 &nbsp;
         </td>
         <td>
@@ -154,32 +102,15 @@
                        [(ngModel)]="user_house_link.agency_collection_mgr_id"
                        (change)="houseUserLinkChanged(user_house_link, 'agency_collection_mgr')">
                     </ng-select>
-                 <span *ngIf="user_house_link.agency_collection_mgr_active_contract">
-                    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.agency_collection_mgr_active_contract.id}}">
-                        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.agency_collection_mgr_active_contract.contract_type == 1"></fa-icon>
-                        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.agency_collection_mgr_active_contract.contract_type == 2"></fa-icon>Active
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.agency_collection_mgr_active_contract.id}}">
-                            ($$$)
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
-                                        *ngIf="(user_house_link.agency_collection_mgr_active_contract.isRenewable == true)"
-                                        (click)="createContract(user_house_link, user_house_link.agency_collection_mgr,user_house_link.agency_collection_mgr_id , 'AGENCY_COLLECTION_MGR', true, user_house_link.agency_collection_mgr_active_contract.id)">
-                                (Renew)
-                    </a>
-                </span>
-                <span *ngIf="user_house_link.agency_collection_mgr_inactive_contracts">
-                    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.agency_collection_mgr_inactive_contracts[0].id}}">
-                            Inactive({{user_house_link.agency_collection_mgr_inactive_contracts.length}})
-                    </a>
-                </span>
-                <span *ngIf="!user_house_link.agency_collection_mgr_active_contract &&  (user_house_link.agency_collection_mgr == true)">
-                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.agency_collection_mgr, user_house_link.agency_collection_mgr_id, 'AGENCY_COLLECTION_MGR', false, null)">
-                            Create(+)
-                    </a>
-                </span>
+                <h4r-user-house-links-dropdown
+                    [userHouseLink]="user_house_link"
+                    [activeContract]="user_house_link.agency_collection_mgr_active_contract"
+                    [inactiveContracts]="user_house_link.agency_collection_mgr_inactive_contracts"
+                    [userId]="user_house_link.agency_collection_mgr_id"
+                    [hasRole]="user_house_link.agency_collection_mgr"
+                    [role]="'AGENCY_COLLECTION_MGR'">
+                </h4r-user-house-links-dropdown>
+
                 &nbsp;
         </td>
         <td>
@@ -190,32 +121,14 @@
                        [(ngModel)]="user_house_link.property_mgmt_mgr_id"
                        (change)="houseUserLinkChanged(user_house_link, 'property_mgmt_mgr')">
                 </ng-select>
-                <span *ngIf="user_house_link.property_mgmt_mgr_active_contract">
-                    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.property_mgmt_mgr_active_contract.id}}">
-                        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.property_mgmt_mgr_active_contract.contract_type == 1"></fa-icon>
-                        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.property_mgmt_mgr_active_contract.contract_type == 2"></fa-icon>Active
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.property_mgmt_mgr_active_contract.id}}">
-                            ($$$)
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
-                                        *ngIf="(user_house_link.property_mgmt_mgr_active_contract.isRenewable == true)"
-                                        (click)="createContract(user_house_link, user_house_link.property_mgmt_mgr,user_house_link.property_mgmt_mgr_id , 'PROPERTY_MGMT_MGR', true, user_house_link.property_mgmt_mgr_active_contract.id)">
-                                (Renew)
-                    </a>
-                </span>
-                <span *ngIf="user_house_link.property_mgmt_mgr_inactive_contracts">
-                    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.property_mgmt_mgr_inactive_contracts[0].id}}">
-                            Inactive({{user_house_link.property_mgmt_mgr_inactive_contracts.length}})
-                    </a>
-                </span>
-                <span *ngIf="!user_house_link.property_mgmt_mgr_active_contract &&  (user_house_link.property_mgmt_mgr == true)">
-                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.property_mgmt_mgr,user_house_link.property_mgmt_mgr_id, 'PROPERTY_MGMT_MGR', false, null)">
-                            Create(+)
-                    </a>
-                </span>
+                <h4r-user-house-links-dropdown
+                    [userHouseLink]="user_house_link"
+                    [activeContract]="user_house_link.property_mgmt_mgr_active_contract"
+                    [inactiveContracts]="user_house_link.property_mgmt_mgr_inactive_contracts"
+                    [userId]="user_house_link.property_mgmt_mgr_id"
+                    [hasRole]="user_house_link.property_mgmt_mgr"
+                    [role]="'PROPERTY_MGMT_MGR'">
+                </h4r-user-house-links-dropdown>
                 &nbsp;
         </td>
         <!--
@@ -227,32 +140,14 @@
                    [(ngModel)]="user_house_link.accountant_id"
                    (change)="houseUserLinkChanged(user_house_link, 'accountant')">
             </ng-select>
-            <span *ngIf="user_house_link.accountant_active_contract">
-                    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.accountant_active_contract.id}}">
-                        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.accountant_active_contract.contract_type == 1"></fa-icon>
-                        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.accountant_active_contract.contract_type == 2"></fa-icon>Active
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.accountant_active_contract.id}}">
-                        ($$$)
-                    </a>
-                    &nbsp;
-                    <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
-                                            *ngIf="(user_house_link.accountant_active_contract.isRenewable == true)"
-                                             (click)="createContract(user_house_link, user_house_link.accountant,user_house_link.accountant_id , 'ACCOUNTANT', true, user_house_link.accountant_active_contract.id)">
-                            (Renew)
-                    </a>
-                </span>
-                <span *ngIf="user_house_link.accountant_inactive_contracts">
-                    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.accountant_inactive_contracts[0].id}}">
-                        Inactive({{user_house_link.accountant_inactive_contracts.length}})
-                    </a>
-                </span>
-                <span *ngIf="!user_house_link.accountant_active_contract &&  (user_house_link.accountant == true)">
-                    <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.accountant,user_house_link.accountant_id, 'ACCOUNTANT', false, null)">
-                        Create(+)
-                    </a>
-            </span>
+            <h4r-user-house-links-dropdown
+                    [userHouseLink]="user_house_link"
+                    [activeContract]="user_house_link.accountant_active_contract"
+                    [inactiveContracts]="user_house_link.accountant_inactive_contracts"
+                    [userId]="user_house_link.accountant_id"
+                    [hasRole]="user_house_link.accountant"
+                    [role]="'ACCOUNTANT'">
+            </h4r-user-house-links-dropdown>
             &nbsp;
         </td>
         -->
@@ -265,32 +160,14 @@
                    [(ngModel)]="user_house_link.property_mgmt_emp_id"
                    (change)="houseUserLinkChanged(user_house_link, 'property_mgmt_emp')">
             </ng-select>
-            <span *ngIf="user_house_link.property_mgmt_emp_active_contract">
-                <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.property_mgmt_emp_active_contract.id}}">
-                    <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.property_mgmt_emp_active_contract.contract_type == 1"></fa-icon>
-                    <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.property_mgmt_emp_active_contract.contract_type == 2"></fa-icon>Active
-                </a>
-                &nbsp;
-                <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.property_mgmt_emp_active_contract.id}}">
-                        ($$$)
-                </a>
-                &nbsp;
-                <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
-                                    *ngIf="(user_house_link.property_mgmt_emp_active_contract.isRenewable == true)"
-                                    (click)="createContract(user_house_link, user_house_link.property_mgmt_emp,user_house_link.property_mgmt_emp_id , 'PROPERTY_MGMT_EMP', true, user_house_link.property_mgmt_emp_active_contract.id)">
-                            (Renew)
-                </a>
-            </span>
-            <span *ngIf="user_house_link.property_mgmt_emp_inactive_contracts">
-                <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.property_mgmt_emp_inactive_contracts[0].id}}">
-                        Inactive({{user_house_link.property_mgmt_emp_inactive_contracts.length}})
-                </a>
-            </span>
-            <span *ngIf="!user_house_link.property_mgmt_emp_active_contract &&  (user_house_link.property_mgmt_emp == true)">
-                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.property_mgmt_emp,user_house_link.property_mgmt_emp_id, 'PROPERTY_MGMT_EMP', false, null)">
-                        Create(+)
-                </a>
-            </span>
+            <h4r-user-house-links-dropdown
+                    [userHouseLink]="user_house_link"
+                    [activeContract]="user_house_link.property_mgmt_emp_active_contract"
+                    [inactiveContracts]="user_house_link.property_mgmt_emp_inactive_contracts"
+                    [userId]="user_house_link.property_mgmt_emp_id"
+                    [hasRole]="user_house_link.property_mgmt_emp"
+                    [role]="'PROPERTY_MGMT_EMP'">
+            </h4r-user-house-links-dropdown>
             &nbsp;
         </td>
         -->
@@ -303,32 +180,14 @@
                    [(ngModel)]="user_house_link.agency_collection_emp_id"
                    (change)="houseUserLinkChanged(user_house_link, 'agency_collection_emp')">
             </ng-select>
-            <span *ngIf="user_house_link.agency_collection_emp_active_contract">
-                <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{user_house_link.agency_collection_emp_active_contract.id}}">
-                    <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="user_house_link.agency_collection_emp_active_contract.contract_type == 1"></fa-icon>
-                    <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="user_house_link.agency_collection_emp_active_contract.contract_type == 2"></fa-icon>Active
-                </a>
-                &nbsp;
-                <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{user_house_link.agency_collection_emp_active_contract.id}}">
-                        ($$$)
-                </a>
-                &nbsp;
-                <a class='ActiveContract renewable' title="Contract is about to expire"  href="#" 
-                                    *ngIf="(user_house_link.agency_collection_emp_active_contract.isRenewable == true)"
-                                    (click)="createContract(user_house_link, user_house_link.agency_collection_emp,user_house_link.agency_collection_emp_id , 'AGENCY_COLLECTION_EMP', true, user_house_link.agency_collection_emp_active_contract.id)">
-                            (Renew)
-                </a>
-            </span>
-            <span *ngIf="user_house_link.agency_collection_emp_inactive_contracts">
-                <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{user_house_link.agency_collection_emp_inactive_contracts[0].id}}">
-                        Inactive({{user_house_link.agency_collection_emp_inactive_contracts.length}})
-                </a>
-            </span>
-            <span *ngIf="!user_house_link.agency_collection_emp_active_contract &&  (user_house_link.agency_collection_emp == true)">
-                <a href="#" class='NewContract' title="New contract" (click)="createContract(user_house_link, user_house_link.agency_collection_emp,user_house_link.agency_collection_emp_id, 'AGENCY_COLLECTION_EMP', false, null)">
-                        Create(+)
-                </a>
-            </span>
+            <h4r-user-house-links-dropdown
+                    [userHouseLink]="user_house_link"
+                    [activeContract]="user_house_link.agency_collection_emp_active_contract"
+                    [inactiveContracts]="user_house_link.agency_collection_emp_inactive_contracts"
+                    [userId]="user_house_link.agency_collection_emp_id"
+                    [hasRole]="user_house_link.agency_collection_emp"
+                    [role]="'AGENCY_COLLECTION_EMP'">
+            </h4r-user-house-links-dropdown>
             &nbsp;
         </td>
         -->

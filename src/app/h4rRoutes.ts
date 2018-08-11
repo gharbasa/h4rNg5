@@ -47,6 +47,8 @@ import { TicketNotesComponent } from './views/ticket-notes/ticket-notes.componen
 import { AutofocusDirective } from './directives/Autofocus';
 import { AccountsComponent } from './views/accounts/accounts.component'
 import { AccountComponent } from './views/account/account.component'
+import { AwsHouseSearchResultsComponent } from './views/house-search-results/aws-house-search-results.component';
+import { UserHouseLinksDropdownComponent } from './views/user-house-links/user-house-links-dropdown.component';
 
 export class h4rRoutes {
     static routes: Routes = [
@@ -184,6 +186,16 @@ export class h4rRoutes {
         }
         ,
         {
+            path: 'cloudsearch',
+            component: AwsHouseSearchResultsComponent
+        }
+        ,
+        {
+            path: 'cloudsearch2',
+            component: AwsHouseSearchResultsComponent
+        }
+        ,
+        {
             path: 'tickets',
             component: TicketsComponent
         }
@@ -230,7 +242,9 @@ export class h4rRoutes {
         PaginationComponent, DatePickerComponent, HouseSearchResultsComponent,
         CommunitiesComponent, CommunityComponent,
         TicketsComponent, TicketComponent, TicketNoteComponent, TicketNotesComponent,
-        AutofocusDirective, AccountComponent, AccountsComponent
+        AutofocusDirective, AccountComponent, AccountsComponent,
+        AwsHouseSearchResultsComponent,
+        UserHouseLinksDropdownComponent
       ]
 
       static modalDialogEntryPoints = [

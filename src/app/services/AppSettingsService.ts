@@ -9,6 +9,4 @@ export class AppSettingsService {
     let settings = new AppSettings();
     return Observable.of<AppSettings>(settings);
   }
-
-  
 }

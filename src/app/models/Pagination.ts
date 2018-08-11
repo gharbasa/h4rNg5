@@ -1,3 +1,5 @@
+import { EventEmitter } from "@angular/core";
+
 export class Pagination {
     public static readonly LIST_PAGE_SIZE:number = 10; //Number of records to display per page.
     public currentPage: number = 1;
@@ -10,7 +12,7 @@ export class Pagination {
     public inactiveRecords:boolean = false;
 	public activeRecords:boolean = true;
     public pageNumbers:Array<number> = [];
-
+    public pageChanged:EventEmitter<number> = new EventEmitter; //This is used in cloudsearch
     constructor(list:Array<any>, activeRecords:boolean, inactiveRecords:boolean) {
         if(list == null) list = [];
         this.originalList = list;

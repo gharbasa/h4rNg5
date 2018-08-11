@@ -83,7 +83,7 @@ export class TicketComponent extends H4rbaseComponent {
     }
 
     canChangeStatus():boolean {
-      return (this.isAdminUser());
+      return (!this.createNewTicket) && (this.isAdminUser());
     }
 
     getTicketStatus():string {

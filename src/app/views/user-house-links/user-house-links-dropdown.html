@@ -1,0 +1,26 @@
+<span *ngIf="activeContract">
+    <a class='ActiveContract' title="Active contract" href="#" routerLink="../house_contract/{{activeContract.id}}">
+        <fa-icon [icon]="['fas', 'sign-in-alt']" *ngIf="activeContract.contract_type == 1"></fa-icon>
+        <fa-icon [icon]="['fas', 'sign-out-alt']" *ngIf="activeContract.contract_type == 2"></fa-icon>Active
+    </a>
+    &nbsp;
+    <a class='ActiveContract' title="$$$ Receivables" href="#" routerLink="../receivables/{{activeContract.id}}">
+        ($$$)
+    </a>
+    &nbsp;
+    <a class='ActiveContract renewable' title="Contract is about to expire. Current contract will be inactivated after renew."  href="#" 
+                            *ngIf="(activeContract.isRenewable == true)"
+                             (click)="createContract(userHouseLink, hasRole,userId , role, true, activeContract.id)">
+            (Renew)
+    </a>
+</span>
+<span *ngIf="inactiveContracts">
+    <a class='InActiveContract' href="#" title="Inactive contracts" routerLink="../house_contract/{{inactiveContracts[0].id}}">
+        Inactive({{inactiveContracts.length}})
+    </a>
+</span>
+<span *ngIf="!activeContract &&  (hasRole == true)">
+    <a href="#" class='NewContract' title="New contract" (click)="createContract(userHouseLink, hasRole,userId , role, false, null)">
+        Create(+)
+    </a>
+</span>

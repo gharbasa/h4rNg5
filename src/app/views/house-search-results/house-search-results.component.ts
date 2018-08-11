@@ -20,15 +20,15 @@ import { UtilityService } from '../../services/UtilityService';
 })
 export class HouseSearchResultsComponent extends H4rbaseComponent {
 
-  private dialogRef:any = null;
+  public dialogRef:any = null;
   public errorMessage:string = "";
   //private houses:Array<House> = [];
-  constructor(private houseService:HouseService,
+  constructor(public houseService:HouseService,
             public loginService:LoginService,
-            private router: Router,
-            private housePicsService: HousePicsService
-            , private logger: LoggingService
-            , private dialog: MatDialog) { 
+            public router: Router,
+            public housePicsService: HousePicsService
+            , public logger: LoggingService
+            , public dialog: MatDialog) { 
               super(loginService);
   }
 

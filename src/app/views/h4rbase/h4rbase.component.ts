@@ -6,6 +6,9 @@ import { Community } from '../../models/Community';
 import { Notification } from '../../models/Notification';
 import { UtilityService } from '../../services/UtilityService';
 import { Pagination } from '../../models/Pagination';
+import { Router } from '@angular/router';
+import { UserHouseContractSharedKey } from '../../models/UserHouseContractSharedKey';
+import { HouseContractsService } from '../../services/HouseContractsService';
 
 @Component({
   selector: 'h4r-h4rbase',
@@ -74,4 +77,12 @@ export class H4rbaseComponent implements OnInit {
     this.originalList = list;
     return new Pagination(list, this.activeRecords, this.inactiveRecords);
   }
+
+  launchNewContractWithSharedKey(router:Router, houseContractsService: HouseContractsService, 
+                    sharedKey: UserHouseContractSharedKey):boolean {
+    houseContractsService.setSharedKey(sharedKey);
+  	router.navigate(['../house_contract/0']);
+		return false;
+  }
+  
 }

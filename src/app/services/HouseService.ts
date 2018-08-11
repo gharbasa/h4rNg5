@@ -6,6 +6,8 @@ import { LoginService } from '../services/login.service';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import { AppSettings } from '../models/AppSettings';
+import { Pagination } from '../models/Pagination';
+import { CloudSearchHouse } from '../models/CloudSearchHouse';
 
 @Injectable()
 export class HouseService {
@@ -101,6 +103,14 @@ export class HouseService {
 		this.logger.log(this, "search for houses, keyword=" + this.searchKeyword);
 		let path = this.basePath_admin + "/search?search=" + this.searchKeyword; 
 		return this.http.get(path).map(res => res as House[] || []);
+	}
+
+	cloudSearch(pageNo:number):Observable<CloudSearchHouse> {
+		this.logger.log(this, "cloud search for houses, keyword=" + this.searchKeyword);
+		let path = this.basePath_admin + "/cloudsearch?search=" + this.searchKeyword
+						 + "&pageNo=" + pageNo
+						 + "&pageSize=" + Pagination.LIST_PAGE_SIZE;
+		return this.http.get(path).map(res => res as CloudSearchHouse || null);
 	}
 
 	setOperation(operation) {

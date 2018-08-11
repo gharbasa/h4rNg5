@@ -7,6 +7,7 @@ import { LoggingService, Config } from 'loggerservice';
 import { IdleService } from '../../services/IdleService';
 import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 import { HouseService } from '../../services/HouseService';
+import { AppSettings } from '../../models/AppSettings';
 
 @Component({
   selector: 'h4r-nav-bar',
@@ -38,10 +39,17 @@ export class NavBarComponent  extends H4rbaseComponent {
 
 	houseSearch() {
 		this.houseService.setSearchKeyword(this.search);
-		if(this.router.url === "/hsearch")
-			this.router.navigate(['hsearch2']);
-		else
-			this.router.navigate(['hsearch']);
+		if(AppSettings.CLOUD_SEARCH == true) {
+			if(this.router.url === "/cloudsearch")
+				this.router.navigate(['cloudsearch2']);
+			else
+				this.router.navigate(['cloudsearch']);	
+		} else  {
+			if(this.router.url === "/hsearch")
+				this.router.navigate(['hsearch2']);
+			else
+				this.router.navigate(['hsearch']);
+		}
   	}
   
 }
