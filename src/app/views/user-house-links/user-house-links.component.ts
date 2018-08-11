@@ -16,7 +16,7 @@ import { UserHouseContractSharedKey } from '../../models/UserHouseContractShared
   templateUrl: './user-house-links.component.html',
   styleUrls: ['./user-house-links.component.scss']
 })
-export class UserHouseLinksComponent  extends H4rbaseComponent {
+export class UserHouseLinksComponent extends H4rbaseComponent {
 	private activePng:any = require("assets/img/active.png");
 	private inactivePng:any = require("assets/img/inactive.png"); 
 	private newcontractPng:any = require("assets/img/new_contract.png");

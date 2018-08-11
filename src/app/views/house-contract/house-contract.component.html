@@ -18,24 +18,28 @@
           <tr>
           	<td>
             	<div class="field">
-          
-                <p>House: <b>{{houseContract.house.name}}</b>
-                    <a class='orange' title="Contract is about to expire. Current contract will be inactivated after renew."  href="#" 
-                            *ngIf="(houseContract.isRenewable == true) && newContract==false"
-                            (click)="renewContract()">(Renew)
-                    </a>
+                House: <b>{{houseContract.house.name}}</b>&nbsp;&nbsp;&nbsp;
+                    <div class="btn-group" *ngIf="newContract == false">
+                        <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Operations
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" title="Contract is about to expire. Current contract will be inactivated after renew." 
+                                            href="#" *ngIf="(houseContract.isRenewable == true)"
+                                            (click)="renewContract()">Renew</a>
+                          <a class="dropdown-item" title="Clone the current contract. Current contract will become inactive." 
+                                            href="#" *ngIf="(houseContract.isRenewable != true)"
+                                            (click)="cloneContract()">Clone</a>
+                          <a class="dropdown-item" title="$$$ Receivables/Payments"
+                                            href="#" 
+                                            routerLink="../../receivables/{{houseContract.id}}">Payments($$$)</a>
+                        </div>
+                    </div>
+                    
                     <a href="#" *ngIf="houseContract.next_contract_id != null && houseContract.next_contract_id != 0" 
                         routerLink="../../house_contract/{{houseContract.next_contract_id}}" title="Next contract">
                         <fa-icon [icon]="['fas', 'forward']"></fa-icon>
                     </a>
-                    <a class='orange' title="Clone the current contract. Current contract will become inactive."  href="#" 
-                            *ngIf="(houseContract.isRenewable != true) && newContract==false"
-                            (click)="cloneContract()">(Clone)
-                    </a>
-                    <a *ngIf="newContract == false" style="color:#85bb65" title="$$$ Receivables/Payments" href="#" routerLink="../../receivables/{{houseContract.id}}">
-                        ($$$)
-                    </a>
-	             </p>
           		</div>
           	</td>
           </tr>	

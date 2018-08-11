@@ -48,6 +48,7 @@ import { AutofocusDirective } from './directives/Autofocus';
 import { AccountsComponent } from './views/accounts/accounts.component'
 import { AccountComponent } from './views/account/account.component'
 import { AwsHouseSearchResultsComponent } from './views/house-search-results/aws-house-search-results.component';
+import { UserHouseLinksDropdownComponent } from './views/user-house-links/user-house-links-dropdown.component';
 
 export class h4rRoutes {
     static routes: Routes = [
@@ -242,7 +243,8 @@ export class h4rRoutes {
         CommunitiesComponent, CommunityComponent,
         TicketsComponent, TicketComponent, TicketNoteComponent, TicketNotesComponent,
         AutofocusDirective, AccountComponent, AccountsComponent,
-        AwsHouseSearchResultsComponent
+        AwsHouseSearchResultsComponent,
+        UserHouseLinksDropdownComponent
       ]
 
       static modalDialogEntryPoints = [
