@@ -1,0 +1,75 @@
+<h4>User Entitlement</h4>
+
+<div id='formDiv' class="row justify-content-center">
+      <form novalidate #form="ngForm" class="form-inline my-2 my-lg-0">
+
+          <div class="form">
+              <div class="field" *ngIf='user.message != ""' style="color:green">
+                  <label>{{user.message}}</label>
+                </div>
+                <div class="field" *ngIf='user.errorMessage != ""' style="color:red">
+                  <label>{{user.errorMessage}}</label>
+                </div>
+                
+        <div class="field">
+          
+            <p>User: {{user.fullName}}</p>
+          
+        </div>
+          
+        <div class="field">
+              
+            <p>{{userEntitlment['TENANT'].label}}: <input class="form-control mr-sm-2" name="TENANT" type="checkbox" [(ngModel)]="userEntitlment['TENANT'].entitled"/></p>
+          
+        </div>
+
+        <div class="field">
+              
+            <p>{{userEntitlment['LAND_LORD'].label}}: <input class="form-control mr-sm-2" name="LAND_LORD" type="checkbox" [(ngModel)]="userEntitlment['LAND_LORD'].entitled"/></p>
+          
+        </div>
+
+        <div class="field">
+              
+            <p>{{userEntitlment['MAINTENANCE'].label}}: <input class="form-control mr-sm-2" name="MAINTENANCE" type="checkbox" [(ngModel)]="userEntitlment['MAINTENANCE'].entitled"/></p>
+          
+        </div>
+
+        <div class="field">
+              
+            <p>{{userEntitlment['AGENCY_COLLECTION_MGR'].label}}: <input class="form-control mr-sm-2" name="AGENCY_COLLECTION_MGR" type="checkbox" [(ngModel)]="userEntitlment['AGENCY_COLLECTION_MGR'].entitled"/></p>
+          
+        </div>
+
+        <div class="field">
+              
+            <p>{{userEntitlment['ACCOUNTANT'].label}}: <input class="form-control mr-sm-2" name="ACCOUNTANT" type="checkbox" [(ngModel)]="userEntitlment['ACCOUNTANT'].entitled"/></p>
+          
+        </div>
+
+        <div class="field">
+              
+            <p>{{userEntitlment['PROPERTY_MGMT_MGR'].label}}: <input class="form-control mr-sm-2" name="PROPERTY_MGMT_MGR" type="checkbox" [(ngModel)]="userEntitlment['PROPERTY_MGMT_MGR'].entitled"/></p>
+          
+        </div>
+
+        <div class="field">
+              
+            <p>{{userEntitlment['PROPERTY_MGMT_EMP'].label}}: <input class="form-control mr-sm-2" name="PROPERTY_MGMT_EMP" type="checkbox" [(ngModel)]="userEntitlment['PROPERTY_MGMT_EMP'].entitled"/></p>
+          
+        </div>
+
+        <div class="field">
+              
+            <p>{{userEntitlment['AGENCY_COLLECTION_EMP'].label}}: <input class="form-control mr-sm-2" name="AGENCY_COLLECTION_EMP" type="checkbox" [(ngModel)]="userEntitlment['AGENCY_COLLECTION_EMP'].entitled"/></p>
+          
+        </div>
+                    
+      </div>
+
+      </form>
+        
+</div>
+<div id='formDiv' class="row justify-content-center">
+    <button type="button" class="btn btn-success"  (click)="saveRecord()">Save</button>
+</div>

@@ -27,6 +27,9 @@ export class AppSettings {
 	static AGENCY_COLLECTION_MGR:number    = 1 << 9 //#Collection agency mgr
 	*/
 	
+	public static readonly ROLES_LIST = ["TENANT", "LAND_LORD","ACCOUNTANT", "PROPERTY_MGMT_MGR", 
+											"PROPERTY_MGMT_EMP", "AGENCY_COLLECTION_EMP",
+											"AGENCY_COLLECTION_MGR", "MAINTENANCE"];
 	public static readonly ROLES:any = {
 	    "GUEST": {value:0, label: "Guest", contract_type:1},
 	    "ADMIN": {value:1 << 16, label: "Admin", contract_type:1},
@@ -39,7 +42,7 @@ export class AppSettings {
 		"AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr", contract_type:2},
 		"MAINTENANCE": {value: 1 << 8, label: "Maintenance", contract_type:2},
 	};
-
+	
 	static IDLE_TIME:number = 15 * 60; //15 minutes
 	static WAIT_TIME_AFTER_IDLE:number = 1 * 60; //1 minutes, after this user session is logged-out
 	public static MAPS_KEY:string =  "<MAPS_KEY>";

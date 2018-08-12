@@ -47,6 +47,10 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 	  this.users = this.loginService.getUsers();
 	  //that.userHouseLinks.length = 0;
 	  let userHouseLinks:Array<UserHouseLink> = [];
+	  if(this.community_id === null) {
+		that.logger.error(this,"Community id can not be null.");
+		return;
+	  }
 	  this.userHouseLinkService.list(this.community_id).subscribe(resp => {
 		  for(var i in resp) {
 			  	let link:any = resp[i];
