@@ -3,8 +3,6 @@ import { HouseContractsService } from '../../services/HouseContractsService';
 import {HouseContract} from '../../models/HouseContract';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
-import {H4rbaseComponent} from '../h4rbase/h4rbase.component';
-import { House } from '../../models/House';
 import { HouseContractsComponent } from './house-contracts.component';
 
 @Component({
@@ -14,7 +12,6 @@ import { HouseContractsComponent } from './house-contracts.component';
 })
 export class TabHouseContractsComponent extends HouseContractsComponent {
 
-	@Input() house:House;
 	constructor(public houseContractsService: HouseContractsService,
 			public logger: LoggingService,
 			public loginService: LoginService) {
