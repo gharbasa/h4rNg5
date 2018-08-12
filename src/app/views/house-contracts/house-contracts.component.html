@@ -1,9 +1,9 @@
   <table width="50%">
     <tr>
-        <td width="30%">
+        <td width="30%" *ngIf="(house == null)">
             House Contracts
         </td>
-        <td width="40%" *ngIf="isAdminUser()">
+        <td width="40%" *ngIf="isAdminUser() && (house == null)">
         <ng-select name="community_id" [items]="communities"
                    bindLabel="name"
                    bindValue="id"

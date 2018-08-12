@@ -13,8 +13,8 @@ import {H4rbaseComponent} from '../h4rbase/h4rbase.component';
 export class HouseContractsComponent extends H4rbaseComponent {
 
 	public errorMessage:string = "";
-	constructor(private houseContractsService: HouseContractsService,
-			private logger: LoggingService,
+	constructor(public houseContractsService: HouseContractsService,
+		public logger: LoggingService,
 			public loginService: LoginService) {
 				super(loginService);
 	}

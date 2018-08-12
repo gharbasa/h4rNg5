@@ -25,7 +25,7 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 	private users:Array<User> = [];
 	public errorMessage:string = "";
 	private message:string = "";
-
+	public roles:string[] = AppSettings.ROLES_LIST;
   	constructor(private userService: UserService,
   			private logger: LoggingService,
 			public loginService: LoginService,
@@ -47,13 +47,8 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 	  this.users = this.loginService.getUsers();
 	  //that.userHouseLinks.length = 0;
 	  let userHouseLinks:Array<UserHouseLink> = [];
-	  if(this.community_id === null) {
-		that.logger.error(this,"Community id can not be null.");
-		return;
-	  }
 	  this.userHouseLinkService.list(this.community_id).subscribe(resp => {
-		  for(var i in resp) {
-			  	let link:any = resp[i];
+		  for(var link of resp) {
 		  		//if(link.house != null && link.role > 0) {
 		  		if(link.house != null) {
 		  			that.pushUserHouseLink(userHouseLinks, link);

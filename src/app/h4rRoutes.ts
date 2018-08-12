@@ -50,6 +50,7 @@ import { AccountComponent } from './views/account/account.component'
 import { AwsHouseSearchResultsComponent } from './views/house-search-results/aws-house-search-results.component';
 import { UserHouseLinksDropdownComponent } from './views/user-house-links/user-house-links-dropdown.component';
 import { UserEntitlementComponent } from './views/user-entitlement/user-entitlement.component';
+import { TabHouseContractsComponent} from './views/house-contracts/tab-house-contracts';
 
 export class h4rRoutes {
     static routes: Routes = [
@@ -250,7 +251,8 @@ export class h4rRoutes {
         TicketsComponent, TicketComponent, TicketNoteComponent, TicketNotesComponent,
         AutofocusDirective, AccountComponent, AccountsComponent,
         AwsHouseSearchResultsComponent,
-        UserHouseLinksDropdownComponent, UserEntitlementComponent
+        UserHouseLinksDropdownComponent, UserEntitlementComponent,
+        TabHouseContractsComponent
       ]
 
       static modalDialogEntryPoints = [

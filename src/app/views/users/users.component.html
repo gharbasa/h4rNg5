@@ -28,9 +28,9 @@
     <th>Community</th>
     <th title="Subscription years">#</th>
     <th title="subscription end date">Ends(d-m-y)</th>
-    <th>Created</th>
+    <th>Joined</th>
     <th>Admin?</th>
-    <th>Reset</th>
+    <th *ngIf="currentUser.admin == true">Actions</th>
   </tr>
   <tr *ngFor="let user of pageSettings.getPaginatedList()">
     <td>

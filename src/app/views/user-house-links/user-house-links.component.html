@@ -19,23 +19,18 @@
 <table width="100%">
     <tr>
         <th>House</th>
-        <th *ngIf="isUserEntitled('TENANT')">{{staticRoles["TENANT"].label}}</th>
-        <th *ngIf="isUserEntitled('LAND_LORD')">{{staticRoles["LAND_LORD"].label}}</th>
-        <th *ngIf="isUserEntitled('MAINTENANCE')" title="Maintenance/Repair contracts">{{staticRoles["MAINTENANCE"].label}}</th>
-        <th *ngIf="isUserEntitled('AGENCY_COLLECTION_MGR')" title="Govt. Agency for taxes">{{staticRoles["AGENCY_COLLECTION_MGR"].label}}</th><!--This is used as maintenance in the past-->
-        <th *ngIf="isUserEntitled('ACCOUNTANT')">{{staticRoles["ACCOUNTANT"].label}}</th>
-        <th *ngIf="isUserEntitled('PROPERTY_MGMT_MGR')">{{staticRoles["PROPERTY_MGMT_MGR"].label}}</th>
-        <th *ngIf="isUserEntitled('PROPERTY_MGMT_EMP')">{{staticRoles["PROPERTY_MGMT_EMP"].label}}</th>
-        <th *ngIf="isUserEntitled('AGENCY_COLLECTION_EMP')">{{staticRoles["AGENCY_COLLECTION_EMP"].label}}</th>
-        
+        <ng-container *ngFor="let role of roles">
+            <th *ngIf="isUserEntitled(role)">{{staticRoles[role].label}}</th>
+        </ng-container>
     </tr>
     <tr *ngIf="errorMessage != ''">
-        <td colspan="8"  style="color:red">{{errorMessage}}</td>
+        <td colspan="8" style="color:red">{{errorMessage}}</td>
     </tr>
     <tr *ngFor="let user_house_link of pageSettings.getPaginatedList(); let i = index">
         <td>
            <a routerLink="../house/{{user_house_link.house.id}}">{{user_house_link.house.name}}</a>
         </td>
+
         <td *ngIf="isUserEntitled('TENANT')">
             <ng-select name="tenant" [items]="users"
                    bindLabel="fullName"
@@ -43,16 +38,16 @@
                    placeholder="Tenant"
                    [(ngModel)]="user_house_link.tenant_id"
                    (change)="houseUserLinkChanged(user_house_link, 'tenant')">
-                </ng-select>
-                <h4r-user-house-links-dropdown
+            </ng-select>
+            <h4r-user-house-links-dropdown
                     [userHouseLink]="user_house_link"
                     [activeContract]="user_house_link.tenant_active_contract"
                     [inactiveContracts]="user_house_link.tenant_inactive_contracts"
                     [userId]="user_house_link.tenant_id"
                     [hasRole]="user_house_link.tenant"
                     [role]="'TENANT'">
-                </h4r-user-house-links-dropdown>
-                &nbsp;
+            </h4r-user-house-links-dropdown>
+            &nbsp;
         </td>
         <td *ngIf="isUserEntitled('LAND_LORD')">
             <ng-select name="landLord" [items]="users"

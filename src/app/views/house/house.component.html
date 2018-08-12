@@ -175,7 +175,36 @@ House
         </div>
       </td>
       <tr *ngIf="!createNewHouse"><td colspan="2" width="100%">
-        <h4r-house-notes [house]="house"></h4r-house-notes>
+        
+
+
+
+        <ul class="nav nav-tabs" *ngIf="!createNewHouse">
+                <li class="nav-item">
+                  <a class="nav-link" id="house{{house.id}}-tab-notes" data-toggle="tab" href="#house{{house.id}}-notes"
+                      role="tab" attr.aria-controls="house{{house.id}}-notes" attr.aria-selected="true">
+                    Notes
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="house{{house.id}}-tab-contracts" data-toggle="tab" href="#house{{house.id}}-contracts"
+                      role="tab" attr.aria-controls="house{{house.id}}-contracts" attr.aria-selected="false">
+                    Contracts
+                   </a>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="myTabContent" *ngIf="!createNewHouse">
+                <div class="tab-pane fade show active"
+                    id="house{{house.id}}-notes" role="tabpanel" attr.aria-labelledby="house{{house.id}}-tab-notes">
+                      <h4r-house-notes [house]="house"></h4r-house-notes>
+                </div>
+                <div class="tab-pane fade" 
+                    id="house{{house.id}}-contracts" role="tabpanel" attr.aria-labelledby="house{{house.id}}-tab-contracts">
+                      <h4r-tab-house-contracts [house]="house"></h4r-tab-house-contracts>
+                </div>
+            </div>
+
       </td></tr>
       </table>
       

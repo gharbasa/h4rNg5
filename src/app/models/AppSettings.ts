@@ -27,9 +27,18 @@ export class AppSettings {
 	static AGENCY_COLLECTION_MGR:number    = 1 << 9 //#Collection agency mgr
 	*/
 	
-	public static readonly ROLES_LIST = ["TENANT", "LAND_LORD","ACCOUNTANT", "PROPERTY_MGMT_MGR", 
+	/**
+	 * The order of display in the UI(user <=> house links)
+	 * If you change this order, you will have to change it in identifyRoleStringConst function.
+	 */
+	public static readonly ROLES_LIST = ["TENANT", "LAND_LORD","MAINTENANCE", "AGENCY_COLLECTION_MGR", 
+											"ACCOUNTANT", "PROPERTY_MGMT_MGR", 
 											"PROPERTY_MGMT_EMP", "AGENCY_COLLECTION_EMP",
-											"AGENCY_COLLECTION_MGR", "MAINTENANCE"];
+											];
+	/**
+	 * contract_type: 1(Income)
+	 * contract_type: 2(Expenditure)
+	 */
 	public static readonly ROLES:any = {
 	    "GUEST": {value:0, label: "Guest", contract_type:1},
 	    "ADMIN": {value:1 << 16, label: "Admin", contract_type:1},
@@ -58,21 +67,21 @@ export class AppSettings {
 		if(role == 1 << 16)
 			return "ADMIN";
 		if(role == 1 << 15)
-			return "TENANT";
+			return AppSettings.ROLES_LIST[0];
 		if(role == 1 << 14)
-			return "LAND_LORD";
+			return AppSettings.ROLES_LIST[1];
 		if(role == 1 << 13)
-			return "ACCOUNTANT";
+			return AppSettings.ROLES_LIST[4];
 		if(role == 1 << 12)
-			return "PROPERTY_MGMT_MGR";
+			return AppSettings.ROLES_LIST[5];
 		if(role == 1 << 11)
-			return "PROPERTY_MGMT_EMP";
+			return AppSettings.ROLES_LIST[6];
 		if(role == 1 << 10)
-			return "AGENCY_COLLECTION_EMP";
+			return AppSettings.ROLES_LIST[7];
 		if(role == 1 << 9)
-			return "AGENCY_COLLECTION_MGR";
+			return AppSettings.ROLES_LIST[3];
 		if(role == 1 << 8)
-			return "MAINTENANCE";
+			return AppSettings.ROLES_LIST[2];
 	}
 
 	public static readonly CONTRACT_CREATION_TYPES:any = {
@@ -80,4 +89,5 @@ export class AppSettings {
 		"CLONE":2,
 		"RENEW":3
 	};
+
 }
