@@ -36,7 +36,8 @@ export class User {
     message:string = "";
     image:any=null;
     active:boolean = true;
-    
+    entitlement:number = -1;
+
 /*
     constructor(fname: string, email: string) {
         this.fname = fname;

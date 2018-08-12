@@ -164,7 +164,7 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 
   fetchContracts(userHouseLink:UserHouseLink) {
   	let that = this;
-  	if((AppSettings.ROLES['TENANT'].accessible) && (userHouseLink.tenant === true)) {
+  	if(this.isUserEntitled('TENANT') && (userHouseLink.tenant === true)) {
   		let key:string = userHouseLink.house_id + "_" + userHouseLink.tenant_id + "_" + AppSettings.ROLES["TENANT"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_TENANTRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
@@ -180,10 +180,10 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 			that.logger.info(that, "There is a problem in fetching tenant house contract");
 		});
 	} else {
-		that.logger.info(that, "Tenants are not accessible over UI. No need to fetch these contracts");
+		that.logger.info(that, "Tenant contracts are not accessible to the login user.");
 	}
 
-	if((AppSettings.ROLES['ACCOUNTANT'].accessible) && (userHouseLink.accountant === true)) {
+	if(this.isUserEntitled('ACCOUNTANT') && (userHouseLink.accountant === true)) {
   		let key:string = userHouseLink.house_id + "_" + userHouseLink.accountant_id + "_" + AppSettings.ROLES["ACCOUNTANT"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_ACCOUNTANTRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
@@ -199,10 +199,10 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 			that.logger.info(that, "There is a problem in fetching accountant house contract");
 		});
 	} else {
-		that.logger.info(that, "ACCOUNTANT are not accessible over UI. No need to fetch these contracts");
+		that.logger.info(that, "ACCOUNTANT contracts are not accessible to the login user.");
 	}
 
-	if((AppSettings.ROLES['LAND_LORD'].accessible) && (userHouseLink.land_lord === true)) {
+	if(this.isUserEntitled('LAND_LORD') && (userHouseLink.land_lord === true)) {
   		let key:string = userHouseLink.house_id + "_" + userHouseLink.land_lord_id + "_" + AppSettings.ROLES["LAND_LORD"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_LAND_LORDRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
@@ -218,10 +218,10 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 			that.logger.info(that, "There is a problem in fetching land_lord house contract");
 		});
 	} else {
-		that.logger.info(that, "LAND_LORD are not accessible over UI. No need to fetch these contracts");
+		that.logger.info(that, "LAND_LORD contracts are not accessible to the login user.");
 	}
 
-	if((AppSettings.ROLES['PROPERTY_MGMT_MGR'].accessible) && (userHouseLink.property_mgmt_mgr === true)) {
+	if(this.isUserEntitled('PROPERTY_MGMT_MGR') && (userHouseLink.property_mgmt_mgr === true)) {
   		let key:string = userHouseLink.house_id + "_" + userHouseLink.property_mgmt_mgr_id + "_" + AppSettings.ROLES["PROPERTY_MGMT_MGR"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_PROPERTY_MGMT_MGRRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
@@ -237,10 +237,10 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 			that.logger.info(that, "There is a problem in fetching property_mgmt_mgr house contract");
 		});
 	} else {
-		that.logger.info(that, "PROPERTY_MGMT_MGR are not accessible over UI. No need to fetch these contracts");
+		that.logger.info(that, "PROPERTY_MGMT_MGR contracts are not accessible to the login user.");
 	}
 
-	if((AppSettings.ROLES['PROPERTY_MGMT_EMP'].accessible) && (userHouseLink.property_mgmt_emp === true)) {
+	if(this.isUserEntitled('PROPERTY_MGMT_EMP') && (userHouseLink.property_mgmt_emp === true)) {
   		let key:string = userHouseLink.house_id + "_" + userHouseLink.property_mgmt_emp_id + "_" + AppSettings.ROLES["PROPERTY_MGMT_EMP"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_PROPERTY_MGMT_EMPRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
@@ -256,10 +256,10 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 			that.logger.info(that, "There is a problem in fetching property_mgmt_emp house contract");
 		});
 	} else {
-		that.logger.info(that, "PROPERTY_MGMT_EMP are not accessible over UI. No need to fetch these contracts");
+		that.logger.info(that, "PROPERTY_MGMT_EMP contracts are not accessible to the login user.");
 	}
 
-	if((AppSettings.ROLES['AGENCY_COLLECTION_MGR'].accessible) && (userHouseLink.agency_collection_mgr === true)) {
+	if(this.isUserEntitled('AGENCY_COLLECTION_MGR') && (userHouseLink.agency_collection_mgr === true)) {
   		let key:string = userHouseLink.house_id + "_" + userHouseLink.agency_collection_mgr_id + "_" + AppSettings.ROLES["AGENCY_COLLECTION_MGR"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_AGENCY_COLLECTION_MGRRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
@@ -275,10 +275,10 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 			that.logger.info(that, "There is a problem in fetching agency_collection_mgr house contract");
 		});
 	} else {
-		that.logger.info(that, "AGENCY_COLLECTION_MGR are not accessible over UI. No need to fetch these contracts");
+		that.logger.info(that, "AGENCY_COLLECTION_MGR contracts are not accessible to the login user.");
 	}
 
-	if((AppSettings.ROLES['AGENCY_COLLECTION_EMP'].accessible) && (userHouseLink.agency_collection_emp === true)) {
+	if(this.isUserEntitled('AGENCY_COLLECTION_EMP') && (userHouseLink.agency_collection_emp === true)) {
   		let key:string = userHouseLink.house_id + "_" + userHouseLink.agency_collection_emp_id + "_" + AppSettings.ROLES["AGENCY_COLLECTION_EMP"].value;
   		that.logger.info(that,"Lets find the contracts associated with house_user_AGENCY_COLLECTION_EMPRole key=" + key);
   		that.userHouseLinkService.contracts(key).subscribe(resp => {
@@ -294,10 +294,10 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 			that.logger.info(that, "There is a problem in fetching agency_collection_emp house contract");
 		});
 	} else {
-		that.logger.info(that, "AGENCY_COLLECTION_EMP are not accessible over UI. No need to fetch these contracts");
+		that.logger.info(that, "AGENCY_COLLECTION_EMP contracts are not accessible to the login user.");
 	}
 
-	if((AppSettings.ROLES['MAINTENANCE'].accessible) && (userHouseLink.maintenance === true)) {
+	if(this.isUserEntitled('MAINTENANCE') && (userHouseLink.maintenance === true)) {
 		let key:string = userHouseLink.house_id + "_" + userHouseLink.maintenance_id + "_" + AppSettings.ROLES["MAINTENANCE"].value;
 		that.logger.info(that,"Lets find the contracts associated with house_user_MAINTENANCERole key=" + key);
 		that.userHouseLinkService.contracts(key).subscribe(resp => {
@@ -313,7 +313,7 @@ export class UserHouseLinksComponent extends H4rbaseComponent {
 		  that.logger.info(that, "There is a problem in fetching agency_collection_emp house contract");
 	  });
   	} else {
-		that.logger.info(that, "MAINTENANCE are not accessible over UI. No need to fetch these contracts");
+		that.logger.info(that, "MAINTENANCE contracts are not accessible to the login user.");
 	}
 
   }

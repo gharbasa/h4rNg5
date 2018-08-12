@@ -84,5 +84,9 @@ export class H4rbaseComponent implements OnInit {
   	router.navigate(['../house_contract/0']);
 		return false;
   }
+
+  public isUserEntitled(roleConst:string):boolean {
+    return (this.currentUser.entitlement & AppSettings.ROLES[roleConst].value) != 0;
+  }
   
 }
