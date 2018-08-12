@@ -26,11 +26,11 @@
     <th>Email</th>
     <th>Avatar</th>
     <th>Community</th>
-    <th>#</th>
+    <th title="Subscription years">#</th>
     <th title="subscription end date">Ends(d-m-y)</th>
-    <th>Created</th>
+    <th>Joined</th>
     <th>Admin?</th>
-    <th>Reset</th>
+    <th *ngIf="currentUser.admin == true">Actions</th>
   </tr>
   <tr *ngFor="let user of pageSettings.getPaginatedList()">
     <td>
@@ -51,7 +51,19 @@
     <td>{{user.subscriptionEndDate}}</td>
     <td>{{user.createdAt}}</td>
     <td><input *ngIf="((currentUser.id !=user.id) || (currentUser.admin != true))" type="checkbox" [(ngModel)]="user.promote2Admin" (change)="promoteUser(user)"></td>
-    <td><a *ngIf="currentUser.admin == true" href="#" (click)="resetPasswordAdmin(user)" >Click</a></td>
+    <td>
+        <div *ngIf="currentUser.admin == true" class="btn-group">
+                <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Actions
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" title="Reset user's login password." 
+                                    href="#" (click)="resetPasswordAdmin(user)">Password reset</a>
+                  <a class="dropdown-item" title="Update user entitlement"
+                                    href="#" routerLink="../userentitlement/{{user.id}}">Entitlement</a>
+                </div>
+        </div>    
+    </td>
   </tr>
 </table>
 <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>

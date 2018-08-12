@@ -32,11 +32,14 @@ export class User {
 	roleStr: string = ""; 
 	sexStr:string = "";
 	sex:number = -1;  //used in self service password reset also
-	errorMessage:string = "";
+    active:boolean = true;
+    entitlement:number = -1;
+    
+    errorMessage:string = "";
     message:string = "";
     image:any=null;
-    active:boolean = true;
     
+
 /*
     constructor(fname: string, email: string) {
         this.fname = fname;

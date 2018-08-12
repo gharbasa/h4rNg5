@@ -29,6 +29,10 @@ export class UserService {
 	resetPasswordAdmin(userId:number) {
 		return this.http.put(this.basePath + "/" + userId + "/resetPassword", "");
 	}
+
+	entitlement(userId:number, entitlementNum:number) {
+		return this.http.put(this.basePath + "/" + userId + "/entitlement", {entitlement: entitlementNum});
+	}
 	
 	forgotPassword(user:User) {
 		return this.http.put(this.basePath + "/forgotPassword", user);

@@ -27,18 +27,31 @@ export class AppSettings {
 	static AGENCY_COLLECTION_MGR:number    = 1 << 9 //#Collection agency mgr
 	*/
 	
+	/**
+	 * The order of display in the UI(user <=> house links)
+	 * If you change this order, you will have to change it in identifyRoleStringConst function.
+	 */
+	public static readonly ROLES_LIST = ["TENANT", "LAND_LORD","MAINTENANCE", "AGENCY_COLLECTION_MGR", 
+											"ACCOUNTANT", "PROPERTY_MGMT_MGR", 
+											"PROPERTY_MGMT_EMP", "AGENCY_COLLECTION_EMP",
+											];
+	/**
+	 * contract_type: 1(Income)
+	 * contract_type: 2(Expenditure)
+	 */
 	public static readonly ROLES:any = {
 	    "GUEST": {value:0, label: "Guest", contract_type:1},
 	    "ADMIN": {value:1 << 16, label: "Admin", contract_type:1},
-	    "TENANT": {value: 1 << 15, label: "Tenant ", contract_type:1, accessible:true},
-	    "LAND_LORD": {value: 1 << 14, label: "Land Lord", contract_type:1, accessible:true},
-	    "ACCOUNTANT": {value: 1 << 13, label: "Accountant", contract_type:1, accessible:false},
-	    "PROPERTY_MGMT_MGR": {value: 1 << 12, label: "Prop. Mgr", contract_type:1, accessible:true},
-	    "PROPERTY_MGMT_EMP": {value: 1 << 11, label: "Prop. Emp", contract_type:1, accessible:false},
-	    "AGENCY_COLLECTION_EMP": {value: 1 << 10, label: "Agency Emp", contract_type:1, accessible:false},
-		"AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr", contract_type:2, accessible:true},
-		"MAINTENANCE": {value: 1 << 8, label: "Maintenance", contract_type:2, accessible:true},
+	    "TENANT": {value: 1 << 15, label: "Tenant ", contract_type:1},
+	    "LAND_LORD": {value: 1 << 14, label: "Land Lord", contract_type:1},
+	    "ACCOUNTANT": {value: 1 << 13, label: "Accountant", contract_type:1},
+	    "PROPERTY_MGMT_MGR": {value: 1 << 12, label: "Prop. Mgr", contract_type:1},
+	    "PROPERTY_MGMT_EMP": {value: 1 << 11, label: "Prop. Emp", contract_type:1},
+	    "AGENCY_COLLECTION_EMP": {value: 1 << 10, label: "Agency Emp", contract_type:1},
+		"AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr", contract_type:2},
+		"MAINTENANCE": {value: 1 << 8, label: "Maintenance", contract_type:2},
 	};
+	
 	static IDLE_TIME:number = 15 * 60; //15 minutes
 	static WAIT_TIME_AFTER_IDLE:number = 1 * 60; //1 minutes, after this user session is logged-out
 	public static MAPS_KEY:string =  "<MAPS_KEY>";
@@ -54,21 +67,21 @@ export class AppSettings {
 		if(role == 1 << 16)
 			return "ADMIN";
 		if(role == 1 << 15)
-			return "TENANT";
+			return AppSettings.ROLES_LIST[0];
 		if(role == 1 << 14)
-			return "LAND_LORD";
+			return AppSettings.ROLES_LIST[1];
 		if(role == 1 << 13)
-			return "ACCOUNTANT";
+			return AppSettings.ROLES_LIST[4];
 		if(role == 1 << 12)
-			return "PROPERTY_MGMT_MGR";
+			return AppSettings.ROLES_LIST[5];
 		if(role == 1 << 11)
-			return "PROPERTY_MGMT_EMP";
+			return AppSettings.ROLES_LIST[6];
 		if(role == 1 << 10)
-			return "AGENCY_COLLECTION_EMP";
+			return AppSettings.ROLES_LIST[7];
 		if(role == 1 << 9)
-			return "AGENCY_COLLECTION_MGR";
+			return AppSettings.ROLES_LIST[3];
 		if(role == 1 << 8)
-			return "MAINTENANCE";
+			return AppSettings.ROLES_LIST[2];
 	}
 
 	public static readonly CONTRACT_CREATION_TYPES:any = {
@@ -76,4 +89,5 @@ export class AppSettings {
 		"CLONE":2,
 		"RENEW":3
 	};
+
 }

@@ -21,7 +21,7 @@
                 House: <b>{{houseContract.house.name}}</b>&nbsp;&nbsp;&nbsp;
                     <div class="btn-group" *ngIf="newContract == false">
                         <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Operations
+                          Actions
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" title="Contract is about to expire. Current contract will be inactivated after renew." 
@@ -33,6 +33,9 @@
                           <a class="dropdown-item" title="$$$ Receivables/Payments"
                                             href="#" 
                                             routerLink="../../receivables/{{houseContract.id}}">Payments($$$)</a>
+                          <a class="dropdown-item" title="Save Contract"
+                                            href="#" 
+                                            (click)="saveRecord()">Save</a>
                         </div>
                     </div>
                     

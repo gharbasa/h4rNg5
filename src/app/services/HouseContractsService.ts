@@ -61,7 +61,14 @@ export class HouseContractsService {
 		}
 		return this.http.get(url).map(res => res as HouseContract[] || []);
 	}
-	
+
+	listByHouse(house_id:number):Observable<HouseContract[]>  {
+		let url = this.basePath_admin;
+		if(house_id != null)
+			url = url + "?house_id=" + house_id;
+		return this.http.get(url).map(res => res as HouseContract[] || []);
+	}
+
 	setSharedKey(sharedKey:UserHouseContractSharedKey) {
 		this.sharedKey = sharedKey;
 	}

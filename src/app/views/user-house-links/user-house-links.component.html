@@ -19,43 +19,37 @@
 <table width="100%">
     <tr>
         <th>House</th>
-        <th>{{staticRoles["TENANT"].label}}</th>
-        <th>{{staticRoles["LAND_LORD"].label}}</th>
-        <th>{{staticRoles["MAINTENANCE"].label}}</th>
-        <th title="Govt. Agency for taxes">{{staticRoles["AGENCY_COLLECTION_MGR"].label}}</th><!--This is used as maintenance in the past-->
-        <!--<th>{{staticRoles["ACCOUNTANT"].label}}</th> -->
-        <th>{{staticRoles["PROPERTY_MGMT_MGR"].label}}</th>
-        <!--<th>{{staticRoles["PROPERTY_MGMT_EMP"].label}}</th> -->
-        
-        <!--<th>{{staticRoles["AGENCY_COLLECTION_EMP"].label}}</th> -->
-        
+        <ng-container *ngFor="let role of roles">
+            <th *ngIf="isUserEntitled(role)">{{staticRoles[role].label}}</th>
+        </ng-container>
     </tr>
     <tr *ngIf="errorMessage != ''">
-        <td colspan="8"  style="color:red">{{errorMessage}}</td>
+        <td colspan="8" style="color:red">{{errorMessage}}</td>
     </tr>
     <tr *ngFor="let user_house_link of pageSettings.getPaginatedList(); let i = index">
         <td>
            <a routerLink="../house/{{user_house_link.house.id}}">{{user_house_link.house.name}}</a>
         </td>
-        <td>
+
+        <td *ngIf="isUserEntitled('TENANT')">
             <ng-select name="tenant" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
                    placeholder="Tenant"
                    [(ngModel)]="user_house_link.tenant_id"
                    (change)="houseUserLinkChanged(user_house_link, 'tenant')">
-                </ng-select>
-                <h4r-user-house-links-dropdown
+            </ng-select>
+            <h4r-user-house-links-dropdown
                     [userHouseLink]="user_house_link"
                     [activeContract]="user_house_link.tenant_active_contract"
                     [inactiveContracts]="user_house_link.tenant_inactive_contracts"
                     [userId]="user_house_link.tenant_id"
                     [hasRole]="user_house_link.tenant"
                     [role]="'TENANT'">
-                </h4r-user-house-links-dropdown>
-                &nbsp;
+            </h4r-user-house-links-dropdown>
+            &nbsp;
         </td>
-        <td>
+        <td *ngIf="isUserEntitled('LAND_LORD')">
             <ng-select name="landLord" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
@@ -75,7 +69,7 @@
              &nbsp;
                 
         </td>
-        <td>
+        <td *ngIf="isUserEntitled('MAINTENANCE')">
                 <ng-select name="maintenance" [items]="users"
                        bindLabel="fullName"
                        bindValue="id"
@@ -94,7 +88,7 @@
                 </h4r-user-house-links-dropdown>
                 &nbsp;
         </td>
-        <td>
+        <td *ngIf="isUserEntitled('AGENCY_COLLECTION_MGR')">
                 <ng-select name="agency_coll_mgr" [items]="users"
                        bindLabel="fullName"
                        bindValue="id"
@@ -113,26 +107,7 @@
 
                 &nbsp;
         </td>
-        <td>
-                <ng-select name="property_mgmt_mgr" [items]="users"
-                       bindLabel="fullName"
-                       bindValue="id"
-                       placeholder="Prop Mgr"
-                       [(ngModel)]="user_house_link.property_mgmt_mgr_id"
-                       (change)="houseUserLinkChanged(user_house_link, 'property_mgmt_mgr')">
-                </ng-select>
-                <h4r-user-house-links-dropdown
-                    [userHouseLink]="user_house_link"
-                    [activeContract]="user_house_link.property_mgmt_mgr_active_contract"
-                    [inactiveContracts]="user_house_link.property_mgmt_mgr_inactive_contracts"
-                    [userId]="user_house_link.property_mgmt_mgr_id"
-                    [hasRole]="user_house_link.property_mgmt_mgr"
-                    [role]="'PROPERTY_MGMT_MGR'">
-                </h4r-user-house-links-dropdown>
-                &nbsp;
-        </td>
-        <!--
-        <td>
+        <td *ngIf="isUserEntitled('ACCOUNTANT')">
             <ng-select name="accountant" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
@@ -150,9 +125,25 @@
             </h4r-user-house-links-dropdown>
             &nbsp;
         </td>
-        -->
-        <!--
-        <td>
+        <td *ngIf="isUserEntitled('PROPERTY_MGMT_MGR')">
+                <ng-select name="property_mgmt_mgr" [items]="users"
+                       bindLabel="fullName"
+                       bindValue="id"
+                       placeholder="Prop Mgr"
+                       [(ngModel)]="user_house_link.property_mgmt_mgr_id"
+                       (change)="houseUserLinkChanged(user_house_link, 'property_mgmt_mgr')">
+                </ng-select>
+                <h4r-user-house-links-dropdown
+                    [userHouseLink]="user_house_link"
+                    [activeContract]="user_house_link.property_mgmt_mgr_active_contract"
+                    [inactiveContracts]="user_house_link.property_mgmt_mgr_inactive_contracts"
+                    [userId]="user_house_link.property_mgmt_mgr_id"
+                    [hasRole]="user_house_link.property_mgmt_mgr"
+                    [role]="'PROPERTY_MGMT_MGR'">
+                </h4r-user-house-links-dropdown>
+                &nbsp;
+        </td>
+        <td *ngIf="isUserEntitled('PROPERTY_MGMT_EMP')">
             <ng-select name="property_mgmt_emp" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
@@ -170,9 +161,7 @@
             </h4r-user-house-links-dropdown>
             &nbsp;
         </td>
-        -->
-        <!--
-        <td>
+        <td *ngIf="isUserEntitled('AGENCY_COLLECTION_EMP')">
             <ng-select name="agency_coll_emp" [items]="users"
                    bindLabel="fullName"
                    bindValue="id"
@@ -190,7 +179,6 @@
             </h4r-user-house-links-dropdown>
             &nbsp;
         </td>
-        -->
     </tr>
    
 </table>

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HouseContractsService } from '../../services/HouseContractsService';
 import {HouseContract} from '../../models/HouseContract';
 import { LoggingService, Config } from 'loggerservice';
 import { LoginService } from '../../services/login.service';
 import {H4rbaseComponent} from '../h4rbase/h4rbase.component';
+import { House } from '../../models/House';
 
 @Component({
   selector: 'h4r-house-contracts',
@@ -13,8 +14,10 @@ import {H4rbaseComponent} from '../h4rbase/h4rbase.component';
 export class HouseContractsComponent extends H4rbaseComponent {
 
 	public errorMessage:string = "";
-	constructor(private houseContractsService: HouseContractsService,
-			private logger: LoggingService,
+	@Input() house:House; //It is set in TabHouseContractsComponent
+	
+	constructor(public houseContractsService: HouseContractsService,
+		public logger: LoggingService,
 			public loginService: LoginService) {
 				super(loginService);
 	}
