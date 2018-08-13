@@ -91,27 +91,6 @@ House
                     <input class="form-control mr-sm-2" name="floor_number" type="text" size="4" [(ngModel)]="house.floor_number" placeholder="Floor number"/>
                 </td>
         </tr>
-
-         <tr *ngIf="!createNewHouse">
-             <td>
-            Land lord:</td><td> 
-                {{house.land_lord && house.land_lord.fullName}}
-                </td>
-         </tr>
-        
-         <tr *ngIf="!createNewHouse">
-             <td>
-            Prop. Mgr:</td><td>
-                {{house.property_mgmt_mgr && house.property_mgmt_mgr.fullName}}
-                </td>
-         </tr>
-         
-          <tr *ngIf="!createNewHouse">
-             <td>
-            Tenant:</td><td>
-                {{house.tenant && house.tenant.fullName}}
-                </td>
-         </tr>
          
         <tr>
 
