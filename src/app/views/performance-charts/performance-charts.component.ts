@@ -141,11 +141,11 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		values: []
 	}];
 	
-	constructor(private houseService: HouseService,
-			private logger: LoggingService,
-			private paymentService: PaymentService,
-			public loginService: LoginService) { 
-				super(loginService);
+	constructor(public houseService: HouseService,
+				public logger: LoggingService,
+				public paymentService: PaymentService,
+				public loginService: LoginService) { 
+			super(loginService);
   	}
   	
   	ngOnInit() {
