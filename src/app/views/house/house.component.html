@@ -181,7 +181,7 @@ House
 
         <ul class="nav nav-tabs" *ngIf="!createNewHouse">
                 <li class="nav-item">
-                  <a class="nav-link" id="house{{house.id}}-tab-notes" data-toggle="tab" href="#house{{house.id}}-notes"
+                  <a class="nav-link active" id="house{{house.id}}-tab-notes" data-toggle="tab" href="#house{{house.id}}-notes"
                       role="tab" attr.aria-controls="house{{house.id}}-notes" attr.aria-selected="true">
                     Notes
                   </a>
@@ -191,6 +191,12 @@ House
                       role="tab" attr.aria-controls="house{{house.id}}-contracts" attr.aria-selected="false">
                     Contracts
                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="house{{house.id}}-tab-report" data-toggle="tab" href="#house{{house.id}}-report"
+                        role="tab" attr.aria-controls="house{{house.id}}-report" attr.aria-selected="false">
+                        Performance
+                    </a>
                 </li>
             </ul>
             
@@ -203,6 +209,14 @@ House
                     id="house{{house.id}}-contracts" role="tabpanel" attr.aria-labelledby="house{{house.id}}-tab-contracts">
                       <h4r-tab-house-contracts [house]="house"></h4r-tab-house-contracts>
                 </div>
+                <div class="tab-pane fade" 
+                    id="house{{house.id}}-report" role="tabpanel" attr.aria-labelledby="house{{house.id}}-tab-report">
+                    <h4r-tab-performance-charts [houseInput]="house"></h4r-tab-performance-charts>
+                </div>
+
+                
+
+
             </div>
 
       </td></tr>

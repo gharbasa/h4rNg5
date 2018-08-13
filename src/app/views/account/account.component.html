@@ -53,7 +53,7 @@ Account
 <ul class="nav nav-tabs" *ngIf="(createNewAccount == false) && (houses.length>0)">
     <li class="nav-item" *ngFor="let house of houses" 
                 (click)="makeActiveHouse(house)">
-      <a class="nav-link" id="house{{house.id}}-tab" data-toggle="tab" href="#house{{house.id}}"
+      <a class="nav-link" [ngClass]="{'active':(house.id == activeHouse.id)}"  id="house{{house.id}}-tab" data-toggle="tab" href="#house{{house.id}}"
           role="tab" attr.aria-controls="house{{house.id}}" attr.aria-selected="{{house.id == activeHouse.id}}">
             {{house.name}}
       </a>
