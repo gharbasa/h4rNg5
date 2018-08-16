@@ -128,7 +128,7 @@ export class HouseComponent implements OnInit {
 			that.latitude = position.coords.latitude;
 			that.longitude = position.coords.longitude;
 			that.zoom = 12;
-			that.agmMap.triggerResize();
+			if ((that.agmMap != null) && (that.agmMap != undefined)) that.agmMap.triggerResize();
 		  });
 		}
 	}
