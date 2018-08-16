@@ -39,8 +39,8 @@ export class AccountComponent implements OnInit {
   				that.editaccount = false;
   				that.account.message = "";
   				that.account.errorMessage = "";
-					that.createNewAccount = true;
-					that.account.baselineDate = that.account.baseline_date = UtilityService.getFormattedDate();
+				that.createNewAccount = true;
+				that.account.baselineDate = that.account.baseline_date = UtilityService.getFormattedDate();
   			} else if(res.id > 0) {
   				//if not -1, then it is a id
   				this.logger.log(this,"User wants to edit account, id=" + res.id);

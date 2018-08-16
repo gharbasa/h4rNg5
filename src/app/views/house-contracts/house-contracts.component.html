@@ -36,12 +36,20 @@
     	<tr *ngIf="errorMessage != ''"><td colspan="9">{{errorMessage}}</td><tr>
         <tr *ngFor="let houseContract of pageSettings.getPaginatedList()"  [ngStyle]="{'color':houseContract.active? '' : '#959ba5' }">
             <td>
-                <a routerLink="../house_contract/{{houseContract.id}}">
+                <a *ngIf="house == null" routerLink="../house_contract/{{houseContract.id}}">
+                    {{houseContract.house.name}} &lt;-&gt; {{houseContract.user.fullName}}
+                </a>
+                <a *ngIf="house != null" routerLink="../../house_contract/{{houseContract.id}}">
                     {{houseContract.house.name}} &lt;-&gt; {{houseContract.user.fullName}}
                 </a>
                 &nbsp;
-                <a style="color:#85bb65" title="$$$ Receivables" href="#" routerLink="../receivables/{{houseContract.id}}">
+                <a *ngIf="house == null" style="color:#85bb65" title="$$$ Receivables" href="#" 
+                                routerLink="../receivables/{{houseContract.id}}">
                         ($$$)
+                </a>
+                <a *ngIf="house != null" style="color:#85bb65" title="$$$ Receivables" href="#" 
+                                routerLink="../../receivables/{{houseContract.id}}">
+                    ($$$)
                 </a>
             </td>
             <td>{{houseContract.roles}}</td>
