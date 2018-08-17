@@ -165,13 +165,13 @@ House
                     Notes
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="houseService.isReadonlyView() == false">
                   <a class="nav-link" id="house{{house.id}}-tab-contracts" data-toggle="tab" href="#house{{house.id}}-contracts"
                       role="tab" attr.aria-controls="house{{house.id}}-contracts" attr.aria-selected="false">
                     Contracts
                    </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="houseService.isReadonlyView() == false">
                     <a class="nav-link" id="house{{house.id}}-tab-report" data-toggle="tab" href="#house{{house.id}}-report"
                         role="tab" attr.aria-controls="house{{house.id}}-report" attr.aria-selected="false">
                         Performance

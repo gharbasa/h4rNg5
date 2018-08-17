@@ -18,7 +18,13 @@
           <tr>
           	<td>
             	<div class="field">
-                House: <b>{{houseContract.house.name}}</b>&nbsp;&nbsp;&nbsp;
+                House: 
+                    <a href="#"
+                        routerLink="../../house/{{houseContract.house.id}}" title="House details">
+                        <b>{{houseContract.house.name}}</b>    
+                    </a>
+
+                    &nbsp;&nbsp;&nbsp;
                     <div class="btn-group" *ngIf="newContract == false">
                         <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Actions
@@ -51,8 +57,11 @@
           	<td>
             	<div class="field">
           
-	            <p>User: <b>{{houseContract.user.fullName}} ({{houseContract.roles}})</b> - ({{getDuration()}})
-
+	            <p>User: 
+                    <a href="#"
+                        routerLink="../../editUser/{{houseContract.user.id}}" title="User details">
+                        <b>{{houseContract.user.fullName}} ({{houseContract.roles}})</b>
+                    </a> - ({{getDuration()}})
 	             </p>
           
           		</div>
