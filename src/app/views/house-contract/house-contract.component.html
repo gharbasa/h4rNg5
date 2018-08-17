@@ -165,9 +165,28 @@
       <td>
           <h4r-house-contract-pics *ngIf="newContract == false" [houseContract]="houseContract"></h4r-house-contract-pics>
       </td>
-      </tr><tr>
+      </tr>
+      <tr *ngIf="newContract == false">
       <td colspan="2" width="100%">
-          <h4r-house-contract-notes *ngIf="newContract == false" [houseContract]="houseContract"></h4r-house-contract-notes>
+
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="housecontract-tab" data-toggle="tab" 
+                        href="#housecontract-notes"
+                        role="tab" attr.aria-controls="housecontract-notes" attr.aria-selected="true">
+                    Notes
+                </a>
+            </li>
+          </ul>
+
+        <div class="tab-content" id="houseContractTabContent">
+                <div class="tab-pane fade show active"
+                    id="housecontract-tab" role="tabpanel" 
+                    attr.aria-labelledby="housecontract-notes">
+                    <h4r-house-contract-notes [houseContract]="houseContract"></h4r-house-contract-notes>
+                </div>
+        </div>
+
       </td>
   </tr>
   </table>
