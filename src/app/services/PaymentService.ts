@@ -29,7 +29,7 @@ export class PaymentService {
 		return this.http.get(url).map(res => res as any[] || []);
 	}
 
-	monthlyExpense(house_id:number, year:number):Observable<any[]> {
+	monthlyExpenses(house_id:number, year:number):Observable<any[]> {
 		let url:string = this.basePath + "/monthlyExpense";
 		if(house_id != null)
 			url = url + "?house_id=" + house_id;
