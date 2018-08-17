@@ -226,7 +226,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				else {
 					existingRow.value = existingRow.value + value;
 				}
-				that.monthlyIncome = that.monthlyIncome + existingRow.value;
+				that.monthlyIncome = that.monthlyIncome + value;
 				if(that.year == null) that.year = element.paymentYear;
 			});
 			that.logger.log(that,", detectChanges..that.monthlyBarChartData.values.length=" 
@@ -242,7 +242,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		let that = this;
 		that.monthlyExpense = 0;
 		this.discreteBarChartDataMonthlyExpense[0].values.length = 0;
-		this.paymentService.monthlyExpense(this.house_id, this.year).subscribe(res => {
+		this.paymentService.monthlyExpenses(this.house_id, this.year).subscribe(res => {
 			that.payments = res;
 			that.payments.forEach(element => {
 				let label = element.paymentMonth;// + "-" + element.paymentYear;
@@ -258,7 +258,7 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 				else {
 					existingRow.value = existingRow.value + value;
 				}
-				that.monthlyExpense = that.monthlyExpense + existingRow.value;
+				that.monthlyExpense = that.monthlyExpense + value;
 				if(that.year == null) that.year = element.paymentYear;
 			});
 			that.logger.log(that,", detectChanges..that.monthlyBarChartData.values.length=" 
