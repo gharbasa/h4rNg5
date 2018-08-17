@@ -37,7 +37,7 @@
                         <!--<td colspan="2">-->
                     <td>
                     <b>Monthly breakdown</b>
-                         , {{year}} Net income ({{(monthlyIncome - monthlyExpense) | currency}})
+                         , {{year}} Net Income ({{(monthlyIncome - monthlyExpense) | currency}})
                         <ng-select name="year" [items]="years"
                                     bindLabel="label"
                                     bindValue="year"
@@ -68,11 +68,11 @@
                     -->
                 </tr>
                     
-                    <tr>
+                <tr>
                         <!--<td colspan="2"> -->
-                                <td>
-                        <br/><br/>
-                    
+                    <td>
+                        <b>Monthly breakdown</b>
+                        , {{year}} Expense
                     </td>
                     </tr>
                     <tr>
@@ -81,8 +81,8 @@
                                 <b></b>
                                 <nvd3 #discreteBarChartMonthlyExpenseTag  [options]="discreteExpenseBarChartOptions" [data]="discreteBarChartDataMonthlyExpense"></nvd3>
                         </td>
-                    </tr>
-                    </table>
+                </tr>
+                </table>
 
         </td>
     </tr>
