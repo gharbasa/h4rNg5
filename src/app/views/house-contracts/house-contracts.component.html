@@ -60,7 +60,10 @@
                 {{houseContract.contract_type_str}}
             </td>
             <td class="orange">{{houseContract.isRenewable}}</td>
-            <td>{{houseContract.annual_rent_amount}}@{{houseContract.monthly_rent_amount}}</td>
+            <td>
+                {{houseContract.annual_rent_amount}}@{{houseContract.monthly_rent_amount}}
+                <br>={{houseContract.totalAmountSofar}}
+            </td>
             <td>{{houseContract.note}}</td>
             <td><input type="checkbox" [(ngModel)]="houseContract.active" (change)="activeFlagChanged(houseContract)"></td>
         </tr>
