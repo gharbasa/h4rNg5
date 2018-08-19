@@ -77,6 +77,43 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		}
 	};
 
+	public discreteMonthlyExpenseBarChartOptions: any = {
+		chart: {
+		  type: 'discreteBarChart',
+		  height: 250,
+		  width: 400,
+		  margin : { 
+			top: 20,
+			right: 20,
+			bottom: 50,
+			left: 55
+		  },
+		  x: function(d){return d.label;},
+		  y: function(d){return d.value;},
+		  showValues: true,
+		  valueFormat: function(d){
+			return d3.format('.0f')(d);
+		  },
+		  duration: 100,
+		  xAxis: {
+			axisLabel: ''
+		  },
+		  yAxis: {
+			axisLabel: '',
+			axisLabelDistance: -5
+		  },
+		  tooltip: {
+			contentGenerator: function(d) { 
+				//console.log("Abed--" + JSON.stringify(d.data));
+				if(d.data.note) {
+					return d.data.note; 
+				}
+				return undefined;
+			}
+		  }
+		}
+	};
+
 	public pieChartOptions: any = {
 		chart: {
 		  type: 'pieChart',
@@ -238,28 +275,52 @@ export class PerformanceChartsComponent extends H4rbaseComponent {
 		});
 	}
 
+	buildNote(payment:any, bar:any, isExistingBar:boolean):void {
+		
+		//if(element.contract && element.contract.note) {
+			if(!isExistingBar)
+				bar.note = payment.contract.note;
+			else {
+				const contractNote:string = payment.contract.note;
+				if (bar.note.indexOf(contractNote) == -1) {
+					bar.note += "<br>" + payment.contract.note;
+				} 
+			}
+		//}
+		
+		//if(element.note) {
+			if (bar.note)
+				bar.note += "<br>&nbsp;&nbsp;&nbsp;(" + payment.amount + ")" + payment.note;
+			//else
+			//bar.note = element.note;
+		//}
+		
+	}
+
 	fetchMonthlyExpense() {
 		let that = this;
 		that.monthlyExpense = 0;
 		this.discreteBarChartDataMonthlyExpense[0].values.length = 0;
 		this.paymentService.monthlyExpenses(this.house_id, this.year).subscribe(res => {
 			that.payments = res;
-			that.payments.forEach(element => {
-				let label = element.paymentMonth;// + "-" + element.paymentYear;
-				let value = element.amount;
+			that.payments.forEach(payment => {
+				let label = payment.paymentMonth;// + "-" + element.paymentYear;
+				let value = payment.amount;
 				let existingRow = that.isPaymentRepeatedInMonth(label, value, that.discreteBarChartDataMonthlyExpense);
 				if(existingRow == null) {
 					existingRow = {
 						value: value,
 						label: label
 					};
+					that.buildNote(payment, existingRow, false);
 					that.discreteBarChartDataMonthlyExpense[0].values.push(existingRow);
 				}
 				else {
 					existingRow.value = existingRow.value + value;
+					that.buildNote(payment, existingRow, true);
 				}
 				that.monthlyExpense = that.monthlyExpense + value;
-				if(that.year == null) that.year = element.paymentYear;
+				if(that.year == null) that.year = payment.paymentYear;
 			});
 			that.logger.log(that,", detectChanges..that.monthlyBarChartData.values.length=" 
 				+ that.discreteBarChartDataMonthlyExpense[0].values.length + ",that.monthlyBarChartData="
