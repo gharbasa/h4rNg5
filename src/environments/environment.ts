@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  API_URL: "http://localhost:3000/" // etc/hosts file map this to localhost
+  API_URL: "https://localhost/" // etc/hosts file map this to localhost
 };

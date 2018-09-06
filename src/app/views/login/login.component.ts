@@ -8,6 +8,9 @@ import { LocalStorageService } from '../../services/LocalStorageService';
 import { LoggingService, Config } from 'loggerservice';
 import { IdleService } from '../../services/IdleService';
 
+import { FacebookLoginProvider, AuthService, SocialUser } from "angularx-social-login";
+ 
+
 @Component({
   selector: 'h4r-login',
   templateUrl: './login.component.html',
@@ -22,7 +25,8 @@ export class LoginComponent implements OnInit {
     		,private localStorageService: LocalStorageService
     		,private router: Router
     		,private logger: LoggingService
-            ,private idleService: IdleService) { 
+            ,private idleService: IdleService
+            ,private authService: AuthService) { 
         
     }
     //@Input() isUserlogin: boolean; //input is supplied from its parent component(refer to app.component.html)
@@ -83,6 +87,11 @@ export class LoginComponent implements OnInit {
     	this.logger.info("user clicked forgot password");
     	this.router.navigate(['reset-password']);
     	return false;
+    }
+
+    signInWithFB():boolean {
+        this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+        return false;
     }
 }
 

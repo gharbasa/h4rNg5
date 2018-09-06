@@ -14,16 +14,17 @@
           <p><input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" [(ngModel)]="usersession.password"/></p>
            </div>
            
-         <p><button type="submit" class="btn btn-success my-1" (click)="login()">Login</button></p>
-         
+         <p>
+             <button type="submit" class="btn btn-success my-1" (click)="login()">Login</button>
+             <br />
+            <a href="#" (click)= "signInWithFB()" title="Login using your facebook account">
+              <fa-icon [icon]="['fab', 'facebook']" class='fa-2x' style="color:#3B5998">facebook</fa-icon>
+            </a>
+        </p>
          <a href="#" (click)= "newUserClicked()">New user?</a>
          <br />
          <a href="#" (click)= "forgotPassword()">Forgot password?</a>
+         <br />
          </div>
         </form>
 </div>
-
-
-
-
-    

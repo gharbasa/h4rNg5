@@ -14,6 +14,7 @@ import { User } from '../models/User';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import { UtilityService } from './UtilityService';
+import { SocialUser } from 'angularx-social-login';
 
 @Injectable()
 export class LoginService {
@@ -50,6 +51,10 @@ export class LoginService {
 
 	update(payload) {
 		return this.http.patch(this.basePath + '/${payload.id}.json', payload);
+	}
+
+	createFederatedUserSession(user: SocialUser):Observable<User> {
+		return this.http.post(this.basePath + "/federatedLogin", user).map(res => res as User || null);
 	}
 
 	postLoginActivity():void {

@@ -34,6 +34,7 @@ export class User {
 	sex:number = -1;  //used in self service password reset also
     active:boolean = true;
     entitlement:number = -1;
+    federated_user_type:number = 0;
     
     errorMessage:string = "";
     message:string = "";

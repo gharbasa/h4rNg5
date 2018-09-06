@@ -24,7 +24,7 @@ export class UtilityService {
 		//urlParam = s3.amazonaws.com/maaghar/house_pics/pictures/000/000/040/original/IMG_2401.jpg?1528432684
 		if(urlParam.indexOf("//s3.amazonaws.com") > -1) {
 			let index = urlParam.indexOf("/" + AppSettings.IMAGE_S3_BUCKET_NAME);
-			let url:string = "http://" + AppSettings.IMAGE_S3_BUCKET_NAME + 
+			let url:string = "https://" + AppSettings.IMAGE_S3_BUCKET_NAME + 
 						".s3.amazonaws.com/" + 
 						urlParam.substring(index + AppSettings.IMAGE_S3_BUCKET_NAME.length + 2);
 			return url;
@@ -39,4 +39,5 @@ export class UtilityService {
 		var year = todayTime.getFullYear();
 		return day + "-" + month + "-" + year;
 	}
+
 }

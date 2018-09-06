@@ -8,6 +8,7 @@ import {Idle, DEFAULT_INTERRUPTSOURCES} from '@ng-idle/core';
 import {Keepalive} from '@ng-idle/keepalive';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { UserIdleWarningDialogComponent } from '../views/user-idle-warning-dialog/user-idle-warning-dialog.component';
+import { AuthService } from "angularx-social-login";
 
 @Injectable()
 export class IdleService {
@@ -21,7 +22,8 @@ export class IdleService {
 				private loginService: LoginService,
 				private idle: Idle, private keepalive: Keepalive,
 				private router: Router,
-				private dialog: MatDialog) { 
+				private dialog: MatDialog,
+				private authService: AuthService) { 
 		
 	}
 
@@ -85,7 +87,7 @@ export class IdleService {
   	let that = this;
     let user = this.loginService.getCurrentUser();
     let userId = user.id;
-    this.logger.log(this,"User will be logged out");    
+		this.logger.log(this,"User will be logged out");    
     that.loginService.remove(userId).subscribe(res => {
       this.logger.log(this,"Logout successful");
       that.localStorageService.removeItem('user');
@@ -98,7 +100,9 @@ export class IdleService {
       that.localStorageService.removeItem('user');
       this.router.navigate(['login']);
       
-    });
+		});
+		this.authService.signOut(); //federated user logout
+		that.localStorageService.removeItem('fbAuthToken');
     return false;
   }
 

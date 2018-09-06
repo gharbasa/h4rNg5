@@ -13,31 +13,39 @@
                 
          <div class="field">
           
-            <p>First Name: <input class="form-control mr-sm-2" [autofocus]="true" name="fname" type="text" size="25" [(ngModel)]="user.fname" placeholder="First name"/></p>
+            <p>First Name: <input class="form-control mr-sm-2" [autofocus]="true" name="fname" type="text" size="25" 
+                            [(ngModel)]="user.fname" placeholder="First name"
+                            [readonly]="isFederatedUser == true"/></p>
           
           </div>
           
          <div class="field">
               
-            <p>Middle Name: <input class="form-control mr-sm-2" name="mname" type="text" size="25" [(ngModel)]="user.mname" placeholder="Middle name"/></p>
+            <p>Middle Name: <input class="form-control mr-sm-2" name="mname" type="text" size="25" 
+                            [(ngModel)]="user.mname" placeholder="Middle name"
+                            [readonly]="isFederatedUser == true"/></p>
           
           </div>
           
          <div class="field">
          
-            <p>Last Name: <input class="form-control mr-sm-2" name="lname" type="text" size="25" [(ngModel)]="user.lname" placeholder="Last name"></p>
+            <p>Last Name: <input class="form-control mr-sm-2" name="lname" type="text" size="25" 
+                            [(ngModel)]="user.lname" placeholder="Last name"
+                            [readonly]="isFederatedUser == true"></p>
           
           </div>
           
           <div class="field">
           
-            <p>Login ID: <input class="form-control mr-sm-2" name="login" [(ngModel)]="user.login" type="text" size="25" placeholder="Login ID"></p>
+            <p>Login ID: <input class="form-control mr-sm-2" name="login" [(ngModel)]="user.login" type="text" size="25" 
+                            placeholder="Login ID" [readonly]="isFederatedUser == true"></p>
          
           </div>
           
           <div class="field">
           
-            <p>Email: <input class="form-control mr-sm-2" name="email" type="text" [(ngModel)]="user.email" size="25" placeholder="Email"></p>
+            <p>Email: <input class="form-control mr-sm-2" name="email" type="text" [(ngModel)]="user.email" size="25" 
+                            placeholder="Email" [readonly]="isFederatedUser == true"></p>
          
           </div>
           
@@ -55,13 +63,17 @@
           
           <div class="field">
           
-              <p>Password: <input class="form-control mr-sm-2" name="password" [(ngModel)]="user.password" type="password" size="25" placeholder="Password"></p>
+              <p>Password: <input class="form-control mr-sm-2" name="password" [(ngModel)]="user.password" 
+                              type="password" size="25" placeholder="Password"
+                              [readonly]="isFederatedUser == true"></p>
            
             </div>
             
              <div class="field">
             
-              <p>Confirm Password: <input class="form-control mr-sm-2" name="password_confirmation" [(ngModel)]="user.password_confirmation" type="password" size="25" placeholder="Confirm Password"></p>
+              <p>Confirm Password: <input class="form-control mr-sm-2" name="password_confirmation" 
+                              [(ngModel)]="user.password_confirmation" type="password" size="25" 
+                              placeholder="Confirm Password" [readonly]="isFederatedUser == true"></p>
            
             </div>
 
