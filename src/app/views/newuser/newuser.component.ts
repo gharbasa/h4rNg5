@@ -140,7 +140,7 @@ export class NewuserComponent extends H4rbaseComponent {
 	}
 
 	isUserFederatedUser(user:any):boolean {
-		return ((user != null) && (user.federated_user_type != 0));
+		return ((user != null) && (user.federated_user_type != AppSettings.LOGIN_TYPES.DOMESTIC));
 	}
 
 }
