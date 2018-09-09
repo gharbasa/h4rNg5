@@ -130,8 +130,11 @@ export class AppComponent {
 
   postLoginActivity(user: User, fedUser: SocialUser):void {
     this.localStorageService.setItem('user', JSON.stringify(user));
-    if(fedUser != null && fedUser.authToken && fedUser.authToken != null)
-      this.localStorageService.setItem('fbAuthToken', JSON.stringify(fedUser.authToken));
+    if(fedUser != null && fedUser.authToken && fedUser.authToken != null) {
+      if(fedUser.provider && fedUser.provider == "FACEBOOK") {
+        this.localStorageService.setItem('fbAuthToken', JSON.stringify(fedUser.authToken));
+      }
+    }
     this.router.navigate(['postlogin']);
     this.idleService.startIdleService();
   }
