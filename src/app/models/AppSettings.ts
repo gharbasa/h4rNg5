@@ -34,7 +34,17 @@ export class AppSettings {
 	public static readonly ROLES_LIST = ["TENANT", "LAND_LORD","MAINTENANCE", "AGENCY_COLLECTION_MGR", 
 											"ACCOUNTANT", "PROPERTY_MGMT_MGR", 
 											"PROPERTY_MGMT_EMP", "AGENCY_COLLECTION_EMP",
-											];
+	];
+	
+	public static readonly LOGIN_TYPES:any = {
+		DOMESTIC: 0// #default
+    	,FACEBOOK :1 << 2 //#4  100
+    	,LINKED : 1 << 3 // #8  1000
+    	,GOOGLE : 1 << 4 //#16 10000
+	};
+	
+	public static loginType:number = AppSettings.LOGIN_TYPES.DOMESTIC; //This is accessible across the application to know the user login type
+
 	/**
 	 * contract_type: 1(Income)
 	 * contract_type: 2(Expenditure)
@@ -51,10 +61,11 @@ export class AppSettings {
 		"AGENCY_COLLECTION_MGR": {value: 1 << 9, label: "Agency Mgr", contract_type:2},
 		"MAINTENANCE": {value: 1 << 8, label: "Maintenance", contract_type:2},
 	};
-	
+
 	static IDLE_TIME:number = 15 * 60; //15 minutes
 	static WAIT_TIME_AFTER_IDLE:number = 1 * 60; //1 minutes, after this user session is logged-out
-	public static MAPS_KEY:string =  "<MAPS_KEY>";
+	public static MAPS_KEY:string =  "<MAPS_KEY>"; //<MAPS_KEY>
+	public static FACEBOOK_APP_ID:string =  "<FACEBOOK_APP_ID>"; //<FACEBOOK_APP_ID>
 	public static CLOUD_SEARCH:boolean = true;
 
 	public static setEnvironment(environmentParam: any):void {

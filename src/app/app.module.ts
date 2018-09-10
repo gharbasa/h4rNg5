@@ -32,9 +32,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 //import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-library.add(fas, far);
+library.add(fas, far, fab);
 //library.add(faCoffee);
 
 import { AppComponent } from './app.component';
@@ -58,6 +59,43 @@ import { AgmCoreModule } from '@agm/core';
 import { AppSettings } from './models/AppSettings';
 import { H4rHttpInterceptor } from './h4rHttpInterceptor';
 
+import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
+import {FacebookLoginProvider} from "angularx-social-login";
+//import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
+
+const fbLoginOptions: LoginOpt = {
+  scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages',
+  return_scopes: true,
+  enable_profile_selector: true
+}; // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.11
+ 
+/**
+const googleLoginOptions: LoginOpt = {
+  scope: 'profile email'
+}; // https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig
+  */
+
+let config = new AuthServiceConfig([
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider(AppSettings.FACEBOOK_APP_ID, fbLoginOptions)
+  }
+  /**,
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("Google-OAuth-Client-Id", googleLoginOptions)
+  },
+  {
+    id: LinkedInLoginProvider.PROVIDER_ID,
+    provider: new LinkedInLoginProvider("LinkedIn-client-Id", false, 'en_US')
+  }*/
+]);
+ 
+export function provideConfig() {
+  return config;
+}
+
+
 //ngx-file-drop
 @NgModule({
   declarations: h4rRoutes.componentDeclarations,
@@ -76,7 +114,8 @@ import { H4rHttpInterceptor } from './h4rHttpInterceptor';
     AgmCoreModule.forRoot({
       apiKey: AppSettings.MAPS_KEY,
       libraries: ["places"]
-    }), ReactiveFormsModule
+    }), ReactiveFormsModule,
+    SocialLoginModule
   ],
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService
@@ -92,7 +131,8 @@ import { H4rHttpInterceptor } from './h4rHttpInterceptor';
                   useClass: H4rHttpInterceptor ,
                   multi: true
                 },
-                AccountService
+                AccountService,
+                {provide: AuthServiceConfig, useFactory: provideConfig}
               ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

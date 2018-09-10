@@ -9,7 +9,7 @@ import { LoginService } from '../../services/login.service';
 })
 export class HomeComponent implements OnInit {
 	
-	public logo:any = require("assets/img/logo.png");
+	public logo:any = require("assets/logos/maaghar.png");
 
 	constructor(private logger: LoggingService
 			,private loginService: LoginService) { }

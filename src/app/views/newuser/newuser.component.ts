@@ -20,7 +20,7 @@ export class NewuserComponent extends H4rbaseComponent {
 	public selfEditUserProfile:boolean = false;
 	public fileToUpload: File = null;
 	public avatar:any = null;//require("../../assets/img/logo.png");
-	
+	public isFederatedUser:boolean = false;
   	constructor(private userService: UserService
   			, private router: Router
   			, private route: ActivatedRoute 
@@ -39,7 +39,8 @@ export class NewuserComponent extends H4rbaseComponent {
   				that.user.message = "";
   				that.user.errorMessage = "";
   				that.avatar = UtilityService.prepareS3BucketUrl(that.user.avatar);//AppSettings.IMAGE_BASE_URL + that.user.avatar;
-  				this.logger.log(this,"User wants to edit his/her own profile " +  that.user.id); 
+				this.logger.log(this,"User wants to edit his/her own profile " +  that.user.id); 
+				that.isFederatedUser = that.isUserFederatedUser(that.user);
   			} else if(res.feature > 0) {
   				//if not -1, then it is a userId 
   				this.userService.get(res.feature).subscribe(resp => {
@@ -47,7 +48,8 @@ export class NewuserComponent extends H4rbaseComponent {
   					that.user.message = "";
 	  				that.user.errorMessage = "";
 	  				that.avatar = UtilityService.prepareS3BucketUrl(that.user.avatar);//AppSettings.IMAGE_BASE_URL + that.user.avatar;
-	  				this.logger.log(this,"User wants to edit someother user profile, userID=" + that.user.id);
+					this.logger.log(this,"User wants to edit someother user profile, userID=" + that.user.id);
+					that.isFederatedUser = that.isUserFederatedUser(that.user);  
   				},
   				err => {
   					
@@ -135,6 +137,10 @@ export class NewuserComponent extends H4rbaseComponent {
 
 	changeGender(type) {
 		this.user.sex = type;
+	}
+
+	isUserFederatedUser(user:any):boolean {
+		return ((user != null) && (user.federated_user_type != AppSettings.LOGIN_TYPES.DOMESTIC));
 	}
 
 }
