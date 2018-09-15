@@ -115,7 +115,7 @@ export class AppComponent {
               that.postLoginActivity(res, user);
             }
             ,err => {
-              this.logger.error(this,"Login failed.");
+              this.logger.error(this,"federated Login failed.");
               that.localStorageService.removeItem('user');
               that.router.navigate(['login']);
             });
@@ -134,7 +134,7 @@ export class AppComponent {
       if(fedUser.provider && fedUser.provider == "FACEBOOK") {
         this.localStorageService.setItem('fbAuthToken', JSON.stringify(fedUser.authToken));
       }
-    }
+    } 
     this.router.navigate(['postlogin']);
     this.idleService.startIdleService();
   }

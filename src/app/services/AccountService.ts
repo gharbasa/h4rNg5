@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import { Account } from '../models/Account';
 import { AppSettings } from '../models/AppSettings';
 import { House } from '../models/House';
+import { AccountMarking } from '../models/AccountMarking';
 
 @Injectable()
 export class AccountService {
@@ -40,6 +41,15 @@ export class AccountService {
 		return this.http.get(this.basePath + "/" + accountId + "/houses").map(res => res as House[] || []);
 	}
 
+	mark(accountId:number, payload:AccountMarking):Observable<AccountMarking> {
+		return this.http.post(this.basePath + "/" + accountId + "/mark", payload)
+					.map(res => res as AccountMarking || null);
+	}
+
+	markings(accountId:number):Observable<AccountMarking[]> {
+		return this.http.get(this.basePath + "/" + accountId + "/markings").map(res => res as AccountMarking[] || []);
+	}
+	
 	/**
 	 * Following attributes are not needed to the backend server.
 	 */

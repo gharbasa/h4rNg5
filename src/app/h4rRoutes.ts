@@ -52,7 +52,7 @@ import { UserHouseLinksDropdownComponent } from './views/user-house-links/user-h
 import { UserEntitlementComponent } from './views/user-entitlement/user-entitlement.component';
 import { TabHouseContractsComponent } from './views/house-contracts/tab-house-contracts';
 import { TabPerformanceChartsComponent } from './views/performance-charts/tab-performance-charts.component';
-
+import {AccountMarkingsComponent} from './views/account-markings/account-markings.component';
 export class h4rRoutes {
     static routes: Routes = [
         {
@@ -253,7 +253,8 @@ export class h4rRoutes {
         AutofocusDirective, AccountComponent, AccountsComponent,
         AwsHouseSearchResultsComponent,
         UserHouseLinksDropdownComponent, UserEntitlementComponent,
-        TabHouseContractsComponent,TabPerformanceChartsComponent
+        TabHouseContractsComponent,TabPerformanceChartsComponent,
+        AccountMarkingsComponent
       ]
 
       static modalDialogEntryPoints = [
