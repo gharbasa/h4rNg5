@@ -1,4 +1,7 @@
+import { EventEmitter } from "@angular/core";
+
 export class Account {
+	public static markedAccount:EventEmitter<string> = new EventEmitter;
 	id: number = 0;
 	note:string = "";
 	baseline_amt:number = 0;

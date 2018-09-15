@@ -7,6 +7,7 @@ import { HouseService } from '../../services/HouseService';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { UtilityService } from '../../services/UtilityService';
 import { House } from '../../models/House';
+import { AccountMarking } from '../../models/AccountMarking';
 
 @Component({
   selector: 'h4r-account',
@@ -16,10 +17,12 @@ import { House } from '../../models/House';
 export class AccountComponent implements OnInit {
 
   public account:Account = new Account();
-	public editaccount:boolean = false;
+  public editaccount:boolean = false;
   public createNewAccount:boolean = false;
-	public houses:Array<House> = [];
-	public activeHouse:House = null;
+  public houses:Array<House> = [];
+  public activeHouse:House = null;
+  public isMarkingTab:boolean = false;
+
   @ViewChild('baselineDate')
   baselineDate: DatePickerComponent;
   
@@ -120,5 +123,27 @@ export class AccountComponent implements OnInit {
 
 	makeActiveHouse(house:House):void {
 		this.activeHouse = house;
+		this.isMarkingTab = false;
+	}
+
+	markingsClicked():void {
+		this.activeHouse = new House();
+		this.isMarkingTab = true;
+		this.logger.log(this,"markingsClicked");
+	}
+
+	markAccount():void {
+		this.logger.log(this,"Marking account==: " + this.account.id);
+		let marking:AccountMarking = new AccountMarking();
+		marking.account_id = this.account.id;
+		marking.amount = this.account.netAmount;
+		let that = this;
+		this.accountService.mark(this.account.id, marking).subscribe(resp => {
+			this.logger.log(this,"Successfully marked account " + this.account.id);
+			Account.markedAccount.emit("Marked");
+		},
+		err => {
+			this.logger.error(this,"Problem marking account " + this.account.id);
+		});
 	}
 }

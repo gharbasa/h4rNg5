@@ -47,6 +47,7 @@ import { TicketNotesComponent } from './views/ticket-notes/ticket-notes.componen
 import { AutofocusDirective } from './directives/Autofocus';
 import { AccountsComponent } from './views/accounts/accounts.component'
 import { AccountComponent } from './views/account/account.component'
+import { AccountMarkingsComponent } from './views/account-markings/account-markings.component'
 import { AwsHouseSearchResultsComponent } from './views/house-search-results/aws-house-search-results.component';
 import { UserHouseLinksDropdownComponent } from './views/user-house-links/user-house-links-dropdown.component';
 import { UserEntitlementComponent } from './views/user-entitlement/user-entitlement.component';
@@ -159,6 +160,10 @@ export class h4rRoutes {
         }
         ,
         {
+            path: "account-markings",
+            component: AccountMarkingsComponent
+        },
+        {
             path: 'house_contracts',
             component: HouseContractsComponent
         }
@@ -253,7 +258,8 @@ export class h4rRoutes {
         AutofocusDirective, AccountComponent, AccountsComponent,
         AwsHouseSearchResultsComponent,
         UserHouseLinksDropdownComponent, UserEntitlementComponent,
-        TabHouseContractsComponent,TabPerformanceChartsComponent
+        TabHouseContractsComponent,TabPerformanceChartsComponent,
+        AccountMarkingsComponent
       ]
 
       static modalDialogEntryPoints = [
