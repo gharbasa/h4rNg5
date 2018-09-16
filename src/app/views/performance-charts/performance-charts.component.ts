@@ -3,7 +3,6 @@ import { HouseService } from '../../services/HouseService';
 import { LoggingService, Config } from 'loggerservice';
 import {PaymentService} from  '../../services/PaymentService';
 import { House } from '../../models/House';
-import { Payment } from '../../models/Payment';
 import { LoginService } from '../../services/login.service';
 import { H4rbaseComponent } from '../h4rbase/h4rbase.component';
 declare let d3: any;
