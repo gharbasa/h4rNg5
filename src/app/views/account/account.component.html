@@ -16,9 +16,16 @@ Account
          <table><tr>
              <td width="20%">
             Name: </td>
-            <td><input [autofocus]="true" name="note" type="text" size="25" [(ngModel)]="account.note" placeholder="Community or house name"/>
+            <td><input [autofocus]="true" name="note" type="text" size="25" [(ngModel)]="account.note" placeholder="Account name"/>
                 </td>
                </tr>
+               <tr>
+                    <td width="20%">
+                   Description: </td>
+                   <td>
+                    <textarea name="description" [(ngModel)]='account.description' rows="2" cols="40" placeholder="Account description"> </textarea>   
+                       </td>
+                      </tr>
         <tr>
           <td>
             Baseline amount:</td>
@@ -35,7 +42,8 @@ Account
               <td>
                 Net Amount :</td><td> 
                   <label>{{account.netAmount | currency}}</label>
-                  &nbsp;&nbsp;<button class="btn btn-success btn-sm" type="button" (click)="markAccount()" title="Mark this as verified amount as of today">
+                  &nbsp;&nbsp;
+                  <button *ngIf="editaccount == true" class="btn btn-success btn-sm" type="button" (click)="markAccount()" title="Mark this as verified amount as of today">
                     <fa-icon [icon]="['fas', 'check']"></fa-icon> Mark
                   </button>
               </td>

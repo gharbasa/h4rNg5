@@ -14,6 +14,7 @@ export class Account {
 	updated_by:number = 0;
 	created_at:string = "";
 	updated_at:string = "";
+	description:string = "";
 	netAmount:number = 0; //readonly
 	errorMessage:string = "";
 	message:string  = "";
