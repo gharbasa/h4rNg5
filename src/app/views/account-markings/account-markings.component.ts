@@ -4,6 +4,7 @@ import { AccountService } from '../../services/AccountService';
 import { LoggingService } from '../../../../node_modules/loggerservice';
 import { AccountMarking } from '../../models/AccountMarking';
 import {Pagination} from  '../../models/Pagination';
+import { UtilityService } from '../../services/UtilityService';
 
 declare let d3: any;
 
@@ -83,12 +84,13 @@ export class AccountMarkingsComponent implements OnInit {
       for(i=that.markings.length - 1; i >= 0; i--) {
         let row:any = {
           value: that.markings[i].amount,
-          label: that.markings[i].markingDate
+          label: UtilityService.dateYear(that.markings[i].markingDate)
         };
         that.discreteBarChartAccountMarkingIncome[0].values.push(row);
       }
       that.discreteBarChartAccountMarkingTag.chart.update();
     });
   }
+
 
 }

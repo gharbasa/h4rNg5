@@ -40,4 +40,10 @@ export class UtilityService {
 		return day + "-" + month + "-" + year;
 	}
 
+	//date: dd-mm-yyyy, return mm-yy
+	public static dateYear(date:string):string {
+		let tokens = date.split("-");
+		return tokens[1] + "-" + tokens[2].substring(2, 4);
+	}
+
 }
