@@ -13,11 +13,15 @@ export class Pagination {
 	public activeRecords:boolean = true;
     public pageNumbers:Array<number> = [];
     public pageChanged:EventEmitter<number> = new EventEmitter; //This is used in cloudsearch
-    constructor(list:Array<any>, activeRecords:boolean, inactiveRecords:boolean) {
+    public keyword:string = "";
+    public filterAttrs:string[] = []; //"fname","lname", "name"
+    constructor(list:Array<any>, activeRecords:boolean, inactiveRecords:boolean, keyword:string, filterAttrs:string[]) {
         if(list == null) list = [];
         this.originalList = list;
         this.inactiveRecords = inactiveRecords;
         this.activeRecords = activeRecords;
+        this.keyword = keyword;
+        this.filterAttrs = filterAttrs;
     }
     
     getPaginatedList():Array<any> {
@@ -65,13 +69,16 @@ export class Pagination {
     }
 
     showRecord(record:any):boolean {
+        let matchedString:boolean = this.isStringMatched(record);
+
         if(this.showBothActiveAndInactiveRecords()) {
-            return true;
+            return true && matchedString;
         } else if (this.showActiveRecordsOnly()) {
-            return record.active;
+            return record.active && matchedString;
         } else if (this.showInactiveRecordsOnly()) {
-            return !record.active;
+            return !record.active && matchedString;
         }
+
     }
     
     showActiveRecordsOnly():boolean {
@@ -84,5 +91,15 @@ export class Pagination {
 
     showBothActiveAndInactiveRecords():boolean {
         return ((this.inactiveRecords) && (this.activeRecords));
+    }
+
+    isStringMatched(record:any):boolean {
+        let that = this;
+        let contains = (this.filterAttrs.length == 0) || (that.keyword.trim() == "");
+        this.filterAttrs.forEach( attr => {
+            if (contains == false && record[attr] && record[attr] != null)
+                contains = (record[attr].toUpperCase().includes(that.keyword.toUpperCase()));
+        });
+        return contains;
     }
 }

@@ -1,5 +1,4 @@
 <br/>
-
 <table width="100%">
     <tr>
 <td width="40%" valign='top'>
@@ -7,12 +6,14 @@
     <table>
     <tr>
         <th width="10%">Date(d-m-y)</th>
-        <th width="10%">Amount</th>
+        <th width="10%" title="Income in the month">Month Income</th>
+        <th width="10%" title="Net income as of previous month">Past Net Income</th>
     </tr>
     </tbody>
     <tbody>
         <tr *ngFor="let marking of pageSettings.getPaginatedList()">
             <td>{{marking.markingDate}}</td>
+            <td>{{marking.delta | currency}}</td>
             <td>{{marking.amount | currency}}</td>
         </tr>
     </tbody>
@@ -20,6 +21,8 @@
     <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
 </td>
 <td valign='top'>
+    <br>
+
     <nvd3 #discreteBarChartAccountMarkingTag  [options]="discreteBarChartAccountMarkingOptions" [data]="discreteBarChartAccountMarkingIncome"></nvd3>
 </td>
     </tr>

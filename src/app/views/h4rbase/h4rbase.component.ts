@@ -35,6 +35,8 @@ export class H4rbaseComponent implements OnInit {
 
   public inactiveRecords:boolean = false;
   public activeRecords:boolean = true; 
+  public keyword:string  = "";
+  public searchAttr:string[]  = [];
   public originalList:Array<any> = null;
   public pageSettings:Pagination = this.createPaginationObject(this.originalList);
 
@@ -75,7 +77,7 @@ export class H4rbaseComponent implements OnInit {
 
   public createPaginationObject(list:Array<any>): Pagination {
     this.originalList = list;
-    return new Pagination(list, this.activeRecords, this.inactiveRecords);
+    return new Pagination(list, this.activeRecords, this.inactiveRecords, this.keyword, this.searchAttr);
   }
 
   launchNewContractWithSharedKey(router:Router, houseContractsService: HouseContractsService, 
@@ -88,5 +90,9 @@ export class H4rbaseComponent implements OnInit {
   public isUserEntitled(roleConst:string):boolean {
     return (this.currentUser.entitlement & AppSettings.ROLES[roleConst].value) != 0;
   }
+
+  filterAsYouType(): void {
+    this.pageSettings = this.createPaginationObject(this.originalList);
+	}
   
 }

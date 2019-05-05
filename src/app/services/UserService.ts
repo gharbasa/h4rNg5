@@ -38,8 +38,12 @@ export class UserService {
 		return this.http.put(this.basePath + "/forgotPassword", user);
 	}
 	
-	remove(userId:number) {
+	delete(userId:number) {
 		return this.http.delete(this.basePath + "/" + userId);
+	}
+
+	activate(userId:number) {
+		return this.http.put(this.basePath + "/" + userId + "/activate", "");
 	}
 	
 	list():Observable<User[]> {

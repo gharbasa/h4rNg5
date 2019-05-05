@@ -5,7 +5,7 @@ export class CloudSearchPagination extends Pagination {
     
     private found:number = 0; //number of total records found
 	constructor(data:any, activeRecords:boolean, inactiveRecords:boolean) {
-        super(data.results, activeRecords, inactiveRecords);
+        super(data.results, activeRecords, inactiveRecords,"",[]);
         this.found = data.found;
     }
 

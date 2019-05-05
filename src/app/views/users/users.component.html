@@ -1,9 +1,9 @@
-<table width="60%">
+<table width="80%">
     <tr>
-        <td width="30%">
+        <td width="20%">
     Users <a routerLink="../newUser">(+)</a>
         </td>
-        <td width="40%" *ngIf="isAdminUser()">
+        <td width="25%" *ngIf="isAdminUser()">
         <ng-select name="community_id" [items]="communities"
                    bindLabel="name"
                    bindValue="id"
@@ -12,9 +12,13 @@
                    (change)="refreshUsersList()">
            </ng-select>
         </td>
-        <td width="30%">
+        <td width="25%">
                 <input type="checkbox" [(ngModel)]="activeRecords" (ngModelChange)="filterActiveRecords()"> Active
                 <input type="checkbox" [(ngModel)]="inactiveRecords" (ngModelChange)="filterActiveRecords()"> Inactive
+        </td>
+        <td width="30%">
+           Search
+          <input [(ngModel)]="keyword" (ngModelChange)="filterAsYouType()"> 
         </td>
     </tr>
 </table>
@@ -45,12 +49,13 @@
     <td><img [src]="user.avatarURL" height="30" width="30"></td>
     <td>{{user.community && user.community.name}}</td>
     <td>
-        <input *ngIf="user.admin != true" type="text" [(ngModel)]="user.subscriptionType" name="subscriptionType" size="2" (change)="changeSubscription(user)"/>
+        <input *ngIf="(user.active == true) && (user.admin != true)" type="text" [(ngModel)]="user.subscriptionType" name="subscriptionType" size="2" (change)="changeSubscription(user)"/>
         <label *ngIf="user.admin == true">{{user.subscriptionType}}</label>
+        <label *ngIf="user.active == false">{{user.subscriptionType}}</label>
     </td>
     <td>{{user.subscriptionEndDate}}</td>
     <td>{{user.createdAt}}</td>
-    <td><input *ngIf="((currentUser.id !=user.id) || (currentUser.admin != true))" type="checkbox" [(ngModel)]="user.promote2Admin" (change)="promoteUser(user)"></td>
+    <td><input *ngIf="(user.active == true) && ((currentUser.id != user.id) || (currentUser.admin != true))" type="checkbox" [(ngModel)]="user.promote2Admin" (change)="promoteUser(user)"></td>
     <td>
         <div *ngIf="currentUser.admin == true" class="btn-group">
                 <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,6 +66,10 @@
                                     href="#" (click)="resetPasswordAdmin(user)">Password reset</a>
                   <a class="dropdown-item" title="Update user entitlement"
                                     href="#" routerLink="../userentitlement/{{user.id}}">Entitlement</a>
+                  <a *ngIf="user.active==false" class="dropdown-item" title="Activate the user." 
+                                    href="#" (click)="activateUser(user)">Activate</a>
+                  <a *ngIf="user.active==true" class="dropdown-item" title="Inactivate the user." 
+                                    href="#" (click)="inactivateUser(user)">Inactivate</a>
                 </div>
         </div>    
     </td>

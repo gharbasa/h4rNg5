@@ -13,7 +13,7 @@ import { HouseService } from '../../services/HouseService';
 })
 export class HouseNotesComponent implements OnInit {
 
-	public pageSettings:Pagination = new Pagination(null, true, true);
+	public pageSettings:Pagination = new Pagination(null, true, true, "", []);
 	@Input() house:House;
 	public newHouseNote:HouseNote = new HouseNote();
 	constructor(private houseNoteService: HouseNoteService
@@ -36,7 +36,7 @@ export class HouseNotesComponent implements OnInit {
 		let that = this;
 		this.newHouseNote = new HouseNote();
 		this.houseNoteService.list(this.house.id).subscribe(resp => {
-			that.pageSettings = new Pagination(resp, true, true); //We have to build a new instance of pagination, existing instance will not refresh the view.
+			that.pageSettings = new Pagination(resp, true, true, "", []); //We have to build a new instance of pagination, existing instance will not refresh the view.
 			that.newHouseNote.house_id = that.house.id;
 			this.logger.log(this, "Number of House Notes=" +  that.pageSettings.list.length);
 		},
