@@ -41,7 +41,7 @@ export class HouseSearchResultsComponent extends H4rbaseComponent {
     let that = this;
     //this.houses.length = 0;
     this.houseService.search().subscribe(res => {
-      that.pageSettings = new Pagination(res, true, true); //We have to build a new instance of pagination, existing instance will not refresh the view.
+      that.pageSettings = new Pagination(res, true, true, "", []); //We have to build a new instance of pagination, existing instance will not refresh the view.
     });
   }
 

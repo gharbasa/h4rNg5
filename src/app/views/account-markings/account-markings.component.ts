@@ -16,7 +16,7 @@ declare let d3: any;
 export class AccountMarkingsComponent implements OnInit {
 
   public markings:AccountMarking[] = [];
-  public pageSettings:Pagination = new Pagination(null, true, true);
+  public pageSettings:Pagination = new Pagination(null, true, true, "",[]);
 
   @Input() accountInput:Account; //Input from Account detail page
   @ViewChild('discreteBarChartAccountMarkingTag') discreteBarChartAccountMarkingTag;
@@ -29,7 +29,7 @@ export class AccountMarkingsComponent implements OnInit {
 		chart: {
 		  type: 'discreteBarChart',
 		  height: 250,
-		  width: 400,
+		  width: 600,
 		  margin : { 
 			top: 20,
 			right: 20,
@@ -79,9 +79,13 @@ export class AccountMarkingsComponent implements OnInit {
     let that = this;
     this.accountService.markings(this.accountInput.id).subscribe(resp => {
       that.markings = resp;
-      that.pageSettings = new Pagination(resp, true, true); //We have to build a new instance of pagination, existing instance will not refresh the view.
+      that.pageSettings = new Pagination(resp, true, true, "", []); //We have to build a new instance of pagination, existing instance will not refresh the view.
       let i:number = 0;
+      if(that.markings.length > 0)
+        that.markings[0].delta = that.accountInput.netAmount - that.markings[0].amount;
       for(i=that.markings.length - 1; i >= 0; i--) {
+        if(that.markings[i-1] && that.markings[i])
+          that.markings[i].delta = that.markings[i-1].amount - that.markings[i].amount;
         let row:any = {
           value: that.markings[i].amount,
           label: UtilityService.dateYear(that.markings[i].markingDate)

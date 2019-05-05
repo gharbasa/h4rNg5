@@ -1,6 +1,7 @@
 export class AccountMarking {
 	id: number = 0;
 	amount:number = 0;
+	delta:number = 0;
     marking_date:string = "";
     markingDate:string = "";
 	active:boolean = true;

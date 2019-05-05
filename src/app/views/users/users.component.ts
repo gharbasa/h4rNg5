@@ -14,10 +14,9 @@ import { User } from '../../models/User';
 })
 export class UsersComponent extends H4rbaseComponent {
 
-	constructor(private userService: UserService,
-			private logger: LoggingService, 	
-			public loginService: LoginService) {
-				super(loginService);
+	constructor(private userService: UserService, private logger: LoggingService, public loginService: LoginService) {
+		super(loginService);
+		this.searchAttr = ["fname", "lname", "mname"];
   	}
 	
 	ngOnInit() {
@@ -89,5 +88,27 @@ export class UsersComponent extends H4rbaseComponent {
 		err => {
 			this.logger.error(this, "Probleming changing subscription.");
 		});	
+	}
+
+	activateUser(user:User): boolean {
+		this.userService.activate(user.id).subscribe(resp => {
+			this.logger.info(this, "Successfully activted the user " + user.id);
+			this.refreshUsersList();
+		},
+		err => {
+			this.logger.error(this, "Problem in resetting the password.");
+		});	
+		return false;
+	}
+
+	inactivateUser(user:User): boolean {
+		this.userService.delete(user.id).subscribe(resp => {
+			this.logger.info(this, "Successfully inactivted the user " + user.id);
+			this.refreshUsersList();
+		},
+		err => {
+			this.logger.error(this, "Problem in resetting the password.");
+		});	
+		return false;
 	}
 }
