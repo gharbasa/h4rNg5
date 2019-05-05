@@ -6,8 +6,8 @@
     <table>
     <tr>
         <th width="10%">Date(d-m-y)</th>
-        <th width="10%" title="Income in the current month">Current Income</th>
-        <th width="10%" title="Net income as of previous month">Previous Balance</th>
+        <th width="10%" title="Income in the month">Month Income</th>
+        <th width="10%" title="Net income as of previous month">Past Net Income</th>
     </tr>
     </tbody>
     <tbody>
@@ -22,7 +22,7 @@
 </td>
 <td valign='top'>
     <br>
-    
+
     <nvd3 #discreteBarChartAccountMarkingTag  [options]="discreteBarChartAccountMarkingOptions" [data]="discreteBarChartAccountMarkingIncome"></nvd3>
 </td>
     </tr>
