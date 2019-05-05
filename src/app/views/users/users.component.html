@@ -36,7 +36,7 @@
     <th>Admin?</th>
     <th *ngIf="currentUser.admin == true">Actions</th>
   </tr>
-  <tr *ngFor="let user of pageSettings.getPaginatedList()">
+  <tr *ngFor="let user of pageSettings.getPaginatedList()" [ngStyle]="{'color':user.active? '' : '#959ba5' }">
     <td>
         <a routerLink="../editUser/{{user.id}}">{{user.fullName}} (
         <fa-icon *ngIf="user.sex == 1" [icon]="['fas', 'male']"></fa-icon>
@@ -62,9 +62,9 @@
                   Actions
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" title="Reset user's login password." 
+                  <a *ngIf="user.active==true" class="dropdown-item" title="Reset user's login password." 
                                     href="#" (click)="resetPasswordAdmin(user)">Password reset</a>
-                  <a class="dropdown-item" title="Update user entitlement"
+                  <a *ngIf="user.active==true" class="dropdown-item" title="Update user entitlement"
                                     href="#" routerLink="../userentitlement/{{user.id}}">Entitlement</a>
                   <a *ngIf="user.active==false" class="dropdown-item" title="Activate the user." 
                                     href="#" (click)="activateUser(user)">Activate</a>
