@@ -27,10 +27,6 @@ export class AccountMarkingsComponent implements OnInit {
   public monthIncome:string = "Consecutive Month Income";
   @ViewChild('multiBarChartAccountMarkingTag') multiBarChartAccountMarkingTag;
   
-  public houseIncome:string = "House Income";
-  public month:string = "Month";
-  @ViewChild('multiBarChartMonthlyIncomeTag') multiBarChartMonthlyIncomeTag;
-
   public  multiBarChartAccountMarkingIncome: any = [
     {
 		  key: this.pastNetIncome,
@@ -42,45 +38,7 @@ export class AccountMarkingsComponent implements OnInit {
     }
   ];
 
-  public  multiBarChartMonthlyIncome: any = [
-    {
-		  key: this.houseIncome,
-		  values: []
-    },
-    {
-		  key: this.month,
-		  values: []
-    }
-  ];
-  
   public multiBarChartAccountMarkingOptions: any = {
-		chart: {
-		  type: 'multiBarChart',
-		  height: 250,
-		  width: 600,
-		  margin : { 
-        top: 20,
-        right: 20,
-        bottom: 50,
-        left: 55
-		  },
-		  
-		  showValues: true,
-		  valueFormat: function(d){
-			return d3.format('.0f')(d);
-		  },
-		  duration: 100,
-		  xAxis: {
-			axisLabel: 'mm-yy'
-		  },
-		  yAxis: {
-			axisLabel: '',
-			axisLabelDistance: -5
-		  }
-		}
-  };
-
-  public multiBarChartMonthlyIncomeOptions: any = {
 		chart: {
 		  type: 'multiBarChart',
 		  height: 250,
