@@ -6,6 +6,7 @@ import { Account } from '../models/Account';
 import { AppSettings } from '../models/AppSettings';
 import { House } from '../models/House';
 import { AccountMarking } from '../models/AccountMarking';
+import { MonthTransaction } from '../models/MonthTransaction';
 
 @Injectable()
 export class AccountService {
@@ -49,7 +50,15 @@ export class AccountService {
 	markings(accountId:number):Observable<AccountMarking[]> {
 		return this.http.get(this.basePath + "/" + accountId + "/markings").map(res => res as AccountMarking[] || []);
 	}
-	
+
+	allMonthlyIncome(accountId:number, month:string, year:string):Observable<MonthTransaction[]> {
+		return this.http.get(AppSettings.H4R_BACKEND_URL
+					 + 'api/1/payments/allMonthlyIncome?accountId='+ accountId
+					 + '&month=' + month
+					 + '&year=' + year)
+					.map(res => res as MonthTransaction[] || []);
+	}
+
 	/**
 	 * Following attributes are not needed to the backend server.
 	 */

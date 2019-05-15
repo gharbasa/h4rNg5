@@ -6,24 +6,48 @@
     <table>
     <tr>
         <th width="10%">Date(d-m-y)</th>
-        <th width="10%" title="Income in the month">Month Income</th>
-        <th width="10%" title="Net income as of previous month">Past Net Income</th>
+        <th width="10%" title="Net income as of previous month">{{pastNetIncome}}</th>
+        <th width="10%" title="Income in the month">{{monthIncome}}</th>
+        
     </tr>
     </tbody>
     <tbody>
-        <tr *ngFor="let marking of pageSettings.getPaginatedList()">
+        <tr *ngFor="let marking of pageSettings.getPaginatedList()" [ngStyle]="{'color':currentMark.id == marking.id? '#996600' : '' }">
             <td>{{marking.markingDate}}</td>
-            <td>{{marking.delta | currency}}</td>
             <td>{{marking.amount | currency}}</td>
+            <td (click)="fetchTransactionDetails(marking)" style="cursor: pointer;text-decoration: underline">{{marking.delta | currency}}</td>
         </tr>
     </tbody>
     </table>
     <h4r-pagination [pageSettings]="pageSettings"></h4r-pagination>
 </td>
 <td valign='top'>
-    <br>
-
-    <nvd3 #discreteBarChartAccountMarkingTag  [options]="discreteBarChartAccountMarkingOptions" [data]="discreteBarChartAccountMarkingIncome"></nvd3>
+    <nvd3 #multiBarChartAccountMarkingTag  [options]="multiBarChartAccountMarkingOptions" [data]="multiBarChartAccountMarkingIncome"></nvd3>
+    
+    
+    <table>
+        <tr>
+            <th width="10%">On(d-m-y)</th>
+            <th width="10%">House</th>
+            <th width="10%">Amount</th>
+            <th width="10%">Type</th>
+        </tr>
+        </tbody>
+        <tbody>
+            <tr *ngFor="let monthTransaction of monthTransactions">
+                <td>{{monthTransaction.formattedPaymentDate}}</td>
+                <td>{{monthTransaction.houseName}}</td>
+                <td title="{{monthTransaction.description}}" 
+                            [ngStyle]="{'color':monthTransaction.transType == 2? '#ff3300' : '' }">
+                    {{monthTransaction.amount}}
+                </td>
+                <td>{{monthTransaction.transTypeStr}}</td>
+            </tr>
+            <tr>
+                <th colspan=4 align='right'>Total={{totalAmount | currency}}</th>
+            </tr>
+        </tbody>
+    </table>
 </td>
     </tr>
 </table>
