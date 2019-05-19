@@ -62,6 +62,7 @@ import { H4rHttpInterceptor } from './h4rHttpInterceptor';
 import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
 import {FacebookLoginProvider} from "angularx-social-login";
 //import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
+import { OrderModule } from 'ngx-order-pipe';
 
 const fbLoginOptions: LoginOpt = {
   scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages',
@@ -115,7 +116,8 @@ export function provideConfig() {
       apiKey: AppSettings.MAPS_KEY,
       libraries: ["places"]
     }), ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    OrderModule
   ],
   providers: [Config ,LoggingService, LoginService, AppSettingsService
                 , LocalStorageService, UserService

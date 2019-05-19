@@ -12,10 +12,10 @@
     </tr>
     </tbody>
     <tbody>
-        <tr *ngFor="let marking of pageSettings.getPaginatedList()" [ngStyle]="{'color':currentMark.id == marking.id? '#996600' : '' }">
+        <tr (click)="fetchTransactionDetails(marking)" *ngFor="let marking of pageSettings.getPaginatedList()" [ngStyle]="{'color':currentMark.id == marking.id? '#996600' : '' }">
             <td>{{marking.markingDate}}</td>
             <td>{{marking.amount | currency}}</td>
-            <td (click)="fetchTransactionDetails(marking)" style="cursor: pointer;text-decoration: underline">{{marking.delta | currency}}</td>
+            <td style="cursor: pointer;text-decoration: underline">{{marking.delta | currency}}</td>
         </tr>
     </tbody>
     </table>
@@ -34,7 +34,7 @@
         </tr>
         </tbody>
         <tbody>
-            <tr *ngFor="let monthTransaction of monthTransactions">
+            <tr *ngFor="let monthTransaction of monthTransactions | orderBy:'houseName'">
                 <td>{{monthTransaction.formattedPaymentDate}}</td>
                 <td>{{monthTransaction.houseName}}</td>
                 <td title="{{monthTransaction.description}}" 
