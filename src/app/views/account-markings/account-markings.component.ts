@@ -122,7 +122,7 @@ export class AccountMarkingsComponent implements OnInit {
     this.currentMark = accountMarking;
     let date:string = accountMarking.markingDate; //dd-mm-yyyy
     let tokens:string[] = date.split("-");
-    this.accountService.allMonthlyIncome(accountMarking.account_id, tokens[1], tokens[2]).subscribe(resp => {
+    this.accountService.allMonthlyIncome(accountMarking.account_id, accountMarking.id).subscribe(resp => {
       that.monthTransactions = resp;
       that.totalAmount = 0;
       that.monthTransactions.forEach(function (monthTransaction) {

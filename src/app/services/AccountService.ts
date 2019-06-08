@@ -51,11 +51,10 @@ export class AccountService {
 		return this.http.get(this.basePath + "/" + accountId + "/markings").map(res => res as AccountMarking[] || []);
 	}
 
-	allMonthlyIncome(accountId:number, month:string, year:string):Observable<MonthTransaction[]> {
+	allMonthlyIncome(accountId:number, markingId:number):Observable<MonthTransaction[]> {
 		return this.http.get(AppSettings.H4R_BACKEND_URL
 					 + 'api/1/payments/allMonthlyIncome?accountId='+ accountId
-					 + '&month=' + month
-					 + '&year=' + year)
+					 + '&markingId=' + markingId)
 					.map(res => res as MonthTransaction[] || []);
 	}
 
