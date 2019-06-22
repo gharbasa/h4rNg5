@@ -23,8 +23,8 @@ export class AccountMarkingsComponent implements OnInit {
   public pageSettings:Pagination = new Pagination(null, true, true, "",[]);
   @Input() accountInput:Account; //Input from Account detail page
   
-  public pastNetIncome:string = "Past Net Income";
-  public monthIncome:string = "Consecutive Month Income";
+  public pastNetIncome:string = "Marked Income";
+  public monthIncome:string = "Income after marking";
   @ViewChild('multiBarChartAccountMarkingTag') multiBarChartAccountMarkingTag;
   
   public  multiBarChartAccountMarkingIncome: any = [

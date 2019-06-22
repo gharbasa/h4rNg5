@@ -37,7 +37,7 @@
             <tr *ngFor="let monthTransaction of monthTransactions | orderBy:'houseName'">
                 <td>{{monthTransaction.formattedPaymentDate}}</td>
                 <td>{{monthTransaction.houseName}}</td>
-                <td title="{{monthTransaction.description}}" 
+                <td title="{{monthTransaction.note}}-{{monthTransaction.description}}" 
                             [ngStyle]="{'color':monthTransaction.transType == 2? '#ff3300' : '' }">
                     {{monthTransaction.amount}}
                 </td>
